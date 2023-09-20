@@ -12,17 +12,17 @@
 
 #include <cmd.h>
 
-t_cmd *new_node(char *cmd)
+t_cmd *new_node( char *arg)
 {
 	t_cmd *new;
 
 	new = malloc(sizeof(t_cmd));
 	if (!new)
 		return (NULL);
+	if (arg)
+		new->cmd = ft_strdup(arg);
 	new->prev = NULL;
 	new->next = NULL;
-	new->cmd = cmd;
-	new->args = NULL;
 	return (new);
 }
 
@@ -61,6 +61,9 @@ void	create_list(char *rl, t_cmd **lst)
 		add_back(lst, new_node(cmds[i]));
 		i++;
 	}
+	i = -1;
+	while (cmds[++i])
+		free(cmds[i]);
 }
 
 void	print_list(t_cmd *lst)
@@ -77,7 +80,6 @@ void	print_list(t_cmd *lst)
 		printf("%s\n", tmp->cmd);
 		tmp = tmp->next;
 	}
-	printf("\n");
 }
 
 void	cmdlstclear(t_cmd **lst)

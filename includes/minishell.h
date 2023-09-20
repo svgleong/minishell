@@ -9,4 +9,6 @@
 # include <readline/history.h>
 # include <stdio.h>
 
+t_cmd *new_node( char *arg);
+
 #endif

@@ -23,7 +23,7 @@ int main(int ac, char **av, char **env)
 	char *rl;
 	t_cmd *lst;
 	
-	lst = malloc(sizeof(t_cmd));
+	lst = NULL;
 	while (1)
 	{
 		rl = readline("Painshell: ");

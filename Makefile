@@ -7,7 +7,7 @@ OBJS		= $(addprefix $(OBJ_PATH)/, $(addsuffix .o, $(basename $(SRCS))))
 INCLUDES	= includes/
 
 CC			= cc
-CFLAGS	= -Wall -Wextra -Werror -I$(INCLUDES) #-fsanitize=address -g
+CFLAGS	= -Wall -Wextra -Werror -g -I$(INCLUDES) -fsanitize=address
 RM			= rm -f
 
 all: $(NAME)
@@ -17,7 +17,7 @@ $(OBJ_PATH)/%.o:%.c
 	$(CC) $(CFLAGS) -I $(INCLUDES) -I /usr/local/include -c -o $@ $<
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -lreadline -o $@  $^
+	$(CC) $(CFLAGS) -lreadline -o $@  $^	
 
 clean:
 	rm -rf $(OBJ_PATH)
