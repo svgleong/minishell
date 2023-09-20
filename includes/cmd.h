@@ -13,8 +13,11 @@
 #ifndef CMD_H
 # define CMD_H
 
-# include <stdio.h>
-# include "../srcs/Libft/libft.h"
+#include <stdio.h>
+#include <readline/readline.h>
+#include <readline/history.h>
+#include <stdlib.h>
+#include <string.h>
 
 typedef struct s_cmd
 {

@@ -1,18 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: svalente <svalente@student.42lisboa.com >  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/10 14:58:55 by svalente          #+#    #+#             */
-/*   Updated: 2022/11/10 15:24:33 by svalente         ###   ########.fr       */
+/*   Created: 2022/11/02 17:54:42 by svalente          #+#    #+#             */
+/*   Updated: 2023/08/30 15:33:43 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <minishell.h>
 
-void	ft_putchar_fd(char c, int fd)
+void	*ft_calloc(size_t count, size_t size)
 {
-	write(fd, &c, 1);
+	void	*ptr;
+
+	ptr = malloc(count * size);
+	if (!ptr)
+		return (NULL);
+	ft_memset(ptr, '\0', (count * size));
+	return (ptr);
 }

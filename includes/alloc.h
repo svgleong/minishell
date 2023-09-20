@@ -1,43 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   cmd.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: svalente <svalente@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/16 14:49:27 by svalente          #+#    #+#             */
-/*   Updated: 2023/08/03 15:27:40 by svalente         ###   ########.fr       */
+/*   Created: 2023/09/19 22:20:58 by svalente          #+#    #+#             */
+/*   Updated: 2023/09/20 12:25:42 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef ALLOC_H
+# define ALLOC_H
 
-void	ft_lstclear(t_list **lst, void (*del)(void*))
-{
-	t_list	*temp;
+# include <stddef.h>
 
-	if (!*lst || !del)
-		return ;
-	while (*lst)
-	{
-		temp = *lst;
-		*lst = (*lst)->next;
-		ft_lstdelone(temp, del);
-	}
-	*lst = 0;
-}
+void	*ft_calloc(size_t count, size_t size);
 
-void	lstclear(t_list **lst)
-{
-	t_list	*temp;
-
-	if (!*lst || !lst)
-		return ;
-	while (*lst)
-	{
-		temp = (*lst)->next;
-		free(*lst);
-		*lst = temp;
-	}
-	lst = NULL;
-}
+#endif

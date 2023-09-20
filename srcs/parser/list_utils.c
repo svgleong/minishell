@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cmd.h"
+#include <cmd.h>
 
 t_cmd *new_node(char *cmd)
 {
@@ -30,7 +30,6 @@ t_cmd	*last_node(t_cmd *lst)
 {
 	if (!lst)
 		return (NULL);
-	
 	while (lst->next)
 		lst = lst->next;
 	return (lst);
@@ -44,7 +43,6 @@ void	add_back(t_cmd **lst, t_cmd *new)
 	{
 		*lst = new;
 		new->prev = NULL;
-		printf("debug\n");
 		return ;
 	}
 	last = last_node(*lst);

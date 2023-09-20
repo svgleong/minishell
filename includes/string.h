@@ -1,35 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstmap.c                                        :+:      :+:    :+:   */
+/*   cmd.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: svalente <svalente@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/16 15:04:48 by svalente          #+#    #+#             */
-/*   Updated: 2023/08/03 15:27:17 by svalente         ###   ########.fr       */
+/*   Created: 2023/09/19 22:20:58 by svalente          #+#    #+#             */
+/*   Updated: 2023/09/20 12:25:42 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef STRING_H
+# define STRING_H
 
-t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
-{
-	t_list	*newlst;
-	t_list	*new;
+# include <stddef.h>
+# include <alloc.h>
 
-	if (!lst)
-		return (0);
-	newlst = NULL;
-	while (lst)
-	{
-		new = ft_lstnew(f(lst->content));
-		if (!new)
-		{
-			ft_lstclear(&newlst, del);
-			return (0);
-		}
-		ft_lstadd_back(&newlst, new);
-		lst = lst->next;
-	}
-	return (newlst);
-}
+char	**ft_split(char const *s, char c);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
+size_t	ft_strlen(const char *s);
+void	*ft_memset(void *s, int c, size_t n);
+
+#endif

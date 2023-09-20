@@ -1,21 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: svalente <svalente@student.42lisboa.com >  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/16 14:42:07 by svalente          #+#    #+#             */
-/*   Updated: 2022/11/16 14:49:17 by svalente         ###   ########.fr       */
+/*   Created: 2022/10/26 19:01:31 by svalente          #+#    #+#             */
+/*   Updated: 2022/11/09 12:23:56 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <minishell.h>
 
-void	ft_lstdelone(t_list *lst, void (*del)(void*))
+void	*ft_memset(void *s, int c, size_t n)
 {
-	if (!lst)
-		return ;
-	del(lst->content);
-	free(lst);
+	size_t			i;
+	unsigned char	*p;
+
+	p = (unsigned char *)s;
+	i = 0;
+	while (i < n)
+	{
+		p[i] = c;
+		i++;
+	}
+	return (p);
 }
