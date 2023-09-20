@@ -24,6 +24,7 @@ typedef struct s_cmd
 	struct s_cmd	*prev;
 	struct s_cmd	*next;
 	char			*cmd;
+	char			*path;
 	char			**args;
 }	t_cmd;
 
