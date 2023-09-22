@@ -54,10 +54,12 @@ void	create_list(char *rl, t_cmd **lst)
 {
 	char 	**cmds;
 	int		i = 0;
+	char 	**args;
 
 	cmds = ft_split(rl, '|');
 	while (cmds[i])
 	{
+		args = ft_split(cmds, " ");
 		add_back(lst, new_node(cmds[i]));
 		i++;
 	}
