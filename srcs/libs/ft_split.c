@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svalente <svalente@student.42lisboa.com >  +#+  +:+       +#+        */
+/*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 17:16:47 by svalente          #+#    #+#             */
-/*   Updated: 2022/11/16 18:17:45 by svalente         ###   ########.fr       */
+/*   Updated: 2023/09/25 11:57:29 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	ft_count_words(const char *s, char c)
 
 	count = 0;
 	boolean = 0;
+	if (!s)
+		return (0);
 	while (*s)
 	{
 		if (*s != c && boolean == 0)

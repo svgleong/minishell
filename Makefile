@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: svalente <svalente@student.42lisboa.com>   +#+  +:+       +#+         #
+#    By: svalente <svalente@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/20 20:09:21 by svalente          #+#    #+#              #
-#    Updated: 2023/09/21 11:00:41 by svalente         ###   ########.fr        #
+#    Updated: 2023/09/25 11:10:22 by svalente         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,8 @@ SRCS		= srcs/main.c					\
 			  srcs/libs/ft_strlen.c			\
 			  srcs/libs/ft_substr.c			\
 			  srcs/parser/list_utils.c 		\
+			  srcs/parser/utils.c 			\
+			  srcs/alloc/utils.c 			\
 
 
 OBJS		= $(addprefix $(OBJ_PATH)/, $(addsuffix .o, $(basename $(SRCS))))

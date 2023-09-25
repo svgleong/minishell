@@ -1,4 +1,4 @@
-#include <string.h>
+#include <minishell.h>
 
 char	*ft_strdup(const char *s)
 {
@@ -7,7 +7,7 @@ char	*ft_strdup(const char *s)
 	int		i;
 
 	leng_s = ft_strlen((const char *)s);
-	dest = (char *)malloc(sizeof(char) * (leng_s +1));
+	dest = ft_calloc(leng_s + 1, sizeof(char)); //(char *)malloc(sizeof(char) * (leng_s +1));
 	if (!dest)
 		return (NULL);
 	i = 0;

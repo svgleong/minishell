@@ -1,39 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/20 11:39:21 by svalente          #+#    #+#             */
-/*   Updated: 2023/09/25 11:24:34 by svalente         ###   ########.fr       */
+/*   Created: 2023/09/25 10:08:22 by svalente          #+#    #+#             */
+/*   Updated: 2023/09/25 10:10:33 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <stdio.h>
 
-int main(int ac, char **av, char **env)
+void	free_matrix(char **matrix)
 {
-	(void)ac;
-	(void)av;
-	(void)env;
-	char *rl;
-	t_cmd *lst;
-	
-	lst = NULL;
-	while (1)
-	{
-		rl = readline("Painshell: ");
-		//printf("%s\n", rl);
-		create_list(rl, &lst);
-		print_list(lst);
-		cmdlstclear(&lst);
-		free(rl);
-	}
-	free(rl);
-	rl = NULL;
-	return (0);
+	int	i;
+
+	i = 0;
+	if (!matrix)
+		return ;
+	while (matrix && matrix[i])
+		free(matrix[i++]);
+	free(matrix);
+	matrix = NULL;
 }

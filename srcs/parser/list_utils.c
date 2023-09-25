@@ -3,26 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   list_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svalente <svalente@student.42lisboa.com>   +#+  +:+       +#+        */
+/*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 10:46:46 by svalente          #+#    #+#             */
-/*   Updated: 2023/09/20 13:57:17 by svalente         ###   ########.fr       */
+/*   Updated: 2023/09/25 11:54:41 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cmd.h>
+#include <alloc.h>
+#include "../../includes/alloc.h"
 
-t_cmd *new_node( char *arg)
+t_cmd *new_node( char **args)
 {
 	t_cmd *new;
 
-	new = malloc(sizeof(t_cmd));
+	new = ft_calloc(1, sizeof(t_cmd));//malloc(sizeof(t_cmd));
 	if (!new)
 		return (NULL);
-	if (arg)
-		new->cmd = ft_strdup(arg);
+	if (args)
+		new->args = copy_matrix(args);
+	/* for (int i = 0; args[i] != NULL; i++)
+		printf("Args[%d] %s\n", i, args[i]);   */
 	new->prev = NULL;
 	new->next = NULL;
+	//printf("args[0]: %s\n", new->args[0]);
 	return (new);
 }
 
@@ -59,8 +64,9 @@ void	create_list(char *rl, t_cmd **lst)
 	cmds = ft_split(rl, '|');
 	while (cmds[i])
 	{
-		args = ft_split(cmds, " ");
-		add_back(lst, new_node(cmds[i]));
+		//printf("cmds[%d]: %s\n", i, cmds[i]);
+		args = ft_split(cmds[i], ' ');
+		add_back(lst, new_node(args));
 		i++;
 	}
 	i = -1;
@@ -71,6 +77,7 @@ void	create_list(char *rl, t_cmd **lst)
 void	print_list(t_cmd *lst)
 {
 	t_cmd *tmp = lst;
+	int i = 0;
 
 	if(!lst)
 	{
@@ -79,7 +86,12 @@ void	print_list(t_cmd *lst)
 	}
 	while (tmp)
 	{
-		printf("%s\n", tmp->cmd);
+		i = 0;
+		while (tmp->args[i])
+		{
+			printf("arg[%d] %s\n", i, tmp->args[i]);
+			i++;
+		}
 		tmp = tmp->next;
 	}
 }
@@ -92,7 +104,7 @@ void	cmdlstclear(t_cmd **lst)
 	{
 		tmp = *lst;
 		*lst = (*lst)->next;
-		free(tmp->cmd);
+		free_matrix(tmp->args);
 		free(tmp);
 	}
 	*lst = NULL;
