@@ -1,26 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/25 10:08:22 by svalente          #+#    #+#             */
-/*   Updated: 2023/09/25 16:18:49 by svalente         ###   ########.fr       */
+/*   Created: 2023/09/25 14:51:17 by svalente          #+#    #+#             */
+/*   Updated: 2023/09/25 15:32:29 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#ifndef PARSER_H
+# define PARSER_H
 
-char	**free_matrix(char **matrix)
-{
-	int	i;
+int     valid_quotes(char *str);
+void    check_quotes(char *rl);
+char    *modify_str(char *rl);
 
-	i = 0;
-	if (!matrix)
-		return (NULL);
-	while (matrix[i])
-		free(matrix[i++]);
-	free(matrix);
-	return (NULL);
-}
+#endif

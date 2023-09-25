@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 10:46:46 by svalente          #+#    #+#             */
-/*   Updated: 2023/09/25 11:54:41 by svalente         ###   ########.fr       */
+/*   Updated: 2023/09/25 14:38:38 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,14 @@ void	create_list(char *rl, t_cmd **lst)
 	char 	**cmds;
 	int		i = 0;
 	char 	**args;
-
+	// Funcao que vai verificar as quotes e pipes, ter em atencao se tiver dentro de quotes 
+	// "|" "  |  "
 	cmds = ft_split(rl, '|');
 	while (cmds[i])
 	{
 		//printf("cmds[%d]: %s\n", i, cmds[i]);
+		// Funcao que verifica se as quotes sao validas
+		// Transformar o split para ter em conta as quotes e depois sim podes fazer split (se achares que es capaz tens incluir a divisao das redirections) 
 		args = ft_split(cmds[i], ' ');
 		add_back(lst, new_node(args));
 		i++;

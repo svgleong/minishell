@@ -6,7 +6,7 @@
 #    By: svalente <svalente@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/20 20:09:21 by svalente          #+#    #+#              #
-#    Updated: 2023/09/25 11:10:22 by svalente         ###   ########.fr        #
+#    Updated: 2023/09/25 16:20:36 by svalente         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,8 @@ SRCS		= srcs/main.c					\
 			  srcs/libs/ft_substr.c			\
 			  srcs/parser/list_utils.c 		\
 			  srcs/parser/utils.c 			\
+			  srcs/parser/check_quotes.c	\
+			  srcs/parser/modify_string.c 	\
 			  srcs/alloc/utils.c 			\
 
 
@@ -30,7 +32,7 @@ OBJS		= $(addprefix $(OBJ_PATH)/, $(addsuffix .o, $(basename $(SRCS))))
 INCLUDES	= includes/
 
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -g -I$(INCLUDES) -fsanitize=address,undefined
+CFLAGS		= -g -I$(INCLUDES) -fsanitize=address #,undefined # -Wall -Wextra -Werror
 RM			= rm -f
 
 FT_PRINTF_PATH = ./srcs/ft_printf
@@ -50,8 +52,8 @@ $(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) $(FT_PRINTF) -lreadline -o $@  $^
 	@echo "\033[1;35m---> MINISHELL SUCCESSFULLY COMPILED\033[0m"
 
-run: $(NAME)
-	./$(NAME)
+run: 
+	make re && clear && ./$(NAME)
 
 clean: 
 	clear

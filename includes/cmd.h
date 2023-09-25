@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svalente <svalente@student.42lisboa.com>   +#+  +:+       +#+        */
+/*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:20:58 by svalente          #+#    #+#             */
-/*   Updated: 2023/09/20 12:25:42 by svalente         ###   ########.fr       */
+/*   Updated: 2023/09/25 16:55:21 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef struct s_cmd
 {
 	struct s_cmd	*prev;
 	struct s_cmd	*next;
-	char			*cmd;
+	//char			*cmd;
 	char			*path;
 	char			**args;
 }	t_cmd;

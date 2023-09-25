@@ -4,6 +4,7 @@
 # include <alloc.h>
 # include <cmd.h>
 # include <string.h>
+# include <parser.h>
 # include <stdlib.h>
 # include <readline/readline.h>
 # include <readline/history.h>
