@@ -6,7 +6,7 @@
 #    By: svalente <svalente@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/20 20:09:21 by svalente          #+#    #+#              #
-#    Updated: 2023/09/25 16:20:36 by svalente         ###   ########.fr        #
+#    Updated: 2023/09/26 12:23:24 by svalente         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,10 +21,12 @@ SRCS		= srcs/main.c					\
 			  srcs/libs/ft_strdup.c			\
 			  srcs/libs/ft_strlen.c			\
 			  srcs/libs/ft_substr.c			\
+			  srcs/libs/ft_strchr.c			\
 			  srcs/parser/list_utils.c 		\
 			  srcs/parser/utils.c 			\
 			  srcs/parser/check_quotes.c	\
 			  srcs/parser/modify_string.c 	\
+			  srcs/alloc/utils.c 			\
 			  srcs/alloc/utils.c 			\
 
 

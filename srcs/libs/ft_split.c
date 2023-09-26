@@ -6,61 +6,60 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 17:16:47 by svalente          #+#    #+#             */
-/*   Updated: 2023/09/25 11:57:29 by svalente         ###   ########.fr       */
+/*   Updated: 2023/09/26 12:28:17 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	ft_count_words(const char *s, char c)
+
+static size_t	ft_countword(char const *s, char c)
 {
 	size_t	count;
-	int		boolean;
 
-	count = 0;
-	boolean = 0;
-	if (!s)
+	if (!*s)
 		return (0);
+	count = 0;
 	while (*s)
 	{
-		if (*s != c && boolean == 0)
-		{
-			boolean = 1;
+		while (*s == c)
+			s++;
+		if (*s)
 			count++;
-		}
-		else if (*s == c)
-			boolean = 0;
-		s++;
+		while (*s != c && *s)
+			s++;
 	}
 	return (count);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	size_t	i;
-	size_t	j;
-	char	**split;
-	int		index;
-
-	split = malloc(sizeof(char *) * (ft_count_words(s, c) + 1));
-	if (!s || !split)
+	char	**lst;
+	size_t	word_len;
+	int		i;
+	
+	printf("S = %s\n", s);
+	if (!s)
+		return (0);
+	lst = (char **)malloc((ft_countword(s, c) + 1) * sizeof(char *));
+	if (!lst)
 		return (0);
 	i = 0;
-	j = 0;
-	index = -1;
-	while (i <= ft_strlen(s))
+	while (*s)
 	{
-		if (s[i] != c && index < 0)
-			index = i;
-		else if ((s[i] == c || i == ft_strlen(s)) && index >= 0)
-		{
-			split[j++] = ft_substr(s, index, i - index);
-			index = -1;
-		}
-		i++;
+		while (*s == c && *s)
+			s++;
+		if (*s == '\0')
+			break ;
+		if (!ft_strchr(s, c))
+			word_len = ft_strlen(s);
+		else
+			word_len = ft_strchr(s, c) - s;
+		lst[i++] = ft_substr(s, 0, word_len);
+		s += word_len;
 	}
-	split[j] = 0;
-	return (split);
+	lst[i] = NULL;
+	return (lst);
 }
 
 /* 
