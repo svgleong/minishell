@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 14:40:47 by svalente          #+#    #+#             */
-/*   Updated: 2023/09/25 15:10:05 by svalente         ###   ########.fr       */
+/*   Updated: 2023/09/26 17:02:44 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,75 @@
 
 int valid_quotes(char *str)
 {
-    int i;
-    int d_quotes;
-    int s_quotes;
+    int		i;
+    char    quote;
+	int		n_quote;
+	int		len;
 
-    i = 0;
-    d_quotes = 0;
-    s_quotes = 0;
-    while(str[i])
-    {
-        if (str[i] == '\"')
-            d_quotes++;
-        if (str[i] == '\'')
-            s_quotes++;
-        i++;
-    }
-    if (d_quotes % 2 == 0 && s_quotes % 2 == 0)
-        return (1);
-    return (0);
+	i = 0;
+	quote = '\0';
+	n_quote = 0;
+	while (str[i])
+	{
+		if (!quote && (str[i] == '\"' || str[i] == '\''))
+		{
+			quote = str[i++];
+			n_quote++;
+		}
+		if (!str[i])
+			break ;
+		while (str[i] && quote && str[i] != quote)
+			i++;
+		if (str[i] && quote && str[i] == quote)
+		{
+			quote = '\0';
+			n_quote++;
+		}
+		i++;
+	}
+	if (n_quote % 2 != 0)
+	 	return (0);
+	return (1);
 }
 
-void    check_quotes(char *rl)
+int	valid_delimiters(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i++] == '|')
+		{
+			while (str[i] == ' ' || (str[i] >= '\t' && str[i] <= '\r'))
+				i++;
+			if (str[i] == '|')
+				return (0);
+		}
+		/* if (str[i++] == '>')
+		{
+			while (str[i] == ' ' || (str[i] >= '\t' && str[i] <= '\r'))
+				i++;
+			if (!str[i] || )
+		} */
+			
+	}
+	return (1);
+}
+
+int   checker(char *rl)
 {
     if (!valid_quotes(rl))
     {
-        printf("Invalid quotes");
+        printf("Invalid quotes\n");
         free (rl);
-        exit(EXIT_FAILURE);
+		return (0);
     }
+	if (!valid_delimiters(rl))
+	{
+        printf("Invalid delimiters\n");
+        free (rl);
+    	return (0);
+    }
+	return (1);
 }

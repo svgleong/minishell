@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 17:16:47 by svalente          #+#    #+#             */
-/*   Updated: 2023/09/26 12:28:17 by svalente         ###   ########.fr       */
+/*   Updated: 2023/09/26 15:16:17 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,7 @@ char	**ft_split(char const *s, char c)
 	char	**lst;
 	size_t	word_len;
 	int		i;
-	
-	printf("S = %s\n", s);
+
 	if (!s)
 		return (0);
 	lst = (char **)malloc((ft_countword(s, c) + 1) * sizeof(char *));

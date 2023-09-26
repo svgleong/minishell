@@ -6,7 +6,7 @@
 #    By: svalente <svalente@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/20 20:09:21 by svalente          #+#    #+#              #
-#    Updated: 2023/09/26 12:23:24 by svalente         ###   ########.fr        #
+#    Updated: 2023/09/26 15:53:17 by svalente         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ OBJS		= $(addprefix $(OBJ_PATH)/, $(addsuffix .o, $(basename $(SRCS))))
 INCLUDES	= includes/
 
 CC			= cc
-CFLAGS		= -g -I$(INCLUDES) -fsanitize=address #,undefined # -Wall -Wextra -Werror
+CFLAGS		= -g -I$(INCLUDES) #-fsanitize=address #,undefined # -Wall -Wextra -Werror
 RM			= rm -f
 
 FT_PRINTF_PATH = ./srcs/ft_printf

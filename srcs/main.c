@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:39:21 by svalente          #+#    #+#             */
-/*   Updated: 2023/09/26 12:51:00 by svalente         ###   ########.fr       */
+/*   Updated: 2023/09/26 16:58:56 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,16 @@ int main(int ac, char **av, char **env)
 	{
 		rl = readline("Painshell: ");
 		add_history(rl);
+		if (!checker(rl))
+			continue ;
 		tmp = separate_args(rl);
-		// printf("tmp[0] = %s\n", tmp[0]);
 		create_list(&lst, tmp);
 		print_list(lst);
-		//check_quotes(rl);
-		//create_list(rl, &lst);
 		cmdlstclear(&lst);
-		free (tmp);
+		//free (tmp);
 	}
 	free(rl);
 	rl = NULL;
+	rl_clear_history();
 	return (0);
 }
