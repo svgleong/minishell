@@ -7,3 +7,5 @@ svalente@c2r5s3:~/Documents/minishell$ <<end
 svalente@c2r5s3:~/Documents/minishell$ 
 
 
+expansion
+retirar quotes
