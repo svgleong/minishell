@@ -38,6 +38,15 @@ typedef struct s_list
 	void			(*ft_exec)(struct s_list **list);
 }	t_list;
 
+typedef struct s_env
+{
+	char			*content;
+	struct s_env	*next;
+	struct s_env	*prev;
+}	t_env;
+
+t_env	*get_env_to_list(char **env);
+
 
 
 #endif
