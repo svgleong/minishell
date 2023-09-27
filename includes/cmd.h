@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:20:58 by svalente          #+#    #+#             */
-/*   Updated: 2023/09/26 11:57:47 by svalente         ###   ########.fr       */
+/*   Updated: 2023/09/27 09:52:58 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,12 @@
 #include <stdlib.h>
 #include <string.h>
 
+
+/* 	">" -> 0
+	"<" -> 1
+	">>" -> 2
+	"<<" -> 3 */
+
 typedef struct s_cmd
 {
 	struct s_cmd	*prev;
@@ -28,6 +34,7 @@ typedef struct s_cmd
 	int				pipe[2];
 	int				fd_in;
 	int				fd_out;
+	int				redir;
 }	t_cmd;
 
 void	create_list(t_cmd **lst, char **args);

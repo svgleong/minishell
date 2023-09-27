@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 10:46:46 by svalente          #+#    #+#             */
-/*   Updated: 2023/09/26 15:33:10 by svalente         ###   ########.fr       */
+/*   Updated: 2023/09/27 11:23:13 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ t_cmd *new_node( char **args)
 		new->args = copy_matrix(args);
 	new->prev = NULL;
 	new->next = NULL;
+	new->fd_in = 0;
+	new->fd_out = 1;
+	new-> redir = -1;
 	return (new);
 }
 
@@ -102,7 +105,7 @@ void	print_list(t_cmd *lst)
 {
 	t_cmd *tmp = lst;
 	int i = 0;
-
+	int j = 1;
 	if(!lst)
 	{
 		printf("Empty list\n");	
@@ -110,13 +113,16 @@ void	print_list(t_cmd *lst)
 	}
 	while (tmp)
 	{
+		printf("Node %d\n", j);
 		i = 0;
 		while (tmp->args[i])
 		{
 			printf("arg[%d] %s\n", i, tmp->args[i]);
 			i++;
 		}
+		printf("redir %d fd_in %d fd_out %d\n", tmp->redir, tmp->fd_in, tmp->fd_out);
 		tmp = tmp->next;
+		j++;
 	}
 }
 

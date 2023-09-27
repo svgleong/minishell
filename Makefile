@@ -6,7 +6,7 @@
 #    By: svalente <svalente@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/20 20:09:21 by svalente          #+#    #+#              #
-#    Updated: 2023/09/26 15:53:17 by svalente         ###   ########.fr        #
+#    Updated: 2023/09/27 15:51:45 by svalente         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,19 +22,23 @@ SRCS		= srcs/main.c					\
 			  srcs/libs/ft_strlen.c			\
 			  srcs/libs/ft_substr.c			\
 			  srcs/libs/ft_strchr.c			\
+			  srcs/libs/ft_strncmp.c		\
+			  srcs/libs/ft_isspace.c		\
+			  srcs/libs/ft_special_char.c	\
 			  srcs/parser/list_utils.c 		\
 			  srcs/parser/utils.c 			\
 			  srcs/parser/check_quotes.c	\
 			  srcs/parser/modify_string.c 	\
+			  srcs/parser/redirections.c 	\
 			  srcs/alloc/utils.c 			\
-			  srcs/alloc/utils.c 			\
+			  
 
 
 OBJS		= $(addprefix $(OBJ_PATH)/, $(addsuffix .o, $(basename $(SRCS))))
 INCLUDES	= includes/
 
 CC			= cc
-CFLAGS		= -g -I$(INCLUDES) #-fsanitize=address #,undefined # -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror -g -I$(INCLUDES) -fsanitize=address #,undefined 
 RM			= rm -f
 
 FT_PRINTF_PATH = ./srcs/ft_printf
@@ -69,7 +73,7 @@ fclean: clean
 	@echo "\033[1;32m---> ./$(NAME) was deleted\033[0m"
 
 valgrind:	re
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes valgrind --tool=helgrind --log-file=valgrind-out.txt ./minishell
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes valgrind --tool=helgrind --log-file=valgrind-out.txt --suppressions=readline.supp ./minishell
 
 re: fclean all
 
