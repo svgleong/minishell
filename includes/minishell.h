@@ -10,6 +10,8 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <stdio.h>
+# include <unistd.h>
+# include <limits.h>
 
 t_cmd *new_node( char *arg);
 

@@ -6,7 +6,7 @@
 #    By: mzarichn <mzarichn@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/20 20:09:21 by svalente          #+#    #+#              #
-#    Updated: 2023/09/27 16:31:15 by mzarichn         ###   ########.fr        #
+#    Updated: 2023/09/28 15:24:12 by mzarichn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,12 +20,15 @@ SRCS		= srcs/libs/ft_calloc.c			\
 			  srcs/libs/ft_strdup.c			\
 			  srcs/libs/ft_strlen.c			\
 			  srcs/libs/ft_substr.c			\
+			  srcs/libs/ft_strncmp.c			\
 			  srcs/parser/list_utils.c 		\
 			  srcs/parser/utils.c 			\
 			  srcs/alloc/utils.c 			\
 			  srcs/executer/main.c					\
 			  srcs/executer/builtin/env.c		\
 			  srcs/executer/builtin/export.c		\
+			  srcs/executer/builtin/echo.c		\
+			  srcs/executer/builtin/pwd.c		\
 
 
 OBJS		= $(addprefix $(OBJ_PATH)/, $(addsuffix .o, $(basename $(SRCS))))

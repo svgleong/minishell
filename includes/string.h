@@ -6,7 +6,7 @@
 /*   By: mzarichn <mzarichn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:20:58 by svalente          #+#    #+#             */
-/*   Updated: 2023/09/27 15:57:02 by mzarichn         ###   ########.fr       */
+/*   Updated: 2023/09/28 12:04:20 by mzarichn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 size_t	ft_strlen(const char *s);
 void	*ft_memset(void *s, int c, size_t n);
 char	*ft_strdup(const char *s);
+//added
+int	ft_strncmp(const char *s1, char *s2, size_t n);
 
 #endif
