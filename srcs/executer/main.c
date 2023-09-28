@@ -1,6 +1,6 @@
-#include "./includes/executer.h"
+#include <executer.h>
 
-void cd_command() {
+/* void cd_command() {
     printf("Running 'cd' command.\n");
 }
 
@@ -10,35 +10,27 @@ void pwd_command() {
 
 void echo_command() {
     printf("Running 'echo' command.\n");
-}
+} */
 
-t_env	*env(void)
+/* t_env	*env(void)
 {
 	static t_env env;
 	return (&env);
-}
+} */
 
-void	print_env(t_env *env)
+void	_init(t_cmd)
 {
-	t_env *tmp = env;
-
-	if(!env)
-	{
-		printf("Empty list\n");	
-		return ;
-	}
-	while (tmp)
-	{
-		printf("%s\n", tmp->content);
-		tmp = tmp->next;
-	}
+	
 }
 
 int main(int ac, char **av, char **env)
 {
     (void)ac;
 	(void)av;
-	t_env *env_list = get_env_to_list(env);
-	print_env(env_list);
+	t_cmd cmd;
+	
+	t_env *env_list;
+    env_list = NULL;
+	env_bi(env, env_list);
 	return (0);
 }

@@ -19,13 +19,13 @@ typedef struct s_lexer
 
 //command struct
 //ex: ls-la > output.txt < input.txt
-typedef struct s_cmd
+/* typedef struct s_cmd
 {
 	char			**cmd;
 	int				n_redr;
 	t_lexer			*redr;
 }	t_cmd;
-
+ */
 typedef struct s_list
 {
 	char			**content;

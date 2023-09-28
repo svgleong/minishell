@@ -6,7 +6,7 @@
 /*   By: mzarichn <mzarichn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:39:21 by svalente          #+#    #+#             */
-/*   Updated: 2023/09/25 14:33:04 by mzarichn         ###   ########.fr       */
+/*   Updated: 2023/09/27 16:32:11 by mzarichn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # include <readline/history.h> 
 # include <stdio.h>
 
-int main(int ac, char **av, char **env)
+/* int main(int ac, char **av, char **env)
 {
 	(void)ac;
 	(void)av;
@@ -36,4 +36,4 @@ int main(int ac, char **av, char **env)
 	free(rl);
 	rl = NULL;
 	return (0);
-}
+} */
