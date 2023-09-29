@@ -2,15 +2,10 @@
 
 void    pwd_bi(void)
 {
-    char    cwd[PATH_MAX];
+    char	*buf;
 
-        printf("entrou pwd");
-
-    if (getcwd(cwd, sizeof(cwd)) != NULL)
-    {
-        printf("aqui");
-        printf("%s", cwd);
-    }
-    else
-        printf("error in finding directory");
+	buf = getcwd(NULL, 0);
+	ft_putendl_fd(buf, 1);
+	free(buf);
+	return ;
 }

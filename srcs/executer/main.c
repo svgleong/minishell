@@ -49,6 +49,7 @@ int main(int ac, char **av, char **env)
 	
 	t_env *env_list;
     env_list = NULL;
+	(void)env_list;
 	//env_bi(env, env_list);
 
 	return (0);

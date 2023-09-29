@@ -24,5 +24,6 @@ void	*ft_memset(void *s, int c, size_t n);
 char	*ft_strdup(const char *s);
 //added
 int	ft_strncmp(const char *s1, char *s2, size_t n);
+void	ft_putendl_fd(char *s, int fd);
 
 #endif

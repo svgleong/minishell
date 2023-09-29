@@ -21,6 +21,7 @@ SRCS		= srcs/libs/ft_calloc.c			\
 			  srcs/libs/ft_strlen.c			\
 			  srcs/libs/ft_substr.c			\
 			  srcs/libs/ft_strncmp.c			\
+			  srcs/libs/ft_putendl_fd.c			\
 			  srcs/parser/list_utils.c 		\
 			  srcs/parser/utils.c 			\
 			  srcs/alloc/utils.c 			\

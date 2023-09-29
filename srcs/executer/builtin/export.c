@@ -3,6 +3,20 @@
 // normally stdin stdout but can pipe to file
 // uses builtin declare that we dont create but in bash there is
 //declare -x A[="B"] -> can declare NULL / "\0" / abc
+////
 //
+// export is sorted alphabetacly and has declare -x
 
-#include "../includes/executer.h"
+
+#include <executer.h>
+
+void	only_export(char **args)
+{
+	
+}
+
+void	export_bi(char **args)
+{
+	if (!args[1])
+		only_export(args);
+}
