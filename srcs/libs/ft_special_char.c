@@ -1,26 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_special_char.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/25 10:08:22 by svalente          #+#    #+#             */
-/*   Updated: 2023/09/25 16:18:49 by svalente         ###   ########.fr       */
+/*   Created: 2023/09/27 13:00:20 by svalente          #+#    #+#             */
+/*   Updated: 2023/09/27 15:53:00 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include <string.h>
 
-char	**free_matrix(char **matrix)
+int	is_special_char(char c)
 {
-	int	i;
-
-	i = 0;
-	if (!matrix)
-		return (NULL);
-	while (matrix[i])
-		free(matrix[i++]);
-	free(matrix);
-	return (NULL);
+	return (c == '>' || c == '<' || c == '|' 
+			|| c == ';' || c == '&' || c == '\\');
 }

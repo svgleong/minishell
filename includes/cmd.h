@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzarichn <mzarichn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:20:58 by svalente          #+#    #+#             */
-/*   Updated: 2023/09/28 11:48:40 by mzarichn         ###   ########.fr       */
+/*   Updated: 2023/09/27 09:52:58 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <readline/history.h>
 #include <stdlib.h>
 #include <string.h>
+
 
 /* 	">" -> 0
 	"<" -> 1
@@ -36,7 +37,7 @@ typedef struct s_cmd
 	int				redir;
 }	t_cmd;
 
-void	create_list(char *rl, t_cmd **lst);
+void	create_list(t_cmd **lst, char **args);
 void	print_list(t_cmd *lst);
 void	cmdlstclear(t_cmd **lst);
 

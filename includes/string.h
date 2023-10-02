@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   string.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzarichn <mzarichn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: svalente <svalente@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:20:58 by svalente          #+#    #+#             */
-/*   Updated: 2023/09/28 12:04:20 by mzarichn         ###   ########.fr       */
+/*   Updated: 2023/09/20 12:25:42 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,12 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 size_t	ft_strlen(const char *s);
 void	*ft_memset(void *s, int c, size_t n);
 char	*ft_strdup(const char *s);
+char	*ft_strchr(const char *s, int c);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
+int		ft_isspace(char c);
+int		is_special_char(char c);
+int		valid_delimeters(char *str);
 //added
-int	ft_strncmp(const char *s1, char *s2, size_t n);
 void	ft_putendl_fd(char *s, int fd);
 
 #endif

@@ -1,26 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_isspace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/25 10:08:22 by svalente          #+#    #+#             */
-/*   Updated: 2023/09/25 16:18:49 by svalente         ###   ########.fr       */
+/*   Created: 2022/10/26 19:01:31 by svalente          #+#    #+#             */
+/*   Updated: 2023/09/27 15:52:20 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-char	**free_matrix(char **matrix)
+int	ft_isspace(char c)
 {
-	int	i;
-
-	i = 0;
-	if (!matrix)
-		return (NULL);
-	while (matrix[i])
-		free(matrix[i++]);
-	free(matrix);
-	return (NULL);
+	return ((c == ' ' || (c >= '\t' && c <= '\r')));
 }

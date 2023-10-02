@@ -22,8 +22,15 @@ SRCS		= srcs/libs/ft_calloc.c			\
 			  srcs/libs/ft_substr.c			\
 			  srcs/libs/ft_strncmp.c			\
 			  srcs/libs/ft_putendl_fd.c			\
+			  srcs/libs/ft_strchr.c			\
+			  srcs/libs/ft_strncmp.c		\
+			  srcs/libs/ft_isspace.c		\
+			  srcs/libs/ft_special_char.c	\
 			  srcs/parser/list_utils.c 		\
 			  srcs/parser/utils.c 			\
+			  srcs/parser/check_quotes.c	\
+			  srcs/parser/modify_string.c 	\
+			  srcs/parser/redirections.c 	\
 			  srcs/alloc/utils.c 			\
 			  srcs/executer/main.c					\
 			  srcs/executer/builtin/env.c		\
@@ -32,11 +39,12 @@ SRCS		= srcs/libs/ft_calloc.c			\
 			  srcs/executer/builtin/pwd.c		\
 
 
+
 OBJS		= $(addprefix $(OBJ_PATH)/, $(addsuffix .o, $(basename $(SRCS))))
 INCLUDES	= includes/
 
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -g -I$(INCLUDES) #-fsanitize=address,undefined
+CFLAGS		= -Wall -Wextra -Werror -g -I$(INCLUDES) -fsanitize=address #,undefined 
 RM			= rm -f
 
 $(VERBOSE).SILENT:
@@ -52,11 +60,8 @@ $(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) -lreadline -o $@  $^
 	@echo "\033[1;35m---> MINISHELL SUCCESSFULLY COMPILED\033[0m"
 
-run: $(NAME)
-	./$(NAME)
-
-rrun: re
-	./$(NAME)
+run: 
+	make re && clear && ./$(NAME)
 
 clean: 
 	clear
@@ -68,7 +73,7 @@ fclean: clean
 	@echo "\033[1;32m---> ./$(NAME) was deleted\033[0m"
 
 valgrind:	re
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes valgrind --tool=helgrind --log-file=valgrind-out.txt ./minishell
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes valgrind --tool=helgrind --log-file=valgrind-out.txt --suppressions=readline.supp ./minishell
 
 re: fclean all
 
