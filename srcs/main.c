@@ -28,6 +28,31 @@ void	sig_handler(int signal)
 }
 
 
+#include <executer.h>
+
+
+t_env	*env(void)
+{
+	static t_env env;
+	return (&env);
+}
+
+t_export_env	*export_env(void)
+{
+	static t_export_env export_env;
+	return (&export_env);
+}
+
+void	print_args(t_cmdd *cmd)
+{
+	printf("Debug Args: ");
+    for (int i = 0; cmd->args[i] != NULL; i++) {
+        printf("%s ", cmd->args[i]);
+    }
+	printf("\n");
+}
+
+
 int main(int ac, char **av, char **env)
 {
     (void)ac;
