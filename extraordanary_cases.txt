@@ -9,3 +9,78 @@ svalente@c2r5s3:~/Documents/minishell$
 
 expansion
 retirar quotes
+
+
+EXPANSION CASES
+
+echo $11
+1
+
+echo $1sofia
+sofia
+
+echo '$PATH'
+$PATH
+
+echo "$PATH"
+/nfs/homes/svalente/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+
+echo $PATH
+/nfs/homes/svalente/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+
+echo "'$PATH'"
+'/nfs/homes/svalente/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin'
+---> expands and prints single quotes
+
+echo "'"$PATH"'"
+'/nfs/homes/svalente/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin'
+--->expands and prints single quotes
+
+echo "'"'$PATH'"'"
+'$PATH'
+
+echo $PAT
+
+---> no output, deletes string
+
+echo ""$ASSS"$PATH"
+/nfs/homes/svalente/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+---> deletes "$ASSS", expands $PATH
+
+echo ""$ASSS"'$PATH'"
+'/nfs/homes/svalente/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin'
+---> expands and prints single quotes
+
+echo $ERT6$HOME'"$USER"'
+/nfs/homes/svalente"$USER"
+
+echo $USER6$HOME'"$USER"'
+/nfs/homes/svalente"$USER"
+
+echo $USER*$HOME'"$USER"'
+svalente*/nfs/homes/svalente"$USER"
+
+echo $USER]$HOME'"$USER"'
+svalente]/nfs/homes/svalente"$USER"
+
+echo $5USER]$HOME'"$USER"'
+USER]/nfs/homes/svalente"$USER"
+
+echo $sofia$HOME'"$USER"'
+thomas/nfs/homes/svalente"$USER"
+
+HEREDOC
+
+cat <<end
+> $PATH
+> "$PATH"
+> '$PATH'
+> end
+/nfs/homes/svalente/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+"/nfs/homes/svalente/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"
+'/nfs/homes/svalente/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin'
+
+cat <<'end'
+> $PATH
+> end
+$PATH
