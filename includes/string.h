@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   string.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: svalente <svalente@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:20:58 by svalente          #+#    #+#             */
-/*   Updated: 2023/09/27 15:52:47 by svalente         ###   ########.fr       */
+/*   Updated: 2023/09/20 12:25:42 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define STRING_H
 
 # include <stddef.h>
-# include <alloc.h>
+# include "alloc.h"
 # include <stdlib.h>
 
 char	**ft_split(char const *s, char c);
@@ -27,5 +27,7 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_isspace(char c);
 int		is_special_char(char c);
 int		valid_delimeters(char *str);
+//added
+void	ft_putendl_fd(char *s, int fd);
 
 #endif
