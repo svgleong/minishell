@@ -10,13 +10,14 @@
 
 #include <executer.h>
 
-void	only_export(char **args)
+/* void	only_export()
 {
-	
+	list_bubble_sort(&export_env());
+	print_env(&export_env());
 }
 
-void	export_bi(char **args)
+void	export_bi(t_cmdd *cmd)
 {
-	if (!args[1])
-		only_export(args);
-}
+	if (!(cmd->args[1]))
+		only_export();
+} */

@@ -26,17 +26,6 @@ typedef struct s_lexer
 	t_lexer			*redr;
 }	t_cmd;
  */
-typedef struct s_list
-{
-	char			**content;
-	char			*path;
-	int				fd_master[2];
-	int				fd[2];
-	int				master_error[2];
-	struct s_list	*next;
-	struct s_list	*prev;
-	void			(*ft_exec)(struct s_list **list);
-}	t_list;
 
 typedef struct s_env
 {
@@ -44,6 +33,13 @@ typedef struct s_env
 	struct s_env	*next;
 	struct s_env	*prev;
 }	t_env;
+
+typedef struct s_export_env
+{
+	char			*content;
+	struct s_env	*next;
+	struct s_env	*prev;
+}	t_export_env;
 
 t_env	*get_env_to_list(char **env);
 
