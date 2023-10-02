@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzarichn <mzarichn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:39:21 by svalente          #+#    #+#             */
-/*   Updated: 2023/09/27 18:31:49 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/02 12:28:47 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	print_args(t_cmdd *cmd)
 }
 
 
-int main(int ac, char **av, char **env)
+/* int main(int ac, char **av, char **env)
 {
     (void)ac;
 	(void)av;
@@ -71,9 +71,9 @@ int main(int ac, char **av, char **env)
 
 
 	return (0);
-}
+} */
 
-/* int main(int ac, char **av, char **env)
+int main(int ac, char **av, char **env)
 {
 	(void)ac;
 	(void)av;
@@ -105,4 +105,4 @@ int main(int ac, char **av, char **env)
 	rl = NULL;
 	rl_clear_history();
 	return (0);
-} */
+}
