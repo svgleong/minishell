@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   ft_isspace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/25 14:51:17 by svalente          #+#    #+#             */
-/*   Updated: 2023/09/27 10:59:09 by svalente         ###   ########.fr       */
+/*   Created: 2022/10/26 19:01:31 by svalente          #+#    #+#             */
+/*   Updated: 2023/09/27 15:52:20 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
+#include <minishell.h>
 
-int     valid_quotes(char *str);
-int		checker(char *rl);
-char    *modify_str(char *rl);
-char	**separate_args(char *rl);
-int		redirections(t_cmd **lst);
-
-#endif
+int	ft_isspace(char c)
+{
+	return ((c == ' ' || (c >= '\t' && c <= '\r')));
+}

@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 10:46:46 by svalente          #+#    #+#             */
-/*   Updated: 2023/09/25 14:38:38 by svalente         ###   ########.fr       */
+/*   Updated: 2023/09/27 11:23:13 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,16 @@ t_cmd *new_node( char **args)
 {
 	t_cmd *new;
 
-	new = ft_calloc(1, sizeof(t_cmd));//malloc(sizeof(t_cmd));
+	new = ft_calloc(1, sizeof(t_cmd));
 	if (!new)
 		return (NULL);
 	if (args)
 		new->args = copy_matrix(args);
-	/* for (int i = 0; args[i] != NULL; i++)
-		printf("Args[%d] %s\n", i, args[i]);   */
 	new->prev = NULL;
 	new->next = NULL;
-	//printf("args[0]: %s\n", new->args[0]);
+	new->fd_in = 0;
+	new->fd_out = 1;
+	new-> redir = -1;
 	return (new);
 }
 
@@ -55,7 +55,7 @@ void	add_back(t_cmd **lst, t_cmd *new)
 	last->next->prev = last;
 }
 
-void	create_list(char *rl, t_cmd **lst)
+/* void	create_list(char *rl, t_cmd **lst)
 {
 	char 	**cmds;
 	int		i = 0;
@@ -75,13 +75,37 @@ void	create_list(char *rl, t_cmd **lst)
 	i = -1;
 	while (cmds[++i])
 		free(cmds[i]);
+} */
+
+void	create_list(t_cmd **lst, char **args)
+{
+	int	i;
+
+	i = 0;
+	while (args[i])
+	{
+		if (args[i][0] != '|')
+		{
+			//printf("ARGS[%d] %s\n",i, args[i]);
+			add_back(lst, new_node(args + i));
+			i++;
+		}
+		while (args[i] && args[i][0] != '|')
+			i++;
+		if (!args[i])
+			break ;
+		i++;
+	}
+	free_matrix(args);
 }
+
+//fsafafs | fasfaf |F asfasfasf
 
 void	print_list(t_cmd *lst)
 {
 	t_cmd *tmp = lst;
 	int i = 0;
-
+	int j = 1;
 	if(!lst)
 	{
 		printf("Empty list\n");	
@@ -89,13 +113,16 @@ void	print_list(t_cmd *lst)
 	}
 	while (tmp)
 	{
+		printf("Node %d\n", j);
 		i = 0;
 		while (tmp->args[i])
 		{
 			printf("arg[%d] %s\n", i, tmp->args[i]);
 			i++;
 		}
+		printf("redir %d fd_in %d fd_out %d\n", tmp->redir, tmp->fd_in, tmp->fd_out);
 		tmp = tmp->next;
+		j++;
 	}
 }
 

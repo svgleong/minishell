@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 15:21:53 by svalente          #+#    #+#             */
-/*   Updated: 2023/09/25 16:57:53 by svalente         ###   ########.fr       */
+/*   Updated: 2023/09/27 15:53:49 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@ static int  add_delimiter(char **rl, char *str, int *j, char quote)
     count = count_delimiter(*rl);
     if (quote || (!quote && *rl && !count))
         return (0);
-    str[(*j)++] = '\2';
+    str[(*j)++] = '2';
     str[(*j)++] = *rl[0]++;
     if (count == 2)
         str[(*j)++] = *rl[0]++;
-    str[(*j)++] = '\2';
+    str[(*j)++] = '2';
     return (1);
 }
 
@@ -58,23 +58,39 @@ char *modify_str(char *rl)
     {
         if (!quote && (*rl == '\"' || *rl == '\''))
         {    
-            str[j++] = '\2';
+            str[j++] = '2';
             quote = *rl;
         }
         else if (quote && quote == *rl)
         {
             str[j++] = *rl++;
-            str[j++] = '\2';
+            str[j++] = '2';
             quote = '\0';
             continue ;
         }
         if (add_delimiter(&rl, str, &j, quote))
             continue ;
         if (!quote && *rl == ' ')
-            *rl = '\2';
+            *rl = '2';
         str[j++] = *rl++;
     }
     str[j] = '\0';
+	// printf("MODIFIED: %s\n", str);
     return (str);
 }
 
+char	**separate_args(char *rl)
+{
+	char	*mod_str;
+	char	**all_args;
+	int		i;
+
+	mod_str = modify_str(rl);
+	all_args = ft_split(mod_str, '2');
+	i = -1;
+	// while (all_args && all_args[++i])
+	// 	printf("ARG[%i]: %s\n", i, all_args[i]);
+	free(rl);
+	free(mod_str);
+	return (all_args);
+}
