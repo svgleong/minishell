@@ -39,17 +39,17 @@ t_env	*env_last_node(t_env *lst)
 }
 
 //adds the created node in the last position
-void	env_add_node_end(t_env **lst, t_env *new)
+void	env_add_node_end(t_env *lst, t_env *new)
 {
 	if (lst)
 	{
-		if (*lst)
+		if (lst)
 		{
-			new->prev = env_last_node(*lst);
-			env_last_node(*lst)->next = new;
+			new->prev = env_last_node(lst);
+			env_last_node(lst)->next = new;
 		}
 		else
-			*lst = new;
+			lst = new;
 	}
 }
 
@@ -62,36 +62,42 @@ t_env	*env_new_node(char *str)
 	if (!new)
 		return (NULL);
 	new->content = ft_strdup(str);
-		//printf("content %s\n", new->content);
+	new->prev = NULL;
+	new->next = NULL;
+	//printf("content %s\n", new->content);
 	return (new);
 }
 
 //puts char **env to list
-t_env	*get_env_to_list(char **env)
+void	get_env_to_list(char **env)
 {
-	t_env	*env_list = NULL;
 
 	int i = -1;
 	while (env[++i])
-		env_add_node_end(&env_list, env_new_node(env[i]));
-    return (env_list);
+	{
+		//printf("%d %s\n", i, env[i]);
+		env_add_node_end(envp(), env_new_node(env[i]));
+	}
 }
 
 void	print_env(t_env *env)
 {
+	int i = 0;
+
 	if (!env)
 		printf("nada\n");
-	while (env)
+	while (env->next)
 	{
-		printf("%s\n", env->content);
 		env = env->next;
+		printf("%s\n", env->content);
+		i++;
 	}
 }
 
-void    env_bi(char **env, t_env *env_lst)
+/* void    env_bi(char **env, t_env *env_lst)
 {
 	env_lst = get_env_to_list(env);
     print_env(env_lst);
     free_env_list(&env_lst);
-}
+} */
 

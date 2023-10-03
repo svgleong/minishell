@@ -25,8 +25,8 @@ char	*ft_strdup(const char *s);
 void    env_bi(char **env,t_env *env_lst);
 t_env	*env(void);
 t_export_env	*export_env(void);
-t_env	*get_env_to_list(char **env);
-t_export_env	*get2_env_to_list(char **env);
+void	get_env_to_list(char **env);
+void	print_env(t_env *env);
 
 
 //cmd

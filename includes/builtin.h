@@ -41,8 +41,6 @@ typedef struct s_export_env
 	struct s_env	*prev;
 }	t_export_env;
 
-t_env	*get_env_to_list(char **env);
-
-
+t_env	*envp(void);
 
 #endif

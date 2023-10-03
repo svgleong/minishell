@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:39:21 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/02 12:35:10 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/03 17:00:16 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,13 @@ void	print_args(t_cmdd *cmd)
 	return (0);
 } */
 
+t_env	*envp(void)
+{
+	static t_env	envp;
+	
+	return (&envp);
+}
+
 int main(int ac, char **av, char **env)
 {
 	(void)ac;
@@ -84,6 +91,8 @@ int main(int ac, char **av, char **env)
 	char **tmp;
 	lst = NULL;
 
+	get_env_to_list(env);
+	print_env(envp());
 	rl_catch_signals = 0;
 	signal(SIGQUIT, sig_handler);
 	signal(SIGINT, sig_handler);

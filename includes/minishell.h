@@ -16,6 +16,6 @@
 # include <signal.h>
 # include <unistd.h>
 
-t_cmd *new_node( char *arg);
+t_cmd 	*new_node( char *arg);
 
 #endif
