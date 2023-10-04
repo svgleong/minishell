@@ -26,7 +26,7 @@ void    env_bi(char **env,t_env *env_lst);
 t_env	*env(void);
 t_export_env	*export_env(void);
 void	get_env_to_list(char **env);
-void	print_env(t_env *env);
+void	print_env();
 
 
 //cmd

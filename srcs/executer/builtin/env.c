@@ -43,14 +43,11 @@ void	env_add_node_end(t_env *lst, t_env *new)
 {
 	if (lst)
 	{
-		if (lst)
-		{
-			new->prev = env_last_node(lst);
-			env_last_node(lst)->next = new;
-		}
-		else
-			lst = new;
+		new->prev = env_last_node(lst);
+		env_last_node(lst)->next = new;
 	}
+	else
+		lst = new;
 }
 
 //creates and allocs new node putting env str in content
@@ -71,25 +68,23 @@ t_env	*env_new_node(char *str)
 //puts char **env to list
 void	get_env_to_list(char **env)
 {
-
-	int i = -1;
+	int i = 0;
+	data()->envp = env_new_node(env[0]);
 	while (env[++i])
-	{
-		//printf("%d %s\n", i, env[i]);
-		env_add_node_end(envp(), env_new_node(env[i]));
-	}
+		env_add_node_end(data()->envp, env_new_node(env[i]));
 }
 
-void	print_env(t_env *env)
+void	print_env()
 {
 	int i = 0;
-
+	t_env *env = data()->envp;
+ 
 	if (!env)
 		printf("nada\n");
-	while (env->next)
+	while (env)
 	{
-		env = env->next;
 		printf("%s\n", env->content);
+		env = env->next;
 		i++;
 	}
 }
