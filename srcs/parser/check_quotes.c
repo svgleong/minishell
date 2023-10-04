@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 14:40:47 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/04 15:17:30 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/04 15:44:12 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ int	validate(char *str, char quote, int *i)
 int	valid_quotes(char *str)
 {
 	int		i;
-	bool	del;
+	//bool	del;
 
 	i = -1;
-	del = true;
+	//del = true;
 	while (str[++i])
 	{
 		if (str[i] == '\'')
