@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 14:40:47 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/04 14:49:53 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/04 15:17:30 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,13 +92,16 @@ int		valid_delimiters(char *str)
 		return (false);
 	while (str[++i])
 	{
-		/* if (str[i] == '\'')
-			
-		else */ 
+		if (str[i] == '\'')
+			if (validate(str, '\'', &i) == -1)
+				del = false;
+		if (str[i] == '"')
+			if (validate(str, '"', &i) == -1)
+				del = false;
 		if (str[i] == '>')
 			del = valid(str + i + 1, '>', '<');
-		else if (str[i] == '<')
-			del = valid(str + i + 1, '<', '>');
+		/* else if (str[i] == '<')
+			del = valid(str + i + 1, '<', '>'); */ // criar outfile mas dar erro
 		else if (str[i] == '|')
 			del = valid(str + i + 1, '|', '|');
 		if (del == false)

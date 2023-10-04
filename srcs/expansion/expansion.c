@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:02:23 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/04 12:34:09 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/04 15:24:41 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,10 @@ char	*get_status(char *str, int i)
 char	*expansion(char *str, int i)
 {
 	t_env	*env;
+	char	*value;
 
-	env = data()->envp;	
+	env = data()->envp;
+	value =
 	printf("Argm: %s\n", str);
 	if (str[i + 1] == '?')
 		str = get_status(str, i);
@@ -30,7 +32,10 @@ char	*expansion(char *str, int i)
 	{
 		printf("env: %s\n", env->content);
 		if (!(ft_strncmp(str + i + 1, env->content, ft_strlen_special(env->content, '='))))
+		{
 			printf("TRUE\n");
+				
+		}
 		else
 			printf("false\n");
 		env = env->next;
