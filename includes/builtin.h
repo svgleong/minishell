@@ -1,6 +1,7 @@
 #ifndef BUILTIN_H
 # define BUILTIN_H
 
+
 //enum -> struct but each line of definition has a number
 typedef enum s_token
 {
@@ -30,6 +31,7 @@ typedef struct s_lexer
 typedef struct s_env
 {
 	char			*content;
+	char			*key;
 	struct s_env	*next;
 	struct s_env	*prev;
 }	t_env;
@@ -41,8 +43,14 @@ typedef struct s_export_env
 	struct s_env	*prev;
 }	t_export_env;
 
-t_env	*get_env_to_list(char **env);
+typedef struct s_data
+{
+	t_env			*envp;
+	t_export_env	*export;
+	t_lexer			*lexer;
+	t_token			*token;
+} t_data;
 
-
+t_data	*data(void);
 
 #endif

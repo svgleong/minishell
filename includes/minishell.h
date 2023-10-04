@@ -15,7 +15,8 @@
 # include <stdbool.h>
 # include <signal.h>
 # include <unistd.h>
+# include <builtin.h>
 
-t_cmd *new_node( char *arg);
+t_cmd 	*new_node( char *arg);
 
 #endif

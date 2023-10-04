@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 14:40:47 by svalente          #+#    #+#             */
-/*   Updated: 2023/09/27 18:02:23 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/04 15:17:30 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	valid(char *str, char delim, char opps)
 	ct = 1;
 	if (!str || !str[0])
 		return 0;
-	if (str[0] == delim && ++i)
+	if (delim != '|' && str[0] == delim && ++i)
 		ct++;
 	//printf("str[0] :%c: e delim :%c:\n", str[0], delim);
 	while (str[i])
@@ -88,12 +88,22 @@ int		valid_delimiters(char *str)
 	
 	i = -1;
 	del = true;
+	if (str[0] == '|')
+		return (false);
 	while (str[++i])
 	{
+		if (str[i] == '\'')
+			if (validate(str, '\'', &i) == -1)
+				del = false;
+		if (str[i] == '"')
+			if (validate(str, '"', &i) == -1)
+				del = false;
 		if (str[i] == '>')
 			del = valid(str + i + 1, '>', '<');
-		else if (str[i] == '<')
-			del = valid(str + i + 1, '<', '>');
+		/* else if (str[i] == '<')
+			del = valid(str + i + 1, '<', '>'); */ // criar outfile mas dar erro
+		else if (str[i] == '|')
+			del = valid(str + i + 1, '|', '|');
 		if (del == false)
 			break ;
 	}

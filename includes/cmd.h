@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:20:58 by svalente          #+#    #+#             */
-/*   Updated: 2023/09/27 09:52:58 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/04 12:27:37 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include <readline/history.h>
 #include <stdlib.h>
 #include <string.h>
-
+#include <builtin.h>
 
 /* 	">" -> 0
 	"<" -> 1
@@ -40,5 +40,9 @@ typedef struct s_cmd
 void	create_list(t_cmd **lst, char **args);
 void	print_list(t_cmd *lst);
 void	cmdlstclear(t_cmd **lst);
+
+// Expansion resources
+int		search_expansion(t_cmd *cmds);
+char	*expansion(char *str, int i);
 
 #endif

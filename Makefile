@@ -6,7 +6,7 @@
 #    By: svalente <svalente@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/20 20:09:21 by svalente          #+#    #+#              #
-#    Updated: 2023/10/02 12:28:27 by svalente         ###   ########.fr        #
+#    Updated: 2023/10/04 12:00:42 by svalente         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SRCS		= srcs/libs/ft_calloc.c			\
 			  srcs/libs/ft_strncmp.c		\
 			  srcs/libs/ft_isspace.c		\
 			  srcs/libs/ft_special_char.c	\
+			  srcs/libs/ft_isalnum.c		\
 			  srcs/parser/list_utils.c 		\
 			  srcs/parser/utils.c 			\
 			  srcs/parser/check_quotes.c	\
@@ -36,7 +37,9 @@ SRCS		= srcs/libs/ft_calloc.c			\
 			  srcs/executer/builtin/export.c\
 			  srcs/executer/builtin/echo.c	\
 			  srcs/executer/builtin/pwd.c	\
+			  srcs/expansion/expansion.c	\
 			  srcs/main.c 					\
+			  
 
 
 OBJS		= $(addprefix $(OBJ_PATH)/, $(addsuffix .o, $(basename $(SRCS))))

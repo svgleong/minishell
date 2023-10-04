@@ -6,9 +6,10 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:39:21 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/02 12:28:47 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/04 14:55:07 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include <minishell.h>
 
@@ -73,6 +74,13 @@ void	print_args(t_cmdd *cmd)
 	return (0);
 } */
 
+t_data	*data(void)
+{
+	static t_data	data;
+	
+	return (&data);
+}
+
 int main(int ac, char **av, char **env)
 {
 	(void)ac;
@@ -83,6 +91,8 @@ int main(int ac, char **av, char **env)
 	char **tmp;
 	lst = NULL;
 
+	get_env_to_list(env);
+	//print_env();
 	rl_catch_signals = 0;
 	signal(SIGQUIT, sig_handler);
 	signal(SIGINT, sig_handler);
@@ -103,6 +113,7 @@ int main(int ac, char **av, char **env)
 	}
 	free(rl);
 	rl = NULL;
+	
 	rl_clear_history();
 	return (0);
 }
