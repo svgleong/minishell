@@ -6,7 +6,7 @@
 /*   By: mzarichn <mzarichn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:20:58 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/06 16:46:54 by mzarichn         ###   ########.fr       */
+/*   Updated: 2023/10/06 18:00:01 by mzarichn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,11 @@ int		is_special_char(char c);
 int		valid_delimeters(char *str);
 int		validate(char *str, char quote, int *i);
 int		ft_isalnum(int c);
+int		ft_isalpha(int c);
+int		ft_isdigit(int c);
+
+
+//added
 void	ft_putendl_fd(char *s, int fd);
 void *ft_memcpy(void *dest, const void *src, size_t n);
 char	*ft_strjoin_free(char *s1, char *s2, int free_str);

@@ -6,7 +6,7 @@
 /*   By: mzarichn <mzarichn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:39:21 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/06 17:56:51 by mzarichn         ###   ########.fr       */
+/*   Updated: 2023/10/06 17:58:54 by mzarichn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int main(int ac, char **av, char **env)
 		tmp = separate_args(rl);
 		create_list(&lst, tmp);
 		//redirections(&lst);
-		print_list(lst);
+		//print_list(lst);
 		cmdlstclear(&lst);
 		//free (tmp);
 	}

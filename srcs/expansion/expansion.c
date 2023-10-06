@@ -6,23 +6,20 @@
 /*   By: mzarichn <mzarichn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:02:23 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/06 12:06:39 by mzarichn         ###   ########.fr       */
+/*   Updated: 2023/10/06 17:59:34 by mzarichn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-char	*get_status(char *str, int i)
+int	key_value(char *str)
 {
-	(void)str;
-	(void)i;
-	return NULL;
-}
+	int	sz;
 
-int	calculate_result(char *str , char *value, int key)
-{
-	return (ft_strlen_special(str, '$') + ft_strlen(value) + \
-	ft_strlen(ft_strchr(str, '$') + key));
+	sz = 0;
+	while (str[++sz] && ft_isalnum(str[sz]))
+		;
+	return (sz -1);
 }
 
 char	*expanding(char *str , char *value, int key) 
@@ -30,24 +27,36 @@ char	*expanding(char *str , char *value, int key)
 	char	*result;
 	int		sz;
 	int		i;
-	int		j;
 	int		k;
 
 	sz = calculate_result(str, value, key);
-	//printf("sz: %d\n", sz);
 	result = malloc(sz);
 	i = -1;
-	j = -1;
+	sz = -1;
 	while (str[++i] != '$')
 		result[i] = str[i];
 	k = i  + key + 1;
-	while (value[++j])
-		result[i++] = value[j];
+	while (value[++sz])
+		result[i++] = value[sz];
 	while (str[k])
 		result[i++] = str[k++];
 	result[i] = '\0';
-	printf("result %s\n", result);
-	return (result);	
+	return (result);
+}
+
+char	*check_expansion (char *str, int i)
+{	
+	if (!str[i + 1])
+		return "\2";
+	if (str[i + 1] == '?')
+		return ((str = get_status(str, i)));
+	if (ft_isdigit(str[i + 1]))
+		return (remove_number(str, i));	
+	if (str[i + 1] == '$')
+		return (remove_dollar(str, i));
+	if (!ft_isalnum(str[i + 1]))
+		return "\2";
+	return (expansion(str, i));
 }
 
 char	*expansion(char *str, int i)
@@ -55,30 +64,20 @@ char	*expansion(char *str, int i)
 	t_env	*env;
 
 	env = data()->envp;
-	char *value = NULL;
-	if (str[i + 1] == '?')
-		return ((str = get_status(str, i)));
+	value = NULL;
+
 	while (env)
 	{
-		if (!ft_strncmp(str + i + 1, env->content, ft_strlen_special(env->content, '=')))
+		if (!ft_strncmp(str + i + 1, env->content, ft_strlen_special(env->content, '='))
+			&& key_value(str + i) == (int)ft_strlen_special(env->content, '='))
 		{
 			value = expanding(str, ft_strchr(env->content, '=') + 1, ft_strlen_special(env->content, '='));
 			return (value);
 		}
 		env = env->next;
 	}
-	// remove_expand();
-
-	// while (str[++i])
-	// {
-	// 	if (!ft_isalpha(str[i]) || str[i] != '_')
-			
-	// 	//apagar $ e numero
-	// 	//se nao existe apagar ate $
-	// 	//se existir copiar a partir do igual
-	// 	//se encontrar ' depois de $ nao expande echo "$'PATH'" --> $'PATH'
-	// }
-	return (str);
+	value = remove_expand(str);
+	return (value);
 }
 
 int	search_expansion(t_cmd *cmds)
@@ -86,7 +85,6 @@ int	search_expansion(t_cmd *cmds)
 	int		i;
 	int		j;
 	char	*tmp;
-	//char	*str;
 
 	i = -1;
 	j = -1;
@@ -99,12 +97,12 @@ int	search_expansion(t_cmd *cmds)
 				break ;
 			else if (cmds->args[i][j] && cmds->args[i][j] == '$')
 			{
-				tmp = expansion(cmds->args[i], j);
+				tmp = check_expansion(cmds->args[i], j);
+				if (tmp[0] == '\2')
+					continue ;
 				free(cmds->args[i]);
 				cmds->args[i] = tmp;
 				j = -1;
-				//(void)tmp;
-				// $+USER ou $$USER ou $'USER'
 			}
 		}
 	}

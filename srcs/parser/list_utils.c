@@ -6,15 +6,16 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 10:46:46 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/04 16:44:00 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/06 17:38:41 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cmd.h>
 #include <alloc.h>
 #include "../../includes/alloc.h"
+#include <minishell.h>
 
-t_cmd *new_node( char **args)
+t_cmd *new_node(char **args)
 {
 	t_cmd *new;
 
@@ -96,7 +97,10 @@ void	create_list(t_cmd **lst, char **args)
 			break ;
 		i++;
 	}
+	//print_list(*lst);
 	search_expansion(*lst);
+	//print_list(*lst);
+	remove_quotes(lst);
 	free_matrix(args);
 }
 
@@ -121,7 +125,7 @@ void	print_list(t_cmd *lst)
 			printf("arg[%d] %s\n", i, tmp->args[i]);
 			i++;
 		}
-		printf("redir %d fd_in %d fd_out %d\n", tmp->redir, tmp->fd_in, tmp->fd_out);
+		//printf("redir %d fd_in %d fd_out %d\n", tmp->redir, tmp->fd_in, tmp->fd_out);
 		tmp = tmp->next;
 		j++;
 	}

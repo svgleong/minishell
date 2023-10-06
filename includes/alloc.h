@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:20:58 by svalente          #+#    #+#             */
-/*   Updated: 2023/09/25 16:19:41 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/06 15:35:21 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,5 @@
 void	*ft_calloc(size_t count, size_t size);
 char    **free_matrix(char **matrix);
 char    **copy_matrix(char **matrix);
-
 
 #endif
