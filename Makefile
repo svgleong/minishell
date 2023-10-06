@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mzarichn <mzarichn@student.42.fr>          +#+  +:+       +#+         #
+#    By: svalente <svalente@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/20 20:09:21 by svalente          #+#    #+#              #
-#    Updated: 2023/10/06 17:59:14 by mzarichn         ###   ########.fr        #
+#    Updated: 2023/10/06 18:11:41 by svalente         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ SRCS		= srcs/libs/ft_calloc.c			\
 			  srcs/libs/ft_strjoin_free.c	\
 			  srcs/libs/lst_utils.c		\
 			  srcs/parser/utils.c 			\
-			  srcs/parser/check_quotes.c	\
+			  srcs/parser/checker.c	\
 			  srcs/parser/modify_string.c 	\
 			  srcs/parser/remove_quotes.c 	\
 			  srcs/parser/redirections.c 	\
