@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: svalente <svalente@student.42.fr>          +#+  +:+       +#+         #
+#    By: mzarichn <mzarichn@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/20 20:09:21 by svalente          #+#    #+#              #
-#    Updated: 2023/10/06 17:48:44 by svalente         ###   ########.fr        #
+#    Updated: 2023/10/06 17:59:14 by mzarichn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,9 @@ SRCS		= srcs/libs/ft_calloc.c			\
 			  srcs/libs/ft_isspace.c		\
 			  srcs/libs/ft_special_char.c	\
 			  srcs/libs/ft_isalnum.c		\
-			  srcs/parser/list_utils.c 		\
+			  srcs/libs/ft_memcpy.c			\
+			  srcs/libs/ft_strjoin_free.c	\
+			  srcs/libs/lst_utils.c		\
 			  srcs/parser/utils.c 			\
 			  srcs/parser/check_quotes.c	\
 			  srcs/parser/modify_string.c 	\
@@ -37,7 +39,8 @@ SRCS		= srcs/libs/ft_calloc.c			\
 			  srcs/executer/builtin/env.c	\
 			  srcs/executer/builtin/export.c\
 			  srcs/executer/builtin/echo.c	\
-			  srcs/executer/builtin/pwd.c	\
+			  srcs/executer/builtin/echo.c	\
+			  srcs/executer/executer.c	\
 			  srcs/expansion/expansion.c	\
 			  srcs/expansion/expansion_utils.c\
 			  srcs/main.c 					\
@@ -48,8 +51,8 @@ OBJS		= $(addprefix $(OBJ_PATH)/, $(addsuffix .o, $(basename $(SRCS))))
 INCLUDES	= includes/
 
 #FIXME: Change to CC
-CC			= gcc
-CFLAGS		= -Wall -Wextra -Werror -g -I$(INCLUDES) -fsanitize=address #,undefined
+CC			= cc
+CFLAGS		= -Wall -Wextra -Werror -g -I$(INCLUDES) #-fsanitize=address #,undefined
 RM			= rm -f
 
 #$(VERBOSE).SILENT:
@@ -58,7 +61,7 @@ all: $(NAME)
 
 $(OBJ_PATH)/%.o:%.c
 	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAGS) -I $(INCLUDES) -I /usr/local/include -c -o $@ $<
+	@$(CC) $(CFLAGS) -I $(INCLUDES) -I /usr/local/include  -c -o $@ $<
 
 $(NAME): $(OBJS)
 	clear

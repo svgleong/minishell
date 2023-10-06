@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mzarichn <mzarichn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:02:23 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/06 17:47:49 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/06 17:59:34 by mzarichn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ char	*check_expansion (char *str, int i)
 char	*expansion(char *str, int i)
 {
 	t_env	*env;
-	char	*value;
 
 	env = data()->envp;
 	value = NULL;

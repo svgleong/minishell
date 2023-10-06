@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   string.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mzarichn <mzarichn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:20:58 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/06 15:25:48 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/06 18:00:01 by mzarichn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,9 @@ int		ft_isdigit(int c);
 
 //added
 void	ft_putendl_fd(char *s, int fd);
+void *ft_memcpy(void *dest, const void *src, size_t n);
+char	*ft_strjoin_free(char *s1, char *s2, int free_str);
+char **env_to_matrix(void);
+int	list_size(void);
 
 #endif

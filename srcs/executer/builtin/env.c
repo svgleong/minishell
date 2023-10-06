@@ -87,10 +87,8 @@ void	print_env()
 	}
 }
 
-/* void    env_bi(char **env, t_env *env_lst)
+void    env_builtin(void)
 {
-	env_lst = get_env_to_list(env);
-    print_env(env_lst);
-    free_env_list(&env_lst);
-} */
+    print_env();
+}
 

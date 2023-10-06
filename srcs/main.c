@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mzarichn <mzarichn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:39:21 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/06 17:07:38 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/06 17:58:54 by mzarichn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include <minishell.h>
 
-void	sig_handler(int signal)
+/* void	sig_handler(int signal)
 {
 	if (signal == SIGQUIT)
 		return ;
@@ -26,7 +26,7 @@ void	sig_handler(int signal)
 		rl_redisplay();
 	}
 	return ;
-}
+} */
 
 
 #include <executer.h>
@@ -38,13 +38,14 @@ t_env	*env(void)
 	return (&env);
 }
 
-t_export_env	*export_env(void)
+t_data	*data(void)
 {
-	static t_export_env export_env;
-	return (&export_env);
+	static t_data	data;
+	
+	return (&data);
 }
 
-void	print_args(t_cmdd *cmd)
+void	print_args(t_cmd *cmd)
 {
 	printf("Debug Args: ");
     for (int i = 0; cmd->args[i] != NULL; i++) {
@@ -53,33 +54,25 @@ void	print_args(t_cmdd *cmd)
 	printf("\n");
 }
 
-
 /* int main(int ac, char **av, char **env)
 {
     (void)ac;
 	(void)av;
-	t_cmdd cmd = {
-		.args = (char *[]){"echo", "-nnnnnnnni", "ola", NULL}
+	t_cmd cmd = {
+		.args = (char *[]){"ls",  NULL}
 	};
 	print_args(&cmd);
+	get_env_to_list(env);
+	execution(&cmd);
+	//printf("%i: list size\n", list_size());
+	//can_execute_command(cmd.args[0]);
 	//pwd_bi();
-
-	
-	t_env *env_list;
-    env_list = NULL;
-	env_bi(env, env_list);
 	//list_bubble_sort(env);
 
 
 	return (0);
 } */
 
-t_data	*data(void)
-{
-	static t_data	data;
-	
-	return (&data);
-}
 
 int main(int ac, char **av, char **env)
 {

@@ -51,5 +51,8 @@ typedef struct s_data
 } t_data;
 
 t_data	*data(void);
+t_env	*env(void);
+
+void    env_builtin(void);
 
 #endif
