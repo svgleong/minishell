@@ -35,5 +35,6 @@ int		ft_isalpha(int c);
 
 //added
 void	ft_putendl_fd(char *s, int fd);
+int	ft_strncmp(const char *s1, char *s2, size_t n);
 
 #endif

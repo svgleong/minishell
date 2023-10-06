@@ -28,10 +28,10 @@ int	validate(char *str, char quote, int *i)
 int	valid_quotes(char *str)
 {
 	int		i;
-	bool	del;
+	//bool	del;
 
 	i = -1;
-	del = true;
+	//del = true;
 	while (str[++i])
 	{
 		if (str[i] == '\'')

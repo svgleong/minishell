@@ -21,10 +21,9 @@ char	*get_status(char *str, int i)
 char	*expansion(char *str, int i)
 {
 	t_env	*env;
-	char	*value;
 
 	env = data()->envp;
-	value =
+
 	printf("Argm: %s\n", str);
 	if (str[i + 1] == '?')
 		str = get_status(str, i);
