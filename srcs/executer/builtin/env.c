@@ -76,7 +76,6 @@ void	get_env_to_list(char **env)
 
 void	print_env()
 {
-	int i = 0;
 	t_env *env = data()->envp;
  
 	if (!env)
@@ -85,7 +84,6 @@ void	print_env()
 	{
 		printf("%s\n", env->content);
 		env = env->next;
-		i++;
 	}
 }
 

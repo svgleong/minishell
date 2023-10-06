@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 15:21:53 by svalente          #+#    #+#             */
-/*   Updated: 2023/09/27 15:53:49 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/04 15:44:45 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,11 @@ char	**separate_args(char *rl)
 {
 	char	*mod_str;
 	char	**all_args;
-	int		i;
+	//int		i;
 
 	mod_str = modify_str(rl);
 	all_args = ft_split(mod_str, '2');
-	i = -1;
+	//i = -1;
 	// while (all_args && all_args[++i])
 	// 	printf("ARG[%i]: %s\n", i, all_args[i]);
 	free(rl);

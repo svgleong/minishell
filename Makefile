@@ -6,7 +6,7 @@
 #    By: svalente <svalente@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/20 20:09:21 by svalente          #+#    #+#              #
-#    Updated: 2023/10/04 12:00:42 by svalente         ###   ########.fr        #
+#    Updated: 2023/10/06 17:48:44 by svalente         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ SRCS		= srcs/libs/ft_calloc.c			\
 			  srcs/parser/utils.c 			\
 			  srcs/parser/check_quotes.c	\
 			  srcs/parser/modify_string.c 	\
+			  srcs/parser/remove_quotes.c 	\
 			  srcs/parser/redirections.c 	\
 			  srcs/alloc/utils.c 			\
 			  srcs/executer/builtin/env.c	\
@@ -38,6 +39,7 @@ SRCS		= srcs/libs/ft_calloc.c			\
 			  srcs/executer/builtin/echo.c	\
 			  srcs/executer/builtin/pwd.c	\
 			  srcs/expansion/expansion.c	\
+			  srcs/expansion/expansion_utils.c\
 			  srcs/main.c 					\
 			  
 
@@ -45,11 +47,12 @@ SRCS		= srcs/libs/ft_calloc.c			\
 OBJS		= $(addprefix $(OBJ_PATH)/, $(addsuffix .o, $(basename $(SRCS))))
 INCLUDES	= includes/
 
-CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -g -I$(INCLUDES) -fsanitize=address #,undefined 
+#FIXME: Change to CC
+CC			= gcc
+CFLAGS		= -Wall -Wextra -Werror -g -I$(INCLUDES) -fsanitize=address #,undefined
 RM			= rm -f
 
-$(VERBOSE).SILENT:
+#$(VERBOSE).SILENT:
 
 all: $(NAME)
 

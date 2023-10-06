@@ -31,7 +31,6 @@ typedef struct s_lexer
 typedef struct s_env
 {
 	char			*content;
-	char			*key;
 	struct s_env	*next;
 	struct s_env	*prev;
 }	t_env;

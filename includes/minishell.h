@@ -17,6 +17,5 @@
 # include <unistd.h>
 # include <builtin.h>
 
-t_cmd 	*new_node( char *arg);
 
 #endif
