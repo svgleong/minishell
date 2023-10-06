@@ -6,7 +6,7 @@
 /*   By: mzarichn <mzarichn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:02:23 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/06 11:57:01 by mzarichn         ###   ########.fr       */
+/*   Updated: 2023/10/06 12:06:39 by mzarichn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	*expansion(char *str, int i)
 	t_env	*env;
 
 	env = data()->envp;
-	value = NULL;
+	char *value = NULL;
 	if (str[i + 1] == '?')
 		return ((str = get_status(str, i)));
 	while (env)

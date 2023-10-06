@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mzarichn <mzarichn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:39:21 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/04 14:55:07 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/06 17:56:51 by mzarichn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,19 +32,10 @@
 #include <executer.h>
 
 
-t_env	*ex_env(void)
+t_env	*env(void)
 {
 	static t_env env;
 	return (&env);
-}
-
-void	print_args(t_cmdd *cmd)
-{
-	printf("Debug Args: ");
-    for (int i = 0; cmd->args[i] != NULL; i++) {
-        printf("%s ", cmd->args[i]);
-    }
-	printf("\n");
 }
 
 t_data	*data(void)
@@ -54,25 +45,36 @@ t_data	*data(void)
 	return (&data);
 }
 
-int main(int ac, char **av, char **env)
+void	print_args(t_cmd *cmd)
+{
+	printf("Debug Args: ");
+    for (int i = 0; cmd->args[i] != NULL; i++) {
+        printf("%s ", cmd->args[i]);
+    }
+	printf("\n");
+}
+
+/* int main(int ac, char **av, char **env)
 {
     (void)ac;
 	(void)av;
-	t_cmdd cmd = {
-		.args = (char *[]){"ls", "-nnnnnnnni", "ola", NULL}
+	t_cmd cmd = {
+		.args = (char *[]){"ls",  NULL}
 	};
 	print_args(&cmd);
 	get_env_to_list(env);
-	can_execute_command(cmd.args[0], ex_env());
+	execution(&cmd);
+	//printf("%i: list size\n", list_size());
+	//can_execute_command(cmd.args[0]);
 	//pwd_bi();
 	//list_bubble_sort(env);
 
 
 	return (0);
-}
+} */
 
 
-/* int main(int ac, char **av, char **env)
+int main(int ac, char **av, char **env)
 {
 	(void)ac;
 	(void)av;
@@ -107,4 +109,4 @@ int main(int ac, char **av, char **env)
 	
 	rl_clear_history();
 	return (0);
-} */
+}

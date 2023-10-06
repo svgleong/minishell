@@ -10,13 +10,6 @@
 # include <stdio.h>
 # include <stdbool.h>
 
-typedef struct s_cmdd
-{
-	char			**args;
-}	t_cmdd;
-
-
-
 //utils
 void	*ft_calloc(size_t count, size_t size);
 char	*ft_strdup(const char *s);
@@ -30,13 +23,15 @@ void	print_env();
 
 
 //cmd
-void    echo_bi(t_cmdd *cmd);
+void    echo_bi(t_cmd *cmd);
 //pwd
 void    pwd_bi(void);
 
 void	only_export();
 
-int	can_execute_command(char *command, t_env *env);
+int	can_execute_command(char *command);
+void	execution(t_cmd *cmd);
+char	*find_command_path(char *command);
 
 
 

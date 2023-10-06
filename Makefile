@@ -6,7 +6,7 @@
 #    By: mzarichn <mzarichn@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/20 20:09:21 by svalente          #+#    #+#              #
-#    Updated: 2023/10/06 11:56:23 by mzarichn         ###   ########.fr        #
+#    Updated: 2023/10/06 16:48:36 by mzarichn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,9 @@ SRCS		= srcs/libs/ft_calloc.c			\
 			  srcs/libs/ft_isspace.c		\
 			  srcs/libs/ft_special_char.c	\
 			  srcs/libs/ft_isalnum.c		\
-			  srcs/parser/list_utils.c 		\
+			  srcs/libs/ft_memcpy.c			\
+			  srcs/libs/ft_strjoin_free.c	\
+			  srcs/libs/lst_utils.c		\
 			  srcs/parser/utils.c 			\
 			  srcs/parser/check_quotes.c	\
 			  srcs/parser/modify_string.c 	\
@@ -47,8 +49,8 @@ OBJS		= $(addprefix $(OBJ_PATH)/, $(addsuffix .o, $(basename $(SRCS))))
 INCLUDES	= includes/
 
 #FIXME: Change to CC
-CC			= gcc
-CFLAGS		= -Wall -Wextra -Werror -g -I$(INCLUDES) -fsanitize=address #,undefined
+CC			= cc
+CFLAGS		= -Wall -Wextra -Werror -g -I$(INCLUDES) #-fsanitize=address #,undefined
 RM			= rm -f
 
 #$(VERBOSE).SILENT:
