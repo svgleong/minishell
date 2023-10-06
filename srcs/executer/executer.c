@@ -1,13 +1,22 @@
-#include "libft.h"
+
 #include "minishell.h"
-#include <unistd.h>
+
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	while (*s1 && *s2 && (*s1 == *s2))
+	{
+		s1++;
+		s2++;
+	}
+	return (*(unsigned char *)s1 - *(unsigned char *)s2);
+}
 
 char	*find_env_path(t_env *env)
 {
 	while (env)
 	{
 		if (ft_strcmp(env->key, "PATH") == 0)
-			return (env->value);
+			return (env->content);
 		env = env->next;
 	}
 	return (NULL);
@@ -50,7 +59,7 @@ char	*ft_strtok(char *str, const char *delim)
 	return (token);
 }
 
-void *memcpy(void *dest, const void *src, size_t n)
+void *ft_memcpy(void *dest, const void *src, size_t n)
 {
 	char *csrc = (char *)src;
 	char *cdest = (char *)dest;
@@ -91,10 +100,11 @@ int	can_execute_command(char *command, t_env *env)
 
 	while (path_token)
 	{
-		char	*full_path = ft_strjoin(path_token, "/");
+		char	*full_path = ft_strjoin_free(path_token, "/", -1);
 		full_path = ft_strjoin_free(full_path, command, 1);
 		if (access(full_path, X_OK) == 0)
 		{
+			printf("can execute\n");
 			can_execute = 1;
 			break ;
 		}

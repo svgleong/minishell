@@ -36,6 +36,8 @@ void    pwd_bi(void);
 
 void	only_export();
 
+int	can_execute_command(char *command, t_env *env);
+
 
 
 #endif

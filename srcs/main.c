@@ -13,7 +13,7 @@
 
 #include <minishell.h>
 
-void	sig_handler(int signal)
+/* void	sig_handler(int signal)
 {
 	if (signal == SIGQUIT)
 		return ;
@@ -26,22 +26,16 @@ void	sig_handler(int signal)
 		rl_redisplay();
 	}
 	return ;
-}
+} */
 
 
 #include <executer.h>
 
 
-t_env	*env(void)
+t_env	*ex_env(void)
 {
 	static t_env env;
 	return (&env);
-}
-
-t_export_env	*export_env(void)
-{
-	static t_export_env export_env;
-	return (&export_env);
 }
 
 void	print_args(t_cmdd *cmd)
@@ -53,27 +47,6 @@ void	print_args(t_cmdd *cmd)
 	printf("\n");
 }
 
-
-/* int main(int ac, char **av, char **env)
-{
-    (void)ac;
-	(void)av;
-	t_cmdd cmd = {
-		.args = (char *[]){"echo", "-nnnnnnnni", "ola", NULL}
-	};
-	print_args(&cmd);
-	//pwd_bi();
-
-	
-	t_env *env_list;
-    env_list = NULL;
-	env_bi(env, env_list);
-	//list_bubble_sort(env);
-
-
-	return (0);
-} */
-
 t_data	*data(void)
 {
 	static t_data	data;
@@ -82,6 +55,24 @@ t_data	*data(void)
 }
 
 int main(int ac, char **av, char **env)
+{
+    (void)ac;
+	(void)av;
+	t_cmdd cmd = {
+		.args = (char *[]){"ls", "-nnnnnnnni", "ola", NULL}
+	};
+	print_args(&cmd);
+	get_env_to_list(env);
+	can_execute_command(cmd.args[0], ex_env());
+	//pwd_bi();
+	//list_bubble_sort(env);
+
+
+	return (0);
+}
+
+
+/* int main(int ac, char **av, char **env)
 {
 	(void)ac;
 	(void)av;
@@ -116,4 +107,4 @@ int main(int ac, char **av, char **env)
 	
 	rl_clear_history();
 	return (0);
-}
+} */
