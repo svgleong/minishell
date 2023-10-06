@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:20:58 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/04 16:56:14 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/06 15:25:48 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int		valid_delimeters(char *str);
 int		validate(char *str, char quote, int *i);
 int		ft_isalnum(int c);
 int		ft_isalpha(int c);
+int		ft_isdigit(int c);
 
 
 //added
