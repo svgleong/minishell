@@ -9,6 +9,19 @@ void	is_built_in(t_cmd *cmd)
 		type()->f = pwd_bi;
 }
 
+int	cmd_is(t_cmd *cmd)
+{
+	if (!ft_strncmp(cmd->args[0], "pwd", 3) || \
+		!ft_strncmp(cmd->args[0], "cd", 2) || \
+		!ft_strncmp(cmd->args[0], "exit", 4) || \
+		!ft_strncmp(cmd->args[0], "env", 3) || \
+		!ft_strncmp(cmd->args[0], "export", 6) || \
+		!ft_strncmp(cmd->args[0], "unset", 5))
+		return (1);
+	else
+		return (0);
+}
+
 char	*find_command_path(char *command)
 {
 	char	*path = getenv("PATH");
@@ -36,11 +49,6 @@ char	*find_command_path(char *command)
 	return NULL;
 }
 
-void	core_execution(t_cmd *cmd)
-{
-	type()->f(cmd);
-}
-
 void	normal_execution(t_cmd *cmd)
 {
 	printf("\nPATH FOR EXECUTION: %s\n", cmd->path);
@@ -50,6 +58,17 @@ void	normal_execution(t_cmd *cmd)
 		printf("success execution\n");
 
 }
+void	core_execution(t_cmd *cmd)
+{
+	if (cmd_is(cmd))
+	{
+		type()->f(cmd);
+		return;
+	}
+	else
+		normal_execution(cmd);
+}
+
 
 void	execution(t_cmd *cmd)
 {

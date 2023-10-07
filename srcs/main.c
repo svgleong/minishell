@@ -64,7 +64,7 @@ int main(int ac, char **av, char **env)
     (void)ac;
 	(void)av;
 	t_cmd cmd = {
-		.args = (char *[]){"pwd", NULL}
+		.args = (char *[]){"export", NULL}
 	};
 	print_args(&cmd);
 	get_env_to_list(env);
