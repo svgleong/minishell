@@ -1,6 +1,14 @@
 
 #include <minishell.h>
 
+void	is_built_in(t_cmd *cmd)
+{
+	if (!ft_strncmp(cmd->args[0], "env", 3))
+		type()->f = env_builtin;
+	else if (!ft_strncmp(cmd->args[0], "pwd", 3))
+		type()->f = pwd_bi;
+}
+
 char	*find_command_path(char *command)
 {
 	char	*path = getenv("PATH");
@@ -18,7 +26,6 @@ char	*find_command_path(char *command)
 			executable_path = ft_strjoin_free(ft_strjoin_free(*matrix, "/", 0), command, 1);
 			if (access(executable_path, X_OK) == 0) {
 				printf("PATH: %s\n", executable_path);
-				printf("success\n");
 				return (executable_path);
 			}
 			free(executable_path);
@@ -27,6 +34,11 @@ char	*find_command_path(char *command)
 	}
 	printf("path not found or doesnt exist");
 	return NULL;
+}
+
+void	core_execution(t_cmd *cmd)
+{
+	type()->f(cmd);
 }
 
 void	normal_execution(t_cmd *cmd)
@@ -41,14 +53,16 @@ void	normal_execution(t_cmd *cmd)
 
 void	execution(t_cmd *cmd)
 {
+	while (cmd)
+	{
 		if (cmd->args[0])
-		{
-			cmd->path = find_command_path(cmd->args[0]);
-			if (!ft_strncmp(cmd->args[0], "env", 3))
-				env_builtin();
-			else
-				normal_execution(cmd);
-		}
+			{
+				cmd->path = find_command_path(cmd->args[0]);
+				is_built_in(cmd);
+				core_execution(cmd);
+			}
+		cmd = cmd->next;
+	}
 }
 
 

@@ -64,7 +64,7 @@ char	*expansion(char *str, int i)
 	t_env	*env;
 
 	env = data()->envp;
-	value = NULL;
+	char  *value = NULL;
 
 	while (env)
 	{

@@ -37,6 +37,16 @@ typedef struct s_cmd
 	int				redir;
 }	t_cmd;
 
+typedef struct s_type
+{
+	char	*type;
+	void	(*f)(t_cmd *cmd);
+}	t_type;
+
+t_type	*type(void);	
+void    env_builtin(t_cmd *cmd);
+void    pwd_bi(t_cmd *cmd);
+
 void	create_list(t_cmd **lst, char **args);
 void	print_list(t_cmd *lst);
 void	cmdlstclear(t_cmd **lst);

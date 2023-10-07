@@ -31,6 +31,7 @@ SRCS		= srcs/libs/ft_calloc.c			\
 			  srcs/libs/ft_strjoin_free.c	\
 			  srcs/libs/lst_utils.c		\
 			  srcs/parser/utils.c 			\
+			  srcs/parser/list_utils.c 			\
 			  srcs/parser/check_quotes.c	\
 			  srcs/parser/modify_string.c 	\
 			  srcs/parser/remove_quotes.c 	\
@@ -39,7 +40,7 @@ SRCS		= srcs/libs/ft_calloc.c			\
 			  srcs/executer/builtin/env.c	\
 			  srcs/executer/builtin/export.c\
 			  srcs/executer/builtin/echo.c	\
-			  srcs/executer/builtin/echo.c	\
+			  srcs/executer/builtin/pwd.c	\
 			  srcs/executer/executer.c	\
 			  srcs/expansion/expansion.c	\
 			  srcs/expansion/expansion_utils.c\
@@ -52,7 +53,7 @@ INCLUDES	= includes/
 
 #FIXME: Change to CC
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -g -I$(INCLUDES) #-fsanitize=address #,undefined
+CFLAGS		= -Wall -Wextra -Werror -g -I$(INCLUDES) -fsanitize=address #,undefined
 RM			= rm -f
 
 #$(VERBOSE).SILENT:
