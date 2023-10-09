@@ -39,7 +39,6 @@ typedef struct s_cmd
 
 typedef struct s_type
 {
-	char	*type;
 	void	(*f)(t_cmd *cmd);
 }	t_type;
 
