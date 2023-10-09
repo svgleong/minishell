@@ -6,23 +6,13 @@
 /*   By: mzarichn <mzarichn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:02:23 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/06 17:59:34 by mzarichn         ###   ########.fr       */
+/*   Updated: 2023/10/09 16:30:08 by mzarichn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	key_value(char *str)
-{
-	int	sz;
-
-	sz = 0;
-	while (str[++sz] && ft_isalnum(str[sz]))
-		;
-	return (sz -1);
-}
-
-char	*expanding(char *str , char *value, int key) 
+char	*expanding(char *str, char *value, int key)
 {
 	char	*result;
 	int		sz;
@@ -35,7 +25,7 @@ char	*expanding(char *str , char *value, int key)
 	sz = -1;
 	while (str[++i] != '$')
 		result[i] = str[i];
-	k = i  + key + 1;
+	k = i + key + 1;
 	while (value[++sz])
 		result[i++] = value[sz];
 	while (str[k])
@@ -44,34 +34,36 @@ char	*expanding(char *str , char *value, int key)
 	return (result);
 }
 
-char	*check_expansion (char *str, int i)
-{	
+char	*check_expansion(char *str, int i)
+{
 	if (!str[i + 1])
-		return "\2";
+		return ("\2");
 	if (str[i + 1] == '?')
 		return ((str = get_status(str, i)));
 	if (ft_isdigit(str[i + 1]))
-		return (remove_number(str, i));	
+		return (remove_number(str, i));
 	if (str[i + 1] == '$')
 		return (remove_dollar(str, i));
-	if (!ft_isalnum(str[i + 1]))
-		return "\2";
+	if (!ft_isalnum(str[i + 1]) && str[i + 1] != '_')
+		return ("\2");
 	return (expansion(str, i));
 }
 
 char	*expansion(char *str, int i)
 {
+	char	*value;
 	t_env	*env;
 
 	env = data()->envp;
-	char  *value = NULL;
-
+	value = NULL;
 	while (env)
 	{
-		if (!ft_strncmp(str + i + 1, env->content, ft_strlen_special(env->content, '='))
-			&& key_value(str + i) == (int)ft_strlen_special(env->content, '='))
+		if (!ft_strncmp(str + i + 1, env->content, \
+			ft_strlen_special(env->content, '=')) && \
+			key_value(str + i) == (int)ft_strlen_special(env->content, '='))
 		{
-			value = expanding(str, ft_strchr(env->content, '=') + 1, ft_strlen_special(env->content, '='));
+			value = expanding(str, ft_strchr(env->content, '=') + 1, 
+					ft_strlen_special(env->content, '='));
 			return (value);
 		}
 		env = env->next;
@@ -91,7 +83,7 @@ int	search_expansion(t_cmd *cmds)
 	while (cmds->args[++i])
 	{
 		j = -1;
-		while  (cmds->args[i][++j])
+		while (cmds->args[i][++j])
 		{
 			if (cmds->args[i][0] == '\'')
 				break ;
@@ -107,4 +99,17 @@ int	search_expansion(t_cmd *cmds)
 		}
 	}
 	return (0);
+}
+
+void	expander(t_cmd **cmds)
+{
+	t_cmd	*head;
+
+	head = *cmds;
+	while (*cmds)
+	{
+		search_expansion(*cmds);
+		(*cmds) = (*cmds)->next;
+	}
+	(*cmds) = head;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   string.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzarichn <mzarichn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:20:58 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/06 18:00:01 by mzarichn         ###   ########.fr       */
+/*   Updated: 2023/10/09 14:02:13 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_isspace(char c);
 int		is_special_char(char c);
 int		valid_delimeters(char *str);
-int		validate(char *str, char quote, int *i);
+int		skip_quotes(char *str, char quote, int *i);
 int		ft_isalnum(int c);
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
