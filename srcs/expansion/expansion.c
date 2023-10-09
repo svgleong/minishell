@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svalente <svalente@student.42lisboa.com>   +#+  +:+       +#+        */
+/*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:02:23 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/07 10:56:24 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/09 10:14:50 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	key_value(char *str)
 	int	sz;
 
 	sz = 0;
-	while (str[++sz] && ft_isalnum(str[sz]))
+	while (str[++sz] && (ft_isalnum(str[sz]) || str[sz] == '_'))
 		;
 	return (sz -1);
 }
@@ -54,8 +54,11 @@ char	*check_expansion(char *str, int i)
 		return (remove_number(str, i));
 	if (str[i + 1] == '$')
 		return (remove_dollar(str, i));
-	if (!ft_isalnum(str[i + 1]))
+	if (!ft_isalnum(str[i + 1]) && str[i + 1] != '_')
+	{
+		printf("DEBUGG\n");
 		return ("\2");
+	}
 	return (expansion(str, i));
 }
 
@@ -109,4 +112,17 @@ int	search_expansion(t_cmd *cmds)
 		}
 	}
 	return (0);
+}
+
+void	expander(t_cmd **cmds)
+{
+	t_cmd	*head;
+
+	head = *cmds;
+	while (*cmds)
+	{
+		search_expansion(*cmds);
+		(*cmds) = (*cmds)->next;
+	}
+	(*cmds) = head;
 }

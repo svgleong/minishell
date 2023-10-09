@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 14:51:17 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/06 17:48:19 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/09 09:51:07 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ char	*get_status(char *str, int i);
 char	*remove_expand(char *str);
 char	*remove_dollar(char *str, int i);
 char	*remove_number(char *str, int i);
+void	expander(t_cmd **cmds);
 void	remove_quotes(t_cmd **cmds);
 int		redirections(t_cmd **lst);
 
