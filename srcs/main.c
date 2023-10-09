@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svalente <svalente@student.42lisboa.com>   +#+  +:+       +#+        */
+/*   By: mzarichn <mzarichn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:39:21 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/09 09:34:45 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/09 16:34:57 by mzarichn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int main(int ac, char **av, char **env)
 			free(rl);	
 			exit(0);
 		}
-		add_history(rl); // nao pode guardar so espacoes nem empty
+		add_history(rl);
 		if (!checker(rl))
 			continue ;
 		tmp = separate_args(rl);
