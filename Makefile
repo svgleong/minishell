@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mzarichn <mzarichn@student.42.fr>          +#+  +:+       +#+         #
+#    By: svalente <svalente@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/20 20:09:21 by svalente          #+#    #+#              #
-#    Updated: 2023/10/06 17:59:14 by mzarichn         ###   ########.fr        #
+#    Updated: 2023/10/09 15:29:57 by svalente         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,9 +29,10 @@ SRCS		= srcs/libs/ft_calloc.c			\
 			  srcs/libs/ft_isalnum.c		\
 			  srcs/libs/ft_memcpy.c			\
 			  srcs/libs/ft_strjoin_free.c	\
-			  srcs/libs/lst_utils.c		\
+			  srcs/libs/lst_utils.c			\
 			  srcs/parser/utils.c 			\
-			  srcs/parser/check_quotes.c	\
+			  srcs/parser/checker.c			\
+			  srcs/parser/list_utils.c		\
 			  srcs/parser/modify_string.c 	\
 			  srcs/parser/remove_quotes.c 	\
 			  srcs/parser/redirections.c 	\
@@ -40,12 +41,11 @@ SRCS		= srcs/libs/ft_calloc.c			\
 			  srcs/executer/builtin/export.c\
 			  srcs/executer/builtin/echo.c	\
 			  srcs/executer/builtin/echo.c	\
-			  srcs/executer/executer.c	\
+			  srcs/executer/executer.c		\
 			  srcs/expansion/expansion.c	\
 			  srcs/expansion/expansion_utils.c\
+			  srcs/expansion/expansion_utils2.c\
 			  srcs/main.c 					\
-			  
-
 
 OBJS		= $(addprefix $(OBJ_PATH)/, $(addsuffix .o, $(basename $(SRCS))))
 INCLUDES	= includes/
@@ -53,7 +53,7 @@ INCLUDES	= includes/
 #FIXME: Change to CC
 CC			= cc
 CFLAGS		= -Wall -Wextra -Werror -g -I$(INCLUDES) #-fsanitize=address #,undefined
-RM			= rm -f
+LDFLAGS		= -L /opt/homebrew/opt/readline/lib -I /opt/homebrew/opt/readline/include -lreadline -lhistory
 
 #$(VERBOSE).SILENT:
 
@@ -65,7 +65,7 @@ $(OBJ_PATH)/%.o:%.c
 
 $(NAME): $(OBJS)
 	clear
-	@$(CC) $(CFLAGS) -lreadline -o $@  $^
+	@$(CC) $(CFLAGS) $(LDFLAGS) -o $@  $^
 	@echo "\033[1;35m---> MINISHELL SUCCESSFULLY COMPILED\033[0m"
 
 run: 
@@ -81,7 +81,7 @@ fclean: clean
 	@echo "\033[1;32m---> ./$(NAME) was deleted\033[0m"
 
 valgrind:	re
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes valgrind --tool=helgrind --log-file=valgrind-out.txt --suppressions=readline.supp ./minishell
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes --log-file=valgrind-out.txt --suppressions=readline.supp ./minishell
 
 re: fclean all
 

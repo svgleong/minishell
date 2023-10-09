@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzarichn <mzarichn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: svalente <svalente@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:39:21 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/06 17:58:54 by mzarichn         ###   ########.fr       */
+/*   Updated: 2023/10/09 09:34:45 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include <minishell.h>
 
-/* void	sig_handler(int signal)
+void	sig_handler(int signal)
 {
 	if (signal == SIGQUIT)
 		return ;
@@ -26,7 +26,7 @@
 		rl_redisplay();
 	}
 	return ;
-} */
+}
 
 
 #include <executer.h>
@@ -94,6 +94,11 @@ int main(int ac, char **av, char **env)
 		rl = readline("Painshell: ");
 		if (!rl)
 			return 1;
+		if (rl == NULL || !ft_strncmp(rl, "exit", 5))
+		{
+			free(rl);	
+			exit(0);
+		}
 		add_history(rl); // nao pode guardar so espacoes nem empty
 		if (!checker(rl))
 			continue ;

@@ -6,13 +6,13 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:43:07 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/06 17:47:45 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/06 18:06:01 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	calculate_result(char *str , char *value, int key)
+int	calculate_result(char *str, char *value, int key)
 {
 	if (!value)
 		return (ft_strlen_special(str, '$') + ft_strlen(ft_strchr(str, '$') \
@@ -25,7 +25,7 @@ char	*get_status(char *str, int i)
 {
 	(void)str;
 	(void)i;
-	return NULL;
+	return (NULL);
 }
 
 char	*remove_expand(char *str)
@@ -34,7 +34,7 @@ char	*remove_expand(char *str)
 	int		sz;
 	int		key;
 	int		i;
-	
+
 	key = key_value(ft_strchr(str, '$'));
 	sz = calculate_result(str, NULL, key);
 	new_str = malloc(sz);
@@ -76,7 +76,7 @@ char	*remove_number(char *str, int i)
 	char	*new_str;
 	int		j;
 	int		k;
-	
+
 	new_str = malloc(ft_strlen(str) - 1);
 	j = -1;
 	k = 0;

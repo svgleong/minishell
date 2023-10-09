@@ -69,6 +69,27 @@ USER]/nfs/homes/svalente"$USER"
 echo $sofia$HOME'"$USER"'
 thomas/nfs/homes/svalente"$USER"
 
+echo "|$_123USER123|"
+||
+--> not treated yet
+
+echo "|$_123USER?123|"
+|?123|
+--> not treated yet
+
+echo >
+bash: syntax error near unexpected token `newline'
+
+echo -n -n -nnnn -nnnnm
+-nnnnm (sem newline!)
+
+echo "\"
+> (heredoc)
+
+echo ;;
+bash: syntax error near unexpected token `;;'
+
+
 HEREDOC
 
 cat <<end
@@ -84,3 +105,9 @@ cat <<'end'
 > $PATH
 > end
 $PATH
+
+a << a <<
+(heredoc and then syntax error)
+
+
+echo world |<>> cat -e => I can't handle this ;(
