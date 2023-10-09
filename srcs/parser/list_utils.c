@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 10:46:46 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/09 09:58:24 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/09 15:39:34 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,3 +146,14 @@ void	cmdlstclear(t_cmd **lst)
 	}
 	*lst = NULL;
 }
+
+/* void	envlstclear()
+{
+	t_env *tmp;
+
+	while (*lst)
+	{
+		
+	}
+	*lst = NULL;
+} */

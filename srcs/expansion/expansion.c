@@ -6,21 +6,11 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:02:23 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/09 10:14:50 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/09 12:20:43 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-int	key_value(char *str)
-{
-	int	sz;
-
-	sz = 0;
-	while (str[++sz] && (ft_isalnum(str[sz]) || str[sz] == '_'))
-		;
-	return (sz -1);
-}
 
 char	*expanding(char *str, char *value, int key)
 {
@@ -55,10 +45,7 @@ char	*check_expansion(char *str, int i)
 	if (str[i + 1] == '$')
 		return (remove_dollar(str, i));
 	if (!ft_isalnum(str[i + 1]) && str[i + 1] != '_')
-	{
-		printf("DEBUGG\n");
 		return ("\2");
-	}
 	return (expansion(str, i));
 }
 

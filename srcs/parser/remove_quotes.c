@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 15:41:19 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/09 10:04:03 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/09 14:02:43 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,6 @@ void	remove_quotes(t_cmd **cmds)
 		(*cmds) = (*cmds)->next;
 	}
 	(*cmds) = head;
-	printf("REMOVED QUOTES\n");
-	print_list(*cmds);
+	//printf("REMOVED QUOTES\n");
+	//print_list(*cmds);
 }

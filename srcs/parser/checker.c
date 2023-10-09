@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svalente <svalente@student.42lisboa.com>   +#+  +:+       +#+        */
+/*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 14:40:47 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/07 11:57:57 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/09 15:26:28 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	validate(char *str, char quote, int *i)
+int	skip_quotes(char *str, char quote, int *i)
 {
 	if (!str[++(*i)])
 		return (-1);
@@ -34,12 +34,12 @@ int	valid_quotes(char *str)
 	{
 		if (str[i] == '\'')
 		{
-			if (validate(str, '\'', &i) == -1)
+			if (skip_quotes(str, '\'', &i) == -1)
 				return (0);
 		}
 		else if (str[i] == '"')
 		{
-			if (validate(str, '"', &i) == -1)
+			if (skip_quotes(str, '"', &i) == -1)
 				return (0);
 		}
 	}
@@ -65,8 +65,10 @@ int	valid(char *str, char delim, char opps)
 			return (1);
 		else if (ct == 1 && str[i] == delim)
 			return (0);
-		else if (str[i] == opps)
+		else if (str[i] == opps || str[i] == delim)
 			return (0);
+		else if (delim == '|' && (str[i] == '<' || str[i] == '>'))
+			return (1);
 		else if (is_special_char(str[i]))
 			return (0);
 		i++;
@@ -86,15 +88,17 @@ int	valid_delimiters(char *str)
 	while (str[++i])
 	{
 		if (str[i] == '\'')
-			if (validate(str, '\'', &i) == -1)
+			if (skip_quotes(str, '\'', &i) == -1)
 				del = false;
 		if (str[i] == '"')
-			if (validate(str, '"', &i) == -1)
+			if (skip_quotes(str, '"', &i) == -1)
 				del = false;
+		/* if (str[i + 1] && str[i] == '<' && str[i + 1] == '>')  // criar outfile mas dar erro
+			del = true; */
 		if (str[i] == '>')
 			del = valid(str + i + 1, '>', '<');
-		/* else if (str[i] == '<')
-			del = valid(str + i + 1, '<', '>'); */ // criar outfile mas dar erro
+		else if (str[i] == '<')
+			del = valid(str + i + 1, '<', '>');
 		else if (str[i] == '|')
 			del = valid(str + i + 1, '|', '|');
 		if (del == false)
