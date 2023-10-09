@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: svalente <svalente@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 10:46:46 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/06 17:38:41 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/08 20:42:22 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	create_list(t_cmd **lst, char **args)
 	}
 	//print_list(*lst);
 	search_expansion(*lst);
-	//print_list(*lst);
+	print_list(*lst);
 	remove_quotes(lst);
 	free_matrix(args);
 }
@@ -118,7 +118,7 @@ void	print_list(t_cmd *lst)
 	}
 	while (tmp)
 	{
-		printf("Node %d\n", j);
+		printf("[Node %d]\n", j);
 		i = 0;
 		while (tmp->args[i])
 		{
@@ -129,12 +129,14 @@ void	print_list(t_cmd *lst)
 		tmp = tmp->next;
 		j++;
 	}
+	printf("---------------------\n");
 }
 
 void	cmdlstclear(t_cmd **lst)
 {
 	t_cmd *tmp;
 
+	//printf("Clearing list\n");
 	while (*lst)
 	{
 		tmp = *lst;

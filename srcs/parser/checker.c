@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: svalente <svalente@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 14:40:47 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/06 18:15:12 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/07 11:57:57 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ int	checker(char *rl)
     }
 	if (!valid_delimiters(rl))
 	{
-		printf("Invalid delimiters\n");
+		printf("syntax error near unexpected token\n");
 		free (rl);
 		return (0);
     }

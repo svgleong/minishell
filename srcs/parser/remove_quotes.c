@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   remove_quotes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: svalente <svalente@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 15:41:19 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/06 17:39:44 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/08 18:00:56 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ void	remove_quotes(t_cmd **cmds)
 		}
 		(*cmds) = (*cmds)->next;
 	}
+	printf("cheguei aqui\n");
 	(*cmds) = head;
-	printf("removed quotes\n");
+	printf("REMOVED QUOTES\n");
 	print_list(*cmds);
 }
