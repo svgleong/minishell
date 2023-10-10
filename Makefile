@@ -53,6 +53,7 @@ INCLUDES	= includes/
 #FIXME: Change to CC
 CC			= cc
 CFLAGS		= -Wall -Wextra -Werror -g -I$(INCLUDES) #-fsanitize=address #,undefined
+LDFLAGS		= -L /opt/homebrew/opt/readline/lib -I /opt/homebrew/opt/readline/include -lreadline -lhistory
 
 #$(VERBOSE).SILENT:
 
@@ -60,11 +61,11 @@ all: $(NAME)
 
 $(OBJ_PATH)/%.o:%.c
 	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAGS)  -I $(INCLUDES) -I /usr/local/include  -c -o $@ $<
+	@$(CC) $(CFLAGS) -I $(INCLUDES) -I /usr/local/include  -c -o $@ $<
 
 $(NAME): $(OBJS)
 	clear
-	@$(CC) $(CFLAGS) -o $@  $^
+	@$(CC) $(CFLAGS) -o $@  $^ -lreadline
 	@echo "\033[1;35m---> MINISHELL SUCCESSFULLY COMPILED\033[0m"
 
 run: 

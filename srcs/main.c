@@ -111,10 +111,10 @@ int main(int ac, char **av, char **env)
 		create_list(&lst, tmp);
 		//redirections(&lst);
 		//print_list(lst);
+		execution(lst);
 		cmdlstclear(&lst);
 		//free (tmp);
-		if (lst->args[0])
-			execution(&lst);
+		
 	}
 	free(rl);
 	rl = NULL;

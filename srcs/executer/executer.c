@@ -54,8 +54,16 @@ char	*find_command_path(char *command)
 
 void	main_execution(t_cmd *cmd)
 {
-	(void)cmd;
-	printf("main execution\n");
+	dup2(cmd->fd_in, STDIN_FILENO);
+	if (cmd->next)
+		dup2(cmd->pipe[1], STDOUT_FILENO);
+	close(cmd->pipe[0]);
+	close(cmd->pipe[1]);
+	if (execve(find_command_path(cmd->args[0]), cmd->args, env_to_matrix()) == -1) 
+	{
+		printf("error execve\n");
+		exit(0);
+	}
 }
 
 void	normal_execution(t_cmd *cmd)
