@@ -7,16 +7,19 @@ void	is_built_in(t_cmd *cmd)
 		type()->f = env_builtin;
 	else if (!ft_strncmp(cmd->args[0], "pwd", 3))
 		type()->f = pwd_bi;
+	else if (!ft_strncmp(cmd->args[0], "echo", 4))
+		type()->f = echo_bi;
+	type()->f(cmd);
 }
 
-int	cmd_is(t_cmd *cmd)
+int	cmd_is_builtin(char *command)
 {
-	if (!ft_strncmp(cmd->args[0], "pwd", 3) || \
-		!ft_strncmp(cmd->args[0], "cd", 2) || \
-		!ft_strncmp(cmd->args[0], "exit", 4) || \
-		!ft_strncmp(cmd->args[0], "env", 3) || \
-		!ft_strncmp(cmd->args[0], "export", 6) || \
-		!ft_strncmp(cmd->args[0], "unset", 5))
+	if (!ft_strncmp(command, "pwd", 3) || \
+		!ft_strncmp(command, "cd", 2) || \
+		!ft_strncmp(command, "exit", 4) || \
+		!ft_strncmp(command, "env", 3) || \
+		!ft_strncmp(command, "export", 6) || \
+		!ft_strncmp(command, "unset", 5))
 		return (1);
 	else
 		return (0);
@@ -49,28 +52,39 @@ char	*find_command_path(char *command)
 	return NULL;
 }
 
+void	main_execution(t_cmd *cmd)
+{
+	(void)cmd;
+	printf("main execution\n");
+}
+
 void	normal_execution(t_cmd *cmd)
 {
-	printf("\nPATH FOR EXECUTION: %s\n", cmd->path);
-	if (execve(cmd->path, cmd->args, env_to_matrix()) == -1)
-		printf("error in execution\n");
-	else
-		printf("success execution\n");
 
-}
-void	core_execution(t_cmd *cmd)
-{
-	if (cmd_is(cmd))
+	int pid;
+
+	while (cmd)
 	{
-		type()->f(cmd);
-		return;
+		if (pipe(cmd->pipe) == -1)
+			printf("pipe error\n");
+		pid = fork();
+		if (pid == -1)
+			printf("fork error\n");
+		if (pid == 0)
+			main_execution(cmd);
+		if (cmd->next)
+			cmd->next->fd_in = dup(cmd->pipe[0]);
+		close(cmd->fd_in);
+		close(cmd->pipe[0]);
+		close(cmd->pipe[1]);
+		cmd = cmd->next;
 	}
-	else
-		normal_execution(cmd);
+
+
 }
 
 
-void	execution(t_cmd *cmd)
+/* void	execution(t_cmd *cmd)
 {
 	while (cmd)
 	{
@@ -82,6 +96,17 @@ void	execution(t_cmd *cmd)
 			}
 		cmd = cmd->next;
 	}
+} */
+
+void	execution(t_cmd	*cmd)
+{
+	if (cmd_is_builtin(cmd->args[0]) == 1 && !cmd->next)
+	{
+		printf("Entrou\n");
+		is_built_in(cmd);
+	}
+	else
+		normal_execution(cmd);
 }
 
 

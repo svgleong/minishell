@@ -59,12 +59,12 @@ void	print_args(t_cmd *cmd)
 	printf("\n");
 }
 
-int main(int ac, char **av, char **env)
+/* int main(int ac, char **av, char **env)
 {
     (void)ac;
 	(void)av;
 	t_cmd cmd = {
-		.args = (char *[]){"export", NULL}
+		.args = (char *[]){"echo", NULL}
 	};
 	print_args(&cmd);
 	get_env_to_list(env);
@@ -76,10 +76,10 @@ int main(int ac, char **av, char **env)
 
 
 	return (0);
-}
+} */
 
 
-/* int main(int ac, char **av, char **env)
+int main(int ac, char **av, char **env)
 {
 	(void)ac;
 	(void)av;
@@ -113,10 +113,12 @@ int main(int ac, char **av, char **env)
 		//print_list(lst);
 		cmdlstclear(&lst);
 		//free (tmp);
+		if (lst->args[0])
+			execution(&lst);
 	}
 	free(rl);
 	rl = NULL;
 	
 	rl_clear_history();
 	return (0);
-} */
+}

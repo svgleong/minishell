@@ -45,6 +45,7 @@ typedef struct s_type
 t_type	*type(void);	
 void    env_builtin(t_cmd *cmd);
 void    pwd_bi(t_cmd *cmd);
+void    echo_bi(t_cmd *cmd);
 
 void	create_list(t_cmd **lst, char **args);
 void	print_list(t_cmd *lst);
