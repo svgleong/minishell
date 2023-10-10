@@ -17,7 +17,6 @@ void	which_builtin(t_cmd *cmd)
 		type()->f = echo_bi;
 	else
 		type()->f = exec;
-	
 }
 
 int	cmd_is_builtin(char *command)
@@ -40,7 +39,7 @@ char	*find_command_path(char *command)
 	char	*executable_path;
 
 	if (access(command, X_OK) == 0) {
-			printf("success other\n");
+			printf("success access before\n");
 		return (command);
 	}
 
@@ -74,14 +73,13 @@ char	*find_command_path(char *command)
 	}
 } */
 
-void	core_execution(t_cmd *cmd)
+/* void	core_execution(t_cmd *cmd)
 {
-	int pid;
+	int pid = fork();
 	if (cmd_is_builtin(cmd->args[0]) == 1 && !cmd->next)
 		type()->f(cmd);
-	else
+	else if (pid == 0)
 	{
-		pid = fork();
 		if (pipe(cmd->pipe) == -1)
 			printf("pipe error\n");
 		if (pid == -1)
@@ -89,18 +87,46 @@ void	core_execution(t_cmd *cmd)
 		if (pid == 0)
 		{
 			if (cmd->prev)
+			{
+				printf("prev\n");
 				dup2(cmd->pipe[0], STDIN_FILENO);
+				close(cmd->pipe[0]); // Close the original read end of the pipe
+			}
 			if (cmd->next)
+			{
 				dup2(cmd->pipe[1], STDOUT_FILENO);
+				close(cmd->pipe[1]); // Close the original write end of the pipe
+			}
 			type()->f(cmd);
-			close(0);
+			 // Close standard file descriptors in the child process
+            close(STDIN_FILENO);
+            close(STDOUT_FILENO);
 			exit(0);
 		}
+	}
+} */
+
+void core_execution(t_cmd *cmd)
+{
+	int pid = fork();
+	
+	if (pid == -1)
+		printf("fork error\n");
+	if (pid == 0)
+	{
+		
+	}
+	else
+	{
+		if (cmd->prev )
+
 	}
 }
 
 void	execution(t_cmd *cmd)
 {
+	t_cmd *head = cmd;
+	int status;
 	while (cmd)
 	{
 		if (cmd->args[0])
@@ -109,49 +135,13 @@ void	execution(t_cmd *cmd)
 			which_builtin(cmd);
 			core_execution(cmd);
 		}
-		if (!cmd->next)
-			break ;
 		cmd = cmd->next;
 	}
-}
-
-
-/* void	normal_execution(t_cmd *cmd)
-{
-	int pid;
-
+	/* cmd = head;
 	while (cmd)
 	{
-		if (pipe(cmd->pipe) == -1)
-			printf("pipe error\n");
-		pid = fork();
-		if (pid == -1)
-			printf("fork error\n");
-		if (pid == 0)
-			main_execution(cmd);
+		waitpid(-1, &status, 0);
 		cmd = cmd->next;
-	}
+	} */
 
-
-} */
-
-
-/* void	execution(t_cmd *cmd)
-{
-	int pid;
-	
-} */
-
-/* void	execution(t_cmd	*cmd)
-{
-	if (cmd_is_builtin(cmd->args[0]) == 1 && !cmd->next)
-	{
-		printf("Entrou builtin\n");
-		is_built_in(cmd);
-	}
-	else
-		normal_execution(cmd);
-} */
-
-
- 
+}
