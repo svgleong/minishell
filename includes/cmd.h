@@ -37,6 +37,7 @@ typedef struct s_cmd
 	int				fd_in;
 	int				fd_out;
 	int				redir;
+	int				pid;
 }	t_cmd;
 
 typedef struct s_type

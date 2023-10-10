@@ -108,25 +108,25 @@ char	*find_command_path(char *command)
 
 void core_execution(t_cmd *cmd)
 {
-	int pid = fork();
-	
-	if (pid == -1)
-		printf("fork error\n");
-	if (pid == 0)
+	cmd->pid = fork();
+	if (pipe(cmd->pipe) == -1)
+		printf("pipe error\n");
+	if (cmd->prev)
+		dup2(cmd->pipe[0], STDIN_FILENO);
+	if  (cmd->pid == 0)
 	{
-		
+		if (cmd->next)
+			dup2(cmd->pipe[1], STDOUT_FILENO);
+		close(cmd->pipe[0]);
+		close(cmd->pipe[1]);
+		exec(cmd);
 	}
-	else
-	{
-		if (cmd->prev )
-
-	}
+	close(cmd->pipe[0]);
+	close(cmd->pipe[1]);
 }
 
 void	execution(t_cmd *cmd)
 {
-	t_cmd *head = cmd;
-	int status;
 	while (cmd)
 	{
 		if (cmd->args[0])
@@ -137,11 +137,5 @@ void	execution(t_cmd *cmd)
 		}
 		cmd = cmd->next;
 	}
-	/* cmd = head;
-	while (cmd)
-	{
-		waitpid(-1, &status, 0);
-		cmd = cmd->next;
-	} */
 
 }
