@@ -5,9 +5,6 @@ void	exec(t_cmd *cmd)
 {
 	if (execve(cmd->path, cmd->args, env_to_matrix()) == -1)
 		printf("error execve\n");
-	close(0);
-	close(1);
-	exit(0);
 }
 
 void	which_builtin(t_cmd *cmd)
