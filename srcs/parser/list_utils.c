@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 10:46:46 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/09 15:39:34 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/11 09:54:22 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ t_cmd *new_node(char **args)
 		new->args = copy_matrix(args);
 	new->prev = NULL;
 	new->next = NULL;
-	new->fd_in = 0;
-	new->fd_out = 1;
+	new->fd_in = -1;
+	new->fd_out = -1;
 	new-> redir = -1;
 	return (new);
 }
