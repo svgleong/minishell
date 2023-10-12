@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzarichn <mzarichn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:20:58 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/06 15:09:08 by mzarichn         ###   ########.fr       */
+/*   Updated: 2023/10/12 12:41:55 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,16 @@ typedef struct s_cmd
 	char			*path;
 	char			**args;
 	int				pipe[2];
-	int				fd_in;
-	int				fd_out;
-	int				redir;
+	t_redir			*redir;
 }	t_cmd;
+
+typedef struct s_redir
+{
+	int				fd;
+	int				redir;
+	char			*file;
+	struct s_redir	*next;
+}	t_redir;
 
 void	create_list(t_cmd **lst, char **args);
 void	print_list(t_cmd *lst);

@@ -6,16 +6,16 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 10:46:46 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/11 09:54:22 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/12 12:23:25 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cmd.h>
+/* #include <cmd.h>
 #include <alloc.h>
-#include "../../includes/alloc.h"
+#include "../../includes/alloc.h" */
 #include <minishell.h>
 
-t_cmd *new_node(char **args)
+t_cmd *cmd_new_node(char **args)
 {
 	t_cmd *new;
 
@@ -26,13 +26,10 @@ t_cmd *new_node(char **args)
 		new->args = copy_matrix(args);
 	new->prev = NULL;
 	new->next = NULL;
-	new->fd_in = -1;
-	new->fd_out = -1;
-	new-> redir = -1;
 	return (new);
 }
 
-t_cmd	*last_node(t_cmd *lst)
+t_cmd	*cmd_last_node(t_cmd *lst)
 {
 	if (!lst)
 		return (NULL);
@@ -41,7 +38,7 @@ t_cmd	*last_node(t_cmd *lst)
 	return (lst);
 }
 
-void	add_back(t_cmd **lst, t_cmd *new)
+void	cmd_add_back(t_cmd **lst, t_cmd *new)
 {
 	t_cmd *last;
 	
@@ -51,7 +48,7 @@ void	add_back(t_cmd **lst, t_cmd *new)
 		new->prev = NULL;
 		return ;
 	}
-	last = last_node(*lst);
+	last = cmd_last_node(*lst);
 	last->next = new;
 	last->next->prev = last;
 }
@@ -70,7 +67,7 @@ void	add_back(t_cmd **lst, t_cmd *new)
 		// Funcao que verifica se as quotes sao validas
 		// Transformar o split para ter em conta as quotes e depois sim podes fazer split (se achares que es capaz tens incluir a divisao das redirections) 
 		args = ft_split(cmds[i], ' ');
-		add_back(lst, new_node(args));
+		cmd_add_back(lst, cmd_new_node(args));
 		i++;
 	}
 	i = -1;
@@ -88,7 +85,7 @@ void	create_list(t_cmd **lst, char **args)
 		if (args[i][0] != '|')
 		{
 			//printf("ARGS[%d] %s\n",i, args[i]);
-			add_back(lst, new_node(args + i));
+			cmd_add_back(lst, cmd_new_node(args + i));
 			i++;
 		}
 		while (args[i] && args[i][0] != '|')
