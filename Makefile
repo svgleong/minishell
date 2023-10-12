@@ -36,6 +36,7 @@ SRCS		= srcs/libs/ft_calloc.c			\
 			  srcs/parser/modify_string.c 	\
 			  srcs/parser/remove_quotes.c 	\
 			  srcs/parser/redirections.c 	\
+			  srcs/redirections/redir_lst_utils.c 	\
 			  srcs/alloc/utils.c 			\
 			  srcs/executer/builtin/env.c	\
 			  srcs/executer/builtin/export.c\

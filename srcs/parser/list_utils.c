@@ -26,6 +26,8 @@ t_cmd *cmd_new_node(char **args)
 		new->args = copy_matrix(args);
 	new->prev = NULL;
 	new->next = NULL;
+    new->fd_in = -1;
+    new->fd_out = -1;
 	return (new);
 }
 
@@ -99,6 +101,7 @@ void	create_list(t_cmd **lst, char **args)
 	print_list(*lst);
 	remove_quotes(lst);
 	free_matrix(args);
+    check_redirections(lst);
 }
 
 //fsafafs | fasfaf |F asfasfasf

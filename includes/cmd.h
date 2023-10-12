@@ -25,6 +25,14 @@
 	">>" -> 2
 	"<<" -> 3 */
 
+typedef struct s_redir
+{
+	int				fd;
+	int				redir;
+	char			*file;
+	struct s_redir	*next;
+}	t_redir;
+
 typedef struct s_cmd
 {
 	struct s_cmd	*prev;
@@ -33,15 +41,10 @@ typedef struct s_cmd
 	char			**args;
 	int				pipe[2];
 	t_redir			*redir;
+    int             fd_in;
+    int             fd_out;
 }	t_cmd;
 
-typedef struct s_redir
-{
-	int				fd;
-	int				redir;
-	char			*file;
-	struct s_redir	*next;
-}	t_redir;
 
 void	create_list(t_cmd **lst, char **args);
 void	print_list(t_cmd *lst);

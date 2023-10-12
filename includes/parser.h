@@ -26,5 +26,6 @@ char	*remove_number(char *str, int i);
 void	expander(t_cmd **cmds);
 void	remove_quotes(t_cmd **cmds);
 int		redirections(t_cmd **lst);
+void	check_redirections(t_cmd **cmds);
 
 #endif
