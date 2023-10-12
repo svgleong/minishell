@@ -110,17 +110,28 @@ void core_execution(t_cmd *cmd)
 {
 	char **matrix = env_to_matrix();
 
-	dup2(cmd->fd_in, STDIN_FILENO);
+/* 	dup2(cmd->fd_in, STDIN_FILENO);
 	if (cmd->next)
 		dup2(cmd->pipe[1], STDOUT_FILENO);
 	close(cmd->pipe[0]);
-	close(cmd->pipe[1]);
-	printf("fdin : %i\n", cmd->fd_in);
+	close(cmd->pipe[1]); */
+	if (cmd->fd_in != 0)
+	{
+		dup2(cmd->fd_in, STDIN_FILENO);
+		close(cmd->fd_in);
+	}
+	if (cmd->fd_out != 1)
+	{
+		dup2(cmd->fd_out, STDOUT_FILENO);
+		close(cmd->fd_out);
+	}
+	//printf("fdin : %i\n", cmd->fd_in);
 	if (execve(cmd->path, cmd->args, matrix) == -1) 
 	{
 		perror("execve");
 		exit(0);
 	}
+	printf("AQUI\n");
 	free_matrix(matrix);
 }
 void	pipe_handler(t_cmd *cmd)
@@ -132,25 +143,26 @@ void	pipe_handler(t_cmd *cmd)
 		printf("fork error\n");
 	if (cmd->pid == 0)
 		core_execution(cmd);
-	if (cmd->next)
-		cmd->fd_in = dup(cmd->pipe[0]);
+/* 	if (cmd->next)
+		cmd->next->fd_in = dup(cmd->pipe[0]);
 	close(cmd->fd_in);
 	close(cmd->pipe[0]);
-	close(cmd->pipe[1]);
+	close(cmd->pipe[1]); */
 }
 
 
 void	execution(t_cmd *cmd)
 {
-	//t_cmd *head = cmd;
-	//int status;
+	t_cmd *head = cmd;
+	int status;
 	int i = 1;
-	while (cmd)
+	while (cmd || cmd->next != NULL)
 	{
-		if (cmd->args[0])
+		printf("aqui\n");
+		if (cmd->args)
 		{
 			cmd->path = find_command_path(cmd->args[0]);
-			which_builtin(cmd);
+			//which_builtin(cmd);
 			pipe_handler(cmd);
 			printf("child n%i\n", i);
 			i++;
@@ -159,12 +171,12 @@ void	execution(t_cmd *cmd)
 			break ;
 		cmd = cmd->next;
 	}
-	/* cmd = head;
+	cmd = head;
 	while (cmd)
 	{
-		waitpid(-1, &status, 0);
+		waitpid(cmd->pid, &status, 0);
 		if (!cmd->next)
 			break ;
 		cmd = cmd->next;
-	} */
+	}
 }

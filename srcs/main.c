@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzarichn <mzarichn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: parallels <parallels@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:39:21 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/09 16:34:57 by mzarichn         ###   ########.fr       */
+/*   Updated: 2023/10/12 16:13:33 by parallels        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 void	sig_handler(int signal)
 {
+	printf("aqui sig\n");
 	if (signal == SIGQUIT)
 		return ;
 	if (signal == SIGINT )
@@ -109,6 +110,8 @@ int main(int ac, char **av, char **env)
 			continue ;
 		tmp = separate_args(rl);
 		create_list(&lst, tmp);
+		lst->fd_in = 0;
+		lst->fd_out = 1;
 		//redirections(&lst);
 		//print_list(lst);
 		execution(lst);
