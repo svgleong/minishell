@@ -125,9 +125,11 @@ void core_execution(t_cmd *cmd)
 		dup2(cmd->fd_out, STDOUT_FILENO);
 		close(cmd->fd_out);
 	}
+	else if (cmd->next)
+		dup2(cmd->pipe[1], STDOUT_FILENO);
 	close(cmd->pipe[1]);
 	execve(find_command_path(cmd->args[0]), cmd->args, env_to_matrix());
-		exit(0);
+	exit(0);
 }
 void	pipe_handler(t_cmd *cmd)
 {
@@ -138,11 +140,19 @@ void	pipe_handler(t_cmd *cmd)
 		printf("fork error\n");
 	if (cmd->pid == 0)
 		core_execution(cmd);
- 	if (cmd->next)
-		cmd->next->fd_in = dup(cmd->pipe[0]);
-	//close(cmd->fd_in);
-	close(cmd->pipe[0]);
-	close(cmd->pipe[1]);
+	else
+	{
+		if (cmd->next)
+			cmd->next->fd_in = dup(cmd->pipe[0]);
+		/* if (cmd->prev)
+			close(cmd->prev->fd_in); */
+		/* if (cmd->fd_in != 0)
+			close(cmd->fd_in);
+		if ( cmd->fd_out != 1)
+			close(cmd->fd_out); */
+		close(cmd->pipe[0]);
+		close(cmd->pipe[1]);
+	}	
 }
 
 
