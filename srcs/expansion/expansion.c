@@ -39,13 +39,13 @@ char	*check_expansion(char *str, int i)
 	if (!str[i + 1])
 		return ("\2");
 	if (str[i + 1] == '?')
-		return ((str = get_status(str, i)));
+		return ((get_status(str, i)));
 	if (ft_isdigit(str[i + 1]))
 		return (remove_number(str, i));
 	if (str[i + 1] == '$')
 		return (remove_dollar(str, i));
 	if (!ft_isalnum(str[i + 1]) && str[i + 1] != '_')
-		return ("\2");
+		return (remove_number(str, i));
 	return (expansion(str, i));
 }
 

@@ -96,7 +96,7 @@ void	create_list(t_cmd **lst, char **args)
 			break ;
 		i++;
 	}
-	//print_list(*lst);
+	print_list(*lst);
 	expander(lst);
 	print_list(*lst);
 	remove_quotes(lst);

@@ -20,10 +20,10 @@
 #include <string.h>
 #include <builtin.h>
 
-/* 	">" -> 0
-	"<" -> 1
-	">>" -> 2
-	"<<" -> 3 */
+/* 	">" -> 3
+	"<" -> 4
+	">>" -> 1
+	"<<" -> 2 */
 
 typedef struct s_redir
 {
@@ -41,8 +41,8 @@ typedef struct s_cmd
 	char			**args;
 	int				pipe[2];
 	t_redir			*redir;
-    int             fd_in;
-    int             fd_out;
+	int				fd_in;
+	int				fd_out;
 }	t_cmd;
 
 
