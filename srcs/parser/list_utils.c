@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: parallels <parallels@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 10:46:46 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/09 15:39:34 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/13 15:24:38 by parallels        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,11 +118,11 @@ void	print_list(t_cmd *lst)
 	}
 	while (tmp)
 	{
-		printf("[Node %d]\n", j);
+		//printf("[Node %d]\n", j);
 		i = 0;
 		while (tmp->args[i])
 		{
-			printf("arg[%d] %s\n", i, tmp->args[i]);
+			//printf("arg[%d] %s\n", i, tmp->args[i]);
 			i++;
 		}
 		//printf("redir %d fd_in %d fd_out %d\n", tmp->redir, tmp->fd_in, tmp->fd_out);

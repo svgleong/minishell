@@ -6,7 +6,7 @@
 /*   By: parallels <parallels@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:39:21 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/12 16:13:33 by parallels        ###   ########.fr       */
+/*   Updated: 2023/10/13 15:28:43 by parallels        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void	sig_handler(int signal)
 {
-	printf("aqui sig\n");
+	//printf("aqui sig\n");
 	if (signal == SIGQUIT)
 		return ;
 	if (signal == SIGINT )
@@ -115,6 +115,7 @@ int main(int ac, char **av, char **env)
 		//redirections(&lst);
 		//print_list(lst);
 		execution(lst);
+		
 		cmdlstclear(&lst);
 		//free (tmp);
 		
