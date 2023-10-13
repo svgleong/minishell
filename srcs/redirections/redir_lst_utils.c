@@ -55,10 +55,10 @@ void	clean_redirections(t_cmd **cmd)
 	char	**old_args;
 	t_cmd	*tmp;
 
-	i = -1;
 	tmp = *cmd;
 	while ((*cmd))
 	{
+		i = -1;
 		while ((*cmd)->args[++i])
 		{
 			if (!((*cmd)->args[i][0] == '>' || (*cmd)->args[i][0] == '<'))
@@ -112,9 +112,9 @@ void	check_redirections(t_cmd **cmds)
 	int		i;
 
 	head = (*cmds);
-	i = -1;
 	while ((*cmds))
 	{
+		i = -1;
 		while ((*cmds)->args[++i])
 		{
 			if (!ft_strncmp((*cmds)->args[i], ">>", 2))
