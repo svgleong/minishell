@@ -96,7 +96,7 @@ void	create_list(t_cmd **lst, char **args)
 			break ;
 		i++;
 	}
-	print_list(*lst);
+	//print_list(*lst);
 	expander(lst);
 	print_list(*lst);
 	remove_quotes(lst);
@@ -125,7 +125,7 @@ void	print_list(t_cmd *lst)
 			printf("arg[%d] %s\n", i, tmp->args[i]);
 			i++;
 		}
-		//printf("redir %d fd_in %d fd_out %d\n", tmp->redir, tmp->fd_in, tmp->fd_out);
+		print_redir(lst->redir);
 		tmp = tmp->next;
 		j++;
 	}

@@ -73,7 +73,7 @@ char	*remove_dollar(char *str, int i)
 	return (new_str);
 }
 
-char	*remove_number(char *str, int i)
+char	*remove_character(char *str, int i)
 {
 	char	*new_str;
 	int		j;

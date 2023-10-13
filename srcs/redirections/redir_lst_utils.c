@@ -21,7 +21,7 @@ t_redir *redir_new_node(int redir, char *file)
 		return (NULL);
 	new->fd = -1;
 	new->redir = redir;
-	new->file = file;
+	new->file = ft_strdup(file);
 	new->next = NULL;
 	return (new);
 }
@@ -48,18 +48,55 @@ void    redir_add_back(t_redir **lst, t_redir *new)
 	last->next = new;
 }
 
+void	clean_redirections(t_cmd **cmd)
+{
+	int		i;
+	char	**clean_args;
+	char	**old_args;
+	t_cmd	*tmp;
+
+	i = -1;
+	tmp = *cmd;
+	while ((*cmd))
+	{
+		while ((*cmd)->args[++i])
+		{
+			if (!((*cmd)->args[i][0] == '>' || (*cmd)->args[i][0] == '<'))
+			{
+				clean_args = copy_args_until((*cmd)->args, '<', '>');
+				old_args = (*cmd)->args;
+				(*cmd)->args = clean_args;
+				free_matrix(old_args);
+				continue ;
+			}
+			if ((*cmd)->args[i][0] == '>' || (*cmd)->args[i][0] == '<')
+			{
+				clean_args = copy_args((*cmd)->args + i + 2);
+				old_args = (*cmd)->args;
+				(*cmd)->args = clean_args;
+				free_matrix(old_args);
+				i = -1;
+				continue ;
+			}
+		}
+		(*cmd) = (*cmd)->next;
+	}
+	(*cmd) = tmp;
+}
+
 void	create_redir_lst(t_cmd **cmd, int redir, char *file)
 {
 	redir_add_back(&(*cmd)->redir, redir_new_node(redir, file));
+	//printf("redir: %d file: \n", redir);
 }
 
-void    print_redir(t_redir *lst)
+void	print_redir(t_redir *lst)
 {
 	t_redir *tmp = lst;
 
 	if (!lst)
 	{
-		printf("Empty list2\n");	
+		printf("Empty list for redirections\n");	
 		return ;
 	}
 	while (tmp)
@@ -92,5 +129,11 @@ void	check_redirections(t_cmd **cmds)
 		(*cmds) = (*cmds)->next;
 	}
 	(*cmds) = head;
-	print_redir((*cmds)->redir);
+	while ((*cmds))
+	{
+		clean_redirections(cmds);
+		(*cmds) = (*cmds)->next;
+	}
+	(*cmds) = head;
+	print_list(*cmds);
 }

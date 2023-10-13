@@ -41,11 +41,11 @@ char	*check_expansion(char *str, int i)
 	if (str[i + 1] == '?')
 		return ((get_status(str, i)));
 	if (ft_isdigit(str[i + 1]))
-		return (remove_number(str, i));
+		return (remove_character(str, i));
 	if (str[i + 1] == '$')
 		return (remove_dollar(str, i));
 	if (!ft_isalnum(str[i + 1]) && str[i + 1] != '_')
-		return (remove_number(str, i));
+		return (remove_character(str, i));
 	return (expansion(str, i));
 }
 
