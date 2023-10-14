@@ -6,7 +6,7 @@
 /*   By: parallels <parallels@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:39:21 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/13 15:28:43 by parallels        ###   ########.fr       */
+/*   Updated: 2023/10/14 14:35:45 by parallels        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,8 +110,11 @@ int main(int ac, char **av, char **env)
 			continue ;
 		tmp = separate_args(rl);
 		create_list(&lst, tmp);
-		lst->fd_in = 0;
-		lst->fd_out = 1;
+		if(lst)
+		{
+			lst->fd_in = 0;
+			lst->fd_out = 1;
+		}
 		//redirections(&lst);
 		//print_list(lst);
 		execution(lst);

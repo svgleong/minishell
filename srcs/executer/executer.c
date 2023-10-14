@@ -146,10 +146,10 @@ void	pipe_handler(t_cmd *cmd)
 			cmd->next->fd_in = dup(cmd->pipe[0]);
 		/* if (cmd->prev)
 			close(cmd->prev->fd_in); */
-		/* if (cmd->fd_in != 0)
+		if (cmd->fd_in != 0) //caso cat cat cat
 			close(cmd->fd_in);
 		if ( cmd->fd_out != 1)
-			close(cmd->fd_out); */
+			close(cmd->fd_out);
 		close(cmd->pipe[0]);
 		close(cmd->pipe[1]);
 	}	
@@ -162,10 +162,14 @@ void	execution(t_cmd *cmd)
 	int status;
 	while (cmd)
 	{
+		if (cmd_is_builtin(cmd->args[0]) == 1 && !cmd->next)
+		{
+			which_builtin(cmd);
+			type()->f(cmd);
+		}
 		if (cmd->args)
 		{
 			//cmd->path = find_command_path(cmd->args[0]);
-			//which_builtin(cmd);
 			pipe_handler(cmd);
 		}
 		if (!cmd->next)
