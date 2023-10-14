@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: svalente <svalente@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 10:46:46 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/12 12:23:25 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/14 19:56:32 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_cmd *cmd_new_node(char **args)
 		new->args = copy_matrix(args);
 	new->prev = NULL;
 	new->next = NULL;
+	new->redir = NULL;
     new->fd_in = -1;
     new->fd_out = -1;
 	return (new);
@@ -142,9 +143,12 @@ void	cmdlstclear(t_cmd **lst)
 		tmp = *lst;
 		*lst = (*lst)->next;
 		free_matrix(tmp->args);
+		if (tmp->redir)
+			redirlstclear(&tmp->redir);
 		free(tmp);
 	}
 	*lst = NULL;
+	print_list(*lst);
 }
 
 /* void	envlstclear()

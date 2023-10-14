@@ -6,14 +6,14 @@
 /*   By: svalente <svalente@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:39:21 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/09 09:34:45 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/14 20:31:16 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include <minishell.h>
 
-void	sig_handler(int signal)
+/* void	sig_handler(int signal)
 {
 	if (signal == SIGQUIT)
 		return ;
@@ -26,7 +26,7 @@ void	sig_handler(int signal)
 		rl_redisplay();
 	}
 	return ;
-}
+} */
 
 
 #include <executer.h>
@@ -86,9 +86,9 @@ int main(int ac, char **av, char **env)
 
 	get_env_to_list(env);
 	//print_env();
-	rl_catch_signals = 0;
+	/* rl_catch_signals = 0;
 	signal(SIGQUIT, sig_handler);
-	signal(SIGINT, sig_handler);
+	signal(SIGINT, sig_handler); */
 	while (1)
 	{
 		rl = readline("Painshell: ");
@@ -96,10 +96,10 @@ int main(int ac, char **av, char **env)
 			return 1;
 		if (rl == NULL || !ft_strncmp(rl, "exit", 5))
 		{
-			free(rl);	
+			free(rl);
 			exit(0);
 		}
-		add_history(rl); // nao pode guardar so espacoes nem empty
+		add_history(rl);
 		if (!checker(rl))
 			continue ;
 		tmp = separate_args(rl);
@@ -111,7 +111,8 @@ int main(int ac, char **av, char **env)
 	}
 	free(rl);
 	rl = NULL;
-	
-	rl_clear_history();
+	free_env_list(&data()->envp);
+	print_env();
+	//rl_clear_history();
 	return (0);
 }
