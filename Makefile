@@ -6,7 +6,7 @@
 #    By: parallels <parallels@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/20 20:09:21 by svalente          #+#    #+#              #
-#    Updated: 2023/10/14 14:34:30 by parallels        ###   ########.fr        #
+#    Updated: 2023/10/14 15:11:58 by parallels        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ SRCS		= srcs/libs/ft_calloc.c			\
 			  srcs/executer/builtin/export.c\
 			  srcs/executer/builtin/echo.c	\
 			  srcs/executer/builtin/pwd.c	\
+			  srcs/executer/builtin/cd.c	\
 			  srcs/executer/executer.c	\
 			  srcs/expansion/expansion.c	\
 			  srcs/expansion/expansion_utils.c\
@@ -52,7 +53,7 @@ INCLUDES	= includes/
 
 #FIXME: Change to CC
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -g -I$(INCLUDES) -fsanitize=address #,undefined 
+CFLAGS		= -Wall -Wextra -Werror -g -I$(INCLUDES) #-fsanitize=address #,undefined 
 LDFLAGS		= -L /opt/homebrew/opt/readline/lib -I /opt/homebrew/opt/readline/include -lreadline -lhistory
 
 #$(VERBOSE).SILENT:

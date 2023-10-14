@@ -15,6 +15,8 @@ void	which_builtin(t_cmd *cmd)
 		type()->f = pwd_bi;
 	else if (!ft_strncmp(cmd->args[0], "echo", 4))
 		type()->f = echo_bi;
+	else if (!ft_strncmp(cmd->args[0], "cd", 2))
+		type()->f = cd_bi;
 	else
 		type()->f = exec;
 }
@@ -58,53 +60,6 @@ char	*find_command_path(char *command)
 	printf("path not found or doesnt exist\n");
 	return NULL;
 }
-
-/* void	main_execution(t_cmd *cmd)
-{
-	dup2(cmd->fd_in, STDIN_FILENO);
-	if (cmd->next)
-		dup2(cmd->pipe[1], STDOUT_FILENO);
-	close(cmd->pipe[0]);
-	close(cmd->pipe[1]);
-	if (execve(find_command_path(cmd->args[0]), cmd->args, env_to_matrix()) == -1) 
-	{
-		printf("error execve\n");
-		exit(0);
-	}
-} */
-
-/* void	core_execution(t_cmd *cmd)
-{
-	int pid = fork();
-	if (cmd_is_builtin(cmd->args[0]) == 1 && !cmd->next)
-		type()->f(cmd);
-	else if (pid == 0)
-	{
-		if (pipe(cmd->pipe) == -1)
-			printf("pipe error\n");
-		if (pid == -1)
-			printf("fork error\n");
-		if (pid == 0)
-		{
-			if (cmd->prev)
-			{
-				printf("prev\n");
-				dup2(cmd->pipe[0], STDIN_FILENO);
-				close(cmd->pipe[0]); // Close the original read end of the pipe
-			}
-			if (cmd->next)
-			{
-				dup2(cmd->pipe[1], STDOUT_FILENO);
-				close(cmd->pipe[1]); // Close the original write end of the pipe
-			}
-			type()->f(cmd);
-			 // Close standard file descriptors in the child process
-            close(STDIN_FILENO);
-            close(STDOUT_FILENO);
-			exit(0);
-		}
-	}
-} */
 
 void core_execution(t_cmd *cmd)
 {
@@ -167,7 +122,7 @@ void	execution(t_cmd *cmd)
 			which_builtin(cmd);
 			type()->f(cmd);
 		}
-		if (cmd->args)
+		else if (cmd->args)
 		{
 			//cmd->path = find_command_path(cmd->args[0]);
 			pipe_handler(cmd);
