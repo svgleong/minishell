@@ -93,8 +93,6 @@ int	valid_delimiters(char *str)
 		if (str[i] == '"')
 			if (skip_quotes(str, '"', &i) == -1)
 				del = false;
-		/* if (str[i + 1] && str[i] == '<' && str[i + 1] == '>')  // criar outfile mas dar erro
-			del = true; */
 		if (str[i] == '>')
 			del = valid(str + i + 1, '>', '<');
 		else if (str[i] == '<')

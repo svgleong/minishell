@@ -22,9 +22,11 @@ int		calculate_result(char *str , char *value, int key);
 char	*get_status(char *str, int i);
 char	*remove_expand(char *str);
 char	*remove_dollar(char *str, int i);
-char	*remove_number(char *str, int i);
+char	*remove_character(char *str, int i);
 void	expander(t_cmd **cmds);
 void	remove_quotes(t_cmd **cmds);
 int		redirections(t_cmd **lst);
+void	check_redirections(t_cmd **cmds);
+void	print_redir(t_redir *lst);
 
 #endif
