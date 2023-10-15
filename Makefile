@@ -6,7 +6,7 @@
 #    By: parallels <parallels@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/20 20:09:21 by svalente          #+#    #+#              #
-#    Updated: 2023/10/14 16:59:39 by parallels        ###   ########.fr        #
+#    Updated: 2023/10/15 17:55:59 by parallels        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,7 @@ SRCS		= srcs/libs/ft_calloc.c			\
 			  srcs/executer/builtin/pwd.c	\
 			  srcs/executer/builtin/cd.c	\
 			  srcs/executer/executer.c	\
+			  srcs/executer/heredoc.c	\
 			  srcs/expansion/expansion.c	\
 			  srcs/expansion/expansion_utils.c\
 			  srcs/expansion/expansion_utils2.c\
