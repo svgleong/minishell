@@ -1,31 +1,31 @@
 #include <minishell.h>
 
-int	list_size(void)
+char	**env_to_matrix()
 {
-	int i = 0;
+	int		len;
+	char	**matrix;
+	t_env	*temp;
 
-	while(data()->envp)
+	len = 0;
+	temp = (t_env *)data()->envp;
+	while (temp)
 	{
-		data()->envp = data()->envp->next;
-		i++;
+		len++;
+		temp = temp->next;
 	}
-	return (i);
-}
-
-char **env_to_matrix(void)
-{
-	int len = list_size();
-	char **matrix;
-	int i = 0;
-	matrix = malloc(sizeof(char *) * (len+1));
+	matrix = malloc(sizeof(char *) * (len + 1));
 	if (!matrix)
 		return (NULL);
-	while (data()->envp)
+	temp = (t_env *)data()->envp;
+	len = 0;
+	while (temp)
 	{
-		matrix[i] = ft_strdup(data()->envp->content);
-		data()->envp = data()->envp->next;
-		i++;
+		matrix[len] = ft_strdup(temp->content);
+		if (!matrix[len])
+			return (NULL);
+		temp = temp->next;
+		len++;
 	}
-	matrix[i] = NULL;
-	return (matrix); 
+	matrix[len] = NULL;
+	return (matrix);
 }

@@ -6,7 +6,7 @@
 /*   By: parallels <parallels@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:39:21 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/14 14:35:45 by parallels        ###   ########.fr       */
+/*   Updated: 2023/10/14 17:07:03 by parallels        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,14 +84,12 @@ int main(int ac, char **av, char **env)
 {
 	(void)ac;
 	(void)av;
-	(void)env;
 	char *rl;
 	t_cmd *lst;
 	char **tmp;
 	lst = NULL;
 
 	get_env_to_list(env);
-	//print_env();
 	rl_catch_signals = 0;
 	signal(SIGQUIT, sig_handler);
 	signal(SIGINT, sig_handler);

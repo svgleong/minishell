@@ -17,6 +17,8 @@ void	which_builtin(t_cmd *cmd)
 		type()->f = echo_bi;
 	else if (!ft_strncmp(cmd->args[0], "cd", 2))
 		type()->f = cd_bi;
+	else if (!ft_strncmp(cmd->args[0], "export", 6))
+		type()->f = export_bi;
 	else
 		type()->f = exec;
 }

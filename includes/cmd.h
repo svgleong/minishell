@@ -6,7 +6,7 @@
 /*   By: parallels <parallels@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:20:58 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/14 15:08:34 by parallels        ###   ########.fr       */
+/*   Updated: 2023/10/14 17:00:41 by parallels        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void    env_builtin(t_cmd *cmd);
 void    pwd_bi(t_cmd *cmd);
 void    echo_bi(t_cmd *cmd);
 void cd_bi(t_cmd *cmd);
+void	export_bi(t_cmd *cmd);
 
 void	create_list(t_cmd **lst, char **args);
 void	print_list(t_cmd *lst);
