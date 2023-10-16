@@ -6,7 +6,7 @@
 /*   By: parallels <parallels@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:39:21 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/14 17:07:03 by parallels        ###   ########.fr       */
+/*   Updated: 2023/10/16 15:31:22 by parallels        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 void	sig_handler(int signal)
 {
-	//printf("aqui sig\n");
 	if (signal == SIGQUIT)
 		return ;
 	if (signal == SIGINT )
@@ -50,35 +49,6 @@ t_type	*type(void)
 	static t_type	type;
 	return (&type);
 }
-
-void	print_args(t_cmd *cmd)
-{
-	printf("Debug Args: ");
-    for (int i = 0; cmd->args[i] != NULL; i++) {
-        printf("%s ", cmd->args[i]);
-    }
-	printf("\n");
-}
-
-/* int main(int ac, char **av, char **env)
-{
-    (void)ac;
-	(void)av;
-	t_cmd cmd = {
-		.args = (char *[]){"echo", NULL}
-	};
-	print_args(&cmd);
-	get_env_to_list(env);
-	execution(&cmd);
-	//printf("%i: list size\n", list_size());
-	//can_execute_command(cmd.args[0]);
-	//pwd_bi();
-	//list_bubble_sort(env);
-
-
-	return (0);
-} */
-
 
 int main(int ac, char **av, char **env)
 {
