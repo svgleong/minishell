@@ -87,8 +87,9 @@ void	print_env()
 	}
 }
 
-void    env_builtin(void)
+void    env_builtin(t_cmd *cmd)
 {
+	(void)cmd;
     print_env();
 }
 

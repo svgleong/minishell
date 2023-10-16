@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: koska <koska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:20:58 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/12 12:41:55 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/16 15:52:51 by koska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ typedef struct s_redir
 	struct s_redir	*next;
 }	t_redir;
 
+
+
 typedef struct s_cmd
 {
 	struct s_cmd	*prev;
@@ -43,8 +45,21 @@ typedef struct s_cmd
 	t_redir			*redir;
 	int				fd_in;
 	int				fd_out;
+	pid_t			pid;
 }	t_cmd;
 
+
+typedef struct s_type
+{
+	void	(*f)(t_cmd *cmd);
+}	t_type;
+
+t_type	*type(void);	
+void    env_builtin(t_cmd *cmd);
+void    pwd_bi(t_cmd *cmd);
+void    echo_bi(t_cmd *cmd);
+void 	cd_bi(t_cmd *cmd);
+void	export_bi(t_cmd *cmd);
 
 void	create_list(t_cmd **lst, char **args);
 void	print_list(t_cmd *lst);

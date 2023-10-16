@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svalente <svalente@student.42lisboa.com>   +#+  +:+       +#+        */
+/*   By: koska <koska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:39:21 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/14 20:31:16 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/16 15:50:04 by koska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,31 +61,25 @@ t_env	*env(void)
 t_data	*data(void)
 {
 	static t_data	data;
-	
 	return (&data);
 }
 
-void	print_args(t_cmd *cmd)
+t_type	*type(void)
 {
-	printf("Debug Args: ");
-    for (int i = 0; cmd->args[i] != NULL; i++) {
-        printf("%s ", cmd->args[i]);
-    }
-	printf("\n");
+	static t_type	type;
+	return (&type);
 }
 
 int main(int ac, char **av, char **env)
 {
 	(void)ac;
 	(void)av;
-	(void)env;
 	char *rl;
 	t_cmd *lst;
 	char **tmp;
 	lst = NULL;
 
 	get_env_to_list(env);
-	//print_env();
 	rl_catch_signals = 0;
 	signal(SIGQUIT, sig_handler);
 	signal(SIGINT, sig_handler);
@@ -107,10 +101,18 @@ int main(int ac, char **av, char **env)
 			continue ;
 		tmp = separate_args(rl);
 		create_list(&lst, tmp);
+		if(lst)
+		{
+			lst->fd_in = 0;
+			lst->fd_out = 1;
+		}
 		//redirections(&lst);
 		//print_list(lst);
+		execution(lst);
+		
 		cmdlstclear(&lst);
 		//free (tmp);
+		
 	}
 	free(rl);
 	rl = NULL;

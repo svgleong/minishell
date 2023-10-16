@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: svalente <svalente@student.42lisboa.com>   +#+  +:+       +#+         #
+#    By: koska <koska@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/20 20:09:21 by svalente          #+#    #+#              #
-#    Updated: 2023/10/14 19:53:48 by svalente         ###   ########.fr        #
+#    Updated: 2023/10/16 15:49:25 by koska            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,8 +42,10 @@ SRCS		= srcs/libs/ft_calloc.c			\
 			  srcs/executer/builtin/env.c	\
 			  srcs/executer/builtin/export.c\
 			  srcs/executer/builtin/echo.c	\
-			  srcs/executer/builtin/echo.c	\
-			  srcs/executer/executer.c		\
+			  srcs/executer/builtin/pwd.c	\
+			  srcs/executer/builtin/cd.c	\
+			  srcs/executer/executer.c	\
+			  srcs/executer/heredoc.c	\
 			  srcs/expansion/expansion.c	\
 			  srcs/expansion/expansion_utils.c\
 			  srcs/expansion/expansion_utils2.c\
@@ -67,7 +69,7 @@ $(OBJ_PATH)/%.o:%.c
 
 $(NAME): $(OBJS)
 	clear
-	@$(CC) $(CFLAGS) $(LDFLAGS) -o $@  $^
+	@$(CC) $(CFLAGS) -o $@  $^ -lreadline
 	@echo "\033[1;35m---> MINISHELL SUCCESSFULLY COMPILED\033[0m"
 
 run: 
