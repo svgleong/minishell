@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: parallels <parallels@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:43:07 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/06 18:06:01 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/16 16:02:29 by parallels        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,13 @@ char	*remove_expand(char *str)
 
 	key = key_value(ft_strchr(str, '$'));
 	sz = calculate_result(str, NULL, key);
-	printf("sz: %d\n", sz);
+	//printf("sz: %d\n", sz);
 	new_str = malloc(sz);
 	sz = -1;
 	while (str[++sz] && str[sz] != '$')
 		new_str[sz] = str[sz];
 	i = sz + key + 1;
-	printf("i: %d\n", i);
+	//printf("i: %d\n", i);
 	while (str[i])
 	{
 		new_str[sz++] = str[i];

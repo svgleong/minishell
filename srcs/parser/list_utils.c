@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: koska <koska@student.42.fr>                +#+  +:+       +#+        */
+/*   By: parallels <parallels@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 10:46:46 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/16 15:48:36 by koska            ###   ########.fr       */
+/*   Updated: 2023/10/16 16:00:02 by parallels        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,13 +97,13 @@ void	create_list(t_cmd **lst, char **args)
 			break ;
 		i++;
 	}
-	print_list(*lst);
+	//print_list(*lst);
 	expander(lst);
 	remove_quotes(lst);
 	free_matrix(args);
     check_redirections(lst);
 	redirections(lst);
-	print_list(*lst);
+	//print_list(*lst);
 }
 
 //fsafafs | fasfaf |F asfasfasf

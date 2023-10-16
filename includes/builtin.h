@@ -32,7 +32,6 @@ typedef struct s_data
 t_data	*data(void);
 t_env	*env(void);
 
-void    env_builtin(void);
 void    free_env_list(t_env **lst);
 
 #endif
