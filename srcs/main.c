@@ -3,18 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: parallels <parallels@student.42.fr>        +#+  +:+       +#+        */
+/*   By: koska <koska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:39:21 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/16 15:31:22 by parallels        ###   ########.fr       */
+/*   Updated: 2023/10/16 15:50:04 by koska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include <minishell.h>
 
+
+void	control_d(char *str)
+{
+	// unsigned char	status;
+
+	if (str)
+		return ;
+	rl_clear_history();
+	write(1, "exit\n", 6);
+	// if (this_env()->env)
+	// 	alloc().free_matrix((void **)this_env()->env);
+	// free_memory(this());
+	// status = (unsigned char)(data()->envp)->status;
+	exit(0);
+}
+
 void	sig_handler(int signal)
 {
+	printf("Signal: %d\n", signal);
+	printf("sigquit: %d\n", SIGQUIT);
+	printf("SIGINT: %d\n", SIGINT);
+
 	if (signal == SIGQUIT)
 		return ;
 	if (signal == SIGINT )
@@ -66,11 +86,14 @@ int main(int ac, char **av, char **env)
 	while (1)
 	{
 		rl = readline("Painshell: ");
-		if (!rl)
-			return 1;
+		control_d(rl);
+		if (!rl || !rl[0])
+			continue ;
 		if (rl == NULL || !ft_strncmp(rl, "exit", 5))
 		{
-			free(rl);	
+			break ;
+			free(rl);
+			free_env_list(&data()->envp);
 			exit(0);
 		}
 		add_history(rl);
@@ -93,7 +116,9 @@ int main(int ac, char **av, char **env)
 	}
 	free(rl);
 	rl = NULL;
-	
-	rl_clear_history();
+	cmdlstclear(&lst);
+	free_env_list(&data()->envp);
+	print_env();
+	//rl_clear_history();
 	return (0);
 }

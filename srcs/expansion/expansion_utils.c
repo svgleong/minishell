@@ -37,11 +37,13 @@ char	*remove_expand(char *str)
 
 	key = key_value(ft_strchr(str, '$'));
 	sz = calculate_result(str, NULL, key);
+	printf("sz: %d\n", sz);
 	new_str = malloc(sz);
 	sz = -1;
 	while (str[++sz] && str[sz] != '$')
 		new_str[sz] = str[sz];
 	i = sz + key + 1;
+	printf("i: %d\n", i);
 	while (str[i])
 	{
 		new_str[sz++] = str[i];
@@ -71,7 +73,7 @@ char	*remove_dollar(char *str, int i)
 	return (new_str);
 }
 
-char	*remove_number(char *str, int i)
+char	*remove_character(char *str, int i)
 {
 	char	*new_str;
 	int		j;

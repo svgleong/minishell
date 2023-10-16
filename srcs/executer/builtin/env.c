@@ -16,14 +16,14 @@
 void    free_env_list(t_env **lst)
 {
     t_env	*temp;
-
-		while (*lst)
-		{
-			temp = (*lst)->next;
-			free((*lst)->content);
-			free(*lst);
-			*lst = temp;
-		}
+	
+	while (*lst)
+	{
+		temp = (*lst)->next;
+		free((*lst)->content);
+		free(*lst);
+		*lst = temp;
+	}
 }
 
 //find last node in list
@@ -79,7 +79,7 @@ void	print_env()
 	t_env *env = data()->envp;
  
 	if (!env)
-		printf("nada\n");
+		printf("Empty env\n");
 	while (env)
 	{
 		printf("%s\n", env->content);

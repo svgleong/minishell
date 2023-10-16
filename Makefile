@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: parallels <parallels@student.42.fr>        +#+  +:+       +#+         #
+#    By: koska <koska@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/20 20:09:21 by svalente          #+#    #+#              #
-#    Updated: 2023/10/15 17:55:59 by parallels        ###   ########.fr        #
+#    Updated: 2023/10/16 15:49:25 by koska            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,8 @@ SRCS		= srcs/libs/ft_calloc.c			\
 			  srcs/parser/modify_string.c 	\
 			  srcs/parser/remove_quotes.c 	\
 			  srcs/parser/redirections.c 	\
+			  srcs/redirections/redir_lst_utils.c 	\
+			  srcs/redirections/redirections.c 	\
 			  srcs/alloc/utils.c 			\
 			  srcs/executer/builtin/env.c	\
 			  srcs/executer/builtin/export.c\
@@ -54,7 +56,7 @@ INCLUDES	= includes/
 
 #FIXME: Change to CC
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -g -I$(INCLUDES) #-fsanitize=address #,undefined 
+CFLAGS		= -Wall -Wextra -Werror -g -I$(INCLUDES) #-fsanitize=address,undefined
 LDFLAGS		= -L /opt/homebrew/opt/readline/lib -I /opt/homebrew/opt/readline/include -lreadline -lhistory
 
 #$(VERBOSE).SILENT:

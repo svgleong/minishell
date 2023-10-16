@@ -6,14 +6,19 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 09:56:49 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/09 12:43:01 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/12 12:24:15 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 #include <string.h>
 
-int	redirections(t_cmd **lst)
+/* 	">" -> 0
+	"<" -> 1
+	">>" -> 2
+	"<<" -> 3 */
+
+/* int	redirections(t_cmd **lst)
 {
 	int		i;
 	t_cmd	*tmp;
@@ -57,4 +62,4 @@ int	redirections(t_cmd **lst)
 	}
 	(*lst) = tmp;
 	return (0);
-}
+} */

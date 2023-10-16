@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   list_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: parallels <parallels@student.42.fr>        +#+  +:+       +#+        */
+/*   By: koska <koska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 10:46:46 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/13 15:24:38 by parallels        ###   ########.fr       */
+/*   Updated: 2023/10/16 15:48:36 by koska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cmd.h>
+/* #include <cmd.h>
 #include <alloc.h>
-#include "../../includes/alloc.h"
+#include "../../includes/alloc.h" */
 #include <minishell.h>
 
-t_cmd *new_node(char **args)
+t_cmd *cmd_new_node(char **args)
 {
 	t_cmd *new;
 
@@ -26,13 +26,13 @@ t_cmd *new_node(char **args)
 		new->args = copy_matrix(args);
 	new->prev = NULL;
 	new->next = NULL;
-	new->fd_in = 0;
-	new->fd_out = 1;
-	new-> redir = -1;
+	new->redir = NULL;
+    new->fd_in = -1;
+    new->fd_out = -1;
 	return (new);
 }
 
-t_cmd	*last_node(t_cmd *lst)
+t_cmd	*cmd_last_node(t_cmd *lst)
 {
 	if (!lst)
 		return (NULL);
@@ -41,7 +41,7 @@ t_cmd	*last_node(t_cmd *lst)
 	return (lst);
 }
 
-void	add_back(t_cmd **lst, t_cmd *new)
+void	cmd_add_back(t_cmd **lst, t_cmd *new)
 {
 	t_cmd *last;
 	
@@ -51,7 +51,7 @@ void	add_back(t_cmd **lst, t_cmd *new)
 		new->prev = NULL;
 		return ;
 	}
-	last = last_node(*lst);
+	last = cmd_last_node(*lst);
 	last->next = new;
 	last->next->prev = last;
 }
@@ -70,7 +70,7 @@ void	add_back(t_cmd **lst, t_cmd *new)
 		// Funcao que verifica se as quotes sao validas
 		// Transformar o split para ter em conta as quotes e depois sim podes fazer split (se achares que es capaz tens incluir a divisao das redirections) 
 		args = ft_split(cmds[i], ' ');
-		add_back(lst, new_node(args));
+		cmd_add_back(lst, cmd_new_node(args));
 		i++;
 	}
 	i = -1;
@@ -88,7 +88,7 @@ void	create_list(t_cmd **lst, char **args)
 		if (args[i][0] != '|')
 		{
 			//printf("ARGS[%d] %s\n",i, args[i]);
-			add_back(lst, new_node(args + i));
+			cmd_add_back(lst, cmd_new_node(args + i));
 			i++;
 		}
 		while (args[i] && args[i][0] != '|')
@@ -97,11 +97,13 @@ void	create_list(t_cmd **lst, char **args)
 			break ;
 		i++;
 	}
-	//print_list(*lst);
-	expander(lst);
 	print_list(*lst);
+	expander(lst);
 	remove_quotes(lst);
 	free_matrix(args);
+    check_redirections(lst);
+	redirections(lst);
+	print_list(*lst);
 }
 
 //fsafafs | fasfaf |F asfasfasf
@@ -125,7 +127,9 @@ void	print_list(t_cmd *lst)
 			//printf("arg[%d] %s\n", i, tmp->args[i]);
 			i++;
 		}
-		//printf("redir %d fd_in %d fd_out %d\n", tmp->redir, tmp->fd_in, tmp->fd_out);
+		print_redir(lst->redir);
+		printf("fd_in: %d\n", tmp->fd_in);
+		printf("fd_out: %d\n", tmp->fd_out);
 		tmp = tmp->next;
 		j++;
 	}
@@ -142,9 +146,12 @@ void	cmdlstclear(t_cmd **lst)
 		tmp = *lst;
 		*lst = (*lst)->next;
 		free_matrix(tmp->args);
+		if (tmp->redir)
+			redirlstclear(&tmp->redir);
 		free(tmp);
 	}
 	*lst = NULL;
+	//print_list(*lst);
 }
 
 /* void	envlstclear()

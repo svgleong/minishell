@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: parallels <parallels@student.42.fr>        +#+  +:+       +#+        */
+/*   By: koska <koska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:20:58 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/14 17:00:41 by parallels        ###   ########.fr       */
+/*   Updated: 2023/10/16 15:51:26 by koska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,18 @@
 #include <string.h>
 #include <builtin.h>
 
-/* 	">" -> 0
-	"<" -> 1
-	">>" -> 2
-	"<<" -> 3 */
+/* 	">" -> 3
+	"<" -> 4
+	">>" -> 1
+	"<<" -> 2 */
+
+typedef struct s_redir
+{
+	int				fd;
+	int				redir;
+	char			*file;
+	struct s_redir	*next;
+}	t_redir;
 
 
 
@@ -34,11 +42,12 @@ typedef struct s_cmd
 	char			*path;
 	char			**args;
 	int				pipe[2];
+	t_redir			*redir;
 	int				fd_in;
 	int				fd_out;
-	int				redir;
 	pid_t				pid;
 }	t_cmd;
+
 
 typedef struct s_type
 {
