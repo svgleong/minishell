@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: koska <koska@student.42.fr>                +#+  +:+       +#+        */
+/*   By: parallels <parallels@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:39:21 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/16 15:50:04 by koska            ###   ########.fr       */
+/*   Updated: 2023/10/16 16:54:13 by parallels        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,13 +101,8 @@ int main(int ac, char **av, char **env)
 			continue ;
 		tmp = separate_args(rl);
 		create_list(&lst, tmp);
-		if(lst)
-		{
-			lst->fd_in = 0;
-			lst->fd_out = 1;
-		}
 		//redirections(&lst);
-		//print_list(lst);
+		print_list(lst);
 		execution(lst);
 		
 		cmdlstclear(&lst);

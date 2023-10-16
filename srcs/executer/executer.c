@@ -44,7 +44,6 @@ char	*find_command_path(char *command)
 	char	*executable_path;
 
 	if (access(command, X_OK) == 0) {
-			printf("success access before\n");
 		return (command);
 	}
 
@@ -53,7 +52,7 @@ char	*find_command_path(char *command)
 		while (matrix != NULL && *matrix != NULL) {
 			executable_path = ft_strjoin_free(ft_strjoin_free(*matrix, "/", 0), command, 1);
 			if (access(executable_path, X_OK) == 0) {
-				printf("PATH: %s\n", executable_path);
+				// printf("PATH: %s\n", executable_path);
 				return (executable_path);
 			}
 			free(executable_path);
@@ -66,19 +65,13 @@ char	*find_command_path(char *command)
 
 void core_execution(t_cmd *cmd)
 {
-
-/* 	dup2(cmd->fd_in, STDIN_FILENO);
-	if (cmd->next)
-		dup2(cmd->pipe[1], STDOUT_FILENO);
-	close(cmd->pipe[0]);
-	close(cmd->pipe[1]); */
-	if (cmd->fd_in != 0)
+	if (cmd->fd_in != -1)
 	{
 		dup2(cmd->fd_in, STDIN_FILENO);
 		close(cmd->fd_in);
 	}
 	close(cmd->pipe[0]);
-	if (cmd->fd_out != 1)
+	if (cmd->fd_out != -1)
 	{
 		dup2(cmd->fd_out, STDOUT_FILENO);
 		close(cmd->fd_out);
@@ -102,8 +95,6 @@ void	pipe_handler(t_cmd *cmd)
 	{
 		if (cmd->next)
 			cmd->next->fd_in = dup(cmd->pipe[0]);
-		/* if (cmd->prev)
-			close(cmd->prev->fd_in); */
 		if (cmd->fd_in != 0) //caso cat cat cat
 			close(cmd->fd_in);
 		if ( cmd->fd_out != 1)
