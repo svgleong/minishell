@@ -6,7 +6,7 @@
 /*   By: koska <koska@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:20:58 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/16 15:51:26 by koska            ###   ########.fr       */
+/*   Updated: 2023/10/16 15:52:51 by koska            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ typedef struct s_cmd
 	t_redir			*redir;
 	int				fd_in;
 	int				fd_out;
-	pid_t				pid;
+	pid_t			pid;
 }	t_cmd;
 
 
@@ -58,7 +58,7 @@ t_type	*type(void);
 void    env_builtin(t_cmd *cmd);
 void    pwd_bi(t_cmd *cmd);
 void    echo_bi(t_cmd *cmd);
-void cd_bi(t_cmd *cmd);
+void 	cd_bi(t_cmd *cmd);
 void	export_bi(t_cmd *cmd);
 
 void	create_list(t_cmd **lst, char **args);
