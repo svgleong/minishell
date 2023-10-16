@@ -1,6 +1,6 @@
 #include <minishell.h>
 
-void    main_loop(char *delimiter, int fd)
+/* void    main_loop(char *delimiter, int fd)
 {
     char *line;
     while (1)
@@ -13,18 +13,18 @@ void    main_loop(char *delimiter, int fd)
         free(line);
     }
     free(line);
-}
+} */
 
-void child_here_doc(int fd[2], t_cmd *cmd)
+/* void child_here_doc(int fd[2], t_cmd *cmd)
 {
     sigal(SIGQUIT, SIG_IGN);
     close(fd[0]);
     main_loop(cmd->args[1], fd[1]);
     close(fd[1]);
     exit(0);
-}
+} */
 
-void    parent_here_doc(int fd[2], t_cmd *cmd)
+/* void    parent_here_doc(int fd[2], t_cmd *cmd)
 {
     signal(SIGINT, SIG_IGN);
     wait(exit_status);
@@ -40,9 +40,9 @@ void    parent_here_doc(int fd[2], t_cmd *cmd)
 	}
 	signals_init();
 	return (0);
-}
+} */
 
-int get_here_doc(t_cmd *cmd)
+/* int get_here_doc(t_cmd *cmd)
 {
     int pid;
     int fd[2];
@@ -56,4 +56,4 @@ int get_here_doc(t_cmd *cmd)
     if (pid > 0)
         return (parent_here_doc(fd, cmd));
     return (0);
-}
+} */

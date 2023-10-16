@@ -29,17 +29,21 @@ void    echo_bi(t_cmd *cmd)
 	bool new_line = true;
 	int i = 1;
 
-	printf("entrou eco\n");
+
     if (ft_strncmp("echo", cmd->args[0], ft_strlen(cmd->args[0])))
-        printf("erro not echo\n");
+        printf("error not echo\n");
     if (check_n(cmd->args[1]) == 0)
 	{
 		new_line = false;
-		printf("\nno new line\n");
 		i++;
 	}
 	while (cmd->args[i])
 	{
+		if (!cmd->args[i])
+		{
+			i++;
+			continue;
+		}
 		printf("%s", cmd->args[i++]);
 		if (!(cmd->args[i+1] != 0))
 			printf(" ");

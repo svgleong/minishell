@@ -30,7 +30,8 @@ int	cmd_is_builtin(char *command)
 		!ft_strncmp(command, "exit", 4) || \
 		!ft_strncmp(command, "env", 3) || \
 		!ft_strncmp(command, "export", 6) || \
-		!ft_strncmp(command, "unset", 5))
+		!ft_strncmp(command, "unset", 5) || \
+		!ft_strncmp(command, "echo", 4))
 		return (1);
 	else
 		return (0);

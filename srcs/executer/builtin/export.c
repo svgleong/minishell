@@ -69,7 +69,6 @@ void bubble_sort(char **matrix)
 void	export_bi(t_cmd *cmd)
 {
 	char **export_env = env_to_matrix();
-	int i = 0;
 	if (!(cmd->args[1]))
 	{
 		bubble_sort(export_env);
