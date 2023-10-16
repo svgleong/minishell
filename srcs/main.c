@@ -31,9 +31,9 @@ void	control_d(char *str)
 
 void	sig_handler(int signal)
 {
-	printf("Signal: %d\n", signal);
+	/* printf("Signal: %d\n", signal);
 	printf("sigquit: %d\n", SIGQUIT);
-	printf("SIGINT: %d\n", SIGINT);
+	printf("SIGINT: %d\n", SIGINT); */
 
 	if (signal == SIGQUIT)
 		return ;

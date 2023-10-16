@@ -97,7 +97,7 @@ void	create_list(t_cmd **lst, char **args)
 			break ;
 		i++;
 	}
-	//print_list(*lst);
+	print_list(*lst);
 	expander(lst);
 	remove_quotes(lst);
 	free_matrix(args);
@@ -120,11 +120,11 @@ void	print_list(t_cmd *lst)
 	}
 	while (tmp)
 	{
-		//printf("[Node %d]\n", j);
+		printf("[Node %d]\n", j);
 		i = 0;
 		while (tmp->args[i])
 		{
-			//printf("arg[%d] %s\n", i, tmp->args[i]);
+			printf("arg[%d] %s\n", i, tmp->args[i]);
 			i++;
 		}
 		print_redir(lst->redir);
