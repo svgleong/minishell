@@ -97,12 +97,13 @@ void	create_list(t_cmd **lst, char **args)
 			break ;
 		i++;
 	}
-	//print_list(*lst);
-	expander(lst);
 	print_list(*lst);
+	expander(lst);
 	remove_quotes(lst);
 	free_matrix(args);
     check_redirections(lst);
+	redirections(lst);
+	print_list(*lst);
 }
 
 //fsafafs | fasfaf |F asfasfasf
@@ -127,6 +128,8 @@ void	print_list(t_cmd *lst)
 			i++;
 		}
 		print_redir(lst->redir);
+		printf("fd_in: %d\n", tmp->fd_in);
+		printf("fd_out: %d\n", tmp->fd_out);
 		tmp = tmp->next;
 		j++;
 	}
@@ -148,7 +151,7 @@ void	cmdlstclear(t_cmd **lst)
 		free(tmp);
 	}
 	*lst = NULL;
-	print_list(*lst);
+	//print_list(*lst);
 }
 
 /* void	envlstclear()

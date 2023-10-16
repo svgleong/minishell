@@ -135,7 +135,7 @@ void	check_redirections(t_cmd **cmds)
 		(*cmds) = (*cmds)->next;
 	}
 	(*cmds) = head;
-	print_list(*cmds);
+	//print_list(*cmds);
 }
 
 void	redirlstclear(t_redir **lst)
@@ -149,6 +149,7 @@ void	redirlstclear(t_redir **lst)
 		free(tmp->file);
 		if (tmp->fd != -1)
 			close(tmp->fd);
+		free(tmp);
 	}
 	*lst = NULL;
 }

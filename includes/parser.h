@@ -25,7 +25,7 @@ char	*remove_dollar(char *str, int i);
 char	*remove_character(char *str, int i);
 void	expander(t_cmd **cmds);
 void	remove_quotes(t_cmd **cmds);
-int		redirections(t_cmd **lst);
+void	redirections(t_cmd **cmds);
 void	check_redirections(t_cmd **cmds);
 void	redirlstclear(t_redir **lst);
 void	print_redir(t_redir *lst);
