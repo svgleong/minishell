@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: svalente <svalente@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 14:51:17 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/09 09:51:07 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/14 19:10:42 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@ char	*remove_dollar(char *str, int i);
 char	*remove_character(char *str, int i);
 void	expander(t_cmd **cmds);
 void	remove_quotes(t_cmd **cmds);
-int		redirections(t_cmd **lst);
+void	redirections(t_cmd **cmds);
 void	check_redirections(t_cmd **cmds);
+void	redirlstclear(t_redir **lst);
 void	print_redir(t_redir *lst);
 
 #endif

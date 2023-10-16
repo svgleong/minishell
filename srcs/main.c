@@ -6,15 +6,35 @@
 /*   By: svalente <svalente@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:39:21 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/09 09:34:45 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/14 20:31:16 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include <minishell.h>
 
+
+void	control_d(char *str)
+{
+	// unsigned char	status;
+
+	if (str)
+		return ;
+	rl_clear_history();
+	write(1, "exit\n", 6);
+	// if (this_env()->env)
+	// 	alloc().free_matrix((void **)this_env()->env);
+	// free_memory(this());
+	// status = (unsigned char)(data()->envp)->status;
+	exit(0);
+}
+
 void	sig_handler(int signal)
 {
+	printf("Signal: %d\n", signal);
+	printf("sigquit: %d\n", SIGQUIT);
+	printf("SIGINT: %d\n", SIGINT);
+
 	if (signal == SIGQUIT)
 		return ;
 	if (signal == SIGINT )
@@ -54,26 +74,6 @@ void	print_args(t_cmd *cmd)
 	printf("\n");
 }
 
-/* int main(int ac, char **av, char **env)
-{
-    (void)ac;
-	(void)av;
-	t_cmd cmd = {
-		.args = (char *[]){"ls",  NULL}
-	};
-	print_args(&cmd);
-	get_env_to_list(env);
-	execution(&cmd);
-	//printf("%i: list size\n", list_size());
-	//can_execute_command(cmd.args[0]);
-	//pwd_bi();
-	//list_bubble_sort(env);
-
-
-	return (0);
-} */
-
-
 int main(int ac, char **av, char **env)
 {
 	(void)ac;
@@ -92,14 +92,17 @@ int main(int ac, char **av, char **env)
 	while (1)
 	{
 		rl = readline("Painshell: ");
-		if (!rl)
-			return 1;
+		control_d(rl);
+		if (!rl || !rl[0])
+			continue ;
 		if (rl == NULL || !ft_strncmp(rl, "exit", 5))
 		{
-			free(rl);	
+			break ;
+			free(rl);
+			free_env_list(&data()->envp);
 			exit(0);
 		}
-		add_history(rl); // nao pode guardar so espacoes nem empty
+		add_history(rl);
 		if (!checker(rl))
 			continue ;
 		tmp = separate_args(rl);
@@ -111,7 +114,9 @@ int main(int ac, char **av, char **env)
 	}
 	free(rl);
 	rl = NULL;
-	
-	rl_clear_history();
+	cmdlstclear(&lst);
+	free_env_list(&data()->envp);
+	print_env();
+	//rl_clear_history();
 	return (0);
 }

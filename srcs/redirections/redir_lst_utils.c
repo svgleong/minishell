@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_lst_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: svalente <svalente@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 12:22:56 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/12 12:43:36 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/14 19:08:23 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,5 +135,21 @@ void	check_redirections(t_cmd **cmds)
 		(*cmds) = (*cmds)->next;
 	}
 	(*cmds) = head;
-	print_list(*cmds);
+	//print_list(*cmds);
+}
+
+void	redirlstclear(t_redir **lst)
+{
+	t_redir	*tmp;
+
+	while (*lst)
+	{
+		tmp = *lst;
+		(*lst) = (*lst)->next;
+		free(tmp->file);
+		if (tmp->fd != -1)
+			close(tmp->fd);
+		free(tmp);
+	}
+	*lst = NULL;
 }

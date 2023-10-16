@@ -52,6 +52,8 @@ char *modify_str(char *rl)
 	int     j;
 
 	quote = '\0';
+	if (!rl || !rl[0])
+		return (NULL);
 	str = malloc(ft_strlen(rl) * 5);
 	j = 0;
 	while (*rl)
