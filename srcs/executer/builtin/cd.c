@@ -6,7 +6,7 @@ void update_pwd(t_cmd *cmd)
     write(2, "need to update\n", 16);
 }
 
-void cd_bi(t_cmd *cmd)
+void cd(t_cmd *cmd)
 {
     char *path;
 

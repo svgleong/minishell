@@ -33,5 +33,10 @@ t_data	*data(void);
 t_env	*env(void);
 
 void    free_env_list(t_env **lst);
+void bubble_sort(char **matrix);
+void	print_export(char **export_env);
+char	*get_env_var(char *str);
+t_env	*env_new_node(char *str);
+void	env_add_node_end(t_env *lst, t_env *new);
 
 #endif

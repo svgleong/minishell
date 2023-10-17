@@ -10,69 +10,83 @@
 
 #include <executer.h>
 
-char	*get_env_var(char *str)
+t_env	*search_env(char *var)
+{
+	t_env *envp;
+
+	envp = data()->envp;
+	while (envp && envp->content != NULL)
+	{
+		if (!ft_strncmp(envp->content, var, ft_strlen(var)))
+			return (envp);
+		envp = envp->next;
+	}
+	return (NULL);
+}
+
+void	update_env_export(char *cmd, char **new_var)
+{
+	t_env *node;
+	char *var;
+	char *value;
+
+	var = new_var[0];
+	value = new_var[1];
+	node = search_env(var);
+	if (node == NULL)
+		env_add_node_end(data()->envp, env_new_node(cmd));
+	if (node && value)
+	{
+		free(node->content);
+		node->content = ft_strdup(cmd);
+	}
+}
+
+int is_valid(char *var)
 {
 	int		i;
 
 	i = 0;
-	while (str && str[i] && str[i] != '=')
-		i++;
-	return (ft_substr(str, 0, i));
-}
-
-void	print_export(char **export_env)
-{
-	int i;
-
-	i = -1;
-	while(export_env[++i])
+	if (ft_isdigit(var[i]) == 1)
+		return (0);
+	while (var[i] && var[i] != '=')
 	{
-		ft_putstr_fd("declare -x ", STDOUT_FILENO);
-		ft_putstr_fd(get_env_var(export_env[i]), STDOUT_FILENO);
-		if (ft_strchr(export_env[i], '='))
-		{
-			ft_putchar_fd('\"', STDOUT_FILENO);
-			ft_putstr_fd(ft_strchr(export_env[i], '=') + 1, STDOUT_FILENO);
-			ft_putchar_fd('\"', STDOUT_FILENO);
-		}
-		ft_putchar_fd('\n', STDOUT_FILENO);
-	}
-}
-
-void bubble_sort(char **matrix)
-{
-	int i;
-	int j;
-	char *temp;
-	int size = 0;
-
-	while (matrix[size])
-		size++;
-	i = 0;
-	while (i < size - 1)
-	{
-		j = 0;
-		while (j < size - i - 1)
-		{
-			if (ft_strcmp(matrix[j], matrix[j + 1]) > 0)
-			{
-				temp = matrix[j];
-				matrix[j] = matrix[j + 1];
-				matrix[j + 1] = temp;
-			}
-			j++;
-		}
+		if (ft_isalnum(var[i]) == 0)
+			return (0);
 		i++;
 	}
+	if (var[i] != '=')
+		return (0);
+	return (1);
 }
 
-void	export_bi(t_cmd *cmd)
+void	export(t_cmd *cmd)
 {
-	char **export_env = env_to_matrix();
+	char **export_env = NULL;
+	int i = 0;
+	char **var_value;
 	if (!(cmd->args[1]))
 	{
+		export_env = env_to_matrix();
 		bubble_sort(export_env);
 		print_export(export_env);
 		free_matrix(export_env);
+		return ;
+	}
+	else
+	{
+		while (cmd->args[++i])
+		{
+			if (is_valid(cmd->args[i]) == 0 && cmd->args[i][0] != '=')
+				printf("option not valid\n");
+			else
+			{
+				printf("cmd->args[%d] = %s\n", i, cmd->args[i]);
+				var_value = ft_split(cmd->args[i], '=');
+				print_matrix(var_value);
+				update_env_export(cmd->args[i], var_value);
+				free_matrix(var_value);
+			}
+		}
 	}
 }

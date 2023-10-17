@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: svalente <svalente@student.42.fr>          +#+  +:+       +#+         #
+#    By: parallels <parallels@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/20 20:09:21 by svalente          #+#    #+#              #
-#    Updated: 2023/10/17 12:19:08 by svalente         ###   ########.fr        #
+#    Updated: 2023/10/17 21:30:03 by parallels        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ SRCS		= srcs/libs/ft_calloc.c			\
 			  srcs/alloc/utils.c 			\
 			  srcs/executer/builtin/env.c	\
 			  srcs/executer/builtin/export.c\
+			  srcs/executer/builtin/export_utils.c\
 			  srcs/executer/builtin/echo.c	\
 			  srcs/executer/builtin/pwd.c	\
 			  srcs/executer/builtin/cd.c	\

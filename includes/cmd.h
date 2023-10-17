@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: koska <koska@student.42.fr>                +#+  +:+       +#+        */
+/*   By: parallels <parallels@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:20:58 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/16 15:52:51 by koska            ###   ########.fr       */
+/*   Updated: 2023/10/17 21:33:08 by parallels        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,18 +48,12 @@ typedef struct s_cmd
 	pid_t			pid;
 }	t_cmd;
 
-
-typedef struct s_type
-{
-	void	(*f)(t_cmd *cmd);
-}	t_type;
-
-t_type	*type(void);	
-void    env_builtin(t_cmd *cmd);
-void    pwd_bi(t_cmd *cmd);
-void    echo_bi(t_cmd *cmd);
-void 	cd_bi(t_cmd *cmd);
-void	export_bi(t_cmd *cmd);
+	
+void    envp();
+void    pwd();
+void    echo(t_cmd *cmd);
+void 	cd(t_cmd *cmd);
+void	export(t_cmd *cmd);
 
 void	create_list(t_cmd **lst, char **args);
 void	print_list(t_cmd *lst);

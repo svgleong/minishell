@@ -24,7 +24,7 @@ int	check_n(char *s)
 	return (0);
 }
 
-void    echo_bi(t_cmd *cmd)
+void    echo(t_cmd *cmd)
 {
 	bool	new_line;
 	int		i;

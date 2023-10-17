@@ -1,26 +1,18 @@
 
 #include <minishell.h>
 
-void	exec(t_cmd *cmd)
-{
-	if (execve(cmd->path, cmd->args, env_to_matrix()) == -1)
-		printf("error execve\n");
-}
-
 void	which_builtin(t_cmd *cmd)
 {
 	if (!ft_strncmp(cmd->args[0], "env", ft_strlen(cmd->args[0])))
-		type()->f = env_builtin;
+		envp(cmd);
 	else if (!ft_strncmp(cmd->args[0], "pwd", ft_strlen(cmd->args[0])))
-		type()->f = pwd_bi;
+		pwd();
 	else if (!ft_strncmp(cmd->args[0], "echo", ft_strlen(cmd->args[0])))
-		type()->f = echo_bi;
+		echo(cmd);
 	else if (!ft_strncmp(cmd->args[0], "cd", ft_strlen(cmd->args[0])))
-		type()->f = cd_bi;
+		cd(cmd);
 	else if (!ft_strncmp(cmd->args[0], "export", ft_strlen(cmd->args[0])))
-		type()->f = export_bi;
-	else
-		type()->f = exec;
+		export(cmd);
 }
 
 int	cmd_is_builtin(char *command)
@@ -51,13 +43,11 @@ char	*find_command_path(char *command)
 		matrix = ft_split(path, ':');
 		while (matrix != NULL && *matrix != NULL) {
 			executable_path = ft_strjoin_free(ft_strjoin_free(*matrix, "/", 0), command, 1);
-			if (access(executable_path, X_OK) == 0) {
-				// printf("PATH: %s\n", executable_path);
+			if (access(executable_path, X_OK) == 0)
 				return (executable_path);
-			}
 			free(executable_path);
 			matrix++;
-		}
+		}	
 	}
 	printf("path not found or doesnt exist\n");
 	return NULL;
@@ -79,8 +69,8 @@ void core_execution(t_cmd *cmd)
 	else if (cmd->next)
 		dup2(cmd->pipe[1], STDOUT_FILENO);
 	close(cmd->pipe[1]);
-	execve(find_command_path(cmd->args[0]), cmd->args, env_to_matrix());
-	exit(0);
+	if (execve(find_command_path(cmd->args[0]), cmd->args, env_to_matrix()) == -1)
+		printf("execve error\n");
 }
 void	pipe_handler(t_cmd *cmd)
 {
@@ -95,9 +85,9 @@ void	pipe_handler(t_cmd *cmd)
 	{
 		if (cmd->next)
 			cmd->next->fd_in = dup(cmd->pipe[0]);
-		if (cmd->fd_in != 0) //caso cat cat cat
+		if (cmd->fd_in != -1) //caso cat cat cat
 			close(cmd->fd_in);
-		if ( cmd->fd_out != 1)
+		if ( cmd->fd_out != -1) //mudar 0 1
 			close(cmd->fd_out);
 		close(cmd->pipe[0]);
 		close(cmd->pipe[1]);
@@ -109,18 +99,13 @@ void	execution(t_cmd *cmd)
 {
 	t_cmd *head = cmd;
 	int status;
+
 	while (cmd)
 	{
 		if (cmd_is_builtin(cmd->args[0]) == 1 && !cmd->next)
-		{
 			which_builtin(cmd);
-			type()->f(cmd);
-		}
 		else if (cmd->args)
-		{
-			//cmd->path = find_command_path(cmd->args[0]);
 			pipe_handler(cmd);
-		}
 		if (!cmd->next)
 			break ;
 		cmd = cmd->next;

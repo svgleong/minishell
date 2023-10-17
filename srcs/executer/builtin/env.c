@@ -101,9 +101,8 @@ void	print_env()
 	}
 }
 
-void    env_builtin(t_cmd *cmd)
+void    envp()
 {
-	(void)cmd;
     print_env();
 }
 
