@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 09:42:07 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/17 12:31:19 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/17 14:46:23 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	clean_redirections(t_cmd **cmds)
 	while (*cmds)
 	{
 		i = -1;
+		j = 0;
 		new_matrix = ft_calloc(matrix_size((*cmds)->args) + 1, sizeof(char *));
 		while ((*cmds)->args[++i])
 		{
