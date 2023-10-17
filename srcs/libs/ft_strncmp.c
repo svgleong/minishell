@@ -6,7 +6,7 @@
 /*   By: parallels <parallels@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 16:03:14 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/15 16:55:18 by parallels        ###   ########.fr       */
+/*   Updated: 2023/10/17 11:38:48 by parallels        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int ft_strcmp(const char *s1, const char *s2)
 {
-	while (*s1 && (*s1 == *s2))
+	while (*s1 && *s2 && (*s1 == *s2))
 	{
 		s1++;
 		s2++;

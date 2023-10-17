@@ -33,5 +33,7 @@ t_data	*data(void);
 t_env	*env(void);
 
 void    free_env_list(t_env **lst);
+void	env_add_node_end(t_env *lst, t_env *new);
+t_env	*env_new_node(char *str);
 
 #endif
