@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 09:42:07 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/17 14:46:23 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/17 15:49:13 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	clean_redirections(t_cmd **cmds)
 	t_cmd	*head;
 	char	**new_matrix;
 
-	j = 0;
 	head = (*cmds);
 	while (*cmds)
 	{
@@ -44,6 +43,21 @@ void	clean_redirections(t_cmd **cmds)
 	(*cmds) = head;
 }
 
+int	count_redir(char **args)
+{
+	int	i;
+	int	count;
+
+	i = -1;
+	count = 0;
+	while (args[++i])
+	{
+		if (args[i][0] == '>' || args[i][0] == '<')
+			count += 2;
+	}
+	return (count);
+}
+
 int	matrix_size(char **args)
 {
 	int	i;
@@ -51,5 +65,6 @@ int	matrix_size(char **args)
 	i = 0;
 	while (args[i])
 		i++;
+	i += count_redir(args);
 	return (i);
 }
