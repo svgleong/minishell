@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_lst_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svalente <svalente@student.42lisboa.com>   +#+  +:+       +#+        */
+/*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 12:22:56 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/16 21:37:15 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/17 12:07:35 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void    redir_add_back(t_redir **lst, t_redir *new)
 	last->next = new;
 }
 
-void	clean_redirections(t_cmd **cmd)
+/* void	clean_redirections(t_cmd **cmd)
 {
 	int		i;
 	char	**clean_args;
@@ -78,7 +78,7 @@ void	clean_redirections(t_cmd **cmd)
 		(*cmd) = (*cmd)->next;
 	}
 	(*cmd) = tmp;
-}
+} */
 
 void	create_redir_lst(t_cmd **cmd, int redir, char *file)
 {
@@ -125,12 +125,7 @@ void	check_redirections(t_cmd **cmds)
 		(*cmds) = (*cmds)->next;
 	}
 	(*cmds) = head;
-	while ((*cmds))
-	{
-		clean_redirections(cmds);
-		(*cmds) = (*cmds)->next;
-	}
-	(*cmds) = head;
+	clean_redirections(cmds);
 	//print_list(*cmds);
 }
 
