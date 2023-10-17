@@ -6,7 +6,7 @@
 #    By: parallels <parallels@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/20 20:09:21 by svalente          #+#    #+#              #
-#    Updated: 2023/10/17 11:54:40 by parallels        ###   ########.fr        #
+#    Updated: 2023/10/17 15:13:23 by parallels        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ SRCS		= srcs/libs/ft_calloc.c			\
 			  srcs/parser/redirections.c 	\
 			  srcs/redirections/redir_lst_utils.c 	\
 			  srcs/redirections/redirections.c 	\
+			  srcs/redirections/clean_redirections.c 	\
 			  srcs/alloc/utils.c 			\
 			  srcs/executer/builtin/env.c	\
 			  srcs/executer/builtin/export.c\

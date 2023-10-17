@@ -13,7 +13,7 @@
     }
 } */
 
-void    free_env_list(t_env **lst)
+/* void    free_env_list(t_env **lst)
 {
     t_env	*temp;
 	
@@ -24,6 +24,20 @@ void    free_env_list(t_env **lst)
 		free(*lst);
 		*lst = temp;
 	}
+} */
+
+void    free_env_list(t_env **lst)
+{
+    t_env	*temp;
+	
+	while (*lst)
+	{
+		temp = (*lst);
+		(*lst) = (*lst)->next;
+		free((*lst)->content);
+		free(temp);
+	}
+	*lst = NULL;
 }
 
 //find last node in list

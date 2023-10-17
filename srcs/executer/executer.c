@@ -9,15 +9,15 @@ void	exec(t_cmd *cmd)
 
 void	execute_builtin(t_cmd *cmd)
 {
-	if (!ft_strncmp(cmd->args[0], "env", 3))
+	if (!ft_strncmp(cmd->args[0], "env", ft_strlen(cmd->args[0])))
 		type()->f = env_builtin;
-	else if (!ft_strncmp(cmd->args[0], "pwd", 3))
+	else if (!ft_strncmp(cmd->args[0], "pwd", ft_strlen(cmd->args[0])))
 		type()->f = pwd_bi;
-	else if (!ft_strncmp(cmd->args[0], "echo", 4))
+	else if (!ft_strncmp(cmd->args[0], "echo", ft_strlen(cmd->args[0])))
 		type()->f = echo_bi;
-	else if (!ft_strncmp(cmd->args[0], "cd", 2))
+	else if (!ft_strncmp(cmd->args[0], "cd", ft_strlen(cmd->args[0])))
 		type()->f = cd_bi;
-	else if (!ft_strncmp(cmd->args[0], "export", 6))
+	else if (!ft_strncmp(cmd->args[0], "export", ft_strlen(cmd->args[0])))
 		type()->f = export_bi;
 	else
 		type()->f = exec;

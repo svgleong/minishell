@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_lst_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svalente <svalente@student.42lisboa.com>   +#+  +:+       +#+        */
+/*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 12:22:56 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/14 19:08:23 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/17 12:07:35 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,27 +48,24 @@ void    redir_add_back(t_redir **lst, t_redir *new)
 	last->next = new;
 }
 
-void	clean_redirections(t_cmd **cmd)
+/* void	clean_redirections(t_cmd **cmd)
 {
 	int		i;
 	char	**clean_args;
 	char	**old_args;
+	char	**begin_args;
 	t_cmd	*tmp;
 
 	tmp = *cmd;
+	begin_args = NULL;
+	clean_args = NULL;
 	while ((*cmd))
 	{
 		i = -1;
+		if (!((*cmd)->args[0][0] == '>' || (*cmd)->args[0][0] == '<') && !begin_args)
+			begin_args = copy_args_until((*cmd)->args, '<', '>');
 		while ((*cmd)->args[++i])
 		{
-			if (!((*cmd)->args[i][0] == '>' || (*cmd)->args[i][0] == '<'))
-			{
-				clean_args = copy_args_until((*cmd)->args, '<', '>');
-				old_args = (*cmd)->args;
-				(*cmd)->args = clean_args;
-				free_matrix(old_args);
-				continue ;
-			}
 			if ((*cmd)->args[i][0] == '>' || (*cmd)->args[i][0] == '<')
 			{
 				clean_args = copy_args((*cmd)->args + i + 2);
@@ -76,13 +73,12 @@ void	clean_redirections(t_cmd **cmd)
 				(*cmd)->args = clean_args;
 				free_matrix(old_args);
 				i = -1;
-				continue ;
 			}
 		}
 		(*cmd) = (*cmd)->next;
 	}
 	(*cmd) = tmp;
-}
+} */
 
 void	create_redir_lst(t_cmd **cmd, int redir, char *file)
 {
@@ -129,12 +125,7 @@ void	check_redirections(t_cmd **cmds)
 		(*cmds) = (*cmds)->next;
 	}
 	(*cmds) = head;
-	while ((*cmds))
-	{
-		clean_redirections(cmds);
-		(*cmds) = (*cmds)->next;
-	}
-	(*cmds) = head;
+	clean_redirections(cmds);
 	//print_list(*cmds);
 }
 

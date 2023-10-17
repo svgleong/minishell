@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: svalente <svalente@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 09:52:09 by svalente          #+#    #+#             */
-/*   Updated: 2023/09/26 12:45:22 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/16 21:42:23 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,11 @@
 char **copy_matrix(char **matrix)
 {
     char    **dup;
-    int i;
+    int     i;
 
     i = 0;
     while (matrix[i] && matrix[i][0] != '|')
         i++;
-    
     dup = ft_calloc(i + 1, sizeof(char *));
     i = 0;
     while (matrix[i] && matrix[i][0] != '|')
@@ -44,7 +43,7 @@ char **copy_args_until(char **matrix, char c, char d)
     int i;
 
     i = 0;
-    (void)d;
+    //(void)d;
     while (matrix[i] && matrix[i][0] != c && matrix[i][0] != d)
         i++;
     dup = ft_calloc(i + 1, sizeof(char *));
