@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   modify_string.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svalente <svalente@student.42lisboa.com>   +#+  +:+       +#+        */
+/*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 15:21:53 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/07 11:39:39 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/17 15:54:11 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ char *modify_str(char *rl)
 		str[j++] = *rl++;
 	}
 	str[j] = '\0';
-	// printf("MODIFIED: %s\n", str);
 	return (str);
 }
 
