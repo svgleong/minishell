@@ -13,7 +13,8 @@
 int	check_n(char *s)
 {
 	int i = 0;
-	if (!(s[i] == '-'))
+
+	if (!(s[0] == '-'))
 		return(-1);
 	while (s[++i])
 	{
@@ -21,31 +22,21 @@ int	check_n(char *s)
 			return (1);
 	}
 	return (0);
-
 }
 
 void    echo_bi(t_cmd *cmd)
 {
-	bool new_line = true;
-	int i = 1;
+	bool	new_line;
+	int		i;
 
-
-    if (ft_strncmp("echo", cmd->args[0], ft_strlen(cmd->args[0])))
-        printf("error not echo\n");
-    if (check_n(cmd->args[1]) == 0)
-	{
+	i = 1;
+	new_line = true;
+    if (cmd->args[1] && !check_n(cmd->args[1]) && i++)
 		new_line = false;
-		i++;
-	}
 	while (cmd->args[i])
 	{
-		if (!cmd->args[i])
-		{
-			i++;
-			continue;
-		}
 		printf("%s", cmd->args[i++]);
-		if (!(cmd->args[i+1] != 0))
+		if ((cmd->args[i] != 0))
 			printf(" ");
 	}
 	if (new_line == true)
