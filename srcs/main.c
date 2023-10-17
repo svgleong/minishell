@@ -6,7 +6,7 @@
 /*   By: parallels <parallels@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:39:21 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/16 16:54:13 by parallels        ###   ########.fr       */
+/*   Updated: 2023/10/17 13:04:51 by parallels        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ void	control_d(char *str)
 
 void	sig_handler(int signal)
 {
-	printf("Signal: %d\n", signal);
-	printf("sigquit: %d\n", SIGQUIT);
-	printf("SIGINT: %d\n", SIGINT);
+	// printf("Signal: %d\n", signal);
+	// printf("sigquit: %d\n", SIGQUIT);
+	// printf("SIGINT: %d\n", SIGINT);
 
 	if (signal == SIGQUIT)
 		return ;

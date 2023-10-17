@@ -7,7 +7,7 @@ void	exec(t_cmd *cmd)
 		printf("error execve\n");
 }
 
-void	which_builtin(t_cmd *cmd)
+void	execute_builtin(t_cmd *cmd)
 {
 	if (!ft_strncmp(cmd->args[0], "env", 3))
 		type()->f = env_builtin;
@@ -113,8 +113,7 @@ void	execution(t_cmd *cmd)
 	{
 		if (cmd_is_builtin(cmd->args[0]) == 1 && !cmd->next)
 		{
-			which_builtin(cmd);
-			type()->f(cmd);
+			execute_builtin(cmd);
 		}
 		else if (cmd->args)
 		{
