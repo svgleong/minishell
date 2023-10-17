@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: parallels <parallels@student.42.fr>        +#+  +:+       +#+        */
+/*   By: svalente <svalente@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:39:21 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/16 16:54:13 by parallels        ###   ########.fr       */
+/*   Updated: 2023/10/16 21:08:22 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <minishell.h>
 
 
-void	control_d(char *str)
+/* void	control_d(char *str)
 {
 	// unsigned char	status;
 
@@ -31,9 +31,9 @@ void	control_d(char *str)
 
 void	sig_handler(int signal)
 {
-	/* printf("Signal: %d\n", signal);
+	printf("Signal: %d\n", signal);
 	printf("sigquit: %d\n", SIGQUIT);
-	printf("SIGINT: %d\n", SIGINT); */
+	printf("SIGINT: %d\n", SIGINT);
 
 	if (signal == SIGQUIT)
 		return ;
@@ -46,7 +46,7 @@ void	sig_handler(int signal)
 		rl_redisplay();
 	}
 	return ;
-}
+} */
 
 
 #include <executer.h>
@@ -80,13 +80,13 @@ int main(int ac, char **av, char **env)
 	lst = NULL;
 
 	get_env_to_list(env);
-	rl_catch_signals = 0;
+	/* rl_catch_signals = 0;
 	signal(SIGQUIT, sig_handler);
-	signal(SIGINT, sig_handler);
+	signal(SIGINT, sig_handler); */
 	while (1)
 	{
 		rl = readline("Painshell: ");
-		control_d(rl);
+		//control_d(rl);
 		if (!rl || !rl[0])
 			continue ;
 		if (rl == NULL || !ft_strncmp(rl, "exit", 5))
@@ -96,7 +96,7 @@ int main(int ac, char **av, char **env)
 			free_env_list(&data()->envp);
 			exit(0);
 		}
-		add_history(rl);
+		//add_history(rl);
 		if (!checker(rl))
 			continue ;
 		tmp = separate_args(rl);
