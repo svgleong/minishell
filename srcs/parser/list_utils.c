@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 10:46:46 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/17 17:42:39 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/17 18:38:29 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 #include "../../includes/alloc.h" */
 #include <minishell.h>
 
-t_cmd *cmd_new_node(char **args)
+t_cmd	*cmd_new_node(char **args)
 {
-	t_cmd *new;
+	t_cmd	*new;
 
 	new = ft_calloc(1, sizeof(t_cmd));
 	if (!new)
@@ -27,8 +27,8 @@ t_cmd *cmd_new_node(char **args)
 	new->prev = NULL;
 	new->next = NULL;
 	new->redir = NULL;
-    new->fd_in = -1;
-    new->fd_out = -1;
+	new->fd_in = -1;
+	new->fd_out = -1;
 	return (new);
 }
 
@@ -102,7 +102,7 @@ void	create_list(t_cmd **lst, char **args)
 	remove_empty_strs(lst);
 	remove_quotes(lst);
 	free_matrix(args);
-    check_redirections(lst);
+	check_redirections(lst);
 	redirections(lst);
 	//print_list(*lst);
 }

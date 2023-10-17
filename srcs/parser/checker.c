@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 14:40:47 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/09 15:26:28 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/17 18:37:33 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	valid(char *str, char delim, char opps)
 		return (0);
 	if (delim != '|' && str[0] == delim && ++i)
 		ct++;
-	while (str[i])
+	while (str[i++])
 	{
 		if (ct == 2 && str[i] == delim)
 			return (0);
@@ -71,7 +71,6 @@ int	valid(char *str, char delim, char opps)
 			return (1);
 		else if (is_special_char(str[i]))
 			return (0);
-		i++;
 	}
 	return (0);
 }
@@ -107,17 +106,17 @@ int	valid_delimiters(char *str)
 
 int	checker(char *rl)
 {
-    if (!valid_quotes(rl))
-    {
+	if (!valid_quotes(rl))
+	{
 		printf("Invalid quotes\n");
 		free (rl);
 		return (0);
-    }
+	}
 	if (!valid_delimiters(rl))
 	{
 		printf("syntax error near unexpected token\n");
 		free (rl);
 		return (0);
-    }
+	}
 	return (1);
 }
