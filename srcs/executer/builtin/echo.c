@@ -35,7 +35,7 @@ void    echo_bi(t_cmd *cmd)
 		new_line = false;
 	while (cmd->args[i])
 	{
-		printf("[%s]", cmd->args[i++]);
+		printf("%s", cmd->args[i++]);
 		if ((cmd->args[i] != NULL))
 			printf(" ");
 	}

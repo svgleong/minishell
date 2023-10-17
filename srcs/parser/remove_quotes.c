@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 15:41:19 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/09 14:02:43 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/17 17:43:18 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	remove_quotes(t_cmd **cmds)
 	t_cmd	*head;
 	
 	tmp = NULL;
-	i = -1;
 	head = *cmds;
 	while ((*cmds))
 	{

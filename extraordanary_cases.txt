@@ -111,3 +111,9 @@ a << a <<
 
 
 echo world |<>> cat -e => I can't handle this ;(
+
+
+KILL TERMINAL:
+check processes: ps aux | grep minishell 
+kill process: kill -9 pid(pid number sofia) 
+(dont forget to kill parent alsooooo)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svalente <svalente@student.42lisboa.com>   +#+  +:+       +#+        */
+/*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 09:52:09 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/16 21:42:23 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/17 17:18:01 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ char **copy_args_until(char **matrix, char c, char d)
         }
         i++;
     }
+    matrix[i] = NULL;
     return (dup);
 }
 
@@ -95,7 +96,7 @@ void	print_matrix(char **m)
     printf("PRINT MATRIX\n");
 	while (m[i])
 	{
-		printf("%s\n", m[i]);
+		printf("[%s]\n", m[i]);
 		i++;
 	}
     printf("\n");
