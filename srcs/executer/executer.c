@@ -35,9 +35,8 @@ char	*find_command_path(char *command)
 	char	**matrix;
 	char	*executable_path;
 
-	if (access(command, X_OK) == 0) {
+	if (access(command, X_OK) == 0)
 		return (command);
-	}
 
 	if (path != NULL) {
 		matrix = ft_split(path, ':');
@@ -49,8 +48,9 @@ char	*find_command_path(char *command)
 			matrix++;
 		}	
 	}
-	printf("path not found or doesnt exist\n");
-	return NULL;
+	ft_putstr_fd("Command not found\n", 2);
+	exit(1);
+	return (NULL);
 }
 
 void core_execution(t_cmd *cmd)
@@ -69,7 +69,7 @@ void core_execution(t_cmd *cmd)
 	else if (cmd->next)
 		dup2(cmd->pipe[1], STDOUT_FILENO);
 	close(cmd->pipe[1]);
-	if (execve(find_command_path(cmd->args[0]), cmd->args, env_to_matrix()) == -1)
+	if (execve(find_command_path(cmd->args[0]), cmd->args, env_to_matrix()) == -1) 
 		printf("execve error\n");
 }
 void	pipe_handler(t_cmd *cmd)
