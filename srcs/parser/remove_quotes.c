@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 15:41:19 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/17 17:43:18 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/18 09:47:31 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	remove_quotes(t_cmd **cmds)
 	char	*tmp;
 	int		i;
 	t_cmd	*head;
-	
+
 	tmp = NULL;
 	head = *cmds;
 	while ((*cmds))
@@ -27,7 +27,8 @@ void	remove_quotes(t_cmd **cmds)
 		{
 			if ((*cmds)->args[i][0] == '\'' || (*cmds)->args[i][0] == '\"')
 			{
-				tmp = ft_substr((*cmds)->args[i], 1, ft_strlen((*cmds)->args[i]) - 2);
+				tmp = ft_substr((*cmds)->args[i], 1, \
+					ft_strlen((*cmds)->args[i]) - 2);
 				free((*cmds)->args[i]);
 				(*cmds)->args[i] = tmp;
 			}
@@ -35,6 +36,4 @@ void	remove_quotes(t_cmd **cmds)
 		(*cmds) = (*cmds)->next;
 	}
 	(*cmds) = head;
-	//printf("REMOVED QUOTES\n");
-	//print_list(*cmds);
 }

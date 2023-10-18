@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svalente <svalente@student.42lisboa.com>   +#+  +:+       +#+        */
+/*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 21:28:12 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/14 22:14:12 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/18 10:03:30 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ static void	redir_out(t_cmd **cmds)
 {
 	if ((*cmds)->fd_out != -1)
 		close((*cmds)->fd_out);
-	(*cmds)->fd_out = open((*cmds)->redir->file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	(*cmds)->fd_out = open((*cmds)->redir->file, O_WRONLY | O_CREAT \
+		| O_TRUNC, 0644);
 	if ((*cmds)->fd_out == -1)
 		printf("Error opening file\n");
 }
@@ -61,7 +62,8 @@ static void	redir_out_append(t_cmd **cmds)
 {
 	if ((*cmds)->fd_out != -1)
 		close((*cmds)->fd_out);
-	(*cmds)->fd_out = open((*cmds)->redir->file, O_WRONLY | O_CREAT | O_APPEND, 0644);
+	(*cmds)->fd_out = open((*cmds)->redir->file, O_WRONLY | O_CREAT \
+		| O_APPEND, 0644);
 	if ((*cmds)->fd_out == -1)
 		printf("Error opening file\n");
 }

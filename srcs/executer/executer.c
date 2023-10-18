@@ -95,9 +95,9 @@ void	pipe_handler(t_cmd *cmd)
 	{
 		if (cmd->next)
 			cmd->next->fd_in = dup(cmd->pipe[0]);
-		if (cmd->fd_in != 0) //caso cat cat cat
+		if (cmd->fd_in != -1) //caso cat cat cat
 			close(cmd->fd_in);
-		if ( cmd->fd_out != 1)
+		if ( cmd->fd_out != -1)
 			close(cmd->fd_out);
 		close(cmd->pipe[0]);
 		close(cmd->pipe[1]);

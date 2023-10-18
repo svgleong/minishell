@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 12:20:28 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/17 17:40:45 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/17 18:20:23 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,17 @@ int	key_value(char *str)
 		;
 	return (sz -1);
 }
-void ft_swap(char **a, char **b)
+
+void	ft_swap(char **a, char **b)
 {
-    char *tmp = *a;
-    *a = *b;
-    *b = tmp;
+	char	*tmp;
+
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
 }
 
-char **remove_str(char **args)
+char	**remove_str(char **args)
 {
 	int		i;
 	int		j;

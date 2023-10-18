@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 10:46:46 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/17 17:42:39 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/18 09:41:20 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 #include "../../includes/alloc.h" */
 #include <minishell.h>
 
-t_cmd *cmd_new_node(char **args)
+t_cmd	*cmd_new_node(char **args)
 {
-	t_cmd *new;
+	t_cmd	*new;
 
 	new = ft_calloc(1, sizeof(t_cmd));
 	if (!new)
@@ -27,8 +27,8 @@ t_cmd *cmd_new_node(char **args)
 	new->prev = NULL;
 	new->next = NULL;
 	new->redir = NULL;
-    new->fd_in = -1;
-    new->fd_out = -1;
+	new->fd_in = -1;
+	new->fd_out = -1;
 	return (new);
 }
 
@@ -43,8 +43,8 @@ t_cmd	*cmd_last_node(t_cmd *lst)
 
 void	cmd_add_back(t_cmd **lst, t_cmd *new)
 {
-	t_cmd *last;
-	
+	t_cmd	*last;
+
 	if (!*lst)
 	{
 		*lst = new;
@@ -56,28 +56,6 @@ void	cmd_add_back(t_cmd **lst, t_cmd *new)
 	last->next->prev = last;
 }
 
-/* void	create_list(char *rl, t_cmd **lst)
-{
-	char 	**cmds;
-	int		i = 0;
-	char 	**args;
-	// Funcao que vai verificar as quotes e pipes, ter em atencao se tiver dentro de quotes 
-	// "|" "  |  "
-	cmds = ft_split(rl, '|');
-	while (cmds[i])
-	{
-		//printf("cmds[%d]: %s\n", i, cmds[i]);
-		// Funcao que verifica se as quotes sao validas
-		// Transformar o split para ter em conta as quotes e depois sim podes fazer split (se achares que es capaz tens incluir a divisao das redirections) 
-		args = ft_split(cmds[i], ' ');
-		cmd_add_back(lst, cmd_new_node(args));
-		i++;
-	}
-	i = -1;
-	while (cmds[++i])
-		free(cmds[i]);
-} */
-
 void	create_list(t_cmd **lst, char **args)
 {
 	int	i;
@@ -87,7 +65,6 @@ void	create_list(t_cmd **lst, char **args)
 	{
 		if (args[i][0] != '|')
 		{
-			//printf("ARGS[%d] %s\n",i, args[i]);
 			cmd_add_back(lst, cmd_new_node(args + i));
 			i++;
 		}
@@ -102,12 +79,10 @@ void	create_list(t_cmd **lst, char **args)
 	remove_empty_strs(lst);
 	remove_quotes(lst);
 	free_matrix(args);
-    check_redirections(lst);
+	check_redirections(lst);
 	redirections(lst);
 	//print_list(*lst);
 }
-
-//fsafafs | fasfaf |F asfasfasf
 
 void	print_list(t_cmd *lst)
 {
@@ -139,9 +114,8 @@ void	print_list(t_cmd *lst)
 
 void	cmdlstclear(t_cmd **lst)
 {
-	t_cmd *tmp;
+	t_cmd	*tmp;
 
-	//printf("Clearing list\n");
 	while (*lst)
 	{
 		tmp = *lst;
@@ -152,16 +126,4 @@ void	cmdlstclear(t_cmd **lst)
 		free(tmp);
 	}
 	*lst = NULL;
-	//print_list(*lst);
 }
-
-/* void	envlstclear()
-{
-	t_env *tmp;
-
-	while (*lst)
-	{
-		
-	}
-	*lst = NULL;
-} */

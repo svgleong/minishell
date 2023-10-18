@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/17 18:22:02 by svalente          #+#    #+#             */
+/*   Updated: 2023/10/17 18:22:35 by svalente         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minishell.h>
 
 char	*ft_strdup(const char *s)
@@ -7,7 +19,7 @@ char	*ft_strdup(const char *s)
 	int		i;
 
 	leng_s = ft_strlen((const char *)s);
-	dest = ft_calloc(leng_s + 1, sizeof(char)); //(char *)malloc(sizeof(char) * (leng_s +1));
+	dest = ft_calloc(leng_s + 1, sizeof(char));
 	if (!dest)
 		return (NULL);
 	i = 0;
@@ -19,6 +31,7 @@ char	*ft_strdup(const char *s)
 	dest[i] = '\0';
 	return ((char *)dest);
 }
+
 char	*ft_strdup_special(const char *s, int c)
 {
 	char	*dest;
@@ -26,7 +39,7 @@ char	*ft_strdup_special(const char *s, int c)
 	int		i;
 
 	if (s[0] == c)
-		return NULL;
+		return (NULL);
 	leng_s = ft_strlen_special((const char *)s, c);
 	dest = ft_calloc(leng_s + 1, sizeof(char));
 	if (!dest)
