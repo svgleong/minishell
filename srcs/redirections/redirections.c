@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 21:28:12 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/18 10:03:30 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/18 15:21:11 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	redirections(t_cmd **cmds)
 	t_redir	*tmp_redir;
 
 	tmp_cmds = *cmds;
+	if (!tmp_cmds)
+		return ;
 	tmp_redir = tmp_cmds->redir;
 	while (*cmds)
 	{
