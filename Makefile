@@ -6,7 +6,7 @@
 #    By: parallels <parallels@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/20 20:09:21 by svalente          #+#    #+#              #
-#    Updated: 2023/10/17 21:30:03 by parallels        ###   ########.fr        #
+#    Updated: 2023/10/18 12:51:19 by svalente         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,51 +14,50 @@ NAME		= minishell
 
 OBJ_PATH	= objs
 
-SRCS		= srcs/libs/ft_calloc.c			\
-			  srcs/libs/ft_memset.c			\
-			  srcs/libs/ft_split.c			\
-			  srcs/libs/ft_strdup.c			\
-			  srcs/libs/ft_strlen.c			\
-			  srcs/libs/ft_substr.c			\
-			  srcs/libs/ft_strncmp.c		\
-			  srcs/libs/ft_putendl_fd.c		\
-			  srcs/libs/ft_strchr.c			\
-			  srcs/libs/ft_strncmp.c		\
-			  srcs/libs/ft_isspace.c		\
-			  srcs/libs/ft_special_char.c	\
-			  srcs/libs/ft_isalnum.c		\
-			  srcs/libs/ft_memcpy.c			\
-			  srcs/libs/ft_strjoin_free.c	\
-			  srcs/libs/lst_utils.c			\
-			  srcs/parser/utils.c 			\
-			  srcs/parser/checker.c			\
-			  srcs/parser/list_utils.c		\
-			  srcs/parser/modify_string.c 	\
-			  srcs/parser/remove_quotes.c 	\
-			  srcs/parser/redirections.c 	\
-			  srcs/redirections/redir_lst_utils.c 	\
-			  srcs/redirections/redirections.c 	\
+SRCS		= srcs/libs/ft_calloc.c						\
+			  srcs/libs/ft_memset.c						\
+			  srcs/libs/ft_split.c						\
+			  srcs/libs/ft_strdup.c						\
+			  srcs/libs/ft_strlen.c						\
+			  srcs/libs/ft_substr.c						\
+			  srcs/libs/ft_strncmp.c					\
+			  srcs/libs/ft_putendl_fd.c					\
+			  srcs/libs/ft_strchr.c						\
+			  srcs/libs/ft_strncmp.c					\
+			  srcs/libs/ft_isspace.c					\
+			  srcs/libs/ft_special_char.c				\
+			  srcs/libs/ft_isalnum.c					\
+			  srcs/libs/ft_memcpy.c						\
+			  srcs/libs/ft_strjoin_free.c				\
+			  srcs/libs/lst_utils.c						\
+			  srcs/parser/utils.c 						\
+			  srcs/parser/checker.c						\
+			  srcs/parser/list_utils.c					\
+			  srcs/parser/modify_string.c 				\
+			  srcs/parser/remove_quotes.c 				\
+			  srcs/redirections/redir_lst_utils.c 		\
+			  srcs/redirections/redirections.c 			\
 			  srcs/redirections/clean_redirections.c 	\
-			  srcs/alloc/utils.c 			\
-			  srcs/executer/builtin/env.c	\
-			  srcs/executer/builtin/export.c\
+			  srcs/alloc/utils.c 						\
+			  srcs/executer/builtin/env.c				\
+			  srcs/executer/builtin/export.c			\
 			  srcs/executer/builtin/export_utils.c\
-			  srcs/executer/builtin/echo.c	\
-			  srcs/executer/builtin/pwd.c	\
-			  srcs/executer/builtin/cd.c	\
-			  srcs/executer/executer.c	\
-			  srcs/executer/heredoc.c	\
-			  srcs/expansion/expansion.c	\
-			  srcs/expansion/expansion_utils.c\
-			  srcs/expansion/expansion_utils2.c\
-			  srcs/main.c 					\
+			  srcs/executer/builtin/echo.c				\
+			  srcs/executer/builtin/pwd.c				\
+			  srcs/executer/builtin/cd.c				\
+			  srcs/executer/executer.c					\
+			  srcs/executer/heredoc.c					\
+			  srcs/expansion/expansion.c				\
+			  srcs/expansion/expansion_utils.c			\
+			  srcs/expansion/expansion_utils2.c			\
+			  srcs/main.c 								\
 
 OBJS		= $(addprefix $(OBJ_PATH)/, $(addsuffix .o, $(basename $(SRCS))))
 INCLUDES	= includes/
 
 #FIXME: Change to CC
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -g -I$(INCLUDES) -fsanitize=address,undefined
+CFLAGS		= -Wall -Wextra -Werror -g -I$(INCLUDES) #-fsanitize=address,undefined
 LDFLAGS		= -L /opt/homebrew/opt/readline/lib -I /opt/homebrew/opt/readline/include -lreadline -lhistory
 
 #$(VERBOSE).SILENT:

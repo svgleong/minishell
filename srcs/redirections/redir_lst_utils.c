@@ -6,15 +6,15 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 12:22:56 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/17 12:07:35 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/18 09:56:33 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-t_redir *redir_new_node(int redir, char *file)
+t_redir	*redir_new_node(int redir, char *file)
 {
-	t_redir *new;
+	t_redir	*new;
 
 	new = ft_calloc(1, sizeof(t_redir));
 	if (!new)
@@ -26,7 +26,7 @@ t_redir *redir_new_node(int redir, char *file)
 	return (new);
 }
 
-t_redir *redir_last_node(t_redir *lst)
+t_redir	*redir_last_node(t_redir *lst)
 {
 	if (!lst)
 		return (NULL);
@@ -35,7 +35,7 @@ t_redir *redir_last_node(t_redir *lst)
 	return (lst);
 }
 
-void    redir_add_back(t_redir **lst, t_redir *new)
+void	redir_add_back(t_redir **lst, t_redir *new)
 {
 	t_redir	*last;
 
@@ -83,7 +83,6 @@ void    redir_add_back(t_redir **lst, t_redir *new)
 void	create_redir_lst(t_cmd **cmd, int redir, char *file)
 {
 	redir_add_back(&(*cmd)->redir, redir_new_node(redir, file));
-	//printf("redir: %d file: \n", redir);
 }
 
 void	print_redir(t_redir *lst)
@@ -102,6 +101,7 @@ void	print_redir(t_redir *lst)
 		tmp = tmp->next;
 	}
 }
+
 void	check_redirections(t_cmd **cmds)
 {
 	t_cmd	*head;

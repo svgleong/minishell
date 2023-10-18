@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 14:51:17 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/17 12:05:14 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/17 17:41:03 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	remove_quotes(t_cmd **cmds);
 void	redirections(t_cmd **cmds);
 void	check_redirections(t_cmd **cmds);
 void	clean_redirections(t_cmd **cmds);
+void	remove_empty_strs(t_cmd **cmds);
 void	redirlstclear(t_redir **lst);
 void	print_redir(t_redir *lst);
 
