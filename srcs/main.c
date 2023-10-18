@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:39:21 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/17 12:19:03 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/18 10:12:29 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,6 @@ int main(int ac, char **av, char **env)
 	cmdlstclear(&lst);
 	free_env_list(&data()->envp);
 	print_env();
-	//rl_clear_history();
+	rl_clear_history();
 	return (0);
 }

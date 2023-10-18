@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 09:42:07 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/17 15:49:13 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/18 09:55:15 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	count_redir(char **args)
 int	matrix_size(char **args)
 {
 	int	i;
-	
+
 	i = 0;
 	while (args[i])
 		i++;
