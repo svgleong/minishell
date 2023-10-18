@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: parallels <parallels@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:39:21 by svalente          #+#    #+#             */
 /*   Updated: 2023/10/18 10:12:29 by svalente         ###   ########.fr       */
@@ -62,12 +62,6 @@ t_data	*data(void)
 {
 	static t_data	data;
 	return (&data);
-}
-
-t_type	*type(void)
-{
-	static t_type	type;
-	return (&type);
 }
 
 int main(int ac, char **av, char **env)
