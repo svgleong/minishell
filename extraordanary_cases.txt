@@ -119,7 +119,7 @@ kill process: kill -9 pid(pid number sofia)
 (dont forget to kill parent alsooooo)
 
 echo "';||';"
-
+> ""
 >     "|" 
 srcs/executer/executer.c:38:6: runtime error: null pointer passed as argument 1, which is declared to never be null
 srcs/executer/executer.c:45:8: runtime error: null pointer passed as argument 1, which is declared to never be null

@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 10:46:46 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/18 16:53:53 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/18 17:54:51 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,8 @@ void	print_list(t_cmd *lst)
 	{
 		printf("[Node %d]\n", j);
 		i = 0;
+		if (!tmp->args)
+			printf("No arguments\n");
 		while (tmp->args[i])
 		{
 			printf("arg[%d] [%s]\n", i, tmp->args[i]);

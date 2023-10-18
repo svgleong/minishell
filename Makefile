@@ -6,7 +6,7 @@
 #    By: svalente <svalente@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/20 20:09:21 by svalente          #+#    #+#              #
-#    Updated: 2023/10/18 17:00:47 by svalente         ###   ########.fr        #
+#    Updated: 2023/10/18 17:53:52 by svalente         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,7 @@ INCLUDES	= includes/
 
 #FIXME: Change to CC
 CC			= gcc
-CFLAGS		= -Wall -Wextra -Werror -g -I$(INCLUDES) -fsanitize=address,undefined
+CFLAGS		= -Wall -Wextra -Werror -g -I$(INCLUDES) #-fsanitize=address,undefined
 LDFLAGS		= -L /opt/homebrew/opt/readline/lib -I /opt/homebrew/opt/readline/include -lreadline -lhistory
 
 #$(VERBOSE).SILENT:

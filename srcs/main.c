@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:39:21 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/18 16:57:50 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/18 17:48:47 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int main(int ac, char **av, char **env)
 		tmp = separate_args(rl);
 
 		create_list(&lst, tmp);
-		//print_list(lst);
+		print_list(lst);
 		execution(lst);
 		
 		cmdlstclear(&lst);
