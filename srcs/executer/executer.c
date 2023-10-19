@@ -35,11 +35,6 @@ char	*find_command_path(char *command)
 	char	**matrix;
 	char	*executable_path;
 
-<<<<<<< HEAD
-=======
-	if (access(command, X_OK) == 0)
-		return (command);
->>>>>>> origin
 	if (path != NULL) {
 		matrix = ft_split(path, ':');
 		while (matrix != NULL && *matrix != NULL) {
@@ -69,8 +64,15 @@ void core_execution(t_cmd *cmd)
 	else if (cmd->next)
 		dup2(cmd->pipe[1], STDOUT_FILENO);
 	close(cmd->pipe[1]);
+	if (cmd_is_builtin(cmd->args[0]) == 1 && !cmd->next)
+	{
+		which_builtin(cmd);
+		free_env_list(&data()->envp);
+		cmdlstclear(&cmd);
+		exit (1);
+	}
 	if (execve(find_command_path(cmd->args[0]), cmd->args, env_to_matrix()) == -1) 
-		printf("execve error\n");
+		ft_putstr_fd("execve error\n", 2);
 }
 void	pipe_handler(t_cmd *cmd)
 {
@@ -102,9 +104,7 @@ void	execution(t_cmd *cmd)
 
 	while (cmd)
 	{
-		if (cmd_is_builtin(cmd->args[0]) == 1 && !cmd->next)
-			which_builtin(cmd);
-		else if (cmd->args)
+		if (cmd->args)
 			pipe_handler(cmd);
 		if (!cmd->next)
 			break ;

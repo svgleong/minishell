@@ -6,13 +6,11 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:39:21 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/19 09:58:46 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/19 10:13:06 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include <minishell.h>
-
 
 void	control_d(char *str)
 {
