@@ -27,6 +27,7 @@ typedef struct s_env
 typedef struct s_data
 {
 	t_env			*envp;
+	int				status;
 } t_data;
 
 t_data	*data(void);

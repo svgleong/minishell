@@ -77,17 +77,12 @@ echo "|$_123USER?123|"
 |?123|
 --> not treated yet
 
-echo >
-bash: syntax error near unexpected token `newline'
-
 echo -n -n -nnnn -nnnnm
 -nnnnm (sem newline!)
 
-echo "\"
-> (heredoc)
 
-echo ;;
-bash: syntax error near unexpected token `;;'
+echo '"'$PATH'"'
+" /nfs/homes/mzarichn/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin "
 
 
 HEREDOC
@@ -108,9 +103,12 @@ $PATH
 
 a << a <<
 (heredoc and then syntax error)
+cat <<'end'
+> $PATH
+> end
+$PATH
 
-
-echo world |<>> cat -e => I can't handle this ;(
+echo world |<>> cat -e => I can handle this ;)
 
 
 KILL TERMINAL:
@@ -147,3 +145,14 @@ ISSUES:
 -> Export ola
 -> Env printa com mais argumentos
 -> Trocar o printf do env para ir write
+-> Oldpwd || pwd
+-> shell level
+-> Painshell: echoi "segfaegy8642593%#$#$%&&%" - mensagem de erro execve
+-> mzarichn@c2r5s3:~/Desktop/minishell$ exit 3
+exit
+mzarichn@c2r5s3:~/Desktop/minishell$ echo $?
+3
+->  _="./minishell" - remove
+-> dividir entre single and complex builtins
+-> Painshell: echo -n -n -nnnn -nnnnm
+output: -n -nnnn -nnnnmPainshell: 
