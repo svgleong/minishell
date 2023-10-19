@@ -34,7 +34,8 @@ void    free_env_list(t_env **lst)
 	{
 		temp = (*lst);
 		(*lst) = (*lst)->next;
-		free((*lst)->content);
+		//printf("content: %s\n", temp->content);
+		free(temp->content);
 		free(temp);
 	}
 	*lst = NULL;

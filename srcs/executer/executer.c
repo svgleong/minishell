@@ -37,7 +37,6 @@ char	*find_command_path(char *command)
 
 	if (access(command, X_OK) == 0)
 		return (command);
-
 	if (path != NULL) {
 		matrix = ft_split(path, ':');
 		while (matrix != NULL && *matrix != NULL) {
@@ -87,7 +86,7 @@ void	pipe_handler(t_cmd *cmd)
 			cmd->next->fd_in = dup(cmd->pipe[0]);
 		if (cmd->fd_in != -1) //caso cat cat cat
 			close(cmd->fd_in);
-		if ( cmd->fd_out != --1) //mudar 0 1
+		if ( cmd->fd_out != -1) //mudar 0 1
 			close(cmd->fd_out);
 		close(cmd->pipe[0]);
 		close(cmd->pipe[1]);

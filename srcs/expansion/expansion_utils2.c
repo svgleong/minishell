@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 12:20:28 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/17 18:20:23 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/18 15:15:04 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,8 @@ char	**remove_str(char **args)
 
 void	remove_empty_strs(t_cmd **cmds)
 {
-	int		i;
 	t_cmd	*head;
 
-	i = -1;
 	head = (*cmds);
 	while (*cmds)
 	{

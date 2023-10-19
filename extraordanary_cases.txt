@@ -117,3 +117,25 @@ KILL TERMINAL:
 check processes: ps aux | grep minishell 
 kill process: kill -9 pid(pid number sofia) 
 (dont forget to kill parent alsooooo)
+
+echo "';||';"
+> ""
+>     "|" 
+srcs/executer/executer.c:38:6: runtime error: null pointer passed as argument 1, which is declared to never be null
+srcs/executer/executer.c:45:8: runtime error: null pointer passed as argument 1, which is declared to never be null
+Command not found
+
+=================================================================
+==739449==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 133 byte(s) in 10 object(s) allocated from:
+    #0 0x7f96f9272157 in __interceptor_malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:145
+    #1 0x55fc1d4cc868 in ft_strjoin_free srcs/libs/ft_strjoin_free.c:25
+    #2 0x55fc1d4dae3a in find_command_path srcs/executer/executer.c:44
+    #3 0x55fc1d4db56f in core_execution srcs/executer/executer.c:72
+    #4 0x55fc1d4db7ae in pipe_handler srcs/executer/executer.c:83
+    #5 0x55fc1d4dbf13 in execution srcs/executer/executer.c:108
+    #6 0x55fc1d4dfa5f in main srcs/main.c:100
+    #7 0x7f96f8637082 in __libc_start_main ../csu/libc-start.c:308
+
+SUMMARY: AddressSanitizer: 133 byte(s) leaked in 10 allocation(s).
