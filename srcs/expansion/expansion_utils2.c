@@ -55,10 +55,8 @@ char	**remove_str(char **args)
 
 void	remove_empty_strs(t_cmd **cmds)
 {
-	int		i;
 	t_cmd	*head;
 
-	i = -1;
 	head = (*cmds);
 	while (*cmds)
 	{

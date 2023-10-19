@@ -47,18 +47,38 @@ int is_valid(char *var)
 	int		i;
 
 	i = 0;
-	if (ft_isdigit(var[i]) == 1)
+	if (ft_isdigit(var[i]) || var[0] == '_')
 		return (0);
 	while (var[i] && var[i] != '=')
 	{
-		if (ft_isalnum(var[i]) == 0)
+		if (!ft_isalnum(var[i]) || var[i] == '_')
 			return (0);
 		i++;
 	}
-	if (var[i] != '=')
-		return (0);
 	return (1);
 }
+
+char *rem_quotes_export(char *s)
+{
+	int i = 0;
+	int j = 0;
+	char *new;
+
+	new = malloc(sizeof(char) * ft_strlen(s)+1
+);
+	while (s[i])
+	{
+		if (s[i] != '\"')
+		{
+			new[j] = s[i];
+			j++;
+		}
+		i++;
+	}
+	new[j] = '\0';
+	return (new);
+}
+
 
 void	export(t_cmd *cmd)
 {
@@ -77,14 +97,12 @@ void	export(t_cmd *cmd)
 	{
 		while (cmd->args[++i])
 		{
-			if (is_valid(cmd->args[i]) == 0 && cmd->args[i][0] != '=')
+			if (is_valid(cmd->args[i]) == 0)
 				printf("option not valid\n");
 			else
 			{
-				printf("cmd->args[%d] = %s\n", i, cmd->args[i]);
 				var_value = ft_split(cmd->args[i], '=');
-				print_matrix(var_value);
-				update_env_export(cmd->args[i], var_value);
+				update_env_export(rem_quotes_export(cmd->args[i]), var_value);
 				free_matrix(var_value);
 			}
 		}

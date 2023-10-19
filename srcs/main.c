@@ -106,7 +106,7 @@ int main(int ac, char **av, char **env)
 	rl = NULL;
 	cmdlstclear(&lst);
 	free_env_list(&data()->envp);
-	print_env();
+	//print_env();
 	rl_clear_history();
 	return (0);
 }

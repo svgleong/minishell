@@ -117,3 +117,11 @@ KILL TERMINAL:
 check processes: ps aux | grep minishell 
 kill process: kill -9 pid(pid number sofia) 
 (dont forget to kill parent alsooooo)
+
+
+====================================================MZARICHN====================================================
+
+ISSUES:
+-> Export ola
+-> Env printa com mais argumentos
+-> Trocar o printf do env para ir write
