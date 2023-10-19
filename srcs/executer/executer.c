@@ -69,10 +69,17 @@ void core_execution(t_cmd *cmd)
 		which_builtin(cmd);
 		free_env_list(&data()->envp);
 		cmdlstclear(&cmd);
+<<<<<<< HEAD
 		exit (1);
 	}
 	if (execve(find_command_path(cmd->args[0]), cmd->args, env_to_matrix()) == -1) 
 		ft_putstr_fd("execve error\n", 2);
+=======
+		exit(1);
+	}
+	if(execve(find_command_path(cmd->args[0]), cmd->args, env_to_matrix()) == -1) 
+		printf("execve error\n");
+>>>>>>> e747287df9cbeec797873baea579a0c2226f9fa0
 }
 void	pipe_handler(t_cmd *cmd)
 {
