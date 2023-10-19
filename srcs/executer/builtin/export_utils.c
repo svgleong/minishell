@@ -10,7 +10,7 @@ char	*get_env_var(char *str)
 	return (ft_substr(str, 0, i));
 }
 
-void	print_export(char **export_env)
+/* void	print_export(char **export_env)
 {
 	int i;
 
@@ -30,6 +30,28 @@ void	print_export(char **export_env)
 		ft_putchar_fd('\n', STDOUT_FILENO);
 		free(env_var);
 	}
+} */
+
+void	print_export(char **export_env)
+{
+	char	*temp;
+	int		i;
+	int		j;
+
+	i = -1;
+	while (export_env[++i])
+	{
+		temp = get_env_var(export_env[i]);
+		printf("declare -x %s", temp);
+		j = 0;
+		while (temp[j])
+			j++;
+		if (export_env[i][j] == '=')
+			printf("=\"%s\"\n", &export_env[i][j + 1]);
+		else
+			printf("\n");
+		}
+	free(temp);
 }
 
 void bubble_sort(char **matrix)

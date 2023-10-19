@@ -89,21 +89,14 @@ void	get_env_to_list(char **env)
 		env_add_node_end(data()->envp, env_new_node(env[i]));
 }
 
-void	print_env()
-{
-	t_env *env = data()->envp;
- 
-	if (!env)
-		printf("Empty env\n");
-	while (env)
-	{
-		printf("%s\n", env->content);
-		env = env->next;
-	}
-}
-
 void    envp()
 {
-    print_env();
+    t_env *env = data()->envp;
+	while (env && env->content)
+	{
+		if (ft_strchr(env->content, '='))
+			printf("%s\n", env->content);
+		env = env->next;
+	}
 }
 
