@@ -35,9 +35,6 @@ char	*find_command_path(char *command)
 	char	**matrix;
 	char	*executable_path;
 
-	if (access(command, X_OK) == 0)
-		return (command);
-
 	if (path != NULL) {
 		matrix = ft_split(path, ':');
 		while (matrix != NULL && *matrix != NULL) {
@@ -48,9 +45,7 @@ char	*find_command_path(char *command)
 			matrix++;
 		}	
 	}
-	ft_putstr_fd("Command not found\n", 2);
-	exit(1);
-	return (NULL);
+	return (command);
 }
 
 void core_execution(t_cmd *cmd)

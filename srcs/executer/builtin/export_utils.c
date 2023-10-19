@@ -10,7 +10,7 @@ char	*get_env_var(char *str)
 	return (ft_substr(str, 0, i));
 }
 
-void	print_export(char **export_env)
+/* void	print_export(char **export_env)
 {
 	int i;
 
@@ -30,7 +30,7 @@ void	print_export(char **export_env)
 		ft_putchar_fd('\n', STDOUT_FILENO);
 		free(env_var);
 	}
-}
+} */
 
 void	print_export(char **export_env)
 {
