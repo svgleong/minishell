@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 10:46:46 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/18 09:41:20 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/19 08:56:16 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,12 +98,14 @@ void	print_list(t_cmd *lst)
 	{
 		printf("[Node %d]\n", j);
 		i = 0;
+		if (!tmp->args)
+			printf("No arguments\n");
 		while (tmp->args[i])
 		{
 			printf("arg[%d] [%s]\n", i, tmp->args[i]);
 			i++;
 		}
-		print_redir(lst->redir);
+		//print_redir(lst->redir);
 		printf("fd_in: %d\n", tmp->fd_in);
 		printf("fd_out: %d\n", tmp->fd_out);
 		tmp = tmp->next;

@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 14:40:47 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/17 18:37:33 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/18 17:42:12 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,14 @@ int	valid_quotes(char *str)
 	}
 	return (1);
 }
-
+int valid_aux(char delim, char *str, int i)
+{
+	if (delim == '|' && (str[i] == '<' || str[i] == '>'))
+		return (1);
+	else if (is_special_char(str[i]))
+		return (0);
+	return (1);	
+}
 int	valid(char *str, char delim, char opps)
 {
 	int	i;
@@ -57,7 +64,7 @@ int	valid(char *str, char delim, char opps)
 		return (0);
 	if (delim != '|' && str[0] == delim && ++i)
 		ct++;
-	while (str[i++])
+	while (str[i])
 	{
 		if (ct == 2 && str[i] == delim)
 			return (0);
@@ -67,10 +74,9 @@ int	valid(char *str, char delim, char opps)
 			return (0);
 		else if (str[i] == opps || str[i] == delim)
 			return (0);
-		else if (delim == '|' && (str[i] == '<' || str[i] == '>'))
-			return (1);
-		else if (is_special_char(str[i]))
+		else if (!valid_aux(delim, str, i))
 			return (0);
+		i++;
 	}
 	return (0);
 }

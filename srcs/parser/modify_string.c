@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 15:21:53 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/18 12:00:16 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/18 16:59:13 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,25 +36,26 @@ static int	add_delimiter(char **rl, char *str, int *j, char quote)
 	count = count_delimiter(*rl);
 	if (quote || (!quote && *rl && !count))
 		return (0);
-	str[(*j)++] = '2';
+	str[(*j)++] = '\2';
 	str[(*j)++] = *rl[0]++;
 	if (count == 2)
 		str[(*j)++] = *rl[0]++;
-	str[(*j)++] = '2';
+	str[(*j)++] = '\2';
 	return (1);
 }
+
 void	modify_str_aux(char *str, char *quote, char **rl, int *j)
 {
-	if (!quote && (**rl == '\"' || **rl == '\''))
+	if (!quote[0] && (**rl == '\"' || **rl == '\''))
 	{
-		str[(*j)++] = '2';
-		*quote = **rl;
+		str[(*j)++] = '\2';
+		quote[0] = *rl[0];
 	}
 	else if (*quote && *quote == **rl)
 	{
 		str[(*j)++] = *rl[0]++;
-		str[(*j)++] = '2';
-		*quote = '\0';
+		str[(*j)++] = '\2';
+		quote[0] = '\0';
 	}
 }
 
@@ -88,7 +89,7 @@ char	*modify_str(char *rl)
 		if (add_delimiter(&rl, str, &j, quote))
 			continue ;
 		if (!quote && *rl == ' ')
-			*rl = '2';
+			*rl = '\2';
 		str[j++] = *rl++;
 	}
 	str[j] = '\0';
@@ -101,7 +102,7 @@ char	**separate_args(char *rl)
 	char	**all_args;
 
 	mod_str = modify_str(rl);
-	all_args = ft_split(mod_str, '2');
+	all_args = ft_split(mod_str, '\2');
 	free(rl);
 	free(mod_str);
 	return (all_args);

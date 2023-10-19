@@ -35,6 +35,11 @@ char	*find_command_path(char *command)
 	char	**matrix;
 	char	*executable_path;
 
+<<<<<<< HEAD
+=======
+	if (access(command, X_OK) == 0)
+		return (command);
+>>>>>>> origin
 	if (path != NULL) {
 		matrix = ft_split(path, ':');
 		while (matrix != NULL && *matrix != NULL) {
