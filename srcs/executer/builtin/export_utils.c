@@ -41,6 +41,9 @@ void	print_export(char **export_env)
 	i = -1;
 	while (export_env[++i])
 	{
+		if (!ft_strncmp(export_env[i], "_=", 2))
+			continue;
+
 		temp = get_env_var(export_env[i]);
 		printf("declare -x %s", temp);
 		j = 0;
@@ -51,7 +54,7 @@ void	print_export(char **export_env)
 		else
 			printf("\n");
 		}
-	free(temp);
+		free(temp);
 }
 
 void bubble_sort(char **matrix)

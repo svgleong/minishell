@@ -104,6 +104,14 @@ void	execution(t_cmd *cmd)
 
 	while (cmd)
 	{
+		printf("cmd->args[0]: %i\n", data()->redir);
+		if (cmd_is_builtin(cmd->args[0]) && data()->redir == 0)
+		{
+			printf("entrou\n");
+			which_builtin(cmd);
+			cmd = cmd->next;
+			continue ;
+		}
 		if (cmd->args)
 			pipe_handler(cmd);
 		if (!cmd->next)

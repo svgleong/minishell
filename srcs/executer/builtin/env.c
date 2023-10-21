@@ -84,6 +84,7 @@ t_env	*env_new_node(char *str)
 void	get_env_to_list(char **env)
 {
 	int i = 0;
+	data()->redir = 0;
 	data()->envp = env_new_node(env[0]);
 	while (env[++i])
 		env_add_node_end(data()->envp, env_new_node(env[i]));
@@ -94,7 +95,7 @@ void    envp()
     t_env *env = data()->envp;
 	while (env && env->content)
 	{
-		if (ft_strchr(env->content, '='))
+		if (ft_strchr(env->content, '=') && ft_strncmp(env->content, "_", 1))
 			printf("%s\n", env->content);
 		env = env->next;
 	}
