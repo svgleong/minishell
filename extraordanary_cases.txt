@@ -143,14 +143,30 @@ SUMMARY: AddressSanitizer: 133 byte(s) leaked in 10 allocation(s).
 
 ISSUES:
 -> Export ola / VERIFY
--> Oldpwd || pwd
--> shell level
--> Painshell: echoi "segfaegy8642593%#$#$%&&%" - mensagem de erro execve
--> mzarichn@c2r5s3:~/Desktop/minishell$ exit 3
-exit
-mzarichn@c2r5s3:~/Desktop/minishell$ echo $?
-3
-->  _="./minishell" - remove / VERIFY
 -> dividir entre single and complex builtins / VERIFY
--> Painshell: echo -n -n -nnnn -nnnnm
-output: -n -nnnn -nnnnmPainshell: 
+->  _="./minishell" - remove / VERIFY
+-> Painshell: echoi "segfaegy8642593%#$#$%&&%" - / VERIFY
+-> Painshell: echo -n -n -nnnn -nnnnm / VERIFY
+
+-------BAD/MISSING-------
+
+-> Oldpwd || pwd
+
+-> shell level
+
+-> exit 3
+exit
+echo $?
+3
+
+-> export codigo feio (remove quotes)
+
+-> redo cd
+
+
+
+
+
+
+
+-> export ola="ola" nao guarda / SOFIA (usar printlist)

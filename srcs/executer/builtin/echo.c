@@ -35,8 +35,13 @@ void    echo(t_cmd *cmd)
 		new_line = false;
 	while (cmd->args[i])
 	{
+		if (!check_n(cmd->args[i]))
+		{
+			i++;
+			continue ;
+		}
 		printf("%s", cmd->args[i]);
-		if (cmd->args[i] != NULL)// && cmd->args[i][0] != '"' && cmd->args[i + 1][0] != '"'))
+		if (cmd->args[i] != NULL && !check_n(cmd->args[i]))
 			printf(" ");
 		i++;
 	}

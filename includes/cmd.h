@@ -63,4 +63,11 @@ void	cmdlstclear(t_cmd **lst);
 int		search_expansion(t_cmd *cmds);
 char	*expansion(char *str, int i);
 
+//frees
+void	free_fds();
+void    free_env_list(t_env **lst);
+
+
+char    *ft_strjoin(char *s1, char *s2);
+
 #endif

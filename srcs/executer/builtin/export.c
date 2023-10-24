@@ -64,8 +64,7 @@ char *rem_quotes_export(char *s)
 	int j = 0;
 	char *new;
 
-	new = malloc(sizeof(char) * ft_strlen(s)+1
-);
+	new = malloc(sizeof(char) * ft_strlen(s)+1);
 	while (s[i])
 	{
 		if (s[i] != '\"')
@@ -85,6 +84,7 @@ void	export(t_cmd *cmd)
 	char **export_env = NULL;
 	int i = 0;
 	char **var_value;
+	char *temp;
 	if (!(cmd->args[1]))
 	{
 		export_env = env_to_matrix();
@@ -101,8 +101,11 @@ void	export(t_cmd *cmd)
 				printf("option not valid\n");
 			else
 			{
+				temp = rem_quotes_export(cmd->args[i]);
 				var_value = ft_split(cmd->args[i], '=');
-				update_env_export(rem_quotes_export(cmd->args[i]), var_value);
+				update_env_export(temp, var_value);
+				//printf("%s\n", cmd->args[i]);
+				free(temp);
 				free_matrix(var_value);
 			}
 		}

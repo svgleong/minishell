@@ -29,6 +29,8 @@ SRCS		= srcs/libs/ft_calloc.c						\
 			  srcs/libs/ft_isalnum.c					\
 			  srcs/libs/ft_memcpy.c						\
 			  srcs/libs/ft_strjoin_free.c				\
+			  srcs/libs/free_utils.c					\
+			  srcs/libs/ft_strjoin.c					\
 			  srcs/libs/lst_utils.c						\
 			  srcs/parser/utils.c 						\
 			  srcs/parser/checker.c						\

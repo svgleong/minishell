@@ -13,7 +13,6 @@
 
 #include <minishell.h>
 
-
 void	control_d(char *str)
 {
 	// unsigned char	status;
@@ -22,8 +21,9 @@ void	control_d(char *str)
 		return ;
 	rl_clear_history();
 	write(1, "exit\n", 6);
-	// if (this_env()->env)
-	// 	alloc().free_matrix((void **)this_env()->env);
+	if (data()->envp)
+		free_env_list(&data()->envp);
+	free_fds();
 	// free_memory(this());
 	// status = (unsigned char)(data()->envp)->status;
 	exit(0);
@@ -64,11 +64,6 @@ t_data	*data(void)
 	return (&data);
 }
 
-void	free_all(void)
-{
-	free_env_list(&data()->envp);
-}
-
 int main(int ac, char **av, char **env)
 {
 	(void)ac;
@@ -94,7 +89,6 @@ int main(int ac, char **av, char **env)
 		if (!checker(rl))
 			continue ;
 		tmp = separate_args(rl);
-
 		create_list(&lst, tmp);
 		data()->exit = 0;
 		execution(lst);
@@ -104,8 +98,6 @@ int main(int ac, char **av, char **env)
 	free(rl);
 	rl = NULL;
 	cmdlstclear(&lst);
-	free_all();
-	envp();
 	rl_clear_history();
 	return (0);
 }

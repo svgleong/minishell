@@ -41,5 +41,6 @@ void	print_export(char **export_env);
 char	*get_env_var(char *str);
 t_env	*env_new_node(char *str);
 void	env_add_node_end(t_env *lst, t_env *new);
+t_env	*search_env(char *var);
 
 #endif

@@ -1,46 +1,5 @@
 #include "../includes/executer.h"
 
-//frees list
-/* void    free_env_list(t_env *env)
-{
-    t_env   *tmp;
-    while (env)
-    {
-        tmp = (env)->next;
-        free((env)->content);
-        free(env);
-        env = tmp;
-    }
-} */
-
-/* void    free_env_list(t_env **lst)
-{
-    t_env	*temp;
-	
-	while (*lst)
-	{
-		temp = (*lst)->next;
-		free((*lst)->content);
-		free(*lst);
-		*lst = temp;
-	}
-} */
-
-void    free_env_list(t_env **lst)
-{
-    t_env	*temp;
-	
-	while (*lst)
-	{
-		temp = (*lst);
-		(*lst) = (*lst)->next;
-		//printf("content: %s\n", temp->content);
-		free(temp->content);
-		free(temp);
-	}
-	*lst = NULL;
-}
-
 //find last node in list
 t_env	*env_last_node(t_env *lst)
 {
