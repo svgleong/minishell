@@ -44,12 +44,10 @@ void    free_env_list(t_env **lst)
 //find last node in list
 t_env	*env_last_node(t_env *lst)
 {
-	while (lst)
-	{
-		if (lst->next == NULL)
-			return (lst);
+	if (!lst)
+		return (NULL);
+	while (lst->next)
 		lst = lst->next;
-	}
 	return (lst);
 }
 
@@ -76,7 +74,6 @@ t_env	*env_new_node(char *str)
 	new->content = ft_strdup(str);
 	new->prev = NULL;
 	new->next = NULL;
-	//printf("content %s\n", new->content);
 	return (new);
 }
 

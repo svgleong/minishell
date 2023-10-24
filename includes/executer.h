@@ -18,7 +18,6 @@ char	*ft_strdup(const char *s);
 void    env_bi(char **env,t_env *env_lst);
 t_env	*env(void);
 void	get_env_to_list(char **env);
-void	print_env();
 
 
 //cmd

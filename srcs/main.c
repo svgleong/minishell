@@ -64,6 +64,11 @@ t_data	*data(void)
 	return (&data);
 }
 
+void	free_all(void)
+{
+	free_env_list(&data()->envp);
+}
+
 int main(int ac, char **av, char **env)
 {
 	(void)ac;
@@ -93,15 +98,14 @@ int main(int ac, char **av, char **env)
 		create_list(&lst, tmp);
 		data()->exit = 0;
 		execution(lst);
-		
 		cmdlstclear(&lst);
 		//free (tmp);
 	}
 	free(rl);
 	rl = NULL;
 	cmdlstclear(&lst);
-	//print_env();
-	free_env_list(&data()->envp);
+	free_all();
+	envp();
 	rl_clear_history();
 	return (0);
 }
