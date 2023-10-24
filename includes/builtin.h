@@ -28,7 +28,8 @@ typedef struct s_data
 {
 	t_env			*envp;
 	int				status;
-	int			redir;
+	int				redir;
+	int				exit;
 } t_data;
 
 t_data	*data(void);

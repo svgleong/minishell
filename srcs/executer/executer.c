@@ -13,6 +13,8 @@ void	which_builtin(t_cmd *cmd)
 		cd(cmd);
 	else if (!ft_strncmp(cmd->args[0], "export", ft_strlen(cmd->args[0])))
 		export(cmd);
+	else
+		ft_putstr_fd("Command not found\n", STDERR_FILENO);
 }
 
 int	cmd_is_builtin(char *command)
@@ -72,7 +74,11 @@ void core_execution(t_cmd *cmd)
 		exit(1);
 	}
 	if(execve(find_command_path(cmd->args[0]), cmd->args, env_to_matrix()) == -1) 
-		printf("execve error\n");
+	{
+		ft_putstr_fd("Command not found\n", STDERR_FILENO);
+		data()->exit = 1;
+		exit(1);
+	}
 }
 void	pipe_handler(t_cmd *cmd)
 {
@@ -104,10 +110,10 @@ void	execution(t_cmd *cmd)
 
 	while (cmd)
 	{
-		printf("cmd->args[0]: %i\n", data()->redir);
-		if (cmd_is_builtin(cmd->args[0]) && data()->redir == 0)
+		//printf("cmd->args[0]: %i\n", data()->redir);
+		if (cmd_is_builtin(cmd->args[0]) && !cmd->next && data()->redir == 0)
 		{
-			printf("entrou\n");
+			//printf("entrou\n");
 			which_builtin(cmd);
 			cmd = cmd->next;
 			continue ;

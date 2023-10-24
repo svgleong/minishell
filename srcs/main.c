@@ -91,6 +91,7 @@ int main(int ac, char **av, char **env)
 		tmp = separate_args(rl);
 
 		create_list(&lst, tmp);
+		data()->exit = 0;
 		execution(lst);
 		
 		cmdlstclear(&lst);

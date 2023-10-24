@@ -142,7 +142,7 @@ SUMMARY: AddressSanitizer: 133 byte(s) leaked in 10 allocation(s).
 ====================================================MZARICHN====================================================
 
 ISSUES:
--> Export ola
+-> Export ola / VERIFY
 -> Oldpwd || pwd
 -> shell level
 -> Painshell: echoi "segfaegy8642593%#$#$%&&%" - mensagem de erro execve
@@ -150,7 +150,7 @@ ISSUES:
 exit
 mzarichn@c2r5s3:~/Desktop/minishell$ echo $?
 3
-->  _="./minishell" - remove !!! verificar
--> dividir entre single and complex builtins !!! testar
+->  _="./minishell" - remove / VERIFY
+-> dividir entre single and complex builtins / VERIFY
 -> Painshell: echo -n -n -nnnn -nnnnm
 output: -n -nnnn -nnnnmPainshell: 
