@@ -141,18 +141,18 @@ SUMMARY: AddressSanitizer: 133 byte(s) leaked in 10 allocation(s).
 
 ====================================================MZARICHN====================================================
 
-ISSUES:
+GOOD:
 -> Export ola / VERIFY
 -> dividir entre single and complex builtins / VERIFY
 ->  _="./minishell" - remove / VERIFY
 -> Painshell: echoi "segfaegy8642593%#$#$%&&%" - / VERIFY
 -> Painshell: echo -n -n -nnnn -nnnnm / VERIFY
 -> export | grep PWD / TESTAR
+-> Oldpwd || pwd / VERIFY
+-> redo cd
 
 -------BAD/MISSING-------
 
--> Oldpwd || pwd
--> redo cd
 
 -> shell level
 
@@ -161,8 +161,9 @@ exit
 echo $?
 3
 
-
--> export codigo feio (remove quotes)
+-> heredoc
+-> unset
+-> exit codes
 
 
 
