@@ -81,7 +81,7 @@ void	create_list(t_cmd **lst, char **args)
 	free_matrix(args);
 	check_redirections(lst);
 	redirections(lst);
-	print_list(*lst);
+	//print_list(*lst);
 }
 
 void	print_list(t_cmd *lst)

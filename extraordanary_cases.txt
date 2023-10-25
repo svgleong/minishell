@@ -166,10 +166,6 @@ echo $?
 -> exit codes
 
 
-Painshell: cat | << EOF
-Segmentation fault (core dumped)
-
-
 
 
 

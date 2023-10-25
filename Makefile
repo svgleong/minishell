@@ -44,6 +44,7 @@ SRCS		= srcs/libs/ft_calloc.c						\
 			  srcs/alloc/utils.c 						\
 			  srcs/executer/builtin/env.c				\
 			  srcs/executer/builtin/export.c			\
+			  srcs/executer/builtin/unset.c			\
 			  srcs/executer/builtin/export_utils.c\
 			  srcs/executer/builtin/echo.c				\
 			  srcs/executer/builtin/pwd.c				\
