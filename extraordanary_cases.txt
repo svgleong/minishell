@@ -147,10 +147,12 @@ ISSUES:
 ->  _="./minishell" - remove / VERIFY
 -> Painshell: echoi "segfaegy8642593%#$#$%&&%" - / VERIFY
 -> Painshell: echo -n -n -nnnn -nnnnm / VERIFY
+-> export | grep PWD / TESTAR
 
 -------BAD/MISSING-------
 
 -> Oldpwd || pwd
+-> redo cd
 
 -> shell level
 
@@ -159,9 +161,9 @@ exit
 echo $?
 3
 
+
 -> export codigo feio (remove quotes)
 
--> redo cd
 
 
 

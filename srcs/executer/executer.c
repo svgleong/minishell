@@ -66,7 +66,7 @@ void core_execution(t_cmd *cmd)
 	else if (cmd->next)
 		dup2(cmd->pipe[1], STDOUT_FILENO);
 	close(cmd->pipe[1]);
-	if (cmd_is_builtin(cmd->args[0]) == 1 && !cmd->next)
+	if (cmd_is_builtin(cmd->args[0]) == 1)
 	{
 		which_builtin(cmd);
 		free_env_list(&data()->envp);
