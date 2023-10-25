@@ -69,5 +69,6 @@ void    free_env_list(t_env **lst);
 
 
 char    *ft_strjoin(char *s1, char *s2);
+int    heredoc(t_cmd *cmd);
 
 #endif

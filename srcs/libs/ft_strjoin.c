@@ -1,26 +1,29 @@
-#include <minishell.h>
+#include <string.h>
 
-char    *ft_strjoin(char *s1, char *s2)
+
+char	*ft_strjoin(char *s1, char *s2)
 {
-    char    *new;
-    int     i;
-    int     j;
+	size_t	i;
+	size_t	j;
+	char	*str;
 
-    i = 0;
-    j = 0;
-    new = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
-    if (new == NULL)
-        return (NULL);
-    while (s1[i])
-    {
-        new[i] = s1[i];
-        i++;
-    }
-    while (s2[j])
-    {
-        new[i + j] = s2[j];
-        j++;
-    }
-    new[i + j] = '\0';
-    return (new);
+	i = 0;
+	j = 0;
+	str = malloc((ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (!str)
+		return (0);
+	while (s1 && s1[i])
+	{
+		str[i] = s1[i];
+		i++;
+	}
+	while (s2 && s2[j])
+	{
+		str[i] = s2[j++];
+		if (str[i++] == '\n')
+			break ;
+	}
+	str[i] = '\0';
+	free(s1);
+	return (str);
 }

@@ -30,6 +30,7 @@ typedef struct s_data
 	int				status;
 	int				redir;
 	int				exit;
+	int				*pipe_here;
 } t_data;
 
 t_data	*data(void);
@@ -42,5 +43,4 @@ char	*get_env_var(char *str);
 t_env	*env_new_node(char *str);
 void	env_add_node_end(t_env *lst, t_env *new);
 t_env	*search_env(char *var);
-
 #endif

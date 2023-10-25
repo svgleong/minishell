@@ -3,6 +3,10 @@
 
 //changed to ""
 
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 25
+# endif
+
 # include <alloc.h>
 # include <cmd.h>
 # include <string.h>
@@ -17,6 +21,8 @@
 # include <unistd.h>
 # include <builtin.h>
 # include <sys/wait.h>
+
+char	*get_next_line(int fd);
 
 
 #endif

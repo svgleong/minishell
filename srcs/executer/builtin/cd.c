@@ -40,7 +40,7 @@ void    update_pwd(void)
     }
     node = search_env("PWD");
     var_value = ft_split(node->content, '=');
-    new_old_path = ft_strjoin_free("OLDPWD=", var_value[1], 32);
+    new_old_path = ft_strjoin_free("OLDPWD=", var_value[1], 2);
     free(node->content);
     path = ft_strjoin_free("PWD=", getcwd(NULL, 0), 2);
     node->content = path;
