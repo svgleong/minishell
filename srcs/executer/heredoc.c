@@ -11,11 +11,14 @@ void    child_heredoc(t_cmd *cmd, int fds[2])
         if (!line || !ft_strncmp(line, cmd->redir->file, ft_strlen(cmd->redir->file)))
         {
             free(line);
+            free_env_list(&data()->envp);
+	        cmdlstclear(&cmd);
             break;
         }
         write(fds[1], line, ft_strlen(line));
         free(line);
     }
+    close(fds[0]);
     close(fds[1]);
     exit(0);
 }
