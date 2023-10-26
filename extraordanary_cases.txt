@@ -150,6 +150,7 @@ GOOD:
 -> export | grep PWD / TESTAR
 -> Oldpwd || pwd / VERIFY
 -> redo cd
+-> heredoc
 
 -------BAD/MISSING-------
 
@@ -161,7 +162,8 @@ exit
 echo $?
 3
 
--> heredoc
+-> expansao dentro do heredoc
+
 -> unset
 -> exit codes
 

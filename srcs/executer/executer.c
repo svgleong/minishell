@@ -14,7 +14,7 @@ void	which_builtin(t_cmd *cmd)
 	else if (!ft_strncmp(cmd->args[0], "export", ft_strlen(cmd->args[0])))
 		export(cmd);
 	else if (!ft_strncmp(cmd->args[0], "unset", ft_strlen(cmd->args[0])))
-		heredoc(cmd);
+		unset(cmd->args);
 	else
 		ft_putstr_fd("Command not found\n", STDERR_FILENO);
 }

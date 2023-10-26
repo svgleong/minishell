@@ -54,6 +54,7 @@ void    pwd();
 void    echo(t_cmd *cmd);
 void 	cd(t_cmd *cmd);
 void	export(t_cmd *cmd);
+void    unset(char **cmd);
 
 void	create_list(t_cmd **lst, char **args);
 void	print_list(t_cmd *lst);
