@@ -6,12 +6,12 @@ void    free_env_list(t_env **lst)
 	
 	while (*lst)
 	{
-		temp = (*lst);
-		(*lst) = (*lst)->next;
-		free(temp->content);
-		free(temp);
+		temp = (*lst)->next;
+		free((*lst)->content);
+		free((*lst));
+		*lst = temp;
 	}
-	*lst = NULL;
+	//*lst = NULL;
 }
 
 void	general_free(t_cmd *cmd, bool env, bool close_fds, bool to_exit)

@@ -10,6 +10,8 @@ void unset_node(t_env **envp, t_env *node)
         node->next->prev = node->prev;
     if (node->prev != NULL)
         node->prev->next = node->next;
+    if (node->content)
+        free(node->content);
     free(node);
 }
 

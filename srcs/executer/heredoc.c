@@ -4,6 +4,8 @@ void    child_heredoc(t_cmd *cmd, int fds[2])
 {
     char *line;
 
+    signal(SIGQUIT, SIG_IGN); //says signal c/ should be ignored
+    signal(SIGINT, handle_signals); //when control c handle
     while (1)
     {
         write(0, "> ", 2);
@@ -15,6 +17,7 @@ void    child_heredoc(t_cmd *cmd, int fds[2])
 	        cmdlstclear(&cmd);
             break;
         }
+        //line = search_expansion(cmd);
         write(fds[1], line, ft_strlen(line));
         free(line);
     }
@@ -28,7 +31,6 @@ int heredoc(t_cmd *cmd)
     int fds[2];
     int pid;
 
-    signal(SIGQUIT, SIG_IGN);
     if (pipe(fds) == -1)
         perror("");
     pid = fork();

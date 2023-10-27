@@ -22,8 +22,12 @@
 # include <unistd.h>
 # include <builtin.h>
 # include <sys/wait.h>
+# include <errno.h>
 
 char	*get_next_line(int fd);
 
+// teste
+void handle_signals(int signal);
+int	search_expansion(t_cmd *cmds);
 
 #endif

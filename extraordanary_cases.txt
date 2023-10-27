@@ -167,8 +167,18 @@ GOOD:
 -> expansao dentro do heredoc
 cat << her << ola doesnt do cat
 
+cat ""a""
+cat: '': No such file or directory
+cat: a: No such file or directory
+cat: '': No such file or directory
+exit code 1
+
+echo test > file test1
 
 
+
+> leaks env nodes
+> leak ola
 
 
 

@@ -38,34 +38,44 @@ char	*find_command_path(char *command)
 	char	*path = getenv("PATH");
 	char	**matrix;
 	char	*executable_path;
+	char *temp;
 
 	if (path != NULL) {
 		matrix = ft_split(path, ':');
-		while (matrix != NULL && *matrix != NULL) {
-			executable_path = ft_strjoin_free(ft_strjoin_free(*matrix, "/", 0), command, 1);
+		while (matrix != NULL && *matrix != NULL)
+		{
+			temp = ft_strjoin(*matrix, "/");
+			executable_path = ft_strjoin(temp, command);
 			if (access(executable_path, X_OK) == 0)
 				return (executable_path);
 			free(executable_path);
 			matrix++;
-		}	
+		}
 	}
 	return (command);
 }
 
 void	exec(t_cmd *cmd)
 {
-	if(execve(find_command_path(cmd->args[0]), cmd->args, env_to_matrix()) == -1) 
+	char *path;
+	char **matrix = env_to_matrix();
+
+	path = find_command_path(cmd->args[0]);
+	if (execve(path, cmd->args, matrix) == -1)
 	{
-		ft_putstr_fd("Command not found\n", STDERR_FILENO);
+		ft_putstr_fd("Command not found\n", 2);
+		free_matrix(matrix);
+		free_env_list(&data()->envp);
+		general_free(cmd, 1, 1, 0);
 		data()->exit = 127;
-		exit(data()->exit);
 	}
+	//free(path);
 }
 
 void	exec_builtin(t_cmd *cmd)
 {
 	which_builtin(cmd);
-	//general_free(cmd, 1, 1, 0);
+	general_free(cmd, 1, 1, 0);
 }
 
 void core_execution(t_cmd *cmd)
@@ -125,6 +135,7 @@ void	execution(t_cmd *cmd)
 	t_cmd *head = cmd;
 	int status;
 
+	status = 0;
 	while (cmd)
 	{
 		if (cmd_is_builtin(cmd->args[0]) && !cmd->next && data()->redir == 0)

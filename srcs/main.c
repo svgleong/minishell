@@ -87,6 +87,7 @@ int main(int ac, char **av, char **env)
 		create_list(&lst, tmp);
 		data()->exit = 0;
 		execution(lst);
+		printf("exit code %d\n", data()->exit);
 		cmdlstclear(&lst);
 	}
 	free(rl);
