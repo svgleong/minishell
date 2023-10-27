@@ -32,6 +32,8 @@ SRCS		= srcs/libs/ft_calloc.c						\
 			  srcs/libs/free_utils.c					\
 			  srcs/libs/ft_strjoin.c					\
 			  srcs/libs/lst_utils.c						\
+			  srcs/libs/ft_itoa.c						\
+			  srcs/libs/ft_atoi.c						\
 			  srcs/libs/get_next_line.c					\
 			  srcs/parser/utils.c 						\
 			  srcs/parser/checker.c						\

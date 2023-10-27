@@ -57,7 +57,7 @@ void cd(t_cmd *cmd)
     if (cmd->args[1] == NULL) 
     {
         path = getenv("HOME");
-        if (path == NULL) 
+        if (path == NULL)
         {
             write(2, "cd: HOME not set\n", 17);
             data()->exit = EXIT_FAILURE;

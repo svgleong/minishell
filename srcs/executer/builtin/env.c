@@ -36,6 +36,27 @@ t_env	*env_new_node(char *str)
 	return (new);
 }
 
+
+
+void	update_shell_lvl()
+{
+	t_env	*node;
+	char	**var_value;
+	int		lvl;
+
+	node = search_env("SHLVL");
+	if (node == NULL)
+		env_add_node_end(data()->envp, env_new_node("SHLVL=1"));
+	else
+	{
+		var_value = ft_split(node->content, '=');
+		lvl = ft_atoi(var_value[1]);
+		free(node->content);
+		node->content = ft_strjoin_free("SHLVL=", ft_itoa(++lvl), 2);
+	}
+	free_matrix(var_value);
+}
+
 //puts char **env to list
 void	get_env_to_list(char **env)
 {
@@ -44,6 +65,7 @@ void	get_env_to_list(char **env)
 	data()->envp = env_new_node(env[0]);
 	while (env[++i])
 		env_add_node_end(data()->envp, env_new_node(env[i]));
+	update_shell_lvl();
 }
 
 void    envp()
