@@ -91,6 +91,7 @@ void	export(t_cmd *cmd)
 		bubble_sort(export_env);
 		print_export(export_env);
 		free_matrix(export_env);
+		data()->exit = EXIT_SUCCESS;
 		return ;
 	}
 	else
@@ -98,16 +99,19 @@ void	export(t_cmd *cmd)
 		while (cmd->args[++i])
 		{
 			if (is_valid(cmd->args[i]) == 0)
-				printf("option not valid\n");
+			{
+				ft_putstr_fd(" not a valid identifier\n", STDERR_FILENO);
+				data()->exit = EXIT_FAILURE;
+			}
 			else
 			{
 				temp = rem_quotes_export(cmd->args[i]);
 				var_value = ft_split(cmd->args[i], '=');
 				update_env_export(temp, var_value);
-				//printf("%s\n", cmd->args[i]);
 				free(temp);
 				free_matrix(var_value);
 			}
 		}
 	}
+	data()->exit = EXIT_SUCCESS;
 }

@@ -151,26 +151,31 @@ GOOD:
 -> Oldpwd || pwd / VERIFY
 -> redo cd
 -> heredoc
+-> unset
+-> exit codes
+-> shell level
 
 -------BAD/MISSING-------
 
 
--> shell level
 
+
+
+-> fix leaks
+-> fix norminette
+-> fix heredoc not working with more her
+-> expansao dentro do heredoc
+
+
+
+
+
+
+-> expansao dentro do heredoc
 -> exit 3
 exit
 echo $?
 3
-
--> expansao dentro do heredoc
-
--> unset
--> exit codes
-
-
-
-
-
-
-
 -> export ola="ola" nao guarda / SOFIA (usar printlist)
+Painshell: cat $?
+Segmentation fault (core dumped)

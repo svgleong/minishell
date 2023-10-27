@@ -55,5 +55,6 @@ void    envp()
 			printf("%s\n", env->content);
 		env = env->next;
 	}
+	data()->exit = EXIT_SUCCESS;
 }
 

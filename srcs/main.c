@@ -23,7 +23,6 @@ void	control_d(char *str)
 	write(1, "exit\n", 6);
 	if (data()->envp)
 		free_env_list(&data()->envp);
-	free_fds();
 	// free_memory(this());
 	// status = (unsigned char)(data()->envp)->status;
 	exit(0);
@@ -47,10 +46,6 @@ void	sig_handler(int signal)
 	}
 	return ;
 }
-
-
-#include <executer.h>
-
 
 t_env	*env(void)
 {
@@ -93,7 +88,6 @@ int main(int ac, char **av, char **env)
 		data()->exit = 0;
 		execution(lst);
 		cmdlstclear(&lst);
-		//free (tmp);
 	}
 	free(rl);
 	rl = NULL;

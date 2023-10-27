@@ -24,4 +24,5 @@ void    unset(char **cmd)
             unset_node(&data()->envp, node);
         i++;
     }
+    data()->exit = EXIT_SUCCESS;
 }

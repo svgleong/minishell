@@ -47,4 +47,5 @@ void    echo(t_cmd *cmd)
 	}
 	if (new_line == true)
 		printf("\n");
+	data()->exit = EXIT_SUCCESS;
 }
