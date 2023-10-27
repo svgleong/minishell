@@ -78,7 +78,7 @@ int main(int ac, char **av, char **env)
 		control_d(rl);
 		if (!rl || !rl[0])
 			continue ;
-		if (rl == NULL || !ft_strncmp(rl, "exit", 5))
+		if (rl == NULL) //|| !ft_strncmp(rl, "exit", 5)
 			break ;
 		add_history(rl);
 		if (!checker(rl))

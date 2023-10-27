@@ -15,6 +15,8 @@ void	which_builtin(t_cmd *cmd)
 		export(cmd);
 	else if (!ft_strncmp(cmd->args[0], "unset", ft_strlen(cmd->args[0])))
 		unset(cmd->args);
+	else if (!ft_strncmp(cmd->args[0], "exit", ft_strlen(cmd->args[0])))
+		exit_builtin(cmd);
 	else
 		ft_putstr_fd("Command not found\n", STDERR_FILENO);
 }
@@ -97,10 +99,7 @@ void core_execution(t_cmd *cmd)
 	if (data()->exit == 0)
 	{
 		if (cmd_is_builtin(cmd->args[0]) == 1)
-		{
 			exec_builtin(cmd);
-			exit (EXIT_SUCCESS);
-		}
 		else
 			exec(cmd);
 	}
@@ -154,6 +153,6 @@ void	execution(t_cmd *cmd)
 		waitpid(cmd->pid, &status, 0);
 		cmd = cmd->next;
 	}
-	if (WIFEXITED(status))
-		data()->exit = WEXITSTATUS(status);
+	/* if (WIFEXITED(status))
+		data()->exit = WEXITSTATUS(status); */
 }

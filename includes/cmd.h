@@ -53,6 +53,7 @@ typedef struct s_cmd
 void    envp();
 void    pwd();
 void    echo(t_cmd *cmd);
+void    exit_builtin(t_cmd *cmd);
 void 	cd(t_cmd *cmd);
 void	export(t_cmd *cmd);
 void    unset(char **cmd);
