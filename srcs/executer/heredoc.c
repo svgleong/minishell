@@ -1,59 +1,42 @@
 #include <minishell.h>
 
-/* void    main_loop(char *delimiter, int fd)
+void    child_heredoc(t_cmd *cmd, int fds[2])
 {
     char *line;
+
+    signal(SIGQUIT, SIG_IGN); //says signal c/ should be ignored
+    signal(SIGINT, handle_signals); //when control c handle
     while (1)
     {
-        line = readline("> ");
-        if (!ft_strncmp(line, delimiter, ft_strlen(delimiter)))
-            break ;
-        write(fd, line, ft_strlen(line));
-        write(fd, "\n", 1);
+        write(0, "> ", 2);
+        line = get_next_line(0);
+        if (!line || !ft_strncmp(line, cmd->redir->file, ft_strlen(cmd->redir->file)))
+        {
+            free(line);
+            free_env_list(&data()->envp);
+	        cmdlstclear(&cmd);
+            break;
+        }
+        //line = search_expansion(cmd);
+        write(fds[1], line, ft_strlen(line));
         free(line);
     }
-    free(line);
-} */
-
-/* void child_here_doc(int fd[2], t_cmd *cmd)
-{
-    sigal(SIGQUIT, SIG_IGN);
-    close(fd[0]);
-    main_loop(cmd->args[1], fd[1]);
-    close(fd[1]);
+    close(fds[0]);
+    close(fds[1]);
     exit(0);
-} */
+}
 
-/* void    parent_here_doc(int fd[2], t_cmd *cmd)
+int heredoc(t_cmd *cmd)
 {
-    signal(SIGINT, SIG_IGN);
-    wait(exit_status);
-    close(fd[1]);
-    if (WIFEXITED(exit_status))
-	{
-		exit_status = WEXITSTATUS(exit_status);
-		if (exit_status == 1)
-			return (-3);
-		else
-			command->std_in = dup(heredoc[0]);
-		close(heredoc[0]);
-	}
-	signals_init();
-	return (0);
-} */
-
-/* int get_here_doc(t_cmd *cmd)
-{
+    int fds[2];
     int pid;
-    int fd[2];
-    if (pipe(fd) == -1)
-        return (-1);
+
+    if (pipe(fds) == -1)
+        perror("");
     pid = fork();
-    if (pid == -1)
-        return (-1);
     if (pid == 0)
-        child_here_doc(fd, cmd);
-    if (pid > 0)
-        return (parent_here_doc(fd, cmd));
-    return (0);
-} */
+        child_heredoc(cmd, fds);
+    close(fds[1]);
+    wait(&pid);
+    return (fds[0]);
+}

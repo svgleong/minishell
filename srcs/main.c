@@ -13,7 +13,6 @@
 
 #include <minishell.h>
 
-
 void	control_d(char *str)
 {
 	// unsigned char	status;
@@ -22,8 +21,8 @@ void	control_d(char *str)
 		return ;
 	rl_clear_history();
 	write(1, "exit\n", 6);
-	// if (this_env()->env)
-	// 	alloc().free_matrix((void **)this_env()->env);
+	if (data()->envp)
+		free_env_list(&data()->envp);
 	// free_memory(this());
 	// status = (unsigned char)(data()->envp)->status;
 	exit(0);
@@ -47,10 +46,6 @@ void	sig_handler(int signal)
 	}
 	return ;
 }
-
-
-#include <executer.h>
-
 
 t_env	*env(void)
 {
@@ -83,24 +78,21 @@ int main(int ac, char **av, char **env)
 		control_d(rl);
 		if (!rl || !rl[0])
 			continue ;
-		if (rl == NULL || !ft_strncmp(rl, "exit", 5))
+		if (rl == NULL) //|| !ft_strncmp(rl, "exit", 5)
 			break ;
 		add_history(rl);
 		if (!checker(rl))
 			continue ;
 		tmp = separate_args(rl);
-
 		create_list(&lst, tmp);
+		data()->exit = 0;
 		execution(lst);
-		
+		printf("exit code %d\n", data()->exit);
 		cmdlstclear(&lst);
-		//free (tmp);
 	}
 	free(rl);
 	rl = NULL;
 	cmdlstclear(&lst);
-	//print_env();
-	free_env_list(&data()->envp);
 	rl_clear_history();
 	return (0);
 }

@@ -3,7 +3,12 @@
 
 //changed to ""
 
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 25
+# endif
+
 # include <alloc.h>
+#include <termios.h>
 # include <cmd.h>
 # include <string.h>
 # include <parser.h>
@@ -17,6 +22,17 @@
 # include <unistd.h>
 # include <builtin.h>
 # include <sys/wait.h>
+# include <errno.h>
 
+char	*get_next_line(int fd);
+char	*find_command_path(char *command);
+void	which_builtin(t_cmd *cmd);
+int	cmd_is_builtin(char *command);
+int is_valid(char *var);
+char *rem_quotes_export(char *s);
+
+// teste
+void handle_signals(int signal);
+int	search_expansion(t_cmd *cmds);
 
 #endif

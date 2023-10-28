@@ -1,59 +1,16 @@
 #include "../includes/executer.h"
 
-//frees list
-/* void    free_env_list(t_env *env)
-{
-    t_env   *tmp;
-    while (env)
-    {
-        tmp = (env)->next;
-        free((env)->content);
-        free(env);
-        env = tmp;
-    }
-} */
-
-/* void    free_env_list(t_env **lst)
-{
-    t_env	*temp;
-	
-	while (*lst)
-	{
-		temp = (*lst)->next;
-		free((*lst)->content);
-		free(*lst);
-		*lst = temp;
-	}
-} */
-
-void    free_env_list(t_env **lst)
-{
-    t_env	*temp;
-	
-	while (*lst)
-	{
-		temp = (*lst);
-		(*lst) = (*lst)->next;
-		//printf("content: %s\n", temp->content);
-		free(temp->content);
-		free(temp);
-	}
-	*lst = NULL;
-}
-
-//find last node in list
+// find last node in list
 t_env	*env_last_node(t_env *lst)
 {
-	while (lst)
-	{
-		if (lst->next == NULL)
-			return (lst);
+	if (!lst)
+		return (NULL);
+	while (lst->next)
 		lst = lst->next;
-	}
 	return (lst);
 }
 
-//adds the created node in the last position
+// adds the created node in the last position
 void	env_add_node_end(t_env *lst, t_env *new)
 {
 	if (lst)
@@ -65,7 +22,7 @@ void	env_add_node_end(t_env *lst, t_env *new)
 		lst = new;
 }
 
-//creates and allocs new node putting env str in content
+// creates and allocs new node putting env str in content
 t_env	*env_new_node(char *str)
 {
 	t_env	*new;
@@ -76,27 +33,38 @@ t_env	*env_new_node(char *str)
 	new->content = ft_strdup(str);
 	new->prev = NULL;
 	new->next = NULL;
-	//printf("content %s\n", new->content);
 	return (new);
 }
 
-//puts char **env to list
-void	get_env_to_list(char **env)
+void	update_shell_lvl(void)
 {
-	int i = 0;
-	data()->envp = env_new_node(env[0]);
-	while (env[++i])
-		env_add_node_end(data()->envp, env_new_node(env[i]));
+	t_env	*node;
+	char	**var_value;
+	int		lvl;
+
+	node = search_env("SHLVL");
+	if (node == NULL)
+		env_add_node_end(data()->envp, env_new_node("SHLVL=1"));
+	else
+	{
+		var_value = ft_split(node->content, '=');
+		lvl = ft_atoi(var_value[1]);
+		free(node->content);
+		node->content = ft_strjoin_free("SHLVL=", ft_itoa(++lvl), 2);
+	}
+	free_matrix(var_value);
 }
 
-void    envp()
+void	envp(void)
 {
-    t_env *env = data()->envp;
+	t_env	*env;
+
+	env = data()->envp;
 	while (env && env->content)
 	{
-		if (ft_strchr(env->content, '='))
+		if (ft_strchr(env->content, '=') && ft_strncmp(env->content, "_", 1))
 			printf("%s\n", env->content);
 		env = env->next;
 	}
+	data()->exit = EXIT_SUCCESS;
 }
-

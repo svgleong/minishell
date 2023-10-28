@@ -21,6 +21,8 @@ void	redirections(t_cmd **cmds)
 	t_cmd	*tmp_cmds;
 	t_redir	*tmp_redir;
 
+
+	
 	tmp_cmds = *cmds;
 	if (!tmp_cmds)
 		return ;
@@ -35,6 +37,8 @@ void	redirections(t_cmd **cmds)
 				redir_out(cmds);
 			else if ((*cmds)->redir->redir == 1)
 				redir_out_append(cmds);
+			else if ((*cmds)->redir->redir == 2)
+				(*cmds)->fd_in = heredoc(*cmds);
 			(*cmds)->redir = (*cmds)->redir->next;
 		}
 		(*cmds) = (*cmds)->next;
@@ -45,6 +49,9 @@ void	redirections(t_cmd **cmds)
 
 static void	redir_in(t_cmd **cmds)
 {
+	//
+	data()->redir = 1;
+	//
 	(*cmds)->fd_in = open((*cmds)->redir->file, O_RDONLY);
 	if ((*cmds)->fd_in == -1)
 		printf("Error opening file\n");
@@ -52,6 +59,9 @@ static void	redir_in(t_cmd **cmds)
 
 static void	redir_out(t_cmd **cmds)
 {
+	//
+	data()->redir = 1;
+	//
 	if ((*cmds)->fd_out != -1)
 		close((*cmds)->fd_out);
 	(*cmds)->fd_out = open((*cmds)->redir->file, O_WRONLY | O_CREAT \
@@ -62,6 +72,9 @@ static void	redir_out(t_cmd **cmds)
 
 static void	redir_out_append(t_cmd **cmds)
 {
+	//
+	data()->redir = 1;
+	//
 	if ((*cmds)->fd_out != -1)
 		close((*cmds)->fd_out);
 	(*cmds)->fd_out = open((*cmds)->redir->file, O_WRONLY | O_CREAT \

@@ -29,7 +29,12 @@ SRCS		= srcs/libs/ft_calloc.c						\
 			  srcs/libs/ft_isalnum.c					\
 			  srcs/libs/ft_memcpy.c						\
 			  srcs/libs/ft_strjoin_free.c				\
+			  srcs/libs/free_utils.c					\
+			  srcs/libs/ft_strjoin.c					\
 			  srcs/libs/lst_utils.c						\
+			  srcs/libs/ft_itoa.c						\
+			  srcs/libs/ft_atoi.c						\
+			  srcs/libs/get_next_line.c					\
 			  srcs/parser/utils.c 						\
 			  srcs/parser/checker.c						\
 			  srcs/parser/list_utils.c					\
@@ -41,11 +46,14 @@ SRCS		= srcs/libs/ft_calloc.c						\
 			  srcs/alloc/utils.c 						\
 			  srcs/executer/builtin/env.c				\
 			  srcs/executer/builtin/export.c			\
+			  srcs/executer/builtin/unset.c			\
 			  srcs/executer/builtin/export_utils.c\
 			  srcs/executer/builtin/echo.c				\
 			  srcs/executer/builtin/pwd.c				\
 			  srcs/executer/builtin/cd.c				\
+			  srcs/executer/builtin/exit.c				\
 			  srcs/executer/executer.c					\
+			  srcs/executer/signals.c					\
 			  srcs/executer/heredoc.c					\
 			  srcs/expansion/expansion.c				\
 			  srcs/expansion/expansion_utils.c			\

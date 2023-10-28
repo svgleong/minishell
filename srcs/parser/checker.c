@@ -121,6 +121,7 @@ int	checker(char *rl)
 	if (!valid_delimiters(rl))
 	{
 		printf("syntax error near unexpected token\n");
+		data()->exit = 2;
 		free (rl);
 		return (0);
 	}

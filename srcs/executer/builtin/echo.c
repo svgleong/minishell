@@ -1,21 +1,22 @@
-//echo [-n][args]
-// prints in the terminal what we ask
-// echo $(pwd)
-//echo -n needs to be first arg
-// echo -n "hello" -> hello
-// echo ... -n -> ... -n\n
-// echo -n ... -> ... $bash_prompt
-// in defautl > writes to stdin, if file exists, overwrites it
-// prepare actions for echo remapping fds
+// echo [-n][args]
+//  prints in the terminal what we ask
+//  echo $(pwd)
+// echo -n needs to be first arg
+//  echo -n "hello" -> hello
+//  echo ... -n -> ... -n\n
+//  echo -n ... -> ... $bash_prompt
+//  in defautl > writes to stdin, if file exists, overwrites it
+//  prepare actions for echo remapping fds
 
 #include <executer.h>
 
 int	check_n(char *s)
 {
-	int i = 0;
+	int	i;
 
+	i = 0;
 	if (!(s[0] == '-'))
-		return(-1);
+		return (-1);
 	while (s[++i])
 	{
 		if (s[i] != 'n')
@@ -24,22 +25,28 @@ int	check_n(char *s)
 	return (0);
 }
 
-void    echo(t_cmd *cmd)
+void	echo(t_cmd *cmd)
 {
 	bool	new_line;
 	int		i;
 
 	i = 1;
 	new_line = true;
-    if (cmd->args[1] && !check_n(cmd->args[1]) && i++)
+	if (cmd->args[1] && !check_n(cmd->args[1]) && i++)
 		new_line = false;
 	while (cmd->args[i])
 	{
+		if (!check_n(cmd->args[i]))
+		{
+			i++;
+			continue ;
+		}
 		printf("%s", cmd->args[i]);
-		if (cmd->args[i] != NULL)// && cmd->args[i][0] != '"' && cmd->args[i + 1][0] != '"'))
+		if (cmd->args[i] != NULL && !check_n(cmd->args[i]))
 			printf(" ");
 		i++;
 	}
 	if (new_line == true)
 		printf("\n");
+	data()->exit = EXIT_SUCCESS;
 }
