@@ -154,6 +154,7 @@ GOOD:
 -> exit codes
 -> unset
 -> shell level
+> leak ola
 
 -------BAD/MISSING-------
 
@@ -161,7 +162,6 @@ GOOD:
 
 
 
--> fix leaks
 -> fix norminette
 -> fix heredoc not working with more her
 -> expansao dentro do heredoc
@@ -180,16 +180,27 @@ echo test > file test1
 
 
 > leaks env nodes
-> leak ola
 cd stopped working
 
+->cat << her << ola leaks
+echo bonjour > $test segfault
+cat < Makefile | grep gcc > output works but leaks in rediractions
+echo | -> doesnt wait for next command
+echo hi " ; " hihi -> output diferente
+echo hi";" hihi
+echo ;;
+echo "\n \n \\n"
+echo "\"
 
+echo 2 >> out1 > out2 leaks
+cat < test doesnt end maybe needs exit when no open file or flag
 
 -> expansao dentro do heredoc
 -> exit 3
 exit
 echo $?
 3
+->exit code -10
 
 -> expansao dentro do heredoc
 -> export ola="ola" nao guarda / SOFIA (usar printlist)

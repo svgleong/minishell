@@ -1,6 +1,6 @@
 #include "../includes/executer.h"
 
-//find last node in list
+// find last node in list
 t_env	*env_last_node(t_env *lst)
 {
 	if (!lst)
@@ -10,7 +10,7 @@ t_env	*env_last_node(t_env *lst)
 	return (lst);
 }
 
-//adds the created node in the last position
+// adds the created node in the last position
 void	env_add_node_end(t_env *lst, t_env *new)
 {
 	if (lst)
@@ -22,7 +22,7 @@ void	env_add_node_end(t_env *lst, t_env *new)
 		lst = new;
 }
 
-//creates and allocs new node putting env str in content
+// creates and allocs new node putting env str in content
 t_env	*env_new_node(char *str)
 {
 	t_env	*new;
@@ -36,8 +36,7 @@ t_env	*env_new_node(char *str)
 	return (new);
 }
 
-
-void	update_shell_lvl()
+void	update_shell_lvl(void)
 {
 	t_env	*node;
 	char	**var_value;
@@ -56,20 +55,11 @@ void	update_shell_lvl()
 	free_matrix(var_value);
 }
 
-
-//puts char **env to list
-void	get_env_to_list(char **env)
+void	envp(void)
 {
-	int i = 0;
-	data()->redir = 0;
-	data()->envp = env_new_node(env[0]);
-	while (env[++i])
-		env_add_node_end(data()->envp, env_new_node(env[i]));
-}
+	t_env	*env;
 
-void    envp()
-{
-    t_env *env = data()->envp;
+	env = data()->envp;
 	while (env && env->content)
 	{
 		if (ft_strchr(env->content, '=') && ft_strncmp(env->content, "_", 1))
@@ -78,4 +68,3 @@ void    envp()
 	}
 	data()->exit = EXIT_SUCCESS;
 }
-

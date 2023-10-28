@@ -1,5 +1,17 @@
 #include <minishell.h>
 
+// puts char **env to list
+void	get_env_to_list(char **env)
+{
+	int i;
+
+	i = 0;
+	data()->redir = 0;
+	data()->envp = env_new_node(env[0]);
+	while (env[++i])
+		env_add_node_end(data()->envp, env_new_node(env[i]));
+}
+
 void	which_builtin(t_cmd *cmd)
 {
 	if (!ft_strcmp(cmd->args[0], "env"))
@@ -37,20 +49,24 @@ char	*find_command_path(char *command)
 	char	*path;
 	char	**matrix;
 	char	*executable_path;
+	char	*temp;
+	int		i;
 
 	path = getenv("PATH");
+	i = 0;
 	if (path != NULL)
 	{
 		matrix = ft_split(path, ':');
-		while (matrix != NULL && *matrix != NULL)
+		while (matrix != NULL && matrix[i] != NULL)
 		{
-			executable_path = ft_strjoin_free(ft_strjoin_free(*matrix, "/", 0),
-					command, 1);
+			temp = ft_strjoin_free(matrix[i], "/", 0);
+			executable_path = ft_strjoin_free(temp, command, 1);
 			if (access(executable_path, X_OK) == 0)
 				return (executable_path);
 			free(executable_path);
-			matrix++;
+			i++;
 		}
+		free_matrix(matrix);
 	}
 	return (command);
 }
