@@ -19,6 +19,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <builtin.h>
+#include <stdbool.h>
 
 /* 	">" -> 3
 	"<" -> 4
@@ -52,9 +53,12 @@ typedef struct s_cmd
 void    envp();
 void    pwd();
 void    echo(t_cmd *cmd);
+void    exit_builtin(t_cmd *cmd);
 void 	cd(t_cmd *cmd);
 void	export(t_cmd *cmd);
 void    unset(char **cmd);
+void	execution(t_cmd *cmd);
+void	get_env_to_list(char **env);
 
 void	create_list(t_cmd **lst, char **args);
 void	print_list(t_cmd *lst);
@@ -65,7 +69,7 @@ int		search_expansion(t_cmd *cmds);
 char	*expansion(char *str, int i);
 
 //frees
-void	free_fds();
+void	general_free(t_cmd *cmd, bool env, bool close, bool exit);
 void    free_env_list(t_env **lst);
 
 

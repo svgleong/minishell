@@ -2,16 +2,84 @@
 
 void	exec(t_cmd *cmd)
 {
-	if (execve(find_command_path(cmd->args[0]), \
-			cmd->args, env_to_matrix()) == -1) 
-	{
+	if (!ft_strncmp(cmd->args[0], "env", ft_strlen(cmd->args[0])))
+		envp(cmd);
+	else if (!ft_strncmp(cmd->args[0], "pwd", ft_strlen(cmd->args[0])))
+		pwd();
+	else if (!ft_strncmp(cmd->args[0], "echo", ft_strlen(cmd->args[0])))
+		echo(cmd);
+	else if (!ft_strncmp(cmd->args[0], "cd", ft_strlen(cmd->args[0])))
+		cd(cmd);
+	else if (!ft_strncmp(cmd->args[0], "export", ft_strlen(cmd->args[0])))
+		export(cmd);
+	else if (!ft_strncmp(cmd->args[0], "unset", ft_strlen(cmd->args[0])))
+		unset(cmd->args);
+	else if (!ft_strncmp(cmd->args[0], "exit", ft_strlen(cmd->args[0])))
+		exit_builtin(cmd);
+	else
 		ft_putstr_fd("Command not found\n", STDERR_FILENO);
-		data()->exit = 1;
-		exit(1);
-	}
 }
 
-void	core_execution(t_cmd *cmd)
+int	cmd_is_builtin(char *command)
+{
+	if (!ft_strcmp(command, "pwd") || \
+		!ft_strcmp(command, "cd") || \
+		!ft_strcmp(command, "exit") || \
+		!ft_strcmp(command, "env") || \
+		!ft_strcmp(command, "export") || \
+		!ft_strcmp(command, "unset") || \
+		!ft_strcmp(command, "echo"))
+		return (1);
+	else
+		return (0);
+}
+
+char	*find_command_path(char *command)
+{
+	char	*path = getenv("PATH");
+	char	**matrix;
+	char	*executable_path;
+	char *temp;
+
+	if (path != NULL) {
+		matrix = ft_split(path, ':');
+		while (matrix != NULL && *matrix != NULL)
+		{
+			temp = ft_strjoin(*matrix, "/");
+			executable_path = ft_strjoin(temp, command);
+			if (access(executable_path, X_OK) == 0)
+				return (executable_path);
+			free(executable_path);
+			matrix++;
+		}
+	}
+	return (command);
+}
+
+void	exec(t_cmd *cmd)
+{
+	char *path;
+	char **matrix = env_to_matrix();
+
+	path = find_command_path(cmd->args[0]);
+	if (execve(path, cmd->args, matrix) == -1)
+	{
+		ft_putstr_fd("Command not found\n", 2);
+		free_matrix(matrix);
+		free_env_list(&data()->envp);
+		general_free(cmd, 1, 1, 0);
+		data()->exit = 127;
+	}
+	//free(path);
+}
+
+void	exec_builtin(t_cmd *cmd)
+{
+	which_builtin(cmd);
+	general_free(cmd, 1, 1, 0);
+}
+
+void core_execution(t_cmd *cmd)
 {
 	if (cmd->fd_in != -1)
 	{
@@ -27,16 +95,16 @@ void	core_execution(t_cmd *cmd)
 	else if (cmd->next)
 		dup2(cmd->pipe[1], STDOUT_FILENO);
 	close(cmd->pipe[1]);
-	if (cmd_is_builtin(cmd->args[0]) == 1)
+	if (data()->exit == 0)
 	{
-		which_builtin(cmd);
-		free_env_list(&data()->envp);
-		cmdlstclear(&cmd);
-		exit(1);
+		if (cmd_is_builtin(cmd->args[0]) == 1)
+			exec_builtin(cmd);
+		else
+			exec(cmd);
 	}
-	exec(cmd);
+	//general_free(cmd, 1, 1, 0);
+	exit(data()->exit);
 }
-
 void	pipe_handler(t_cmd *cmd)
 {
 	if (pipe(cmd->pipe) == -1)
@@ -52,7 +120,7 @@ void	pipe_handler(t_cmd *cmd)
 			cmd->next->fd_in = dup(cmd->pipe[0]);
 		if (cmd->fd_in != -1)
 			close(cmd->fd_in);
-		if (cmd->fd_out != -1)
+		if ( cmd->fd_out != -1)
 			close(cmd->fd_out);
 		close(cmd->pipe[0]);
 		close(cmd->pipe[1]);
@@ -64,7 +132,7 @@ void	execution(t_cmd *cmd)
 	t_cmd	*head;
 	int		status;
 
-	head = cmd;
+	status = 0;
 	while (cmd)
 	{
 		if (cmd_is_builtin(cmd->args[0]) && !cmd->next && data()->redir == 0)
@@ -83,4 +151,6 @@ void	execution(t_cmd *cmd)
 		waitpid(cmd->pid, &status, 0);
 		cmd = cmd->next;
 	}
+	/* if (WIFEXITED(status))
+		data()->exit = WEXITSTATUS(status); */
 }

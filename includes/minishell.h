@@ -22,11 +22,15 @@
 # include <unistd.h>
 # include <builtin.h>
 # include <sys/wait.h>
+# include <errno.h>
 
 char	*get_next_line(int fd);
 char	*find_command_path(char *command);
 void	which_builtin(t_cmd *cmd);
 int	cmd_is_builtin(char *command);
 
+// teste
+void handle_signals(int signal);
+int	search_expansion(t_cmd *cmds);
 
 #endif

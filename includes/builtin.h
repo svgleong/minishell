@@ -35,7 +35,6 @@ typedef struct s_data
 
 t_data	*data(void);
 t_env	*env(void);
-
 void    free_env_list(t_env **lst);
 void bubble_sort(char **matrix);
 void	print_export(char **export_env);

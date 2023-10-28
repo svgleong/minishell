@@ -37,7 +37,6 @@ t_env	*env_new_node(char *str)
 }
 
 
-
 void	update_shell_lvl()
 {
 	t_env	*node;
@@ -57,6 +56,7 @@ void	update_shell_lvl()
 	free_matrix(var_value);
 }
 
+
 //puts char **env to list
 void	get_env_to_list(char **env)
 {
@@ -65,7 +65,6 @@ void	get_env_to_list(char **env)
 	data()->envp = env_new_node(env[0]);
 	while (env[++i])
 		env_add_node_end(data()->envp, env_new_node(env[i]));
-	update_shell_lvl();
 }
 
 void    envp()
@@ -77,5 +76,6 @@ void    envp()
 			printf("%s\n", env->content);
 		env = env->next;
 	}
+	data()->exit = EXIT_SUCCESS;
 }
 

@@ -10,6 +10,8 @@ void unset_node(t_env **envp, t_env *node)
         node->next->prev = node->prev;
     if (node->prev != NULL)
         node->prev->next = node->next;
+    if (node->content)
+        free(node->content);
     free(node);
 }
 
@@ -24,4 +26,5 @@ void    unset(char **cmd)
             unset_node(&data()->envp, node);
         i++;
     }
+    data()->exit = EXIT_SUCCESS;
 }

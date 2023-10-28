@@ -23,7 +23,6 @@ void	control_d(char *str)
 	write(1, "exit\n", 6);
 	if (data()->envp)
 		free_env_list(&data()->envp);
-	free_fds();
 	// free_memory(this());
 	// status = (unsigned char)(data()->envp)->status;
 	exit(0);
@@ -47,10 +46,6 @@ void	sig_handler(int signal)
 	}
 	return ;
 }
-
-
-#include <executer.h>
-
 
 t_env	*env(void)
 {
@@ -83,7 +78,7 @@ int main(int ac, char **av, char **env)
 		control_d(rl);
 		if (!rl || !rl[0])
 			continue ;
-		if (rl == NULL || !ft_strncmp(rl, "exit", 5))
+		if (rl == NULL) //|| !ft_strncmp(rl, "exit", 5)
 			break ;
 		add_history(rl);
 		if (!checker(rl))
@@ -92,8 +87,8 @@ int main(int ac, char **av, char **env)
 		create_list(&lst, tmp);
 		data()->exit = 0;
 		execution(lst);
+		printf("exit code %d\n", data()->exit);
 		cmdlstclear(&lst);
-		//free (tmp);
 	}
 	free(rl);
 	rl = NULL;

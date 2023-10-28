@@ -51,7 +51,9 @@ SRCS		= srcs/libs/ft_calloc.c						\
 			  srcs/executer/builtin/echo.c				\
 			  srcs/executer/builtin/pwd.c				\
 			  srcs/executer/builtin/cd.c				\
+			  srcs/executer/builtin/exit.c				\
 			  srcs/executer/executer.c					\
+			  srcs/executer/signals.c					\
 			  srcs/executer/heredoc.c					\
 			  srcs/expansion/expansion.c				\
 			  srcs/expansion/expansion_utils.c			\
@@ -63,7 +65,7 @@ INCLUDES	= includes/
 
 #FIXME: Change to CC
 CC			= gcc
-CFLAGS		= -Wall -Wextra -Werror -g -I$(INCLUDES) #-fsanitize=address,undefined
+CFLAGS		= -Wall -Wextra -Werror -g -I$(INCLUDES) -fsanitize=address,undefined
 LDFLAGS		= -L /opt/homebrew/opt/readline/lib -I /opt/homebrew/opt/readline/include -lreadline -lhistory
 
 #$(VERBOSE).SILENT:
