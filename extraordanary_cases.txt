@@ -162,7 +162,10 @@ GOOD:
 
  cat << her << ola doesnt do cat
 
+env | grep HOME
+free(): double free detected in tcache 2
 
+cd stopped working
 
 
 
