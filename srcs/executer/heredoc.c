@@ -41,8 +41,7 @@ void    child_heredoc(t_cmd *cmd, int fds[2])
 		if (!line || !ft_strncmp(line, cmd->redir->file, ft_strlen(cmd->redir->file)))
 		{
 			free(line);
-			free_env_list(&data()->envp);
-			cmdlstclear(&cmd);
+			general_free(cmd, 1, 1, 0);
 			break;
 		}
 		line = expansion_heredoc(line);

@@ -32,10 +32,11 @@ void	cd(t_cmd *cmd)
 
 	if (cmd->args[1] == NULL)
 	{
-		path = getenv("HOME");
+		path = node_value(search_env("HOME"));
 		if (path == NULL)
 		{
 			ft_putstr_fd("cd: HOME not set\n", 2);
+			free(path);
 			return ;
 		}
 	}
@@ -53,4 +54,5 @@ void	cd(t_cmd *cmd)
 		return ;
 	}
 	update_pwd();
+	free(path);
 }

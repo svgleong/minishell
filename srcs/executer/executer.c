@@ -37,7 +37,8 @@ void	core_execution(t_cmd *cmd)
 		else
 			exec(cmd);
 	}
-	general_free(cmd, 1, 1, 1);
+	general_free(cmd, 1, 1, 0);
+	exit(data()->exit);
 	//print_list(cmd);
 }
 
@@ -70,9 +71,10 @@ void	execution(t_cmd *cmd)
 
 	status = 0;
 	head = cmd;
+	print_list(cmd);
 	while (cmd)
-	{
-		if (cmd_is_builtin(cmd->args[0]) && !cmd->next && data()->redir == 0)
+	{	
+		if (cmd_is_builtin(cmd->args[0]) && !cmd->next && data()->redir == 0 && !cmd->prev)
 		{
 			which_builtin(cmd);
 			cmd = cmd->next;
