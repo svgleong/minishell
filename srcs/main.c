@@ -13,16 +13,18 @@
 
 #include <minishell.h>
 
-void	control_d(char *str)
+void	control_d(char *str, t_cmd **cmd)
 {
 	// unsigned char	status;
-
+	(void)cmd;
 	if (str)
 		return ;
 	rl_clear_history();
 	write(1, "exit\n", 6);
 	if (data()->envp)
 		free_env_list(&data()->envp);
+	//general_free((*cmd), 1, 1, 1);
+	
 	// free_memory(this());
 	// status = (unsigned char)(data()->envp)->status;
 	exit(0);
@@ -38,7 +40,7 @@ void	sig_handler(int signal)
 		return ;
 	if (signal == SIGINT )
 	{
-		// this_env()->status = 130;
+		data()->exit = 130;
 		write(1, "\n", 1);
 		rl_on_new_line();
 		rl_replace_line("", 0);
@@ -67,15 +69,15 @@ int main(int ac, char **av, char **env)
 	t_cmd *lst;
 	char **tmp;
 	lst = NULL;
-
-	get_env_to_list(env);
+	if (env)
+		get_env_to_list(env);
 	rl_catch_signals = 0;
 	signal(SIGQUIT, sig_handler);
 	signal(SIGINT, sig_handler);
 	while (1)
 	{
 		rl = readline("Painshell: ");
-		control_d(rl);
+		control_d(rl, &lst);
 		if (!rl || !rl[0])
 			continue ;
 		if (rl == NULL) //|| !ft_strncmp(rl, "exit", 5)

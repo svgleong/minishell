@@ -81,7 +81,7 @@ void	create_list(t_cmd **lst, char **args)
 	free_matrix(args);
 	check_redirections(lst);
 	redirections(lst);
-	//print_list(*lst);
+	print_list(*lst);
 }
 
 void	print_list(t_cmd *lst)
@@ -105,7 +105,7 @@ void	print_list(t_cmd *lst)
 			printf("arg[%d] [%s]\n", i, tmp->args[i]);
 			i++;
 		}
-		//print_redir(lst->redir);
+		print_redir(lst->redir);
 		printf("fd_in: %d\n", tmp->fd_in);
 		printf("fd_out: %d\n", tmp->fd_out);
 		tmp = tmp->next;

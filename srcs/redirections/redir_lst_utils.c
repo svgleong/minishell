@@ -133,6 +133,8 @@ void	redirlstclear(t_redir **lst)
 {
 	t_redir	*tmp;
 
+	//ft_putstr_fd((*lst)->file, 1);
+	write(1, "1\n", 2);
 	while (*lst)
 	{
 		tmp = *lst;

@@ -14,12 +14,23 @@ void    free_env_list(t_env **lst)
 	//*lst = NULL;
 }
 
+t_cmd	*get_head(t_cmd *lst)
+{
+	while (lst && lst->prev)
+		lst = lst->prev;
+	return (lst);
+}
+
 void	general_free(t_cmd *cmd, bool env, bool close_fds, bool to_exit)
 {
+	cmd = get_head(cmd);
+	printf("%s aqui\n", cmd->args[0]);
+	//print_list(cmd);
 	if (cmd)
 		cmdlstclear(&cmd);
 	if (env)
-		free_env_list(&data()->envp);
+		if (data()->envp)
+			free_env_list(&data()->envp);
 	if (close_fds)
 	{
 		close(0);

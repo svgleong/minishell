@@ -30,6 +30,8 @@ void	which_builtin(t_cmd *cmd);
 int	cmd_is_builtin(char *command);
 int is_valid(char *var);
 char *rem_quotes_export(char *s);
+char	*check_expansion(char *str, int i);
+void	update_shell_lvl(void);
 
 // teste
 void handle_signals(int signal);

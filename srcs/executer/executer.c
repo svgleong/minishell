@@ -9,8 +9,8 @@ void	exec(t_cmd *cmd)
 	{
 		ft_putstr_fd("Command not found\n", 2);
 		free_matrix(matrix);
-		general_free(cmd, 1, 1, 0);
 		data()->exit = 127;
+		general_free(cmd, 1, 1, 1);
 	}
 }
 
@@ -37,8 +37,8 @@ void	core_execution(t_cmd *cmd)
 		else
 			exec(cmd);
 	}
-	//general_free(cmd, 1, 1, 0);
-	exit(data()->exit);
+	general_free(cmd, 1, 1, 1);
+	//print_list(cmd);
 }
 
 void	pipe_handler(t_cmd *cmd)
@@ -88,6 +88,6 @@ void	execution(t_cmd *cmd)
 		waitpid(cmd->pid, &status, 0);
 		cmd = cmd->next;
 	}
-	/* if (WIFEXITED(status))
-		data()->exit = WEXITSTATUS(status); */
+	if (WIFEXITED(status))
+		data()->exit = WEXITSTATUS(status);
 }
