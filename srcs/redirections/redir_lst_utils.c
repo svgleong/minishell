@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 12:22:56 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/18 17:00:01 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/31 15:55:11 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,16 @@ void	redir_add_back(t_redir **lst, t_redir *new)
 	if (!*lst)
 	{
 		*lst = new;
-		return ;
+		// return ;
 	}
+	else
+	{
 	last = redir_last_node(*lst);
 	last->next = new;
+	}
+	// printf("====rediraddback======\n");
+	// print_redir(*lst);
+	// printf("====rediraddback======\n");
 }
 
 /* void	clean_redirections(t_cmd **cmd)
@@ -82,6 +88,7 @@ void	redir_add_back(t_redir **lst, t_redir *new)
 
 void	create_redir_lst(t_cmd **cmd, int redir, char *file)
 {
+	// printf("redir: file %p")
 	redir_add_back(&(*cmd)->redir, redir_new_node(redir, file));
 }
 
@@ -96,6 +103,8 @@ void	print_redir(t_redir *lst)
 	}
 	while (tmp)
 	{
+		// printf("Address of red: %p\n", tmp);
+		// printf("Address of file: %p\n", tmp->file);
 		printf("redir: %d\n", tmp->redir);
 		printf("file: %s\n", tmp->file);
 		tmp = tmp->next;
@@ -122,11 +131,13 @@ void	check_redirections(t_cmd **cmds)
 			else if (!ft_strncmp((*cmds)->args[i], "<", 2))
 				create_redir_lst(cmds, 4, (*cmds)->args[i + 1]);
 		}
+		/* print_redir((*cmds)->redir);
+		printf("==============\n"); */
 		(*cmds) = (*cmds)->next;
 	}
 	(*cmds) = head;
 	clean_redirections(cmds);
-	//print_list(*cmds);
+	// print_list(*cmds);
 }
 
 void	redirlstclear(t_redir **lst)
@@ -134,7 +145,7 @@ void	redirlstclear(t_redir **lst)
 	t_redir	*tmp;
 
 	//ft_putstr_fd((*lst)->file, 1);
-	write(1, "1\n", 2);
+	//write(1, "1\n", 2);
 	while (*lst)
 	{
 		tmp = *lst;

@@ -24,8 +24,6 @@ t_cmd	*get_head(t_cmd *lst)
 void	general_free(t_cmd *cmd, bool env, bool close_fds, bool to_exit)
 {
 	cmd = get_head(cmd);
-	printf("%s aqui\n", cmd->args[0]);
-	//print_list(cmd);
 	if (cmd)
 		cmdlstclear(&cmd);
 	if (env)

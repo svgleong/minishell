@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:39:21 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/19 09:58:46 by svalente         ###   ########.fr       */
+/*   Updated: 2023/10/31 15:01:48 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int main(int ac, char **av, char **env)
 		create_list(&lst, tmp);
 		data()->exit = 0;
 		execution(lst);
-		printf("exit code %d\n", data()->exit);
+		// printf("exit code %d\n", data()->exit);
 		cmdlstclear(&lst);
 	}
 	free(rl);
