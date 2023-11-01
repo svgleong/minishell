@@ -73,6 +73,7 @@ void	execution(t_cmd *cmd)
 
 	status = 0;
 	head = cmd;
+	//print_list(cmd);
 	while (cmd)
 	{
 		if (cmd_is_builtin(cmd->args[0]) && !cmd->next && data()->redir == 0)
