@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 21:28:12 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/01 15:34:23 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/01 15:50:13 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void	redirections(t_cmd **cmds)
 		(*cmds) = (*cmds)->next;
 	}
 	(*cmds) = tmp_cmds;
-	(*cmds)->redir = tmp_redir;
 }
 
 static void	redir_in(t_cmd **cmds)
