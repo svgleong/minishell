@@ -23,6 +23,7 @@ typedef struct s_env
 	struct s_env	*prev;
 }	t_env;
 
+#include <termios.h>
 
 typedef struct s_data
 {
@@ -31,6 +32,7 @@ typedef struct s_data
 	int				redir;
 	int				exit;
 	int				*pipe_here;
+	struct termios	termios_save;
 } t_data;
 
 t_data	*data(void);

@@ -26,6 +26,19 @@ void	update_pwd(void)
 	free_matrix(var_value);
 }
 
+void	ft_chdir(char	*path)
+{
+	if (chdir(path) == -1)
+	{
+		perror("Error");
+		data()->exit = EXIT_FAILURE;
+		free(path);
+		return ;
+	}
+	free(path);
+	update_pwd();
+}
+
 void	cd(t_cmd *cmd)
 {
 	char	*path;
@@ -40,19 +53,14 @@ void	cd(t_cmd *cmd)
 			return ;
 		}
 	}
-	else if (cmd->args[2] != NULL)
-	{
-		ft_putstr_fd("cd: too many arguments\n", 2);
-		return ;
-	}
 	else
-		path = cmd->args[1];
-	if (chdir(path) == -1)
 	{
-		perror("Error");
-		data()->exit = EXIT_FAILURE;
-		return ;
+		if (cmd->args[2] != NULL)
+		{
+			ft_putstr_fd("cd: too many arguments\n", 2);
+			return ;
+		}
+		path = ft_strdup(cmd->args[1]);
 	}
-	update_pwd();
-	free(path);
+	ft_chdir(path);
 }

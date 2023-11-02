@@ -8,7 +8,7 @@
 # endif
 
 # include <alloc.h>
-#include <termios.h>
+# include <termios.h>
 # include <cmd.h>
 # include <string.h>
 # include <parser.h>

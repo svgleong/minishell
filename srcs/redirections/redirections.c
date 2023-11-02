@@ -36,9 +36,10 @@ void	redirections(t_cmd **cmds)
 			else if ((*cmds)->redir->redir == 1)
 				redir_out_append(cmds);
 			else if ((*cmds)->redir->redir == 2)
-				(*cmds)->fd_in = heredoc(*cmds);
+				(*cmds)->fd_in = heredoc((*cmds));
 			(*cmds)->redir = (*cmds)->redir->next;
 		}
+		(*cmds)->redir = tmp_redir;
 		(*cmds) = (*cmds)->next;
 	}
 	(*cmds) = tmp_cmds;

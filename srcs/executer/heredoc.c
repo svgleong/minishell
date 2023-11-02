@@ -28,12 +28,14 @@ char	*expansion_heredoc(char *s)
 	return (s);
 }
 
-void    child_heredoc(t_cmd *cmd, int fds[2])
+
+ void    child_heredoc(t_cmd *cmd, int fds[2])
 {
 	char *line;
 
 	signal(SIGQUIT, SIG_IGN); //says signal c/ should be ignored
 	signal(SIGINT, handle_signals); //when control c handle
+	close(fds[0]);
 	while (1)
 	{
 		write(0, "> ", 2);
@@ -48,7 +50,6 @@ void    child_heredoc(t_cmd *cmd, int fds[2])
 		write(fds[1], line, ft_strlen(line));
 		free(line);
 	}
-	close(fds[0]);
 	close(fds[1]);
 	exit(0);
 }
