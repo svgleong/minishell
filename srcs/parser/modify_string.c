@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 15:21:53 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/18 16:59:13 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/01 12:19:03 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,13 @@ char	*modify_str(char *rl)
 	j = 0;
 	while (*rl)
 	{
-		if (!quote && (*rl == '\"' || *rl == '\''))
+		/* if (!quote && (*rl == '\"' || *rl == '\''))
 		{
 			modify_str_aux(str, &quote, &rl, &j);
 			// str[j++] = '2';
 			// quote = *rl;
-		}
-		else if (quote && quote == *rl)
+		} */
+		if (quote && quote == *rl)
 		{
 			modify_str_aux(str, &quote, &rl, &j);
 			// str[j++] = *rl++;
@@ -93,6 +93,7 @@ char	*modify_str(char *rl)
 		str[j++] = *rl++;
 	}
 	str[j] = '\0';
+	//printf("MODIFIED: %s\n", str);
 	return (str);
 }
 

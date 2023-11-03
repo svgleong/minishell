@@ -10,6 +10,9 @@ void	exec(t_cmd *cmd)
 		ft_putstr_fd("Command not found\n", 2);
 		free_matrix(matrix);
 		data()->exit = 127;
+		// perror("error");
+		// data()->exit = errno;
+		// fprintf(stderr, "error number: %d\n", data()->exit);
 		general_free(cmd, 1, 1, 1);
 	}
 }
