@@ -40,7 +40,6 @@ void	core_execution(t_cmd *cmd)
 		else
 			exec(cmd);
 	}
-	general_free(cmd, 1, 1, 1);
 	//print_list(cmd);
 }
 
@@ -52,18 +51,19 @@ void	pipe_handler(t_cmd *cmd)
 	if (cmd->pid == -1)
 		printf("fork error\n");
 	if (cmd->pid == 0)
-		core_execution(cmd);
-	else
 	{
-		if (cmd->next)
-			cmd->next->fd_in = dup(cmd->pipe[0]);
-		if (cmd->fd_in != -1)
-			close(cmd->fd_in);
-		if (cmd->fd_out != -1)
-			close(cmd->fd_out);
-		close(cmd->pipe[0]);
-		close(cmd->pipe[1]);
+		core_execution(cmd);
+		general_free(cmd, 1, 1, 1);
 	}
+
+	if (cmd->next && cmd->next->fd_in == -1)
+		cmd->next->fd_in = dup(cmd->pipe[0]);
+	if (cmd->fd_in != -1)
+		close(cmd->fd_in);
+	if (cmd->fd_out != -1)
+		close(cmd->fd_out);
+	close(cmd->pipe[0]);
+	close(cmd->pipe[1]);
 }
 
 void	execution(t_cmd *cmd)
@@ -73,7 +73,7 @@ void	execution(t_cmd *cmd)
 
 	status = 0;
 	head = cmd;
-	//print_list(cmd);
+	print_list(cmd);
 	while (cmd)
 	{
 		if (cmd_is_builtin(cmd->args[0]) && !cmd->next && data()->redir == 0)

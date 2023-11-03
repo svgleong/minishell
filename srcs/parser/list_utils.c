@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 10:46:46 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/01 15:49:47 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/03 10:28:37 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,11 @@ void	create_list(t_cmd **lst, char **args)
 		i++;
 	}
 	expander(lst);
+	//print_list(*lst);
 	remove_empty_strs(lst);
 	remove_quotes(lst);
 	free_matrix(args);
 	check_redirections(lst);
-	//print_list(*lst);
 	redirections(lst);
 	//print_list(*lst);
 }
