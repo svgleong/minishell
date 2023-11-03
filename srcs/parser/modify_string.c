@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 15:21:53 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/03 13:33:22 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/03 16:40:38 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	add_delimiter(char **rl, char *str, int *j, char quote)
 	return (1);
 }
 
-void	modify_str_aux(char *str, char *quote, char **rl, int *j)
+/* void	modify_str_aux(char *str, char *quote, char **rl, int *j)
 {
 	if (!quote[0] && (**rl == '\"' || **rl == '\''))
 	{
@@ -57,7 +57,7 @@ void	modify_str_aux(char *str, char *quote, char **rl, int *j)
 		str[(*j)++] = '\2';
 		quote[0] = '\0';
 	}
-}
+} */
 
 char	*modify_str(char *rl)
 {
@@ -72,29 +72,24 @@ char	*modify_str(char *rl)
 	j = 0;
 	while (*rl)
 	{
-/* 		if (!quote && (*rl == '\"' || *rl == '\''))
+		if (!quote && (*rl == '\"' || *rl == '\''))
+			quote = *rl;
+		else if (quote && quote == *rl)
 		{
-			//skip_quotes(rl, quote, &j);
-			//modify_str_aux(str, &quote, &rl, &j);
-			// str[j++] = '2';
-			//quote = *rl;
-		} */
-		if (quote && quote == *rl)
-		{
-			modify_str_aux(str, &quote, &rl, &j);
-			// str[j++] = *rl++;
-			// str[j++] = '2';
-			// quote = '\0';
+			str[j++] = *rl++;
+			quote = '\0';
 			continue ;
 		}
-		if (add_delimiter(&rl, str, &j, quote))
-			continue ;
-		if (!quote && (*rl == ' ' || *rl == '\t'))
-			*rl = '\2';
+		else if (!quote)
+		{
+			if (add_delimiter(&rl, str, &j, quote))
+				continue ;
+			if ((*rl == ' ' || *rl == '\t'))
+				*rl = '\2';
+		}
 		str[j++] = *rl++;
 	}
 	str[j] = '\0';
-	//printf("MODIFIED: %s\n", str);
 	return (str);
 }
 
