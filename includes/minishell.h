@@ -37,5 +37,6 @@ void	update_shell_lvl(void);
 void handle_signals(int signal);
 int	search_expansion(t_cmd *cmds);
 char	*node_value(t_env *node);
+t_cmd	*get_head(t_cmd *lst);
 
 #endif

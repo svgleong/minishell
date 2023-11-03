@@ -192,6 +192,6 @@ MIGEL: CD DOES general_free
 SOFI: export list
 SOFI: $?
 
-=======BIG PROBLEM==============
+=======NOT BIG PROBLEM==============
 cat Makefile > out | ls YES GOOD
-ls | cat Makefile > out NOT GOOD
+ls | cat Makefile > out YES GOOD

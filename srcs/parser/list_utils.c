@@ -116,6 +116,13 @@ void	print_list(t_cmd *lst)
 	printf("---------------------\n");
 }
 
+t_redir	*get_head(t_redir *lst)
+{
+	while (lst && lst->prev)
+		lst = lst->prev;
+	return (lst);
+}
+
 void	cmdlstclear(t_cmd **lst)
 {
 	t_cmd	*tmp;
@@ -130,6 +137,7 @@ void	cmdlstclear(t_cmd **lst)
 		// write(2, "tmp\n", 4);
 		// write(2, tmp->redir, 20);
 		// write(2, "\n", 1);
+
 		if (tmp->redir)
 		{
 			// write(2, tmp->args[0], 20);

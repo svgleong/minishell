@@ -28,6 +28,8 @@ typedef struct s_env
 typedef struct s_data
 {
 	t_env			*envp;
+	int				here[2];
+	char			**del;
 	int				status;
 	int				redir;
 	int				exit;
