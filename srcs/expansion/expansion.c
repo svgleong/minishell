@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzarichn <mzarichn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:02:23 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/09 16:30:08 by mzarichn         ###   ########.fr       */
+/*   Updated: 2023/11/03 10:02:57 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,13 @@ int	search_expansion(t_cmd *cmds)
 		j = -1;
 		while (cmds->args[i][++j])
 		{
-			if (cmds->args[i][0] == '\'')
-				break ;
+			if (cmds->args[i][j] == '\'')
+			{
+				if (cmds->args[i][j - 1] && cmds->args[i][j - 1] == '\"')
+					continue;
+				skip_quotes(cmds->args[i], '\'', &j);
+			}
+				//break;
 			else if (cmds->args[i][j] && cmds->args[i][j] == '$')
 			{
 				tmp = check_expansion(cmds->args[i], j);
