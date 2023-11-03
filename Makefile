@@ -6,7 +6,7 @@
 #    By: svalente <svalente@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/20 20:09:21 by svalente          #+#    #+#              #
-#    Updated: 2023/11/01 15:36:03 by svalente         ###   ########.fr        #
+#    Updated: 2023/11/03 12:50:27 by svalente         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,7 +64,7 @@ OBJS		= $(addprefix $(OBJ_PATH)/, $(addsuffix .o, $(basename $(SRCS))))
 INCLUDES	= includes/
 
 #FIXME: Change to CC
-CC			= gcc
+CC			= cc
 CFLAGS		= -Wall -Wextra -Werror -g -I$(INCLUDES) #-fsanitize=address,undefined
 LDFLAGS		= -L /opt/homebrew/opt/readline/lib -I /opt/homebrew/opt/readline/include -lreadline -lhistory
 
