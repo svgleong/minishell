@@ -90,8 +90,8 @@ int main(int ac, char **av, char **env)
 		data()->exit = 0;
 		print_list(lst);
 		execution(lst);
-		printf("exit code %d\n", data()->exit);
-		cmdlstclear(&lst);
+		//printf("exit code %d\n", data()->exit);
+		//cmdlstclear(&lst);
 	}
 	free(rl);
 	rl = NULL;

@@ -54,17 +54,15 @@ void	pipe_handler(t_cmd *cmd)
 		printf("fork error\n");
 	if (cmd->pid == 0)
 		core_execution(cmd);
-	else
-	{
-		if (cmd->next && cmd->next->fd_in == -1) //perguntar
-			cmd->next->fd_in = dup(cmd->pipe[0]);
-		if (cmd->fd_in != -1)
-			close(cmd->fd_in);
-		if (cmd->fd_out != -1)
-			close(cmd->fd_out);
-		close(cmd->pipe[0]);
-		close(cmd->pipe[1]);
-	}
+	if (cmd->next && cmd->next->fd_in == -1)
+		cmd->next->fd_in = dup(cmd->pipe[0]);
+	
+	if (cmd->fd_in != -1)
+		close(cmd->fd_in);
+	if (cmd->fd_out != -1)
+		close(cmd->fd_out);
+	close(cmd->pipe[0]);
+	close(cmd->pipe[1]);
 }
 
 void	execution(t_cmd *cmd)

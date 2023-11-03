@@ -24,9 +24,9 @@ void	redirections(t_cmd **cmds)
 	tmp_cmds = *cmds;
 	if (!tmp_cmds)
 		return ;
-	tmp_redir = tmp_cmds->redir;
 	while (*cmds)
 	{
+		tmp_redir = (*cmds)->redir;
 		while ((*cmds)->redir)
 		{
 			if ((*cmds)->redir->redir == 4 && (*cmds)->fd_in == -1)
@@ -43,7 +43,6 @@ void	redirections(t_cmd **cmds)
 		(*cmds) = (*cmds)->next;
 	}
 	(*cmds) = tmp_cmds;
-	(*cmds)->redir = tmp_redir;
 }
 
 static void	redir_in(t_cmd **cmds)
