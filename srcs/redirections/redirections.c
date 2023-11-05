@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: svalente <svalente@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 21:28:12 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/01 15:50:13 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/05 21:53:05 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,10 @@ static void	redir_in(t_cmd **cmds)
 	//
 	data()->redir = 1;
 	//
+	if ((*cmds)->fd_in != -1)
+		close((*cmds)->fd_in);
+	if (access((*cmds)->redir->file, F_OK) == -1)
+		return ;
 	(*cmds)->fd_in = open((*cmds)->redir->file, O_RDONLY);
 	if ((*cmds)->fd_in == -1)
 		printf("Error opening file\n");
