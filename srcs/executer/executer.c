@@ -74,7 +74,11 @@ void	execution(t_cmd *cmd)
 	head = cmd;
 	//print_list(cmd);
 	while (cmd)
-	{
+	{	
+		//
+		if (!cmd->args[0])
+			break ;
+		//
 		if (cmd_is_builtin(cmd->args[0]) && !cmd->next && data()->redir == 0)
 		{
 			which_builtin(cmd);

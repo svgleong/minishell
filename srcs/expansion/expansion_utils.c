@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:43:07 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/17 18:20:40 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/06 10:20:44 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,33 @@ int	calculate_result(char *str, char *value, int key)
 
 char	*get_status(char *str, int i)
 {
-	(void)str;
-	(void)i;
-	return (NULL);
+	char	*new;
+	char	*exit_code;
+	int		j;
+	int		k;
+
+	exit_code = ft_itoa(data()->exit);
+	new = ft_calloc(sizeof(char), ft_strlen(str) + ft_strlen(exit_code) - 1);
+	j = -1;
+	k = 0;
+	while (str[++j])
+	{
+		if (j == i)
+		{
+			j += 2;
+			i = 0;
+			while (exit_code[i])
+				new[k++] = exit_code[i++];
+		}
+		if (str[j])
+			new[k] = str[j];
+		else
+			break;
+		k++;
+	}
+	new[k] = '\0';
+	free(exit_code);
+	return (new);
 }
 
 char	*remove_expand(char *str)
@@ -37,7 +61,7 @@ char	*remove_expand(char *str)
 
 	key = key_value(ft_strchr(str, '$'));
 	sz = calculate_result(str, NULL, key);
-	new_str = malloc(sz);
+	new_str = ft_calloc(sizeof(char), sz);
 	sz = -1;
 	while (str[++sz] && str[sz] != '$')
 		new_str[sz] = str[sz];
@@ -57,7 +81,7 @@ char	*remove_dollar(char *str, int i)
 	int		j;
 	int		k;
 
-	new_str = malloc(ft_strlen(str));
+	new_str = ft_calloc(sizeof(char), ft_strlen(str));
 	j = -1;
 	k = 0;
 	while (str[++j])
@@ -77,7 +101,7 @@ char	*remove_character(char *str, int i)
 	int		j;
 	int		k;
 
-	new_str = malloc(ft_strlen(str) - 1);
+	new_str = ft_calloc(sizeof(char), ft_strlen(str) - 1);
 	j = -1;
 	k = 0;
 	while (str[++j])
