@@ -68,7 +68,7 @@ int heredoc(t_cmd *cmd)
 {
 	int pid;
 
-	print_list(cmd);
+	//print_list(cmd);
 	if (pipe(data()->here) == -1)
 		perror("");
 	pid = fork();

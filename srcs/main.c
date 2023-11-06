@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:39:21 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/06 12:26:46 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/06 17:26:41 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ void	control_d(char *str, t_cmd **cmd)
 		return ;
 	rl_clear_history();
 	write(1, "exit\n", 6);
-	if (data()->envp)
-		free_env_list(&data()->envp);
 	general_free((*cmd), 1, 1, 0);
 	//status = (unsigned char)(data()->envp)exit;
 	exit(0);
@@ -30,12 +28,7 @@ void	control_d(char *str, t_cmd **cmd)
 
 void	sig_handler(int signal)
 {
-	printf("int: %d\n", signal);
-	if (signal == 3)
-		return ;
-	if (signal == SIGQUIT)
-		return ;
-	if (signal == SIGINT )
+	if (signal == SIGINT)
 	{
 		data()->exit = 130;
 		write(1, "\n", 1);
@@ -65,13 +58,13 @@ int main(int ac, char **av, char **env)
 	char *rl;
 	t_cmd *lst;
 	char **tmp;
+	
 	lst = NULL;
 	if (env)
 		get_env_to_list(env);
 	rl_catch_signals = 0;
-	signal(SIGQUIT, sig_handler);
+	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, sig_handler);
-	signal(3, sig_handler);
 	while (1)
 	{
 		rl = readline("Painshell: ");
@@ -86,7 +79,7 @@ int main(int ac, char **av, char **env)
 		tmp = separate_args(rl);
 		create_list(&lst, tmp);
 		data()->exit = 0;
-		print_list(lst);
+		data()->pointer_cmd = lst;
 		execution(lst);
 		// printf("exit code %d\n", data()->exit);
 		cmdlstclear(&lst);

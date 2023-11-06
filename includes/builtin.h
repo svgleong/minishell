@@ -24,20 +24,10 @@ typedef struct s_env
 }	t_env;
 
 #include <termios.h>
+#include <cmd.h>
 
-typedef struct s_data
-{
-	t_env			*envp;
-	int				here[2];
-	char			**del;
-	int				status;
-	int				redir;
-	int				exit;
-	int				*pipe_here;
-	struct termios	termios_save;
-} t_data;
 
-t_data	*data(void);
+
 t_env	*env(void);
 void    free_env_list(t_env **lst);
 void bubble_sort(char **matrix);

@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 10:46:46 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/06 12:35:59 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/06 14:07:36 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,12 +116,12 @@ void	print_list(t_cmd *lst)
 	printf("---------------------\n");
 }
 
-t_redir	*get_head(t_redir *lst)
+/* t_redir	*get_head(t_redir *lst)
 {
 	while (lst && lst->prev)
 		lst = lst->prev;
 	return (lst);
-}
+} */
 
 void	cmdlstclear(t_cmd **lst)
 {
