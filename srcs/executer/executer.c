@@ -58,7 +58,6 @@ void	pipe_handler(t_cmd *cmd)
 		core_execution(cmd);
 		general_free(cmd, 1, 1, 1);
 	}
-
 	if (cmd->next && cmd->next->fd_in == -1)
 		cmd->next->fd_in = dup(cmd->pipe[0]);
 	if (cmd->fd_in != -1)
@@ -76,10 +75,14 @@ void	execution(t_cmd *cmd)
 
 	status = 0;
 	head = cmd;
-	print_list(cmd);
+	//print_list(cmd);
 	while (cmd)
 	{	
-		if (cmd_is_builtin(cmd->args[0]) && !cmd->next && data()->redir == 0 && !cmd->prev)
+		//
+		if (!cmd->args[0])
+			break ;
+		//
+		if (cmd_is_builtin(cmd->args[0]) && !cmd->next && data()->redir == 0)
 		{
 			which_builtin(cmd);
 			cmd = cmd->next;

@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 21:28:12 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/01 15:50:13 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/06 09:33:43 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,13 @@ static void	redir_in(t_cmd **cmds)
 	//
 	data()->redir = 1;
 	//
+	if ((*cmds)->fd_in != -1)
+		close((*cmds)->fd_in);
+	if (access((*cmds)->redir->file, F_OK) == -1)
+	{
+		perror("Error");
+		general_free(*cmds, 1, 1, 1);
+	}
 	(*cmds)->fd_in = open((*cmds)->redir->file, O_RDONLY);
 	if ((*cmds)->fd_in == -1)
 	{

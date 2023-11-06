@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:39:21 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/03 10:37:52 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/06 12:26:46 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,24 @@
 
 void	control_d(char *str, t_cmd **cmd)
 {
-	// unsigned char	status;
-	(void)cmd;
+	//unsigned char	status;
+	
 	if (str)
 		return ;
 	rl_clear_history();
 	write(1, "exit\n", 6);
 	if (data()->envp)
 		free_env_list(&data()->envp);
-	//general_free((*cmd), 1, 1, 1);
-	
-	// free_memory(this());
-	// status = (unsigned char)(data()->envp)->status;
+	general_free((*cmd), 1, 1, 0);
+	//status = (unsigned char)(data()->envp)exit;
 	exit(0);
 }
 
 void	sig_handler(int signal)
 {
-	/* printf("Signal: %d\n", signal);
-	printf("sigquit: %d\n", SIGQUIT);
-	printf("SIGINT: %d\n", SIGINT);
- */
+	printf("int: %d\n", signal);
+	if (signal == 3)
+		return ;
 	if (signal == SIGQUIT)
 		return ;
 	if (signal == SIGINT )
@@ -74,6 +71,7 @@ int main(int ac, char **av, char **env)
 	rl_catch_signals = 0;
 	signal(SIGQUIT, sig_handler);
 	signal(SIGINT, sig_handler);
+	signal(3, sig_handler);
 	while (1)
 	{
 		rl = readline("Painshell: ");

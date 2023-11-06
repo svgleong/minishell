@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 10:46:46 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/03 10:28:37 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/06 12:35:59 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	create_list(t_cmd **lst, char **args)
 	expander(lst);
 	//print_list(*lst);
 	remove_empty_strs(lst);
-	remove_quotes(lst);
+	quote_checker(lst);
 	free_matrix(args);
 	check_redirections(lst);
 	redirections(lst);
@@ -98,7 +98,7 @@ void	print_list(t_cmd *lst)
 	{
 		printf("--------------[NODE %d]\n", j);
 		i = 0;
-		if (!tmp->args)
+		if (!tmp->args || !tmp->args[0])
 			printf("No arguments\n");
 		while (tmp->args[i])
 		{
