@@ -192,6 +192,8 @@ echo ;;
 echo "\n \n \\n"
 echo "\"
 
+env -i ./minishell
+
 echo 2 >> out1 > out2 leaks
 cat < test doesnt end maybe needs exit when no open file or flag
 
@@ -205,4 +207,10 @@ echo $?
 -> expansao dentro do heredoc
 -> export ola="ola" nao guarda / SOFIA (usar printlist)
 Painshell: cat $?
-Segmentation fault (core dumped)
+Segmentation fault (core dumped)\
+
+
+cat Makefile > out | ls YES GOOD
+ls | cat Makefile > out NOT GOOD
+
+nada | ls | wc | echo teste > out

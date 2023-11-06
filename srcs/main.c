@@ -6,39 +6,38 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:39:21 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/19 09:58:46 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/06 12:26:46 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include <minishell.h>
 
-void	control_d(char *str)
+void	control_d(char *str, t_cmd **cmd)
 {
-	// unsigned char	status;
-
+	//unsigned char	status;
+	
 	if (str)
 		return ;
 	rl_clear_history();
 	write(1, "exit\n", 6);
 	if (data()->envp)
 		free_env_list(&data()->envp);
-	// free_memory(this());
-	// status = (unsigned char)(data()->envp)->status;
+	general_free((*cmd), 1, 1, 0);
+	//status = (unsigned char)(data()->envp)exit;
 	exit(0);
 }
 
 void	sig_handler(int signal)
 {
-	/* printf("Signal: %d\n", signal);
-	printf("sigquit: %d\n", SIGQUIT);
-	printf("SIGINT: %d\n", SIGINT);
- */
+	printf("int: %d\n", signal);
+	if (signal == 3)
+		return ;
 	if (signal == SIGQUIT)
 		return ;
 	if (signal == SIGINT )
 	{
-		// this_env()->status = 130;
+		data()->exit = 130;
 		write(1, "\n", 1);
 		rl_on_new_line();
 		rl_replace_line("", 0);
@@ -67,15 +66,16 @@ int main(int ac, char **av, char **env)
 	t_cmd *lst;
 	char **tmp;
 	lst = NULL;
-
-	get_env_to_list(env);
+	if (env)
+		get_env_to_list(env);
 	rl_catch_signals = 0;
 	signal(SIGQUIT, sig_handler);
 	signal(SIGINT, sig_handler);
+	signal(3, sig_handler);
 	while (1)
 	{
 		rl = readline("Painshell: ");
-		control_d(rl);
+		control_d(rl, &lst);
 		if (!rl || !rl[0])
 			continue ;
 		if (rl == NULL) //|| !ft_strncmp(rl, "exit", 5)
@@ -87,7 +87,7 @@ int main(int ac, char **av, char **env)
 		create_list(&lst, tmp);
 		data()->exit = 0;
 		execution(lst);
-		printf("exit code %d\n", data()->exit);
+		// printf("exit code %d\n", data()->exit);
 		cmdlstclear(&lst);
 	}
 	free(rl);

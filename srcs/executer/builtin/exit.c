@@ -35,5 +35,6 @@ void    exit_builtin(t_cmd *cmd)
 			data()->exit = ft_atoi(cmd->args[1]);
         i++;
     }
-    printf("exit code: %d\n", data()->exit);
+    // printf("exit code: %d\n", data()->exit);
 }
+// ls > out | cat < Makefile > out2a

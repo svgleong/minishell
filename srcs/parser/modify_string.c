@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 15:21:53 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/18 16:59:13 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/03 16:50:58 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,15 @@ static int	add_delimiter(char **rl, char *str, int *j, char quote)
 
 void	modify_str_aux(char *str, char *quote, char **rl, int *j)
 {
+	(void)str;
+	(void)j;
 	if (!quote[0] && (**rl == '\"' || **rl == '\''))
 	{
-		str[(*j)++] = '\2';
 		quote[0] = *rl[0];
 	}
 	else if (*quote && *quote == **rl)
 	{
-		str[(*j)++] = *rl[0]++;
-		str[(*j)++] = '\2';
+		//str[(*j)++] = *rl[0]++;
 		quote[0] = '\0';
 	}
 }
@@ -73,23 +73,16 @@ char	*modify_str(char *rl)
 	while (*rl)
 	{
 		if (!quote && (*rl == '\"' || *rl == '\''))
-		{
 			modify_str_aux(str, &quote, &rl, &j);
-			// str[j++] = '2';
-			// quote = *rl;
-		}
 		else if (quote && quote == *rl)
-		{
 			modify_str_aux(str, &quote, &rl, &j);
-			// str[j++] = *rl++;
-			// str[j++] = '2';
-			// quote = '\0';
-			continue ;
+		else if (!quote)
+		{
+			if (add_delimiter(&rl, str, &j, quote))
+				continue ;
+			if ((*rl == ' ' || *rl == '\t'))
+				*rl = '\2';
 		}
-		if (add_delimiter(&rl, str, &j, quote))
-			continue ;
-		if (!quote && *rl == ' ')
-			*rl = '\2';
 		str[j++] = *rl++;
 	}
 	str[j] = '\0';

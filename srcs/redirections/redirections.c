@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 21:28:12 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/18 15:21:11 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/06 09:33:43 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,13 @@ void	redirections(t_cmd **cmds)
 {
 	t_cmd	*tmp_cmds;
 	t_redir	*tmp_redir;
-
-
 	
 	tmp_cmds = *cmds;
 	if (!tmp_cmds)
 		return ;
-	tmp_redir = tmp_cmds->redir;
 	while (*cmds)
 	{
+		tmp_redir = (*cmds)->redir;
 		while ((*cmds)->redir)
 		{
 			if ((*cmds)->redir->redir == 4 && (*cmds)->fd_in == -1)
@@ -41,10 +39,10 @@ void	redirections(t_cmd **cmds)
 				(*cmds)->fd_in = heredoc(*cmds);
 			(*cmds)->redir = (*cmds)->redir->next;
 		}
+		(*cmds)->redir = tmp_redir;
 		(*cmds) = (*cmds)->next;
 	}
 	(*cmds) = tmp_cmds;
-	(*cmds)->redir = tmp_redir;
 }
 
 static void	redir_in(t_cmd **cmds)
@@ -52,6 +50,13 @@ static void	redir_in(t_cmd **cmds)
 	//
 	data()->redir = 1;
 	//
+	if ((*cmds)->fd_in != -1)
+		close((*cmds)->fd_in);
+	if (access((*cmds)->redir->file, F_OK) == -1)
+	{
+		perror("Error");
+		general_free(*cmds, 1, 1, 1);
+	}
 	(*cmds)->fd_in = open((*cmds)->redir->file, O_RDONLY);
 	if ((*cmds)->fd_in == -1)
 		printf("Error opening file\n");

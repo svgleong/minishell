@@ -82,5 +82,4 @@ void	export(t_cmd *cmd)
 	}
 	else
 		normal_export(cmd, i);
-	data()->exit = EXIT_SUCCESS;
 }

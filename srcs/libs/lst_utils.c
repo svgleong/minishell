@@ -10,6 +10,7 @@ void	get_env_to_list(char **env)
 	data()->envp = env_new_node(env[0]);
 	while (env[++i])
 		env_add_node_end(data()->envp, env_new_node(env[i]));
+	update_shell_lvl();
 }
 
 void	which_builtin(t_cmd *cmd)
@@ -52,7 +53,7 @@ char	*find_command_path(char *command)
 	char	*temp;
 	int		i;
 
-	path = getenv("PATH");
+	path = getenv("PATH"); //trocar para meu
 	i = 0;
 	if (path != NULL)
 	{

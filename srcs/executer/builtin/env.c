@@ -39,7 +39,7 @@ t_env	*env_new_node(char *str)
 void	update_shell_lvl(void)
 {
 	t_env	*node;
-	char	**var_value;
+	char	**var_value = NULL;
 	int		lvl;
 
 	node = search_env("SHLVL");
