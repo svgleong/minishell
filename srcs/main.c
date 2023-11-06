@@ -86,6 +86,7 @@ int main(int ac, char **av, char **env)
 		tmp = separate_args(rl);
 		create_list(&lst, tmp);
 		data()->exit = 0;
+		print_list(lst);
 		execution(lst);
 		// printf("exit code %d\n", data()->exit);
 		cmdlstclear(&lst);

@@ -53,11 +53,12 @@ char	*find_command_path(char *command)
 	char	*temp;
 	int		i;
 
-	path = getenv("PATH"); //trocar para meu
+	path = node_value(search_env("PATH"));
 	i = 0;
 	if (path != NULL)
 	{
 		matrix = ft_split(path, ':');
+		free(path);
 		while (matrix != NULL && matrix[i] != NULL)
 		{
 			temp = ft_strjoin_free(matrix[i], "/", 0);

@@ -36,7 +36,7 @@ void	redirections(t_cmd **cmds)
 			else if ((*cmds)->redir->redir == 1)
 				redir_out_append(cmds);
 			else if ((*cmds)->redir->redir == 2)
-				(*cmds)->fd_in = heredoc(*cmds);
+				(*cmds)->fd_in = heredoc((*cmds));
 			(*cmds)->redir = (*cmds)->redir->next;
 		}
 		(*cmds)->redir = tmp_redir;
@@ -59,7 +59,11 @@ static void	redir_in(t_cmd **cmds)
 	}
 	(*cmds)->fd_in = open((*cmds)->redir->file, O_RDONLY);
 	if ((*cmds)->fd_in == -1)
+	{
 		printf("Error opening file\n");
+		data()->exit = 1;
+		general_free((*cmds), 1, 1, 0);
+	}
 }
 
 static void	redir_out(t_cmd **cmds)

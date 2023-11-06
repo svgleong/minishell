@@ -155,6 +155,7 @@ GOOD:
 -> unset
 -> shell level
 > leak ola
+-> expansao dentro do heredoc
 
 -------BAD/MISSING-------
 
@@ -162,12 +163,7 @@ GOOD:
 
 
 
--> fix norminette
--> fix heredoc not working with more her
--> expansao dentro do heredoc
-cat << her << ola doesnt do cat
 
-env | grep HOME
 free(): double free detected in tcache 2
 cat ""a""
 cat: '': No such file or directory
@@ -180,37 +176,22 @@ echo test > file test1
 
 
 > leaks env nodes
-cd stopped working
 
-->cat << her << ola leaks
+->cat << her << ola pipe aberto || ver o ultimo del e so escrever
 echo bonjour > $test segfault
 cat < Makefile | grep gcc > output works but leaks in rediractions
-echo | -> doesnt wait for next command
-echo hi " ; " hihi -> output diferente
-echo hi";" hihi
-echo ;;
-echo "\n \n \\n"
-echo "\"
 
 env -i ./minishell
 
 echo 2 >> out1 > out2 leaks
-cat < test doesnt end maybe needs exit when no open file or flag
+SOFI: open only first file and check if the rest can be accessed
 
--> expansao dentro do heredoc
--> exit 3
-exit
-echo $?
-3
-->exit code -10
+MIGEL: FT_EXIT
+MIGEL: CD DOES general_free
 
--> expansao dentro do heredoc
--> export ola="ola" nao guarda / SOFIA (usar printlist)
-Painshell: cat $?
-Segmentation fault (core dumped)\
+SOFI: export list
+SOFI: $?
 
-
+=======NOT BIG PROBLEM==============
 cat Makefile > out | ls YES GOOD
-ls | cat Makefile > out NOT GOOD
-
-nada | ls | wc | echo teste > out
+ls | cat Makefile > out YES GOOD

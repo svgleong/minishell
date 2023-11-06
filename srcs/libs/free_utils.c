@@ -1,5 +1,18 @@
 #include <minishell.h>
 
+char	*node_value(t_env *node)
+{
+	char	**key_value;
+	char	*value;
+
+	if (!node)
+		return (NULL);
+	key_value = ft_split(node->content, '=');
+	value = ft_strdup(key_value[1]);
+	free_matrix(key_value);
+	return (value);
+}
+
 void    free_env_list(t_env **lst)
 {
     t_env	*temp;
