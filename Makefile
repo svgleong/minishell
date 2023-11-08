@@ -6,7 +6,7 @@
 #    By: svalente <svalente@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/20 20:09:21 by svalente          #+#    #+#              #
-#    Updated: 2023/11/08 11:24:30 by svalente         ###   ########.fr        #
+#    Updated: 2023/11/08 12:27:40 by svalente         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,7 @@ SRCS		= srcs/libs/ft_calloc.c						\
 			  srcs/redirections/redir_lst_utils.c 		\
 			  srcs/redirections/redirections.c 			\
 			  srcs/redirections/clean_redirections.c 	\
+			  srcs/redirections/redirections_checker.c 	\
 			  srcs/alloc/utils.c 						\
 			  srcs/executer/builtin/env.c				\
 			  srcs/executer/builtin/export.c			\

@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:20:58 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/07 09:19:57 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/08 12:46:49 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,9 @@ void    unset(char **cmd);
 void	execution(t_cmd *cmd);
 void	get_env_to_list(char **env);
 
-void	create_list(t_cmd **lst, char **args);
 void	print_list(t_cmd *lst);
 void	cmdlstclear(t_cmd **lst);
+int		create_list(t_cmd **lst, char **args);
 
 // Expansion resources
 int		search_expansion(t_cmd *cmds);

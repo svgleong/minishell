@@ -42,16 +42,16 @@ void	heredoc_error()
 	close(data()->here[0]);
 	while (1)
 	{
-		//write(0, "> ", 2);
-		//line = get_next_line(0);
-		line = readline("> ");
+		write(0, "> ", 2);
+		line = get_next_line(0);
+		// line = readline("> ");
 		if (!line)
 		{
 			heredoc_error();
 			general_free(cmd, 1, 1, 0);
 			break;
 		}
-		if (!ft_strcmp(line, cmd->redir->file))//, ft_strlen(cmd->redir->file) + 1))
+		if (!ft_strncmp(line, cmd->redir->file, ft_strlen(line) - 1))
 		{
 			free(line);
 			general_free(cmd, 1, 1, 0);

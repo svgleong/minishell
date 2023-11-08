@@ -223,8 +223,38 @@ ECHO ------------ DEPENDE DO TERMINAL
 echo -n -n -nnnn -nnnnm
 -nnnnm (sem newline!) --> esta a meter espaco
 
-echo bonjour > $test
+echo bonjour > $test - TREATED
 
 EXIT 
 exit 300
 
+env -i 
+
+unset PATH -> ./minishell (nao pode correr comandos)
+
+unset PATH doesnt unset and export PATH= doesnt change path to ""
+
+export var ="cat Makefile | grep >"
+
+sleep 5 | exit
+
+exit -10
+
+svalente@c2r5s4:~$ env | grep PWD
+PWD=/nfs/homes/svalente
+OLDPWD=/nfs/homes/svalente
+svalente@c2r5s4:~$ unset PWD
+svalente@c2r5s4:~$ env | grep PWD
+OLDPWD=/nfs/homes/svalente
+svalente@c2r5s4:~$ cd ..
+svalente@c2r5s4:/nfs/homes$ env | grep PWD
+svalente@c2r5s4:/nfs/homes$ cd ..
+svalente@c2r5s4:/nfs$ env | grep PWD
+OLDPWD=/nfs/homes
+svalente@c2r5s4:/nfs$ cd ..
+svalente@c2r5s4:/$ pwd
+/
+
+
+exit 0 | exit 1 NAO ESCREVER EXIT
+exit 1 | exit 0

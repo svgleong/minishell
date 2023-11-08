@@ -67,6 +67,8 @@ int	is_valid(char *var)
 	int	i;
 
 	i = 0;
+	if (!var[0])
+		return (0);
 	if (ft_isdigit(var[i]) || var[0] == '_')
 		return (0);
 	while (var[i] && var[i] != '=')
