@@ -195,3 +195,36 @@ SOFI: $?
 =======NOT BIG PROBLEM==============
 cat Makefile > out | ls YES GOOD
 ls | cat Makefile > out YES GOOD
+
+
+<< her cat -e > outfile.txt
+
+EXPORT --> FUCKING DEALT WITH
+bana = a
+banana = b
+ban = c (is currently deleting bana!)
+
+HEREDOC
+cat << her
+> sad
+> asd
+> asd
+> dsfdfg
+> dfg (CTRL + D)
+> bash: warning: here-document at line 6 delimited by end-of-file (wanted `her')
+sad
+asd
+asd
+dsfdfg
+dfg
+
+
+ECHO ------------ DEPENDE DO TERMINAL
+echo -n -n -nnnn -nnnnm
+-nnnnm (sem newline!) --> esta a meter espaco
+
+echo bonjour > $test
+
+EXIT 
+exit 300
+

@@ -6,14 +6,14 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:39:21 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/06 12:26:46 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/08 11:11:52 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include <minishell.h>
 
-void	control_d(char *str, t_cmd **cmd)
+void	control_d(char *str)
 {
 	//unsigned char	status;
 	
@@ -21,21 +21,14 @@ void	control_d(char *str, t_cmd **cmd)
 		return ;
 	rl_clear_history();
 	write(1, "exit\n", 6);
-	if (data()->envp)
-		free_env_list(&data()->envp);
-	general_free((*cmd), 1, 1, 0);
+	general_free((data()->pointer_cmd), 1, 1, 0);
 	//status = (unsigned char)(data()->envp)exit;
 	exit(0);
 }
 
 void	sig_handler(int signal)
 {
-	printf("int: %d\n", signal);
-	if (signal == 3)
-		return ;
-	if (signal == SIGQUIT)
-		return ;
-	if (signal == SIGINT )
+	if (signal == SIGINT && !data()->pointer_cmd)
 	{
 		data()->exit = 130;
 		write(1, "\n", 1);
@@ -63,19 +56,18 @@ int main(int ac, char **av, char **env)
 	(void)ac;
 	(void)av;
 	char *rl;
-	t_cmd *lst;
 	char **tmp;
-	lst = NULL;
+	
 	if (env)
 		get_env_to_list(env);
+	data()->pointer_cmd = NULL;
 	rl_catch_signals = 0;
-	signal(SIGQUIT, sig_handler);
+	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, sig_handler);
-	signal(3, sig_handler);
 	while (1)
 	{
 		rl = readline("Painshell: ");
-		control_d(rl, &lst);
+		control_d(rl);
 		if (!rl || !rl[0])
 			continue ;
 		if (rl == NULL) //|| !ft_strncmp(rl, "exit", 5)
@@ -84,16 +76,16 @@ int main(int ac, char **av, char **env)
 		if (!checker(rl))
 			continue ;
 		tmp = separate_args(rl);
-		create_list(&lst, tmp);
+		create_list(&data()->pointer_cmd, tmp);
 		data()->exit = 0;
-		print_list(lst);
-		execution(lst);
+		//print_list(data()->pointer_cmd);
+		execution(data()->pointer_cmd);
 		// printf("exit code %d\n", data()->exit);
-		cmdlstclear(&lst);
+		cmdlstclear(&data()->pointer_cmd);
 	}
 	free(rl);
 	rl = NULL;
-	cmdlstclear(&lst);
+	cmdlstclear(&data()->pointer_cmd);
 	rl_clear_history();
 	return (0);
 }

@@ -27,8 +27,10 @@ void	which_builtin(t_cmd *cmd)
 		export(cmd);
 	else if (!ft_strcmp(cmd->args[0], "unset"))
 		unset(cmd->args);
+	else if (!ft_strcmp(cmd->args[0], "exit"))
+		exit_builtin(cmd);
 	else
-		ft_putstr_fd("Command not found\n", STDERR_FILENO);
+		ft_putstr_fd("command not found\n", STDERR_FILENO);
 }
 
 int	cmd_is_builtin(char *command)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: parallels <parallels@student.42.fr>        +#+  +:+       +#+        */
+/*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:20:58 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/17 21:33:08 by parallels        ###   ########.fr       */
+/*   Updated: 2023/11/07 09:19:57 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_redir
 	int				redir;
 	char			*file;
 	struct s_redir	*next;
+	struct s_redir	*prev;
 }	t_redir;
 
 
@@ -48,6 +49,21 @@ typedef struct s_cmd
 	int				fd_out;
 	pid_t			pid;
 }	t_cmd;
+
+typedef struct s_data
+{
+	t_env			*envp;
+	int				here[2];
+	char			**del;
+	int				status;
+	int				redir;
+	int				exit;
+	int				*pipe_here;
+	t_cmd			*pointer_cmd;
+	struct termios	termios_save;
+} t_data;
+
+t_data	*data(void);
 
 	
 void    envp();

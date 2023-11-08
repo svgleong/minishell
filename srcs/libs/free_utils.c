@@ -48,6 +48,7 @@ void	general_free(t_cmd *cmd, bool env, bool close_fds, bool to_exit)
 		close(1);
 		close(2);
 	}
+	printf("aqui\n");
 	if (to_exit)
 		exit(data()->exit);
 }

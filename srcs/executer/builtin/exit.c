@@ -13,7 +13,7 @@ void    exit_builtin(t_cmd *cmd)
 
     i = 0;
     if (!cmd->args[1])
-        return ;
+        general_free(cmd, 1, 1, 1) ;
     ft_putstr_fd("exit\n", 1);
     if (cmd->args[2])
     {
@@ -35,6 +35,7 @@ void    exit_builtin(t_cmd *cmd)
 			data()->exit = ft_atoi(cmd->args[1]);
         i++;
     }
+    general_free(cmd, 1, 1, 1);
     // printf("exit code: %d\n", data()->exit);
 }
 // ls > out | cat < Makefile > out2a

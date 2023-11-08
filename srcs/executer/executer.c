@@ -7,7 +7,7 @@ void	exec(t_cmd *cmd)
 	matrix = env_to_matrix();
 	if (execve(find_command_path(cmd->args[0]), cmd->args, matrix) == -1)
 	{
-		ft_putstr_fd("Command not found\n", 2);
+		ft_putstr_fd("command not found\n", 2);
 		free_matrix(matrix);
 		data()->exit = 127;
 		// perror("error");

@@ -42,7 +42,7 @@ void	echo(t_cmd *cmd)
 			continue ;
 		}
 		printf("%s", cmd->args[i]);
-		if (cmd->args[i] != NULL && check_n(cmd->args[i]))
+		if (cmd->args[i + 1] != NULL && check_n(cmd->args[i]))
 			printf(" ");
 		i++;
 	}
