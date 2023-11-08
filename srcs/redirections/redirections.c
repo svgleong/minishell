@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 21:28:12 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/08 11:49:32 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/08 15:24:17 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@ static void	redir_out(t_cmd **cmds);
 static void	redir_out_append(t_cmd **cmds);
 void		heredoc_init(t_cmd **cmds);
 
-void	redirections(t_cmd **cmds)
+int	redirections(t_cmd **cmds)
 {
 	t_cmd	*tmp_cmds;
 	t_redir	*tmp_redir;
 	
 	tmp_cmds = *cmds;
 	if (!tmp_cmds)
-		return ;
+		return (-1);
 	while (*cmds)
 	{
 		tmp_redir = (*cmds)->redir;
@@ -33,7 +33,7 @@ void	redirections(t_cmd **cmds)
 			if ((*cmds)->redir->redir == 4)
 			{	
 			 	if (!redir_in(cmds))
-					return ;
+					return (0);
 			}
 			else if ((*cmds)->redir->redir == 3)
 				redir_out(cmds);
@@ -48,6 +48,7 @@ void	redirections(t_cmd **cmds)
 	}
 	(*cmds) = tmp_cmds;
 	heredoc_init(cmds);
+	return (1);
 }
 
 void	heredoc_init(t_cmd **cmds)

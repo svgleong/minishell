@@ -49,7 +49,7 @@ void	normal_export(t_cmd *cmd, int i)
 	{
 		if (is_valid(cmd->args[i]) == 0)
 		{
-			ft_putstr_fd(" not a valid identifier\n", STDERR_FILENO);
+			ft_putstr_fd("not a valid identifier\n", STDERR_FILENO);
 			data()->exit = EXIT_FAILURE;
 		}
 		else

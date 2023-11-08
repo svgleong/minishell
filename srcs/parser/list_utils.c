@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 10:46:46 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/08 11:53:47 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/08 15:23:23 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,33 +56,34 @@ void	cmd_add_back(t_cmd **lst, t_cmd *new)
 	last->next->prev = last;
 }
 
-void	create_list(t_cmd **lst, char **args)
+int	create_list(t_cmd **lst, char **args)
 {
 	int	i;
 
-	i = 0;
-	while (args[i])
+	i = -1;
+	while (args[++i])
 	{
 		if (args[i][0] != '|')
-		{
-			cmd_add_back(lst, cmd_new_node(args + i));
-			i++;
-		}
+			cmd_add_back(lst, cmd_new_node(args + i++));
 		while (args[i] && args[i][0] != '|')
 			i++;
 		if (!args[i])
 			break ;
-		i++;
 	}
-
 	expander(lst);
-	remove_empty_strs(lst);
+	if (!remove_empty_strs(lst))
+	{
+		ft_putstr_fd("ambiguous redirect\n", 2);
+		return (0);
+	}
 	quote_checker(lst);
 	free_matrix(args);
 	check_redirections(lst);
+	if (!redirections(lst))
+		return (0);
+	//print_list(*lst); 
 	//print_list(*lst);
-	redirections(lst);
-	//print_list(*lst);
+	return (1);
 }
 
 void	print_list(t_cmd *lst)

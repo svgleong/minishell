@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:39:21 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/08 11:11:52 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/08 12:51:12 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,11 @@ int main(int ac, char **av, char **env)
 		if (!checker(rl))
 			continue ;
 		tmp = separate_args(rl);
-		create_list(&data()->pointer_cmd, tmp);
+		if (!create_list(&data()->pointer_cmd, tmp))
+		{
+			cmdlstclear(&data()->pointer_cmd);
+			continue;
+		}
 		data()->exit = 0;
 		//print_list(data()->pointer_cmd);
 		execution(data()->pointer_cmd);
