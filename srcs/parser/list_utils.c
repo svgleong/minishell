@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 10:46:46 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/06 14:07:36 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/08 11:53:47 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,13 @@ void	create_list(t_cmd **lst, char **args)
 			break ;
 		i++;
 	}
+
 	expander(lst);
-	//print_list(*lst);
 	remove_empty_strs(lst);
 	quote_checker(lst);
 	free_matrix(args);
 	check_redirections(lst);
+	//print_list(*lst);
 	redirections(lst);
 	//print_list(*lst);
 }
@@ -116,13 +117,6 @@ void	print_list(t_cmd *lst)
 	printf("---------------------\n");
 }
 
-/* t_redir	*get_head(t_redir *lst)
-{
-	while (lst && lst->prev)
-		lst = lst->prev;
-	return (lst);
-} */
-
 void	cmdlstclear(t_cmd **lst)
 {
 	t_cmd	*tmp;
@@ -132,18 +126,12 @@ void	cmdlstclear(t_cmd **lst)
 		tmp = *lst;
 		*lst = (*lst)->next;
 		free_matrix(tmp->args);
-		/* write(2, tmp->args[0], 20);
-		write(2, "\n", 1); */
-		// write(2, "tmp\n", 4);
-		// write(2, tmp->redir, 20);
-		// write(2, "\n", 1);
-
+		if (tmp->fd_in != -1)
+			close(tmp->fd_in);
+		if (tmp->fd_out != -1)
+			close(tmp->fd_out);
 		if (tmp->redir)
-		{
-			// write(2, tmp->args[0], 20);
-			// write(2, "\n", 1);
 			redirlstclear(&tmp->redir);
-		}
 		free(tmp);
 	}
 	*lst = NULL;

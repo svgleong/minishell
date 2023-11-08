@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:20:58 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/06 17:28:52 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/07 09:19:57 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_redir
 	int				redir;
 	char			*file;
 	struct s_redir	*next;
+	struct s_redir	*prev;
 }	t_redir;
 
 

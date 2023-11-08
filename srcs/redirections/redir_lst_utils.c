@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 12:22:56 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/31 15:55:11 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/07 09:31:27 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_redir	*redir_new_node(int redir, char *file)
 	new->fd = -1;
 	new->redir = redir;
 	new->file = ft_strdup(file);
+	new->prev = NULL;
 	new->next = NULL;
 	return (new);
 }
@@ -42,49 +43,19 @@ void	redir_add_back(t_redir **lst, t_redir *new)
 	if (!*lst)
 	{
 		*lst = new;
+		new->prev = NULL;
 		// return ;
 	}
 	else
 	{
 	last = redir_last_node(*lst);
 	last->next = new;
+	last->next->prev = last;
 	}
 	// printf("====rediraddback======\n");
 	// print_redir(*lst);
 	// printf("====rediraddback======\n");
 }
-
-/* void	clean_redirections(t_cmd **cmd)
-{
-	int		i;
-	char	**clean_args;
-	char	**old_args;
-	char	**begin_args;
-	t_cmd	*tmp;
-
-	tmp = *cmd;
-	begin_args = NULL;
-	clean_args = NULL;
-	while ((*cmd))
-	{
-		i = -1;
-		if (!((*cmd)->args[0][0] == '>' || (*cmd)->args[0][0] == '<') && !begin_args)
-			begin_args = copy_args_until((*cmd)->args, '<', '>');
-		while ((*cmd)->args[++i])
-		{
-			if ((*cmd)->args[i][0] == '>' || (*cmd)->args[i][0] == '<')
-			{
-				clean_args = copy_args((*cmd)->args + i + 2);
-				old_args = (*cmd)->args;
-				(*cmd)->args = clean_args;
-				free_matrix(old_args);
-				i = -1;
-			}
-		}
-		(*cmd) = (*cmd)->next;
-	}
-	(*cmd) = tmp;
-} */
 
 void	create_redir_lst(t_cmd **cmd, int redir, char *file)
 {
@@ -140,20 +111,27 @@ void	check_redirections(t_cmd **cmds)
 	// print_list(*cmds);
 }
 
+t_redir	*get_head_redir(t_redir *lst)
+{
+	while (lst && lst->prev)
+		lst = lst->prev;
+	return (lst);
+}
+
 void	redirlstclear(t_redir **lst)
 {
+	t_redir	*head;
 	t_redir	*tmp;
 
-	//ft_putstr_fd((*lst)->file, 1);
-	//write(1, "1\n", 2);
-	while (*lst)
+	head = get_head_redir(*lst);
+	while (head)
 	{
-		tmp = *lst;
-		(*lst) = (*lst)->next;
+		tmp = head;
+		head = head->next;
 		free(tmp->file);
 		if (tmp->fd != -1)
 			close(tmp->fd);
 		free(tmp);
 	}
-	*lst = NULL;
+	head = NULL;
 }

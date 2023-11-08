@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 16:03:14 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/06 10:26:30 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/08 10:33:35 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,16 @@ int	ft_strcmp(const char *s1, const char *s2)
 	}
 	return (*(const unsigned char *) s1 - *(const unsigned char *) s2);
 }
+
+// int	ft_strcmp(const char *s1, const char *s2)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while (s1[i] && s2[i] && (s1[i] == s2[i]))
+// 		i++;
+// 	return (*(const unsigned char *) s1 - *(const unsigned char *) s2);
+// }
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {

@@ -42,15 +42,16 @@ void	heredoc_error()
 	close(data()->here[0]);
 	while (1)
 	{
-		write(0, "> ", 2);
-		line = get_next_line(0);
+		//write(0, "> ", 2);
+		//line = get_next_line(0);
+		line = readline("> ");
 		if (!line)
 		{
 			heredoc_error();
 			general_free(cmd, 1, 1, 0);
 			break;
 		}
-		if (!ft_strncmp(line, cmd->redir->file, ft_strlen(cmd->redir->file)))
+		if (!ft_strcmp(line, cmd->redir->file))//, ft_strlen(cmd->redir->file) + 1))
 		{
 			free(line);
 			general_free(cmd, 1, 1, 0);
@@ -82,11 +83,17 @@ int heredoc(t_cmd *cmd)
 	}
 	close(data()->here[1]);
 	wait(&pid);
-	if (cmd->redir->next == NULL)
+	return (data()->here[0]);
+
+	/* if (cmd->redir->next == NULL)
+	{
+		printf("GOOD\n");
 		return (data()->here[0]);
+	}
 	else
 	{
 		close(data()->here[0]);
+		printf("DEBUG\n");
 		return (0);
-	}
+	} */
 }

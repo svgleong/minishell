@@ -16,7 +16,7 @@ t_env	*search_env(char *var)
 	envp = data()->envp;
 	while (envp && envp->content != NULL)
 	{
-		if (!ft_strncmp(envp->content, var, ft_strlen(var)))
+		if (!ft_strncmp(envp->content, var, ft_strlen_special(envp->content, '=')))
 			return (envp);
 		envp = envp->next;
 	}
@@ -44,7 +44,6 @@ void	update_env_export(char *cmd, char **new_var)
 void	normal_export(t_cmd *cmd, int i)
 {
 	char	**var_value;
-	char	*temp;
 
 	while (cmd->args[++i])
 	{
@@ -55,10 +54,8 @@ void	normal_export(t_cmd *cmd, int i)
 		}
 		else
 		{
-			temp = rem_quotes_export(cmd->args[i]);
 			var_value = ft_split(cmd->args[i], '=');
-			update_env_export(temp, var_value);
-			free(temp);
+			update_env_export(cmd->args[i], var_value);
 			free_matrix(var_value);
 		}
 	}
