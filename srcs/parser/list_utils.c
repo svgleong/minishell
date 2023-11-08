@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 10:46:46 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/08 15:23:23 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/08 16:52:41 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,14 +81,12 @@ int	create_list(t_cmd **lst, char **args)
 	check_redirections(lst);
 	if (!redirections(lst))
 		return (0);
-	//print_list(*lst); 
-	//print_list(*lst);
 	return (1);
 }
 
 void	print_list(t_cmd *lst)
 {
-	t_cmd *tmp = lst;
+	t_cmd	*tmp = lst;
 	int i = 0;
 	int j = 1;
 	if(!lst)
