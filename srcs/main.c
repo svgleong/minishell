@@ -13,32 +13,6 @@
 
 #include <minishell.h>
 
-void	control_d(char *str)
-{
-	//unsigned char	status;
-	
-	if (str)
-		return ;
-	rl_clear_history();
-	write(1, "exit\n", 6);
-	general_free((data()->pointer_cmd), 1, 1, 0);
-	//status = (unsigned char)(data()->envp)exit;
-	exit(0);
-}
-
-void	sig_handler(int signal)
-{
-	if (signal == SIGINT && !data()->pointer_cmd)
-	{
-		data()->exit = 130;
-		write(1, "\n", 1);
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
-	}
-	return ;
-}
-
 t_env	*env(void)
 {
 	static t_env env;
@@ -59,7 +33,8 @@ int main(int ac, char **av, char **env)
 	char **tmp;
 	
 	if (env)
-		get_env_to_list(env);
+		if (!data()->envp)
+			get_env_to_list(env);
 	data()->pointer_cmd = NULL;
 	rl_catch_signals = 0;
 	signal(SIGQUIT, SIG_IGN);

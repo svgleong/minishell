@@ -5,7 +5,7 @@
 # include <minishell.h>
 
 
-# include <string.h>
+# include <string_lib.h>
 # include <stdlib.h>
 # include <stdio.h>
 # include <stdbool.h>

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include <minishell.h>
 
 int	is_special_char(char c)
 {

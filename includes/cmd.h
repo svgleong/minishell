@@ -17,7 +17,7 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include <stdlib.h>
-#include <string.h>
+#include <string_lib.h>
 #include <builtin.h>
 #include <stdbool.h>
 

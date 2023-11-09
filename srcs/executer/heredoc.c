@@ -28,9 +28,20 @@ char	*expansion_heredoc(char *s)
 	return (s);
 }
 
-void	heredoc_error()
+
+
+void	heredoc_error(char *del)
 {
-	printf("error heredoc\n");
+	printf("\nWarning: heredoc on line 1 delimited by EOF (wanted: \"%s\")\n", del);
+}
+
+void	handle_c(int signal)
+{
+	(void)signal;
+	general_free(data()->pointer_cmd, 1, 1, 0);
+	close(data()->here[0]);
+	close(data()->here[1]);
+	exit(EXIT_FAILURE);
 }
 
  void    child_heredoc(t_cmd *cmd)
@@ -38,7 +49,7 @@ void	heredoc_error()
 	char *line;
 
 	signal(SIGQUIT, SIG_IGN); //says signal c/ should be ignored
-	signal(SIGINT, handle_signals); //when control c handle
+	signal(SIGINT, handle_c); //when control c handle
 	close(data()->here[0]);
 	while (1)
 	{
@@ -47,7 +58,7 @@ void	heredoc_error()
 		// line = readline("> ");
 		if (!line)
 		{
-			heredoc_error();
+			heredoc_error(cmd->redir->file);
 			general_free(cmd, 1, 1, 0);
 			break;
 		}
@@ -62,7 +73,6 @@ void	heredoc_error()
 		free(line);
 	}
 	close(data()->here[1]);
-	exit(0);
 }
 
 int heredoc(t_cmd *cmd)
@@ -75,11 +85,9 @@ int heredoc(t_cmd *cmd)
 	pid = fork();
 	if (pid == 0)
 	{
-		while (cmd->redir)
-		{
-			child_heredoc(cmd);
-			cmd->redir = cmd->redir->next;
-		}
+		child_heredoc(cmd);
+		handle_signals();
+		exit(0);
 	}
 	close(data()->here[1]);
 	wait(&pid);

@@ -62,6 +62,8 @@ void	bubble_sort(char **matrix)
 	}
 }
 
+#include <string.h>
+
 int	is_valid(char *var)
 {
 	int	i;
@@ -69,7 +71,7 @@ int	is_valid(char *var)
 	i = 0;
 	if (!var[0])
 		return (0);
-	if (ft_isdigit(var[i]) || var[0] == '_')
+	if (ft_isdigit(var[i]) || var[0] == '_' || var[0] == '=')
 		return (0);
 	while (var[i] && var[i] != '=')
 	{

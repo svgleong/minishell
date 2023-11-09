@@ -35,8 +35,8 @@ int		skip_quotes(char *str, char quote, int *i);
 int		ft_isalnum(int c);
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
-void ft_putstr_fd(char *s, int fd);
-void ft_putchar_fd(char c, int fd);
+void    ft_putstr_fd(char *s, int fd);
+void    ft_putchar_fd(char c, int fd);
 
 
 

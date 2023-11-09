@@ -20,6 +20,8 @@ char	*node_value(t_env *node)
 	if (!node)
 		return (NULL);
 	key_value = ft_split(node->content, '=');
+	if (!key_value[1])
+		return (NULL);
 	value = ft_strdup(key_value[1]);
 	free_matrix(key_value);
 	return (value);

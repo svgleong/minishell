@@ -15,23 +15,26 @@ void	update_pwd(void)
 		free(path);
 	}
 	node = search_env("PWD");
-	var_value = ft_split(node->content, '=');
-	new_old_path = ft_strjoin_free("OLDPWD=", var_value[1], 0);
-	free(node->content);
-	path = ft_strjoin_free("PWD=", getcwd(NULL, 0), 2);
-	node->content = path;
-	node = search_env("OLDPWD");
-	free(node->content);
-	node->content = new_old_path;
-	free_matrix(var_value);
+	if (node)
+	{
+		var_value = ft_split(node->content, '=');
+		new_old_path = ft_strjoin_free("OLDPWD=", var_value[1], 0);
+		free(node->content);
+		path = ft_strjoin_free("PWD=", getcwd(NULL, 0), 2);
+		node->content = path;
+		node = search_env("OLDPWD");
+		free(node->content);
+		node->content = new_old_path;
+		free_matrix(var_value);
+	}
 }
 
 void	ft_chdir(char	*path)
 {
 	if (chdir(path) == -1)
 	{
-		perror("Error");
 		data()->exit = EXIT_FAILURE;
+		perror("Error");
 		free(path);
 		return ;
 	}
