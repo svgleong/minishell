@@ -37,6 +37,16 @@ void	heredoc_error(char *del)
 
 void	handle_c(int signal)
 {
+	/* if (signal == SIGQUIT)
+		SIG_IGN ;
+	else if (signal == SIGINT)
+	{
+		write(2, " ", 1);
+		general_free(data()->pointer_cmd, 1, 1, 0);
+		close(data()->here[0]);
+		close(data()->here[1]);
+		exit(1);
+	} */
 	(void)signal;
 	general_free(data()->pointer_cmd, 1, 1, 0);
 	close(data()->here[0]);
@@ -48,8 +58,6 @@ void	handle_c(int signal)
 {
 	char *line;
 
-	signal(SIGQUIT, SIG_IGN); //says signal c/ should be ignored
-	signal(SIGINT, handle_c); //when control c handle
 	close(data()->here[0]);
 	while (1)
 	{
@@ -79,7 +87,8 @@ int heredoc(t_cmd *cmd)
 {
 	int pid;
 
-	//print_list(cmd);
+	signal(SIGQUIT, SIG_IGN); //says signal c/ should be ignored
+	signal(SIGINT, handle_c); //when control c handle
 	if (pipe(data()->here) == -1)
 		perror("");
 	pid = fork();

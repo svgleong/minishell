@@ -31,6 +31,8 @@ void	update_env_export(char *cmd, char **new_var)
 
 	var = new_var[0];
 	value = new_var[1];
+	if (!value)
+		value = "";
 	node = search_env(var);
 	if (node == NULL)
 		env_add_node_end(data()->envp, env_new_node(cmd));
@@ -51,7 +53,7 @@ int	verify_export(t_cmd *cmd)
 		if (is_valid(cmd->args[i]) == 0)
 		{
 			ft_putstr_fd("not a valid identifier\n", STDERR_FILENO);
-			data()->exit = EXIT_FAILURE;
+			exitbuiltin(EXIT_FAILURE);
 			return (0);
 		}
 	}
@@ -62,7 +64,6 @@ void	normal_export(t_cmd *cmd, int i)
 {
 	char	**var_value;
 
-	//print_list(cmd);
 	if (verify_export(cmd) == 0)
 		return ;
 	while (cmd->args[++i])
