@@ -228,11 +228,8 @@ echo bonjour > $test - TREATED
 EXIT 
 exit 300
 
-env -i 
 
-unset PATH -> ./minishell (nao pode correr comandos)
-
-unset PATH doesnt unset and export PATH= doesnt change path to ""
+export PATH="" / PATH= doesnt change path to ""
 
 export var ="cat Makefile | grep >"
 
@@ -258,3 +255,5 @@ svalente@c2r5s4:/$ pwd
 
 exit 0 | exit 1 NAO ESCREVER EXIT
 exit 1 | exit 0
+
+cd exit code of teste(cant access) overwrite of exit code by executer

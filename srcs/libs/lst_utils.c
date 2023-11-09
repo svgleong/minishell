@@ -6,6 +6,8 @@ void	get_env_to_list(char **env)
 	int i;
 
 	i = 0;
+	if (!env[0])
+		return ;
 	data()->redir = 0;
 	data()->envp = env_new_node(env[0]);
 	while (env[++i])

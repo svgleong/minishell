@@ -41,23 +41,35 @@ void	update_env_export(char *cmd, char **new_var)
 	}
 }
 
-void	normal_export(t_cmd *cmd, int i)
+int	verify_export(t_cmd *cmd)
 {
-	char	**var_value;
+	int i;
 
+	i = -1;
 	while (cmd->args[++i])
 	{
 		if (is_valid(cmd->args[i]) == 0)
 		{
 			ft_putstr_fd("not a valid identifier\n", STDERR_FILENO);
 			data()->exit = EXIT_FAILURE;
+			return (0);
 		}
-		else
-		{
-			var_value = ft_split(cmd->args[i], '=');
-			update_env_export(cmd->args[i], var_value);
-			free_matrix(var_value);
-		}
+	}
+	return (1);
+}
+
+void	normal_export(t_cmd *cmd, int i)
+{
+	char	**var_value;
+
+	//print_list(cmd);
+	if (verify_export(cmd) == 0)
+		return ;
+	while (cmd->args[++i])
+	{
+		var_value = ft_split(cmd->args[i], '=');
+		update_env_export(cmd->args[i], var_value);
+		free_matrix(var_value);
 	}
 }
 

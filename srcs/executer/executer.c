@@ -1,5 +1,11 @@
 #include <minishell.h>
 
+void	exec_error(char *s, int exit_code)
+{
+	ft_putstr_fd(s, STDERR_FILENO);
+	data()->exit = exit_code;
+}
+
 void	exec(t_cmd *cmd)
 {
 	char	**matrix;
@@ -7,12 +13,14 @@ void	exec(t_cmd *cmd)
 	matrix = env_to_matrix();
 	if (execve(find_command_path(cmd->args[0]), cmd->args, matrix) == -1)
 	{
-		ft_putstr_fd("command not found\n", 2);
+		if (errno == 13)
+		{
+			perror("Error");
+			data()->exit = 126;
+		}
+		else
+			exec_error("command not found\n", 127);
 		free_matrix(matrix);
-		data()->exit = 127;
-		// perror("error");
-		// data()->exit = errno;
-		// fprintf(stderr, "error number: %d\n", data()->exit);
 		general_free(cmd, 1, 1, 1);
 	}
 }
