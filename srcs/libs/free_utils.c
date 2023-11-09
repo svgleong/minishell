@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/08 16:41:45 by svalente          #+#    #+#             */
+/*   Updated: 2023/11/08 16:42:24 by svalente         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minishell.h>
 
 char	*node_value(t_env *node)
@@ -13,10 +25,10 @@ char	*node_value(t_env *node)
 	return (value);
 }
 
-void    free_env_list(t_env **lst)
+void	free_env_list(t_env **lst)
 {
-    t_env	*temp;
-	
+	t_env	*temp;
+
 	while (*lst)
 	{
 		temp = (*lst)->next;

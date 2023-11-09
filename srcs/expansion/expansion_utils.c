@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:43:07 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/06 10:20:44 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/08 16:40:08 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	*get_status(char *str, int i)
 		if (str[j])
 			new[k] = str[j];
 		else
-			break;
+			break ;
 		k++;
 	}
 	new[k] = '\0';

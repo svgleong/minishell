@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/08 16:44:41 by svalente          #+#    #+#             */
+/*   Updated: 2023/11/08 16:44:54 by svalente         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minishell.h>
 
 bool	ft_clean_buff(char *str)
@@ -19,6 +31,7 @@ bool	ft_clean_buff(char *str)
 	}
 	return (newline);
 }
+
 char	*get_next_line(int fd)
 {
 	static char	buff[BUFFER_SIZE + 1];
