@@ -51,7 +51,6 @@ void	core_execution(t_cmd *cmd)
 		else
 			exec(cmd);
 	}
-	//print_list(cmd);
 }
 
 void	pipe_handler(t_cmd *cmd)
@@ -78,18 +77,13 @@ void	pipe_handler(t_cmd *cmd)
 
 void	execution(t_cmd *cmd)
 {
-	t_cmd	*head;
 	int		status;
 
 	status = 0;
-	head = cmd;
-	//print_list(cmd);
 	while (cmd)
 	{	
-		//
 		if (!cmd->args[0])
 			break ;
-		//
 		if (cmd_is_builtin(cmd->args[0]) && !cmd->next && data()->redir == 0)
 		{
 			which_builtin(cmd);
@@ -100,7 +94,7 @@ void	execution(t_cmd *cmd)
 			pipe_handler(cmd);
 		cmd = cmd->next;
 	}
-	cmd = head;
+	cmd = data()->pointer_cmd;
 	while (cmd)
 	{
 		waitpid(cmd->pid, &status, 0);

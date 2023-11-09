@@ -25,14 +25,9 @@ t_data	*data(void)
 	return (&data);
 }
 
-
-
-int main(int ac, char **av, char **env)
+void	main_loop(char **env)
 {
-	(void)ac;
-	(void)av;
 	char *rl;
-	//char **tmp;
 	
 	env_checker(env);
 	data()->pointer_cmd = NULL;
@@ -41,30 +36,30 @@ int main(int ac, char **av, char **env)
 	signal(SIGINT, sig_handler);
 	while (1)
 	{
+		data()->error = 0;
 		rl = readline("Painshell: ");
 		control_d(rl);
 		if (!rl || !rl[0])
 			continue ;
-		if (rl == NULL)
-			break ;
 		add_history(rl);
 		if (!parser(rl))
 			continue ;
-		/* if (!checker(rl))
-			continue ;
-		tmp = separate_args(rl);
-		if (!create_list(&data()->pointer_cmd, tmp))
-		{
-			cmdlstclear(&data()->pointer_cmd);
-			continue;
-		} */
 		data()->exit = 0;
-		execution(data()->pointer_cmd);
+		if (data()->error == 0)
+			execution(data()->pointer_cmd);
 		cmdlstclear(&data()->pointer_cmd);
 	}
 	free(rl);
 	rl = NULL;
 	cmdlstclear(&data()->pointer_cmd);
 	rl_clear_history();
+}
+
+int main(int ac, char **av, char **env)
+{
+	(void)ac;
+	(void)av;
+
+	main_loop(env);
 	return (0);
 }

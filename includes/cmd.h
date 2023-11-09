@@ -61,6 +61,7 @@ typedef struct s_data
 	int				*pipe_here;
 	t_cmd			*pointer_cmd;
 	struct termios	termios_save;
+	bool			error;
 } t_data;
 
 t_data	*data(void);
