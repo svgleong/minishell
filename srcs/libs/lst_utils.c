@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lst_utils.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/08 16:45:08 by svalente          #+#    #+#             */
+/*   Updated: 2023/11/08 16:48:18 by svalente         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minishell.h>
 
 // puts char **env to list
 void	get_env_to_list(char **env)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!env[0])
@@ -77,7 +89,7 @@ char	*find_command_path(char *command)
 	return (command);
 }
 
-char	**env_to_matrix()
+char	**env_to_matrix(void)
 {
 	int		len;
 	char	**matrix;

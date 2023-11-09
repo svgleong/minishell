@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 15:21:53 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/03 16:50:58 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/08 16:56:09 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,7 @@ void	modify_str_aux(char *str, char *quote, char **rl, int *j)
 		quote[0] = *rl[0];
 	}
 	else if (*quote && *quote == **rl)
-	{
-		//str[(*j)++] = *rl[0]++;
 		quote[0] = '\0';
-	}
 }
 
 char	*modify_str(char *rl)
@@ -72,11 +69,8 @@ char	*modify_str(char *rl)
 	j = 0;
 	while (*rl)
 	{
-		if (!quote && (*rl == '\"' || *rl == '\''))
-			modify_str_aux(str, &quote, &rl, &j);
-		else if (quote && quote == *rl)
-			modify_str_aux(str, &quote, &rl, &j);
-		else if (!quote)
+		modify_str_aux(str, &quote, &rl, &j);
+		if (!quote)
 		{
 			if (add_delimiter(&rl, str, &j, quote))
 				continue ;
