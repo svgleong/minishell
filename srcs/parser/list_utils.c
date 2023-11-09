@@ -74,6 +74,8 @@ int	create_list(t_cmd **lst, char **args)
 	if (!remove_empty_strs(lst))
 	{
 		ft_putstr_fd("ambiguous redirect\n", 2);
+		free_matrix(args);
+		data()->exit = 1;
 		return (0);
 	}
 	quote_checker(lst);

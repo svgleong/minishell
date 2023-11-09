@@ -81,7 +81,6 @@ void	export(t_cmd *cmd)
 
 	i = 0;
 	export_env = NULL;
-	//print_list(cmd);
 	if (!(cmd->args[1]))
 	{
 		export_env = env_to_matrix();

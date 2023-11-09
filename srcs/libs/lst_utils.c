@@ -89,19 +89,27 @@ char	*find_command_path(char *command)
 	return (command);
 }
 
+int	list_size_env(t_env *env)
+{
+	int	i;
+
+	i = 0;
+	while (env)
+	{
+		i++;
+		env = env->next;
+	}
+	return (i);
+}
+
 char	**env_to_matrix(void)
 {
 	int		len;
 	char	**matrix;
 	t_env	*temp;
 
-	len = 0;
 	temp = (t_env *)data()->envp;
-	while (temp)
-	{
-		len++;
-		temp = temp->next;
-	}
+	len = list_size_env(temp);
 	matrix = malloc(sizeof(char *) * (len + 1));
 	if (!matrix)
 		return (NULL);

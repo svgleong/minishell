@@ -73,7 +73,7 @@ void	handle_c(int signal)
 		if (!ft_strncmp(line, cmd->redir->file, ft_strlen(line) - 1))
 		{
 			free(line);
-			general_free(cmd, 1, 1, 0);
+			general_free(data()->pointer_cmd, 1, 1, 0);
 			break;
 		}
 		line = expansion_heredoc(line);
@@ -81,6 +81,7 @@ void	handle_c(int signal)
 		free(line);
 	}
 	close(data()->here[1]);
+	exit(0);
 }
 
 int heredoc(t_cmd *cmd)
@@ -96,7 +97,6 @@ int heredoc(t_cmd *cmd)
 	{
 		child_heredoc(cmd);
 		handle_signals();
-		exit(0);
 	}
 	close(data()->here[1]);
 	wait(&pid);
