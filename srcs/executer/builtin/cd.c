@@ -33,9 +33,9 @@ void	ft_chdir(char	*path)
 {
 	if (chdir(path) == -1)
 	{
-		data()->exit = EXIT_FAILURE;
 		perror("Error");
 		free(path);
+		exitbuiltin(EXIT_FAILURE);
 		return ;
 	}
 	free(path);

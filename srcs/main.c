@@ -25,16 +25,16 @@ t_data	*data(void)
 	return (&data);
 }
 
+
+
 int main(int ac, char **av, char **env)
 {
 	(void)ac;
 	(void)av;
 	char *rl;
-	char **tmp;
+	//char **tmp;
 	
-	if (env)
-		if (!data()->envp)
-			get_env_to_list(env);
+	env_checker(env);
 	data()->pointer_cmd = NULL;
 	rl_catch_signals = 0;
 	signal(SIGQUIT, SIG_IGN);
@@ -45,21 +45,21 @@ int main(int ac, char **av, char **env)
 		control_d(rl);
 		if (!rl || !rl[0])
 			continue ;
-		if (rl == NULL) //|| !ft_strncmp(rl, "exit", 5)
+		if (rl == NULL)
 			break ;
 		add_history(rl);
-		if (!checker(rl))
+		if (!parser(rl))
+			continue ;
+		/* if (!checker(rl))
 			continue ;
 		tmp = separate_args(rl);
 		if (!create_list(&data()->pointer_cmd, tmp))
 		{
 			cmdlstclear(&data()->pointer_cmd);
 			continue;
-		}
+		} */
 		data()->exit = 0;
-		//print_list(data()->pointer_cmd);
 		execution(data()->pointer_cmd);
-		// printf("exit code %d\n", data()->exit);
 		cmdlstclear(&data()->pointer_cmd);
 	}
 	free(rl);

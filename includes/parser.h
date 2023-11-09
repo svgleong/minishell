@@ -32,5 +32,6 @@ void	print_redir(t_redir *lst);
 void	quote_checker(t_cmd **cmd);
 int		remove_empty_strs(t_cmd **cmds);
 int 	redir_no_file_checker(t_cmd **cmds);
+int	    parser(char *rl);
 
 #endif

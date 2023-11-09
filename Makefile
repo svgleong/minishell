@@ -40,12 +40,14 @@ SRCS		= srcs/libs/ft_calloc.c						\
 			  srcs/parser/list_utils.c					\
 			  srcs/parser/modify_string.c 				\
 			  srcs/parser/remove_quotes.c 				\
+			  srcs/parser/parser.c 				\
 			  srcs/redirections/redir_lst_utils.c 		\
 			  srcs/redirections/redirections.c 			\
 			  srcs/redirections/clean_redirections.c 	\
 			  srcs/redirections/redirections_checker.c 	\
 			  srcs/alloc/utils.c 						\
 			  srcs/executer/builtin/env.c				\
+			  srcs/executer/builtin/env_utils.c				\
 			  srcs/executer/builtin/export.c			\
 			  srcs/executer/builtin/unset.c			\
 			  srcs/executer/builtin/export_utils.c\
@@ -66,7 +68,7 @@ INCLUDES	= includes/
 
 #FIXME: Change to CC
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -g -I$(INCLUDES) -fsanitize=address,undefined
+CFLAGS		= -Wall -Wextra -Werror -g -I$(INCLUDES) #-fsanitize=address,undefined
 LDFLAGS		= -L /opt/homebrew/opt/readline/lib -I /opt/homebrew/opt/readline/include -lreadline -lhistory
 
 #$(VERBOSE).SILENT:
