@@ -9,7 +9,6 @@ void	update_pwd(void)
 
 	if (search_env("OLDPWD") == NULL)
 	{
-		printf("NOT OLDPWD\n");
 		path = ft_strjoin_free("OLDPWD=", getcwd(NULL, 0), 2);
 		env_add_node_end(data()->envp, env_new_node(path));
 		free(path);
