@@ -43,20 +43,13 @@ void	update_env_export(char *cmd, char **new_var)
 	}
 }
 
-int	verify_export(t_cmd *cmd)
+int	verify_export_arg(char *arg)
 {
-	int i;
-
-	i = -1;
-	while (cmd->args[++i])
-	{
-		if (is_valid(cmd->args[i]) == 0)
-		{
-			ft_putstr_fd("not a valid identifier\n", STDERR_FILENO);
-			exitbuiltin(EXIT_FAILURE);
-			return (0);
-		}
-	}
+  if (is_valid(arg) == 0)
+  {
+    ft_putstr_fd("not a valid identifier\n", STDERR_FILENO);
+    return (0);
+  }
 	return (1);
 }
 
@@ -64,10 +57,10 @@ void	normal_export(t_cmd *cmd, int i)
 {
 	char	**var_value;
 
-	if (verify_export(cmd) == 0)
-		return ;
 	while (cmd->args[++i])
 	{
+    if (!verify_export_arg(cmd->args[i]))
+      continue ;
 		var_value = ft_split(cmd->args[i], '=');
 		update_env_export(cmd->args[i], var_value);
 		free_matrix(var_value);
