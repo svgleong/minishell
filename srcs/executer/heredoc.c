@@ -32,7 +32,7 @@ char	*expansion_heredoc(char *s)
 
 void	heredoc_error(char *del)
 {
-	printf("\nWarning: heredoc on line 1 delimited by EOF (wanted: \"%s\")\n", del);
+	printf("\nWarning: heredoc delimited by EOF (wanted: \"%s\")\n", del);
 }
 
 void	handle_c(int signal)
