@@ -100,7 +100,10 @@ int	search_expansion(t_cmd *cmds)
 			{
 				tmp = check_expansion(cmds->args[i], j);
 				if (tmp[0] == '\2')
+        {
+          free(tmp);
 					continue ;
+        }
 				free(cmds->args[i]);
 				cmds->args[i] = tmp;
 				j = -1;

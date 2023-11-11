@@ -20,7 +20,11 @@ char	*expansion_heredoc(char *s)
 		{
 			tmp = check_expansion(s, j);
 			if (tmp[0] == '\2')
+      {
+        free(tmp);
 				continue ;
+      }
+      free(s);
 			s = tmp;
 			j = -1;
 		}
