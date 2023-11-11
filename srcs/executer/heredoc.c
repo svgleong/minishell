@@ -97,7 +97,7 @@ int heredoc(t_cmd *cmd)
 	{
     signal(SIGQUIT, SIG_IGN); //says signal c/ should be ignored
     signal(SIGINT, handle_c); //when control c handle	child_heredoc(cmd);
-		handle_signals();
+		child_heredoc(cmd);
 	}
 	close(data()->here[1]);
 	waitpid(pid, NULL, 0);
