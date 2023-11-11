@@ -70,7 +70,9 @@ void	handle_c(int signal)
 			general_free(cmd, 1, 1, 0);
 			break;
 		}
-		if (!ft_strncmp(line, cmd->redir->file, ft_strlen(line) - 1))
+    if (line[ft_strlen(line) - 1] == '\n')
+      line[ft_strlen(line) - 1] = '\0';
+		if (!ft_strncmp(line, cmd->redir->file, ft_strlen(line) + 1))
 		{
 			free(line);
 			general_free(data()->pointer_cmd, 1, 1, 0);
@@ -88,18 +90,17 @@ int heredoc(t_cmd *cmd)
 {
 	int pid;
 
-	signal(SIGQUIT, SIG_IGN); //says signal c/ should be ignored
-	signal(SIGINT, handle_c); //when control c handle
 	if (pipe(data()->here) == -1)
 		perror("");
 	pid = fork();
 	if (pid == 0)
 	{
-		child_heredoc(cmd);
+    signal(SIGQUIT, SIG_IGN); //says signal c/ should be ignored
+    signal(SIGINT, handle_c); //when control c handle	child_heredoc(cmd);
 		handle_signals();
 	}
 	close(data()->here[1]);
-	wait(&pid);
+	waitpid(pid, NULL, 0);
 	return (data()->here[0]);
 
 	/* if (cmd->redir->next == NULL)

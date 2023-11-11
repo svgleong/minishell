@@ -82,7 +82,6 @@ void	heredoc_init(t_cmd **cmds)
 {
 	t_cmd	*tmp_cmds;
 	t_redir	*tmp_redir;
-	int		fd;
 
 	tmp_cmds = *cmds;
 	if (!tmp_cmds)
@@ -93,7 +92,11 @@ void	heredoc_init(t_cmd **cmds)
 		while ((*cmds)->redir)
 		{
 			if ((*cmds)->redir->redir == 2)
+      {
+        if ((*cmds)->fd_in != -1)
+          close((*cmds)->fd_in);
 				(*cmds)->fd_in = heredoc((*cmds));
+      }
 			(*cmds)->redir = (*cmds)->redir->next;
 		}
 		(*cmds)->redir = tmp_redir;
