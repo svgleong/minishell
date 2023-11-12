@@ -58,10 +58,60 @@ void	handle_c(int signal)
 	exit(EXIT_FAILURE);
 }
 
+int	check_quotes_here(char *s)
+{
+	int i = -1;
+	int	j = 0;
+	int	flag = 0;
+
+	while (s[++i] && flag == 0)
+	{
+		if (s[i] == '\'' || s[i] == '\"')
+		{
+			j = i + 1;
+			while (s[j])
+			{
+				if (s[j] == '\'' || s[j] == '\"')
+				{
+					flag = 1;
+					break;
+				}
+				j++;
+			}
+		}
+	}
+	if (flag == 1)
+		return (1);
+	return (0);
+}
+
+void removeQuotes(char *str) {
+    int len = strlen(str);
+    int i = 0, j = 0;
+
+    while (i < len) {
+        if ((str[i] == '\'' && str[i + 1] == '\"') || (str[i] == '\"' && str[i + 1] == '\'')) {
+            i += 2; // Skip the pair of quotes
+        } else if (str[i] == '\'' || str[i] == '\"') {
+            i++; // Skip the single quote or double quote
+        }
+
+        str[j++] = str[i++];
+    }
+
+    str[j] = '\0';
+}
+
  void    child_heredoc(t_cmd *cmd)
 {
 	char *line;
+	bool	quote;
 
+	if (check_quotes_here(cmd->redir->file) == 1)
+	{
+		removeQuotes(cmd->redir->file);
+		quote = true;
+	}
 	close(data()->here[0]);
 	while (1)
 	{
@@ -74,15 +124,18 @@ void	handle_c(int signal)
 			general_free(cmd, 1, 1, 0);
 			break;
 		}
-    if (line[ft_strlen(line) - 1] == '\n')
-      line[ft_strlen(line) - 1] = '\0';
+   		if (line[ft_strlen(line) - 1] == '\n')
+     		line[ft_strlen(line) - 1] = '\0';
 		if (!ft_strncmp(line, cmd->redir->file, ft_strlen(line) + 1))
 		{
 			free(line);
 			general_free(data()->pointer_cmd, 1, 1, 0);
 			break;
 		}
-		line = expansion_heredoc(line);
+		if (quote == false)
+			line = expansion_heredoc(line);
+		if (line[ft_strlen(line)] == '\0')
+			line[ft_strlen(line)] = '\n';
 		write(data()->here[1], line, ft_strlen(line));
 		free(line);
 	}
@@ -94,28 +147,17 @@ int heredoc(t_cmd *cmd)
 {
 	int pid;
 
+	print_list(cmd);
 	if (pipe(data()->here) == -1)
 		perror("");
 	pid = fork();
 	if (pid == 0)
 	{
-    signal(SIGQUIT, SIG_IGN); //says signal c/ should be ignored
-    signal(SIGINT, handle_c); //when control c handle	child_heredoc(cmd);
+    	signal(SIGQUIT, SIG_IGN); //says signal c/ should be ignored
+    	signal(SIGINT, handle_c); //when control c handle	child_heredoc(cmd);
 		child_heredoc(cmd);
 	}
 	close(data()->here[1]);
 	waitpid(pid, NULL, 0);
 	return (data()->here[0]);
-
-	/* if (cmd->redir->next == NULL)
-	{
-		printf("GOOD\n");
-		return (data()->here[0]);
-	}
-	else
-	{
-		close(data()->here[0]);
-		printf("DEBUG\n");
-		return (0);
-	} */
 }

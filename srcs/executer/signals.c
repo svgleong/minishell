@@ -7,7 +7,7 @@ void handle_signals(void)
 }
 void	control_d(char *str)
 {
-	unsigned char	status;
+	//unsigned char	status;
 	
 	if (str)
 		return ;

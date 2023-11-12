@@ -77,11 +77,11 @@ void	heredoc_init(t_cmd **cmds)
 		while ((*cmds)->redir)
 		{
 			if ((*cmds)->redir->redir == 2)
-      {
-        if ((*cmds)->fd_in != -1)
-          close((*cmds)->fd_in);
+      		{
+				if ((*cmds)->fd_in != -1)
+					close((*cmds)->fd_in);
 				(*cmds)->fd_in = heredoc((*cmds));
-      }
+      		}
 			(*cmds)->redir = (*cmds)->redir->next;
 		}
 		(*cmds)->redir = tmp_redir;
