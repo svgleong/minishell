@@ -76,7 +76,7 @@ int	create_list(t_cmd **lst, char **args)
 		return (0);
 	}
 	quote_checker(lst);
-	print_list(*lst);
+	//print_list(*lst);
 	free_matrix(args);
 	check_redirections(lst);
 	if (!redirections(lst))

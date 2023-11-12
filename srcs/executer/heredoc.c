@@ -85,31 +85,32 @@ int	check_quotes_here(char *s)
 	return (0);
 }
 
-void removeQuotes(char *str) {
-    int len = strlen(str);
-    int i = 0, j = 0;
+void remove_quotes_here(char *str) {
+    int len;
+    int i;
+	int j;
 
+	i = 0;
+	j = 0;
+	len = strlen(str);
     while (i < len) {
-        if ((str[i] == '\'' && str[i + 1] == '\"') || (str[i] == '\"' && str[i + 1] == '\'')) {
+        if ((str[i] == '\'' && str[i + 1] == '\"') || (str[i] == '\"' && str[i + 1] == '\''))
             i += 2; // Skip the pair of quotes
-        } else if (str[i] == '\'' || str[i] == '\"') {
+        else if (str[i] == '\'' || str[i] == '\"')
             i++; // Skip the single quote or double quote
-        }
-
         str[j++] = str[i++];
     }
-
     str[j] = '\0';
 }
 
  void    child_heredoc(t_cmd *cmd)
 {
 	char *line;
-	bool	quote;
+	bool	quote = false;
 
-	if (check_quotes_here(cmd->redir->file) == 1)
+	while (check_quotes_here(cmd->redir->file) == 1)
 	{
-		removeQuotes(cmd->redir->file);
+		remove_quotes_here(cmd->redir->file);
 		quote = true;
 	}
 	close(data()->here[0]);
@@ -147,7 +148,6 @@ int heredoc(t_cmd *cmd)
 {
 	int pid;
 
-	print_list(cmd);
 	if (pipe(data()->here) == -1)
 		perror("");
 	pid = fork();
