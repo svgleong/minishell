@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: svalente <svalente@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 21:28:12 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/08 15:24:17 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/12 14:39:51 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,21 +53,6 @@ int	redirections(t_cmd **cmds)
 		{
 			if (!treat_redirections(&data()->pointer_cmd))
 				return (0);
-			/* if ((*cmds)->redir->redir == 4)
-			{
-			 	if (!redir_in(cmds))
-					return (0);
-			}
-			else if ((*cmds)->redir->redir == 3)
-			{
-				if(!redir_out(cmds))
-					return (0);
-			}
-			else if ((*cmds)->redir->redir == 1)
-			{
-				if (redir_out_append(cmds))
-					return (0);
-			} */
 			data()->pointer_cmd->redir = data()->pointer_cmd->redir->next;
 		}
 		data()->pointer_cmd->redir = tmp_redir;

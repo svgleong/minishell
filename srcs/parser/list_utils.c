@@ -3,16 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   list_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: svalente <svalente@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 10:46:46 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/08 16:52:41 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/12 14:44:56 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* #include <cmd.h>
-#include <alloc.h>
-#include "../../includes/alloc.h" */
 #include <minishell.h>
 
 t_cmd	*cmd_new_node(char **args)
@@ -79,6 +76,7 @@ int	create_list(t_cmd **lst, char **args)
 		return (0);
 	}
 	quote_checker(lst);
+	print_list(*lst);
 	free_matrix(args);
 	check_redirections(lst);
 	if (!redirections(lst))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: svalente <svalente@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:45:08 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/08 16:48:18 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/12 14:46:09 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	get_env_to_list(char **env)
 void	which_builtin(t_cmd *cmd)
 {
 	if (!ft_strcmp(cmd->args[0], "env"))
-		envp(cmd);
+		envp();
 	else if (!ft_strcmp(cmd->args[0], "pwd"))
 		pwd();
 	else if (!ft_strcmp(cmd->args[0], "echo"))
