@@ -44,13 +44,12 @@ int		is_valid(char *var);
 char	*rem_quotes_export(char *s);
 char	*check_expansion(char *str, int *i);
 void	update_shell_lvl(void);
-
-// teste
 void	handle_signals(void);
 void	control_d(char *str);
 void	sig_handler(int signal);
 int		search_expansion(t_cmd *cmds);
-char	*node_value(t_env *node);
 t_cmd	*get_head(t_cmd *lst);
+void	init_data_var2(void);
+void	init_data_var(void);
 
 #endif
