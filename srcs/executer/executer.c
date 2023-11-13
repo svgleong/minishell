@@ -41,16 +41,13 @@ void	core_execution(t_cmd *cmd)
 	else if (cmd->next)
 		dup2(cmd->pipe[1], STDOUT_FILENO);
 	close(cmd->pipe[1]);
-	if (data()->exit == 0)
+	if (cmd_is_builtin(cmd->args[0]) == 1)
 	{
-		if (cmd_is_builtin(cmd->args[0]) == 1)
-		{
-			which_builtin(cmd);
-			general_free(cmd, 1, 1, 1);
-		}
-		else
-			exec(cmd);
+		which_builtin(cmd);
+		general_free(cmd, 1, 1, 1);
 	}
+	else
+		exec(cmd);
 }
 
 void	pipe_handler(t_cmd *cmd)

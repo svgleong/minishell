@@ -24,6 +24,7 @@
 # include <builtin.h>
 # include <sys/wait.h>
 # include <errno.h>
+# include <limits.h>
 
 char	*get_next_line(int fd);
 char	*find_command_path(char *command);

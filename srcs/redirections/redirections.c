@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svalente <svalente@student.42lisboa.com>   +#+  +:+       +#+        */
+/*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 21:28:12 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/12 14:39:51 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/13 11:15:28 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ static int	redir_in(t_cmd **cmds)
 	{
 		perror("Error");
 		data()->exit = 1;
+		//printf("status infile: %d\n", data()->exit);
 		return (0);
 	}
 	(*cmds)->fd_in = open((*cmds)->redir->file, O_RDONLY);

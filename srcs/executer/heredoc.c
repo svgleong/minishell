@@ -41,21 +41,21 @@ void	heredoc_error(char *del)
 
 void	handle_c(int signal)
 {
-	/* if (signal == SIGQUIT)
-		SIG_IGN ;
-	else if (signal == SIGINT)
+	// if (signal == SIGQUIT)
+	// 	SIG_IGN ;
+	if (signal == SIGINT)
 	{
 		write(2, " ", 1);
 		general_free(data()->pointer_cmd, 1, 1, 0);
 		close(data()->here[0]);
 		close(data()->here[1]);
 		exit(1);
-	} */
-	(void)signal;
+	}
+	/* (void)signal;
 	general_free(data()->pointer_cmd, 1, 1, 0);
 	close(data()->here[0]);
 	close(data()->here[1]);
-	exit(EXIT_FAILURE);
+	exit(EXIT_FAILURE); */
 }
 
 int	check_quotes_here(char *s)

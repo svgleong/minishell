@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svalente <svalente@student.42lisboa.com>   +#+  +:+       +#+        */
+/*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:39:21 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/12 14:56:02 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/13 11:24:21 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,10 @@ void	main_loop(char **env)
 	rl_catch_signals = 0;
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, sig_handler);
+	data()->exit = 0;
 	while (1)
 	{
+		data()->redir = 0;
 		data()->error = 0;
 		rl = readline("Painshell: ");
 		control_d(rl);
@@ -44,7 +46,6 @@ void	main_loop(char **env)
 		add_history(rl);
 		if (!parser(rl))
 			continue ;
-		data()->exit = 0;
 		if (data()->error == 0)
 			execution(data()->pointer_cmd);
 		cmdlstclear(&data()->pointer_cmd);

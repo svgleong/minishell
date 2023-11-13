@@ -6,7 +6,7 @@
 #    By: svalente <svalente@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/20 20:09:21 by svalente          #+#    #+#              #
-#    Updated: 2023/11/08 12:27:40 by svalente         ###   ########.fr        #
+#    Updated: 2023/11/13 12:19:50 by svalente         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,8 +68,8 @@ INCLUDES	= includes/
 
 #FIXME: Change to CC
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -g -I$(INCLUDES) #-fsanitize=address,undefined
-LDFLAGS		= -L /opt/homebrew/opt/readline/lib -I /opt/homebrew/opt/readline/include -lreadline -lhistory
+CFLAGS		= -Wall -Wextra -Werror -I$(INCLUDES) #-g -fsanitize=address,undefined
+LDFLAGS		= -L /opt/homebrew/opt/readline/lib -I /opt/homebrew/opt/readline/include -lreadline 
 
 #$(VERBOSE).SILENT:
 
@@ -81,7 +81,7 @@ $(OBJ_PATH)/%.o:%.c
 
 $(NAME): $(OBJS)
 	clear
-	@$(CC) $(CFLAGS) -o $@  $^ -lreadline
+	@$(CC) $(CFLAGS) -o $@  $^ -lreadline -lhistory
 	@echo "\033[1;35m---> MINISHELL SUCCESSFULLY COMPILED\033[0m"
 
 run: 
