@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:02:23 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/03 12:12:46 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/13 16:53:40 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ char	*expansion(char *str, int i)
 
 	env = data()->envp;
 	value = NULL;
+	printf("i = %d\n", i);
 	while (env)
 	{
 		if (!ft_strncmp(str + i + 1, env->content, \
@@ -72,6 +73,7 @@ char	*expansion(char *str, int i)
 	return (value);
 }
 
+
 int	search_expansion(t_cmd *cmds)
 {
 	int		i;
@@ -80,13 +82,16 @@ int	search_expansion(t_cmd *cmds)
 	bool	doub_quote;
 
 	i = -1;
-	j = -1;
 	while (cmds->args[++i])
 	{
 		j = -1;
 		doub_quote = false;
 		while (cmds->args[i][++j])
 		{
+			if (cmds->args[i][j] == '\'' && doub_quote == false)
+			{
+				skip_quotes(cmds->args[i], '\'', &j);
+			}
 			if (cmds->args[i][j] == '"')
 			{
 				if (doub_quote == true)
@@ -94,18 +99,18 @@ int	search_expansion(t_cmd *cmds)
 				else
 					doub_quote = true;
 			}
-			if (cmds->args[i][j] == '\'' && doub_quote == false)
-				skip_quotes(cmds->args[i], '\'', &j);
 			else if (cmds->args[i][j] && cmds->args[i][j] == '$')
 			{
 				tmp = check_expansion(cmds->args[i], j);
+				printf("%s\n", tmp);
 				if (tmp[0] == '\2')
-        {
-          free(tmp);
+        		{
+         		 free(tmp);
 					continue ;
-        }
+    			}
 				free(cmds->args[i]);
 				cmds->args[i] = tmp;
+				doub_quote = false;
 				j = -1;
 			}
 		}
@@ -125,3 +130,6 @@ void	expander(t_cmd **cmds)
 	}
 	(*cmds) = head;
 }
+
+//echo "'$USER'"'"$USER"'
+//echo '"$USER"'"'$USER'"

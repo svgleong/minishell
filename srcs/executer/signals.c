@@ -20,6 +20,9 @@ void	control_d(char *str)
 
 void	sig_handler(int signal)
 {
+	pid_t	pid;
+	int		status;
+
 	if (signal == SIGINT && !data()->pointer_cmd)
 	{
 		data()->exit = 130;
@@ -28,12 +31,16 @@ void	sig_handler(int signal)
 		rl_replace_line("", 0);
 		rl_redisplay();
 	}
-	// else if (signal == SIGINT)
-	// {
-	// 	write(1, "\n", 1);
-	// 	rl_on_new_line();
-	// 	rl_replace_line("", 0);
-	// 	rl_redisplay();
-	// }
+	else if (signal == SIGQUIT)
+	{
+		pid = waitpid(-1, &status, 0);
+		if (pid == -1)
+			SIG_IGN ;
+		else if (data()->in_heredoc == 0)
+		{
+			write(1, "Quit (core dumped)\n", 20);
+			return ;
+		}
+	}
 	return ;
 }

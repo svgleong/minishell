@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:20:58 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/08 12:46:49 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/13 15:44:06 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ typedef struct s_data
 	t_env			*envp;
 	int				here[2];
 	char			**del;
-	int				status;
+	int				in_heredoc;
 	int				redir;
 	int				exit;
 	int				*pipe_here;

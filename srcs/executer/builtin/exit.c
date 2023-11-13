@@ -34,6 +34,8 @@ void    exit_builtin(t_cmd *cmd)
 
 	if (!cmd->args || !cmd->args[1])
 		exit(data()->exit);
+	if (!cmd->next)
+		ft_putstr_fd("exit\n", 2);
 	if (!ft_strdigit(cmd->args[1]) || ft_atol(cmd->args[1]) == 3737373737)
 	{
 		ft_putstr_fd("exit: ", 2);
@@ -45,14 +47,13 @@ void    exit_builtin(t_cmd *cmd)
 	{
 		ft_putstr_fd("exit: too many arguments or outside limits\n", 2);
 		status = 1;
+		return ;
 	}
 	else
 	{
 		status = ft_atoi(cmd->args[1]);
 		status %= 256 + 256 * (status < 0);
 	}
-	if (!cmd->next)
-		ft_putstr_fd("exit\n", 2);
 	data()->exit = status;
 	exit(status);
 }

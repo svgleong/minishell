@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:39:21 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/13 11:24:21 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/13 15:47:10 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	main_loop(char **env)
 	env_checker(env);
 	data()->pointer_cmd = NULL;
 	rl_catch_signals = 0;
-	signal(SIGQUIT, SIG_IGN);
+	signal(SIGQUIT, sig_handler);
 	signal(SIGINT, sig_handler);
 	data()->exit = 0;
 	while (1)

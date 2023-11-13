@@ -147,8 +147,10 @@ void remove_quotes_here(char *str) {
 int heredoc(t_cmd *cmd)
 {
 	int pid;
-  int status;
+ 	int status;
 
+	data()->in_heredoc = 1;
+	status = 0;
 	if (pipe(data()->here) == -1)
 		perror("");
 	pid = fork();
@@ -160,10 +162,11 @@ int heredoc(t_cmd *cmd)
 	}
 	close(data()->here[1]);
 	waitpid(pid, &status, 0);
-  if (WIFEXITED(status) && WEXITSTATUS(status) != 0)
-  {
-    close(data()->here[0]);
-    return (-1);
-  }
+	data()->in_heredoc = 0;
+  	if (WIFEXITED(status) && WEXITSTATUS(status) != 0)
+	{
+		close(data()->here[0]);
+		return (-1);
+	}
 	return (data()->here[0]);
 }
