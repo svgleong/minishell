@@ -22,17 +22,12 @@ char	*expansion_heredoc(char *s)
 	{
 		if (s[j] && s[j] == '$')
 		{
-			tmp = check_expansion(s, j);
-			if (tmp[0] == '\2')
-			{
-				free(tmp);
-				continue ;
-			}
-			free(s);
+			tmp = check_expansion(s, &j);
+	      	free(s);
 			s = tmp;
-			j = -1;
 		}
 	}
+	printf("herdoc expand: %s\n", s);
 	return (s);
 }
 
@@ -58,9 +53,8 @@ void	main_loop_heredoc(t_cmd *cmd, bool quote, char *line)
 		}
 		if (quote == false)
 			line = expansion_heredoc(line);
-		if (line[ft_strlen(line)] == '\0')
-			line[ft_strlen(line)] = '\n';
 		write(data()->here[1], line, ft_strlen(line));
+		write(data()->here[1], "\n", 1);
 		free(line);
 	}
 }
