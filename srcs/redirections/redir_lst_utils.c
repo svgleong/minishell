@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 12:22:56 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/08 12:31:45 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/13 20:52:52 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,42 +44,18 @@ void	redir_add_back(t_redir **lst, t_redir *new)
 	{
 		*lst = new;
 		new->prev = NULL;
-		// return ;
 	}
 	else
 	{
-	last = redir_last_node(*lst);
-	last->next = new;
-	last->next->prev = last;
+		last = redir_last_node(*lst);
+		last->next = new;
+		last->next->prev = last;
 	}
-	// printf("====rediraddback======\n");
-	// print_redir(*lst);
-	// printf("====rediraddback======\n");
 }
 
 void	create_redir_lst(t_cmd **cmd, int redir, char *file)
 {
-	// printf("redir: file %p")
 	redir_add_back(&(*cmd)->redir, redir_new_node(redir, file));
-}
-
-void	print_redir(t_redir *lst)
-{
-	t_redir *tmp = lst;
-
-	if (!lst)
-	{
-		printf("Empty list for redirections\n");	
-		return ;
-	}
-	while (tmp)
-	{
-		// printf("Address of red: %p\n", tmp);
-		// printf("Address of file: %p\n", tmp->file);
-		printf("redir: %d\n", tmp->redir);
-		printf("file: %s\n", tmp->file);
-		tmp = tmp->next;
-	}
 }
 
 void	check_redirections(t_cmd **cmds)
@@ -102,36 +78,8 @@ void	check_redirections(t_cmd **cmds)
 			else if (!ft_strncmp((*cmds)->args[i], "<", 2))
 				create_redir_lst(cmds, 4, (*cmds)->args[i + 1]);
 		}
-		/* print_redir((*cmds)->redir);
-		printf("==============\n"); */
 		(*cmds) = (*cmds)->next;
 	}
 	(*cmds) = head;
 	clean_redirections(cmds);
-	// print_list(*cmds);
-}
-
-t_redir	*get_head_redir(t_redir *lst)
-{
-	while (lst && lst->prev)
-		lst = lst->prev;
-	return (lst);
-}
-
-void	redirlstclear(t_redir **lst)
-{
-	t_redir	*head;
-	t_redir	*tmp;
-
-	head = get_head_redir(*lst);
-	while (head)
-	{
-		tmp = head;
-		head = head->next;
-		free(tmp->file);
-		if (tmp->fd != -1)
-			close(tmp->fd);
-		free(tmp);
-	}
-	head = NULL;
 }

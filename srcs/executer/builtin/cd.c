@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:41:17 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/13 12:31:08 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/13 21:01:43 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	update_pwd(void)
 
 	if (search_env("OLDPWD") == NULL)
 	{
-		printf("NOT OLDPWD\n");
 		path = ft_strjoin_free("OLDPWD=", getcwd(NULL, 0), 2);
 		env_add_node_end(data()->envp, env_new_node(path));
 		free(path);

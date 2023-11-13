@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 09:42:07 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/18 09:55:15 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/13 20:45:18 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,29 @@ int	matrix_size(char **args)
 		i++;
 	i += count_redir(args);
 	return (i);
+}
+
+t_redir	*get_head_redir(t_redir *lst)
+{
+	while (lst && lst->prev)
+		lst = lst->prev;
+	return (lst);
+}
+
+void	redirlstclear(t_redir **lst)
+{
+	t_redir	*head;
+	t_redir	*tmp;
+
+	head = get_head_redir(*lst);
+	while (head)
+	{
+		tmp = head;
+		head = head->next;
+		free(tmp->file);
+		if (tmp->fd != -1)
+			close(tmp->fd);
+		free(tmp);
+	}
+	head = NULL;
 }

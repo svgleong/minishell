@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:20:58 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/13 20:29:50 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/13 20:51:06 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,8 @@ char	*expansion(char *str, int *i);
 void	general_free(t_cmd *cmd, bool env, bool close, bool exit);
 char	*ft_strjoin(char *s1, char *s2);
 int		heredoc(t_cmd *cmd);
+void	cmd_add_back(t_cmd **lst, t_cmd *new);
+t_cmd	*cmd_last_node(t_cmd *lst);
+t_cmd	*cmd_new_node(char **args);
 
 #endif
