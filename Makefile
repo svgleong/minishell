@@ -62,6 +62,7 @@ SRCS		= srcs/libs/ft_calloc.c						\
 			  srcs/expansion/expansion.c				\
 			  srcs/expansion/expansion_utils.c			\
 			  srcs/expansion/expansion_utils2.c			\
+			  srcs/main_utils.c 								\
 			  srcs/main.c 								\
 
 OBJS		= $(addprefix $(OBJ_PATH)/, $(addsuffix .o, $(basename $(SRCS))))
