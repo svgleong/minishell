@@ -1,7 +1,17 @@
-#ifndef MINISHELL_H
-#define MINISHELL_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/13 19:43:20 by svalente          #+#    #+#             */
+/*   Updated: 2023/11/13 19:45:37 by svalente         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-//changed to ""
+#ifndef MINISHELL_H
+# define MINISHELL_H
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 25
@@ -29,18 +39,17 @@
 char	*get_next_line(int fd);
 char	*find_command_path(char *command);
 void	which_builtin(t_cmd *cmd);
-int	    cmd_is_builtin(char *command);
-int     is_valid(char *var);
-char    *rem_quotes_export(char *s);
+int		cmd_is_builtin(char *command);
+int		is_valid(char *var);
+char	*rem_quotes_export(char *s);
 char	*check_expansion(char *str, int *i);
 void	update_shell_lvl(void);
-
-// teste
-void    handle_signals(void);
+void	handle_signals(void);
 void	control_d(char *str);
 void	sig_handler(int signal);
-int	    search_expansion(t_cmd *cmds);
-char	*node_value(t_env *node);
+int		search_expansion(t_cmd *cmds);
 t_cmd	*get_head(t_cmd *lst);
+void	init_data_var2(void);
+void	init_data_var(void);
 
 #endif

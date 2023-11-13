@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   main_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/08 16:41:17 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/13 21:06:39 by svalente         ###   ########.fr       */
+/*   Created: 2023/11/13 21:09:12 by svalente          #+#    #+#             */
+/*   Updated: 2023/11/13 21:09:13 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	pwd(void)
+void	init_data_var(void)
 {
-	char	*buf;
+	data()->redir = 0;
+	data()->error = 0;
+}
 
-	buf = getcwd(NULL, 0);
-	ft_putendl_fd(buf, 1);
-	free(buf);
-	exitbuiltin(EXIT_SUCCESS);
-	return ;
+void	init_data_var2(void)
+{
+	data()->exit = 0;
+	data()->pointer_cmd = NULL;
 }

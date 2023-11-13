@@ -6,7 +6,7 @@
 #    By: svalente <svalente@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/20 20:09:21 by svalente          #+#    #+#              #
-#    Updated: 2023/11/13 19:05:49 by svalente         ###   ########.fr        #
+#    Updated: 2023/11/13 20:49:31 by svalente         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ SRCS		= srcs/libs/ft_calloc.c						\
 			  srcs/parser/parser.c 						\
 			  srcs/redirections/redir_lst_utils.c 		\
 			  srcs/redirections/redirections.c 			\
+			  srcs/redirections/type_redir.c 			\
 			  srcs/redirections/clean_redirections.c 	\
 			  srcs/redirections/redirections_checker.c 	\
 			  srcs/alloc/utils.c 						\
@@ -62,6 +63,7 @@ SRCS		= srcs/libs/ft_calloc.c						\
 			  srcs/expansion/expansion.c				\
 			  srcs/expansion/expansion_utils.c			\
 			  srcs/expansion/expansion_utils2.c			\
+			  srcs/main_utils.c 								\
 			  srcs/main.c 								\
 
 OBJS		= $(addprefix $(OBJ_PATH)/, $(addsuffix .o, $(basename $(SRCS))))

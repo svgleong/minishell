@@ -6,18 +6,15 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 21:28:12 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/13 11:15:28 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/13 21:08:51 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static int	redir_in(t_cmd **cmds);
-static int	redir_out(t_cmd **cmds);
-static int	redir_out_append(t_cmd **cmds);
-int			heredoc_init(t_cmd **cmds);
+int	heredoc_init(t_cmd **cmds, t_cmd *tmp_cmds);
 
-int	treat_redirections (t_cmd **cmds)
+int	treat_redirections(t_cmd **cmds)
 {
 	if ((*cmds)->redir->redir == 4)
 	{
@@ -26,7 +23,7 @@ int	treat_redirections (t_cmd **cmds)
 	}
 	else if ((*cmds)->redir->redir == 3)
 	{
-		if(!redir_out(cmds))
+		if (!redir_out(cmds))
 			return (0);
 	}
 	else if ((*cmds)->redir->redir == 1)
@@ -41,7 +38,7 @@ int	redirections(t_cmd **cmds)
 {
 	t_cmd	*tmp_cmds;
 	t_redir	*tmp_redir;
-	
+
 	(void)cmds;
 	tmp_cmds = data()->pointer_cmd;
 	if (!tmp_cmds)
@@ -59,17 +56,15 @@ int	redirections(t_cmd **cmds)
 		data()->pointer_cmd = data()->pointer_cmd->next;
 	}
 	data()->pointer_cmd = tmp_cmds;
-	if (!heredoc_init(&data()->pointer_cmd))
-    return (0);
+	if (!heredoc_init(&data()->pointer_cmd, data()->pointer_cmd))
+		return (0);
 	return (1);
 }
 
-int	heredoc_init(t_cmd **cmds)
+int	heredoc_init(t_cmd **cmds, t_cmd *tmp_cmds)
 {
-	t_cmd	*tmp_cmds;
 	t_redir	*tmp_redir;
 
-	tmp_cmds = *cmds;
 	if (!tmp_cmds)
 		return (0);
 	while (*cmds)
@@ -78,11 +73,11 @@ int	heredoc_init(t_cmd **cmds)
 		while ((*cmds)->redir)
 		{
 			if ((*cmds)->redir->redir == 2)
-      		{
+			{
 				if ((*cmds)->fd_in != -1)
 					close((*cmds)->fd_in);
 				(*cmds)->fd_in = heredoc((*cmds));
-        		if ((*cmds)->fd_in == -1)
+				if ((*cmds)->fd_in == -1)
 					return (0);
 			}
 			(*cmds)->redir = (*cmds)->redir->next;
@@ -91,59 +86,5 @@ int	heredoc_init(t_cmd **cmds)
 		(*cmds) = (*cmds)->next;
 	}
 	(*cmds) = tmp_cmds;
-	return (1);
-}
-
-static int	redir_in(t_cmd **cmds)
-{
-	data()->redir = 1;
-	if ((*cmds)->fd_in != -1)
-		close((*cmds)->fd_in);
-	if (access((*cmds)->redir->file, F_OK) == -1)
-	{
-		perror("Error");
-		data()->exit = 1;
-		return (0);
-	}
-	(*cmds)->fd_in = open((*cmds)->redir->file, O_RDONLY);
-	if ((*cmds)->fd_in == -1)
-	{
-		ft_putstr_fd("Error opening file\n", 2);
-		data()->exit = 1;
-		return (0);
-	}
-	return (1);
-}
-
-static int	redir_out(t_cmd **cmds)
-{
-	data()->redir = 1;
-	if ((*cmds)->fd_out != -1)
-		close((*cmds)->fd_out);
-	(*cmds)->fd_out = open((*cmds)->redir->file, O_WRONLY | O_CREAT \
-		| O_TRUNC, 0644);
-	if ((*cmds)->fd_out == -1)
-	{
-		ft_putstr_fd("Error opening file\n", 2);
-		data()->exit = 1;
-		return (0);
-	}
-	return (1);
-}
-
-static int	redir_out_append(t_cmd **cmds)
-{
-	data()->redir = 1;
-	if ((*cmds)->fd_out != -1)
-		close((*cmds)->fd_out);
-	(*cmds)->fd_out = open((*cmds)->redir->file, O_WRONLY | O_CREAT \
-		| O_APPEND, 0644);
-	if ((*cmds)->fd_out == -1)
-	{
-		ft_putstr_fd("Error opening file\n", 2);
-		data()->exit = 1;
-		data()->error = 1;
-		return (0);
-	}
 	return (1);
 }

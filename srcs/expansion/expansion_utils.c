@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:43:07 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/13 19:18:24 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/13 19:49:57 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	calculate_result(char *str, char *value, int key, int i)
 {
 	int	size;
-	
+
 	size = i;
 	size += ft_strlen(value) + (ft_strlen(str) - i - key);
 	return (size);

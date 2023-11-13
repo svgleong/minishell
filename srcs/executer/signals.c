@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:41:17 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/13 12:31:08 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/13 21:09:51 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void handle_signals(void)
+void	handle_signals(void)
 {
-    signal(SIGINT, sig_handler);
-    signal(SIGQUIT, sig_handler);
+	signal(SIGINT, sig_handler);
+	signal(SIGQUIT, sig_handler);
 }
+
 void	control_d(char *str)
 {
-	//unsigned char	status;
-	
 	if (str)
 		return ;
 	rl_clear_history();
 	write(1, "exit\n", 6);
 	general_free((data()->pointer_cmd), 1, 1, 0);
-	//status = (unsigned char)(data()->envp)exit;
 	exit(0);
 }
 

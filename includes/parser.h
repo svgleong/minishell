@@ -6,19 +6,19 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 14:51:17 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/13 19:18:34 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/13 20:52:13 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
 
-int     valid_quotes(char *str);
+int		valid_quotes(char *str);
 int		checker(char *rl);
-char    *modify_str(char *rl);
+char	*modify_str(char *rl);
 char	**separate_args(char *rl);
 int		key_value(char *str);
-int		calculate_result(char *str , char *value, int key, int i);
+int		calculate_result(char *str, char *value, int key, int i);
 char	*get_status(char *str, int *i);
 char	*remove_expand(char *str, int *i);
 char	*remove_dollar(char *str, int *i);
@@ -31,8 +31,11 @@ void	redirlstclear(t_redir **lst);
 void	print_redir(t_redir *lst);
 void	quote_checker(t_cmd **cmd);
 int		remove_empty_strs(t_cmd **cmds);
-int 	redir_no_file_checker(t_cmd **cmds);
-int	    parser(char *rl);
+int		redir_no_file_checker(t_cmd **cmds);
+int		parser(char *rl);
 char	*expanding(char *str, char *value, int key, int i);
+int		redir_in(t_cmd **cmds);
+int		redir_out(t_cmd **cmds);
+int		redir_out_append(t_cmd **cmds);
 
 #endif

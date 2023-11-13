@@ -6,25 +6,21 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:20:58 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/13 17:16:01 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/13 20:51:06 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CMD_H
 # define CMD_H
 
-#include <stdio.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-#include <stdlib.h>
-#include <string_lib.h>
-#include <builtin.h>
-#include <stdbool.h>
-
-/* 	">" -> 3
-	"<" -> 4
-	">>" -> 1
-	"<<" -> 2 */
+# include <stdio.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+# include <stdlib.h>
+# include <string_lib.h>
+# include <builtin.h>
+# include <stdbool.h>
+# include <minishell.h>
 
 typedef struct s_redir
 {
@@ -34,8 +30,6 @@ typedef struct s_redir
 	struct s_redir	*next;
 	struct s_redir	*prev;
 }	t_redir;
-
-
 
 typedef struct s_cmd
 {
@@ -60,37 +54,30 @@ typedef struct s_data
 	int				exit;
 	int				*pipe_here;
 	t_cmd			*pointer_cmd;
-	struct termios	termios_save;
 	bool			error;
-} t_data;
+}	t_data;
 
 t_data	*data(void);
 
-	
-void    envp();
-void    pwd();
-void    echo(t_cmd *cmd);
-void    exit_builtin(t_cmd *cmd);
-void 	cd(t_cmd *cmd);
+void	envp(void);
+void	pwd(void);
+void	echo(t_cmd *cmd);
+void	exit_builtin(t_cmd *cmd);
+void	cd(t_cmd *cmd);
 void	export(t_cmd *cmd);
-void    unset(char **cmd);
+void	unset(char **cmd);
 void	execution(t_cmd *cmd);
 void	get_env_to_list(char **env);
-
 void	print_list(t_cmd *lst);
 void	cmdlstclear(t_cmd **lst);
 int		create_list(t_cmd **lst, char **args);
-
-// Expansion resources
 int		search_expansion(t_cmd *cmds);
 char	*expansion(char *str, int *i);
-
-//frees
 void	general_free(t_cmd *cmd, bool env, bool close, bool exit);
-void    free_env_list(t_env **lst);
-
-
-char    *ft_strjoin(char *s1, char *s2);
-int    heredoc(t_cmd *cmd);
+char	*ft_strjoin(char *s1, char *s2);
+int		heredoc(t_cmd *cmd);
+void	cmd_add_back(t_cmd **lst, t_cmd *new);
+t_cmd	*cmd_last_node(t_cmd *lst);
+t_cmd	*cmd_new_node(char **args);
 
 #endif
