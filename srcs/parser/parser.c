@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 20:33:04 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/13 19:54:10 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/13 20:33:17 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,14 @@ int	parser(char *rl)
 	}
 	return (1);
 }
+
+void	error_empty_strs(char **args)
+{
+	ft_putstr_fd("ambiguous redirect\n", 2);
+	free_matrix(args);
+	data()->exit = 1;
+}
+
 int	create_list(t_cmd **lst, char **args)
 {
 	int	i;
@@ -43,7 +51,7 @@ int	create_list(t_cmd **lst, char **args)
 	expander(lst);
 	if (!remove_empty_strs(lst))
 	{
-		
+		error_empty_strs(args);
 		return (0);
 	}
 	quote_checker(lst);
@@ -52,10 +60,4 @@ int	create_list(t_cmd **lst, char **args)
 	if (!redirections(lst))
 		return (0);
 	return (1);
-}
-void    error_empty_strs(char **args)
-{
-    ft_putstr_fd("ambiguous redirect\n", 2);
-    free_matrix(args);
-    data()->exit = 1;
 }

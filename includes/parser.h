@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 14:51:17 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/13 19:18:34 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/13 20:29:00 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,8 @@ int		remove_empty_strs(t_cmd **cmds);
 int		redir_no_file_checker(t_cmd **cmds);
 int		parser(char *rl);
 char	*expanding(char *str, char *value, int key, int i);
+void	cmd_add_back(t_cmd **lst, t_cmd *new);
+t_cmd	*cmd_last_node(t_cmd *lst);
+t_cmd	*cmd_new_node(char **args);
 
 #endif

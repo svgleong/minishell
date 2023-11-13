@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 09:52:09 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/18 09:54:34 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/13 20:34:22 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ char	**copy_matrix(char **matrix)
 		if (dup[i] == NULL)
 		{
 			free_matrix(dup);
-			printf("Error copying matrix\n"); //melhorar
+			printf("Error copying matrix\n");
+			general_free(data()->pointer_cmd, 1, 1, 1);
 			return (NULL);
 		}
 		i++;

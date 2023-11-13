@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:20:58 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/13 19:42:44 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/13 20:29:50 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <string_lib.h>
 # include <builtin.h>
 # include <stdbool.h>
+# include <minishell.h>
 
 typedef struct s_redir
 {
@@ -53,7 +54,6 @@ typedef struct s_data
 	int				exit;
 	int				*pipe_here;
 	t_cmd			*pointer_cmd;
-	struct termios	termios_save;
 	bool			error;
 }	t_data;
 
