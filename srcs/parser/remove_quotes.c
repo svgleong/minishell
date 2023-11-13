@@ -58,10 +58,7 @@ void	remove_quotes(char **args)
 				break ;
 			}
 			else if (args[i][j] == '\'')
-			{
-				printf("entrei\n");	
 				args[i] = rem_quotes_pair(args[i], '\'', &j);
-			}
 			else if (args[i][j] == '"')
 				args[i] = rem_quotes_pair(args[i], '"', &j);
 			if (j >= (int)ft_strlen(args[i]))

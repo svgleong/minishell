@@ -14,17 +14,17 @@
 
 int	parser(char *rl)
 {
-    char **tmp;
+	char	**tmp;
 
-    if (!checker(rl))
-        return (0);
-    tmp = separate_args(rl);
-    if (!create_list(&data()->pointer_cmd, tmp))
-    {
-        cmdlstclear(&data()->pointer_cmd);
-        return (0);
-    }
-    return (1);
+	if (!checker(rl))
+		return (0);
+	tmp = separate_args(rl);
+	if (!create_list(&data()->pointer_cmd, tmp))
+	{
+		cmdlstclear(&data()->pointer_cmd);
+		return (0);
+	}
+	return (1);
 }
 int	create_list(t_cmd **lst, char **args)
 {

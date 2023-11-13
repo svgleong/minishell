@@ -87,11 +87,11 @@ char	**copy_args(char **matrix)
 
 void	print_matrix(char **m)
 {
-	int i = 0;
-	
-	if(!m)
+	int	i;
+
+	i = 0;
+	if (!m)
 		return ;
-	printf("PRINT MATRIX\n");
 	while (m[i])
 	{
 		printf("[%s]\n", m[i]);
