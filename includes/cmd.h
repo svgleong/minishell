@@ -74,7 +74,6 @@ int		create_list(t_cmd **lst, char **args);
 int		search_expansion(t_cmd *cmds);
 char	*expansion(char *str, int *i);
 void	general_free(t_cmd *cmd, bool env, bool close, bool exit);
-void	free_env_list(t_env **lst);
 char	*ft_strjoin(char *s1, char *s2);
 int		heredoc(t_cmd *cmd);
 

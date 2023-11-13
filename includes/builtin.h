@@ -13,7 +13,7 @@
 #ifndef BUILTIN_H
 # define BUILTIN_H
 
-# include <cmd.h>
+# include <minishell.h>
 
 typedef struct s_env
 {
@@ -29,7 +29,9 @@ void	print_export(char **export_env);
 char	*get_env_var(char *str);
 t_env	*env_new_node(char *str);
 void	env_add_node_end(t_env *lst, t_env *new);
+void	free_env_list(t_env **lst);
 t_env	*search_env(char *var);
+char	*node_value(t_env *node);
 void	exitbuiltin(int i);
 void	simple_env(void);
 void	env_checker(char **env);
