@@ -1,4 +1,16 @@
-#include "../includes/executer.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/08 16:41:17 by svalente          #+#    #+#             */
+/*   Updated: 2023/11/13 12:31:08 by svalente         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <minishell.h>
 
 // find last node in list
 t_env	*env_last_node(t_env *lst)
@@ -39,9 +51,10 @@ t_env	*env_new_node(char *str)
 void	update_shell_lvl(void)
 {
 	t_env	*node;
-	char	**var_value = NULL;
+	char	**var_value;
 	int		lvl;
 
+	var_value = NULL;
 	node = search_env("SHLVL");
 	if (node == NULL)
 		env_add_node_end(data()->envp, env_new_node("SHLVL=1"));

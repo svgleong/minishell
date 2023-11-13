@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   remove_quotes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: svalente <svalente@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 15:41:19 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/08 16:57:56 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/12 14:52:44 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,16 @@ void	remove_quotes(char **args)
 		j = -1;
 		while (args[i][++j])
 		{
-			if (args[i][j] == '\'')
+			if (args[i][j + 1] && args[i][j] == '<' && args[i][j + 1] == '<' )
+			{
+				i++;
+				break ;
+			}
+			else if (args[i][j] == '\'')
+			{
+				printf("entrei\n");	
 				args[i] = rem_quotes_pair(args[i], '\'', &j);
+			}
 			else if (args[i][j] == '"')
 				args[i] = rem_quotes_pair(args[i], '"', &j);
 			if (j >= (int)ft_strlen(args[i]))

@@ -58,7 +58,6 @@ char	**copy_args_until(char **matrix, char c, char d)
 		}
 		i++;
 	}
-	matrix[i] = NULL;
 	return (dup);
 }
 

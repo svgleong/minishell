@@ -1,13 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/08 16:41:17 by svalente          #+#    #+#             */
+/*   Updated: 2023/11/13 12:31:08 by svalente         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minishell.h>
 
-int	check_dolla(char *s)
-{
-	int i = -1;
-	while (s[++i])
-		if (s[i] == '$')
-			return (i);
-	return (-1);
-}
 char	*expansion_heredoc(char *s)
 {
 	int		j;
@@ -18,99 +22,84 @@ char	*expansion_heredoc(char *s)
 	{
 		if (s[j] && s[j] == '$')
 		{
-			tmp = check_expansion(s, j);
-			if (tmp[0] == '\2')
-				continue ;
+			tmp = check_expansion(s, &j);
+	      	free(s);
 			s = tmp;
-			j = -1;
 		}
 	}
+	printf("herdoc expand: %s\n", s);
 	return (s);
 }
 
-
-
-void	heredoc_error(char *del)
+void	main_loop_heredoc(t_cmd *cmd, bool quote, char *line)
 {
-	printf("\nWarning: heredoc on line 1 delimited by EOF (wanted: \"%s\")\n", del);
-}
-
-void	handle_c(int signal)
-{
-	/* if (signal == SIGQUIT)
-		SIG_IGN ;
-	else if (signal == SIGINT)
-	{
-		write(2, " ", 1);
-		general_free(data()->pointer_cmd, 1, 1, 0);
-		close(data()->here[0]);
-		close(data()->here[1]);
-		exit(1);
-	} */
-	(void)signal;
-	general_free(data()->pointer_cmd, 1, 1, 0);
-	close(data()->here[0]);
-	close(data()->here[1]);
-	exit(EXIT_FAILURE);
-}
-
- void    child_heredoc(t_cmd *cmd)
-{
-	char *line;
-
-	close(data()->here[0]);
 	while (1)
 	{
 		write(0, "> ", 2);
 		line = get_next_line(0);
-		// line = readline("> ");
 		if (!line)
 		{
 			heredoc_error(cmd->redir->file);
 			general_free(cmd, 1, 1, 0);
-			break;
+			break ;
 		}
-		if (!ft_strncmp(line, cmd->redir->file, ft_strlen(line) - 1))
+		if (line[ft_strlen(line) - 1] == '\n')
+			line[ft_strlen(line) - 1] = '\0';
+		if (!ft_strncmp(line, cmd->redir->file, ft_strlen(line) + 1))
 		{
 			free(line);
 			general_free(data()->pointer_cmd, 1, 1, 0);
-			break;
+			break ;
 		}
-		line = expansion_heredoc(line);
+		if (quote == false)
+			line = expansion_heredoc(line);
 		write(data()->here[1], line, ft_strlen(line));
+		write(data()->here[1], "\n", 1);
 		free(line);
 	}
+}
+
+void	child_heredoc(t_cmd *cmd)
+{
+	bool	quote;
+	char	*line;
+
+	quote = false;
+	line = NULL;
+	while (check_quotes_here(cmd->redir->file) == 1)
+	{
+		remove_quotes_here(cmd->redir->file);
+		quote = true;
+	}
+	close(data()->here[0]);
+	main_loop_heredoc(cmd, quote, line);
 	close(data()->here[1]);
 	exit(0);
 }
 
-int heredoc(t_cmd *cmd)
+int	heredoc(t_cmd *cmd)
 {
-	int pid;
+	int	pid;
+	int	status;
 
-	signal(SIGQUIT, SIG_IGN); //says signal c/ should be ignored
-	signal(SIGINT, handle_c); //when control c handle
+	data()->in_heredoc = 1;
+	status = 0;
 	if (pipe(data()->here) == -1)
 		perror("");
 	pid = fork();
 	if (pid == 0)
 	{
+		signal(SIGQUIT, SIG_IGN);
+		signal(SIGINT, handle_c);
 		child_heredoc(cmd);
-		handle_signals();
 	}
 	close(data()->here[1]);
-	wait(&pid);
-	return (data()->here[0]);
-
-	/* if (cmd->redir->next == NULL)
-	{
-		printf("GOOD\n");
-		return (data()->here[0]);
-	}
-	else
+	waitpid(pid, &status, 0);
+	data()->in_heredoc = 0;
+	if (WIFEXITED(status) && WEXITSTATUS(status) != 0)
 	{
 		close(data()->here[0]);
-		printf("DEBUG\n");
-		return (0);
-	} */
+		return (-1);
+	}
+	return (data()->here[0]);
 }

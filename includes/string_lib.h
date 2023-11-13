@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   string.h                                           :+:      :+:    :+:   */
+/*   string_lib.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: parallels <parallels@student.42.fr>        +#+  +:+       +#+        */
+/*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:20:58 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/15 16:55:29 by parallels        ###   ########.fr       */
+/*   Updated: 2023/11/13 12:31:48 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int		ft_isalpha(int c);
 int		ft_isdigit(int c);
 void    ft_putstr_fd(char *s, int fd);
 void    ft_putchar_fd(char c, int fd);
+int		check_limits(char *str);
+long	ft_atol(const char *str);
 
 
 

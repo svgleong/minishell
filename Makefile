@@ -6,7 +6,7 @@
 #    By: svalente <svalente@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/20 20:09:21 by svalente          #+#    #+#              #
-#    Updated: 2023/11/08 12:27:40 by svalente         ###   ########.fr        #
+#    Updated: 2023/11/13 19:05:49 by svalente         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,6 @@ SRCS		= srcs/libs/ft_calloc.c						\
 			  srcs/libs/ft_strjoin_free.c				\
 			  srcs/libs/free_utils.c					\
 			  srcs/libs/ft_strjoin.c					\
-			  srcs/libs/lst_utils.c						\
 			  srcs/libs/ft_itoa.c						\
 			  srcs/libs/ft_atoi.c						\
 			  srcs/libs/get_next_line.c					\
@@ -40,24 +39,26 @@ SRCS		= srcs/libs/ft_calloc.c						\
 			  srcs/parser/list_utils.c					\
 			  srcs/parser/modify_string.c 				\
 			  srcs/parser/remove_quotes.c 				\
-			  srcs/parser/parser.c 				\
+			  srcs/parser/parser.c 						\
 			  srcs/redirections/redir_lst_utils.c 		\
 			  srcs/redirections/redirections.c 			\
 			  srcs/redirections/clean_redirections.c 	\
 			  srcs/redirections/redirections_checker.c 	\
 			  srcs/alloc/utils.c 						\
 			  srcs/executer/builtin/env.c				\
-			  srcs/executer/builtin/env_utils.c				\
+			  srcs/executer/builtin/env_utils.c			\
 			  srcs/executer/builtin/export.c			\
-			  srcs/executer/builtin/unset.c			\
-			  srcs/executer/builtin/export_utils.c\
+			  srcs/executer/builtin/unset.c				\
+			  srcs/executer/builtin/export_utils.c		\
 			  srcs/executer/builtin/echo.c				\
 			  srcs/executer/builtin/pwd.c				\
 			  srcs/executer/builtin/cd.c				\
 			  srcs/executer/builtin/exit.c				\
 			  srcs/executer/executer.c					\
+			  srcs/executer/executer_utils.c			\
 			  srcs/executer/signals.c					\
 			  srcs/executer/heredoc.c					\
+			  srcs/executer/heredoc_utils.c				\
 			  srcs/expansion/expansion.c				\
 			  srcs/expansion/expansion_utils.c			\
 			  srcs/expansion/expansion_utils2.c			\
@@ -68,8 +69,8 @@ INCLUDES	= includes/
 
 #FIXME: Change to CC
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -g -I$(INCLUDES) #-fsanitize=address,undefined
-LDFLAGS		= -L /opt/homebrew/opt/readline/lib -I /opt/homebrew/opt/readline/include -lreadline -lhistory
+CFLAGS		= -Wall -Wextra -Werror -I$(INCLUDES) -g -fsanitize=address,undefined
+LDFLAGS		= -L /opt/homebrew/opt/readline/lib -I /opt/homebrew/opt/readline/include -lreadline 
 
 #$(VERBOSE).SILENT:
 
@@ -81,7 +82,7 @@ $(OBJ_PATH)/%.o:%.c
 
 $(NAME): $(OBJS)
 	clear
-	@$(CC) $(CFLAGS) -o $@  $^ -lreadline
+	@$(CC) $(CFLAGS) -o $@  $^ -lreadline -lhistory
 	@echo "\033[1;35m---> MINISHELL SUCCESSFULLY COMPILED\033[0m"
 
 run: 

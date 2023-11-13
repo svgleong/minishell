@@ -25,7 +25,7 @@ void    echo_bi(t_cmd *cmd);
 
 void	only_export();
 
-int	can_execute_command(char *command);
+int		can_execute_command(char *command);
 void	execution(t_cmd *cmd);
 char	*find_command_path(char *command);
 

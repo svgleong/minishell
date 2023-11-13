@@ -10,52 +10,70 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <executer.h>
+#include <minishell.h>
 
-int	flags(char **cmd, bool *flag)
+void	heredoc_error(char *del)
 {
+	printf("\nWarning: heredoc delimited by EOF (wanted: \"%s\")\n", del);
+}
+
+void	handle_c(int signal)
+{
+	if (signal == SIGINT)
+	{
+		write(2, "\n ", 1);
+		general_free(data()->pointer_cmd, 1, 1, 0);
+		close(data()->here[0]);
+		close(data()->here[1]);
+		exit(1);
+	}
+}
+
+int	check_quotes_here(char *s)
+{
+	int	i;
+	int	j;
+	int	flag;
+
+	i = -1;
+	j = 0;
+	flag = 0;
+	while (s[++i] && flag == 0)
+	{
+		if (s[i] == '\'' || s[i] == '\"')
+		{
+			j = i + 1;
+			while (s[j])
+			{
+				if (s[j] == '\'' || s[j] == '\"')
+				{
+					flag = 1;
+					break ;
+				}
+				j++;
+			}
+		}
+	}
+	return (flag);
+}
+
+void	remove_quotes_here(char *str)
+{
+	int	len;
 	int	i;
 	int	j;
 
 	i = 0;
-	while (cmd[++i])
+	j = 0;
+	len = strlen(str);
+	while (i < len)
 	{
-		if (cmd[i][0] != '-')
-			return (i);
-		if (cmd[i][1] == '\0')
-			return (i);
-		j = 1;
-		while (cmd[i][j])
-		{
-			if (cmd[i][j] != 'n')
-				return (i);
-			j++;
-		}
-		*flag = true;
+		if ((str[i] == '\'' && str[i + 1] == '\"') \
+			|| (str[i] == '\"' && str[i + 1] == '\''))
+			i += 2;
+		else if (str[i] == '\'' || str[i] == '\"')
+			i++;
+		str[j++] = str[i++];
 	}
-	return (i);
-}
-
-void	echo(t_cmd *cmd)
-{
-	bool	flag;
-	int		i;
-
-	flag = false;
-	if (!cmd->args[1])
-	{
-		printf("\n");
-		exitbuiltin(EXIT_SUCCESS);
-		return ;
-	}
-	i = flags(cmd->args, &flag) - 1;
-	while (cmd->args[++i])
-	{
-		printf("%s", cmd->args[i]);
-		if (cmd->args[i + 1])
-			printf(" ");
-	}
-	if (!flag)
-		printf("\n");
-	exitbuiltin(EXIT_SUCCESS);
+	str[j] = '\0';
 }

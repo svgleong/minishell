@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:39:21 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/08 12:51:12 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/13 15:47:10 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,12 @@ void	main_loop(char **env)
 	env_checker(env);
 	data()->pointer_cmd = NULL;
 	rl_catch_signals = 0;
-	signal(SIGQUIT, SIG_IGN);
+	signal(SIGQUIT, sig_handler);
 	signal(SIGINT, sig_handler);
+	data()->exit = 0;
 	while (1)
 	{
+		data()->redir = 0;
 		data()->error = 0;
 		rl = readline("Painshell: ");
 		control_d(rl);
@@ -44,7 +46,6 @@ void	main_loop(char **env)
 		add_history(rl);
 		if (!parser(rl))
 			continue ;
-		data()->exit = 0;
 		if (data()->error == 0)
 			execution(data()->pointer_cmd);
 		cmdlstclear(&data()->pointer_cmd);

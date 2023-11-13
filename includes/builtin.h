@@ -39,4 +39,8 @@ t_env	*search_env(char *var);
 void 	exitbuiltin(int i);
 void	simple_env(void);
 void	env_checker(char **env);
+void	handle_c(int signal);
+int	check_quotes_here(char *s);
+void	heredoc_error(char *del);
+void remove_quotes_here(char *str);
 #endif
