@@ -13,12 +13,12 @@
 #ifndef PARSER_H
 # define PARSER_H
 
-int     valid_quotes(char *str);
+int		valid_quotes(char *str);
 int		checker(char *rl);
-char    *modify_str(char *rl);
+char	*modify_str(char *rl);
 char	**separate_args(char *rl);
 int		key_value(char *str);
-int		calculate_result(char *str , char *value, int key, int i);
+int		calculate_result(char *str, char *value, int key, int i);
 char	*get_status(char *str, int *i);
 char	*remove_expand(char *str, int *i);
 char	*remove_dollar(char *str, int *i);
@@ -31,8 +31,8 @@ void	redirlstclear(t_redir **lst);
 void	print_redir(t_redir *lst);
 void	quote_checker(t_cmd **cmd);
 int		remove_empty_strs(t_cmd **cmds);
-int 	redir_no_file_checker(t_cmd **cmds);
-int	    parser(char *rl);
+int		redir_no_file_checker(t_cmd **cmds);
+int		parser(char *rl);
 char	*expanding(char *str, char *value, int key, int i);
 
 #endif
