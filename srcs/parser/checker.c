@@ -6,24 +6,11 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 14:40:47 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/13 19:15:16 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/13 19:50:58 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-int	skip_quotes(char *str, char quote, int *i)
-{
-	if (!str[++(*i)])
-		return (-1);
-	while (str[*i])
-	{
-		if (str[*i] == quote)
-			return (1);
-		(*i)++;
-	}
-	return (-1);
-}
 
 int	valid_quotes(char *str)
 {

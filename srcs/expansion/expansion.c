@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:02:23 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/13 19:21:42 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/13 19:50:15 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ char	*expanding(char *str, char *value, int key, int i)
 	while (str[k])
 		result[i++] = str[k++];
 	result[i] = '\0';
-	
 	return (result);
 }
 
@@ -81,7 +80,6 @@ char	*expansion(char *str, int *cursor)
 	(*cursor)--;
 	return (value);
 }
-
 
 int	search_expansion(t_cmd *cmds)
 {

@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 20:33:04 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/13 11:16:57 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/13 19:54:10 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,37 @@ int	parser(char *rl)
         return (0);
     }
     return (1);
+}
+int	create_list(t_cmd **lst, char **args)
+{
+	int	i;
+
+	i = -1;
+	while (args[++i])
+	{
+		if (args[i][0] != '|')
+			cmd_add_back(lst, cmd_new_node(args + i++));
+		while (args[i] && args[i][0] != '|')
+			i++;
+		if (!args[i])
+			break ;
+	}
+	expander(lst);
+	if (!remove_empty_strs(lst))
+	{
+		
+		return (0);
+	}
+	quote_checker(lst);
+	free_matrix(args);
+	check_redirections(lst);
+	if (!redirections(lst))
+		return (0);
+	return (1);
+}
+void    error_empty_strs(char **args)
+{
+    ft_putstr_fd("ambiguous redirect\n", 2);
+    free_matrix(args);
+    data()->exit = 1;
 }

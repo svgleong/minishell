@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   remove_quotes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svalente <svalente@student.42lisboa.com>   +#+  +:+       +#+        */
+/*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 15:41:19 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/12 14:52:44 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/13 19:51:03 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,17 @@ void	quote_checker(t_cmd **cmd)
 		(*cmd) = (*cmd)->next;
 	}
 	(*cmd) = head;
+}
+
+int	skip_quotes(char *str, char quote, int *i)
+{
+	if (!str[++(*i)])
+		return (-1);
+	while (str[*i])
+	{
+		if (str[*i] == quote)
+			return (1);
+		(*i)++;
+	}
+	return (-1);
 }
