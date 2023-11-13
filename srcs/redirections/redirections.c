@@ -15,7 +15,7 @@
 static int	redir_in(t_cmd **cmds);
 static int	redir_out(t_cmd **cmds);
 static int	redir_out_append(t_cmd **cmds);
-void		heredoc_init(t_cmd **cmds);
+int		heredoc_init(t_cmd **cmds);
 
 int	treat_redirections (t_cmd **cmds)
 {
@@ -59,18 +59,19 @@ int	redirections(t_cmd **cmds)
 		data()->pointer_cmd = data()->pointer_cmd->next;
 	}
 	data()->pointer_cmd = tmp_cmds;
-	heredoc_init(&data()->pointer_cmd);
+	if (!heredoc_init(&data()->pointer_cmd))
+    return (0);
 	return (1);
 }
 
-void	heredoc_init(t_cmd **cmds)
+int	heredoc_init(t_cmd **cmds)
 {
 	t_cmd	*tmp_cmds;
 	t_redir	*tmp_redir;
 
 	tmp_cmds = *cmds;
 	if (!tmp_cmds)
-		return ;
+		return (0);
 	while (*cmds)
 	{
 		tmp_redir = (*cmds)->redir;
@@ -81,6 +82,8 @@ void	heredoc_init(t_cmd **cmds)
 				if ((*cmds)->fd_in != -1)
 					close((*cmds)->fd_in);
 				(*cmds)->fd_in = heredoc((*cmds));
+        if ((*cmds)->fd_in == -1)
+          return (0);
       		}
 			(*cmds)->redir = (*cmds)->redir->next;
 		}
@@ -88,6 +91,7 @@ void	heredoc_init(t_cmd **cmds)
 		(*cmds) = (*cmds)->next;
 	}
 	(*cmds) = tmp_cmds;
+  return (1);
 }
 
 static int	redir_in(t_cmd **cmds)

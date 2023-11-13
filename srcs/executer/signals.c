@@ -23,13 +23,11 @@ void	sig_handler(int signal)
 	if (signal == SIGINT && !data()->pointer_cmd)
 	{
 		data()->exit = 130;
-		write(1, "\n", 1);
+		write(2, "^C\n", 3);
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
 	}
-	else
-		write(1, "\n", 1);
 	// else if (signal == SIGINT)
 	// {
 	// 	write(1, "\n", 1);

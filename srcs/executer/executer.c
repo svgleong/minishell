@@ -59,6 +59,8 @@ void	pipe_handler(t_cmd *cmd)
 		printf("fork error\n");
 	if (cmd->pid == 0)
 	{
+    signal(SIGINT, SIG_DFL);
+    signal(SIGQUIT, SIG_DFL);
 		core_execution(cmd);
 		general_free(cmd, 1, 1, 1);
 	}
