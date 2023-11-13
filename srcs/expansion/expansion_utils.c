@@ -15,7 +15,7 @@
 int	calculate_result(char *str, char *value, int key, int i)
 {
 	int	size;
-	
+
 	size = i;
 	size += ft_strlen(value) + (ft_strlen(str) - i - key);
 	return (size);
