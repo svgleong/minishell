@@ -38,7 +38,6 @@ void	free_env_list(t_env **lst)
 		free((*lst));
 		*lst = temp;
 	}
-	//*lst = NULL;
 }
 
 t_cmd	*get_head(t_cmd *lst)

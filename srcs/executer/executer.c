@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/08 16:41:17 by svalente          #+#    #+#             */
+/*   Updated: 2023/11/13 12:31:08 by svalente         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minishell.h>
 
 void	exec_error(char *s, int exit_code)
@@ -59,8 +71,8 @@ void	pipe_handler(t_cmd *cmd)
 		printf("fork error\n");
 	if (cmd->pid == 0)
 	{
-    signal(SIGINT, SIG_DFL);
-    signal(SIGQUIT, SIG_DFL);
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
 		core_execution(cmd);
 		general_free(cmd, 1, 1, 1);
 	}
@@ -80,7 +92,7 @@ void	execution(t_cmd *cmd)
 
 	status = 0;
 	while (cmd)
-	{	
+	{
 		if (!cmd->args[0])
 			break ;
 		if (cmd_is_builtin(cmd->args[0]) && !cmd->next && data()->redir == 0)

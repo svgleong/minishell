@@ -27,7 +27,7 @@ int	has_file(t_cmd *cmd)
 	return (1);
 }
 
-int redir_no_file_checker(t_cmd **cmds)
+int	redir_no_file_checker(t_cmd **cmds)
 {
 	t_cmd	*head;
 

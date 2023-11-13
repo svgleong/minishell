@@ -15,7 +15,7 @@
 static int	redir_in(t_cmd **cmds);
 static int	redir_out(t_cmd **cmds);
 static int	redir_out_append(t_cmd **cmds);
-int		heredoc_init(t_cmd **cmds);
+int			heredoc_init(t_cmd **cmds);
 
 int	treat_redirections (t_cmd **cmds)
 {
@@ -82,16 +82,16 @@ int	heredoc_init(t_cmd **cmds)
 				if ((*cmds)->fd_in != -1)
 					close((*cmds)->fd_in);
 				(*cmds)->fd_in = heredoc((*cmds));
-        if ((*cmds)->fd_in == -1)
-          return (0);
-      		}
+        		if ((*cmds)->fd_in == -1)
+					return (0);
+			}
 			(*cmds)->redir = (*cmds)->redir->next;
 		}
 		(*cmds)->redir = tmp_redir;
 		(*cmds) = (*cmds)->next;
 	}
 	(*cmds) = tmp_cmds;
-  return (1);
+	return (1);
 }
 
 static int	redir_in(t_cmd **cmds)
@@ -103,7 +103,6 @@ static int	redir_in(t_cmd **cmds)
 	{
 		perror("Error");
 		data()->exit = 1;
-		//printf("status infile: %d\n", data()->exit);
 		return (0);
 	}
 	(*cmds)->fd_in = open((*cmds)->redir->file, O_RDONLY);
