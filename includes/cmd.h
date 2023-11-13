@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:20:58 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/13 17:16:01 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/13 19:42:44 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,6 @@ void    free_env_list(t_env **lst);
 
 
 char    *ft_strjoin(char *s1, char *s2);
-int    heredoc(t_cmd *cmd);
+int   	heredoc(t_cmd *cmd);
 
 #endif
