@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:41:17 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/13 21:06:31 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/14 11:03:42 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	exit_builtin(t_cmd *cmd)
 	}
 	else if (cmd->args[2])
 	{
-		ft_putstr_fd("exit: too many arguments or outside limits\n", 2);
+		ft_putstr_fd("exit: too many arguments\n", 2);
 		data()->exit = 1;
 		return ;
 	}

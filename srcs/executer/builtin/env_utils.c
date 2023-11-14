@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:41:17 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/13 21:06:22 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/14 11:48:29 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ void	simple_env(void)
 
 	pwd = getcwd(NULL, 0);
 	env = malloc(sizeof(char *) * 4);
+	if (!env)
+		general_free(data()->pointer_cmd, 0, 0, 1);
 	env[0] = ft_strdup("SHLVL=0");
 	temp = ft_strjoin_free("PWD=", pwd, -1);
 	env[1] = ft_strdup(temp);
@@ -77,7 +79,7 @@ char	**env_to_matrix(void)
 	len = list_size_env(temp);
 	matrix = malloc(sizeof(char *) * (len + 1));
 	if (!matrix)
-		return (NULL);
+		general_free(data()->pointer_cmd, 1, 0, 1);
 	temp = (t_env *)data()->envp;
 	len = 0;
 	while (temp)

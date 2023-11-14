@@ -6,7 +6,7 @@
 #    By: svalente <svalente@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/20 20:09:21 by svalente          #+#    #+#              #
-#    Updated: 2023/11/13 20:49:31 by svalente         ###   ########.fr        #
+#    Updated: 2023/11/14 10:44:01 by svalente         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,13 +65,15 @@ SRCS		= srcs/libs/ft_calloc.c						\
 			  srcs/expansion/expansion_utils2.c			\
 			  srcs/main_utils.c 								\
 			  srcs/main.c 								\
+			  srcs/print_functions.c 								\
+
 
 OBJS		= $(addprefix $(OBJ_PATH)/, $(addsuffix .o, $(basename $(SRCS))))
 INCLUDES	= includes/
 
 #FIXME: Change to CC
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -I$(INCLUDES) -g -fsanitize=address,undefined
+CFLAGS		= -Wall -Wextra -Werror -I$(INCLUDES) -g #-fsanitize=address,undefined
 LDFLAGS		= -L /opt/homebrew/opt/readline/lib -I /opt/homebrew/opt/readline/include -lreadline 
 
 #$(VERBOSE).SILENT:

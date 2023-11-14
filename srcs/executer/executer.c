@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:41:17 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/13 21:06:47 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/14 10:52:28 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,14 @@ void	execution(t_cmd *cmd)
 	while (cmd)
 	{
 		if (!cmd->args[0])
+		{
+			if (cmd->next)
+			{
+				cmd = cmd->next;
+				continue ;
+			}
 			break ;
+		}
 		if (cmd_is_builtin(cmd->args[0]) && !cmd->next && data()->redir == 0)
 		{
 			which_builtin(cmd);

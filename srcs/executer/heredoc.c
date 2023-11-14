@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:41:17 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/13 21:09:26 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/14 12:14:42 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,7 @@ void	main_loop_heredoc(t_cmd *cmd, bool quote, char *line)
 		if (!line)
 		{
 			heredoc_error(cmd->redir->file);
-			general_free(cmd, 1, 1, 0);
-			break ;
+			general_free(cmd, 1, 1, 1);
 		}
 		if (line[ft_strlen(line) - 1] == '\n')
 			line[ft_strlen(line) - 1] = '\0';
