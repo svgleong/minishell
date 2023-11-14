@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 21:28:12 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/14 10:38:13 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/14 13:41:31 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,4 +87,22 @@ int	heredoc_init(t_cmd **cmds, t_cmd *tmp_cmds)
 	}
 	(*cmds) = tmp_cmds;
 	return (1);
+}
+
+void	redirlstclear(t_redir **lst)
+{
+	t_redir	*head;
+	t_redir	*tmp;
+
+	head = get_head_redir(*lst);
+	while (head)
+	{
+		tmp = head;
+		head = head->next;
+		free(tmp->file);
+		if (tmp->fd != -1)
+			close(tmp->fd);
+		free(tmp);
+	}
+	head = NULL;
 }

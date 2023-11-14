@@ -6,21 +6,20 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 21:05:47 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/13 21:05:48 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/14 12:49:08 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXECUTER_H
 # define EXECUTER_H
 
-# include "builtin.h"
+# include <builtin.h>
 # include <minishell.h>
 # include <string_lib.h>
 # include <stdlib.h>
 # include <stdio.h>
 # include <stdbool.h>
 
-void	*ft_calloc(size_t count, size_t size);
 char	*ft_strdup(const char *s);
 void	env_bi(char **env, t_env *env_lst);
 t_env	*env(void);

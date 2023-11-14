@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:41:17 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/13 21:06:35 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/14 12:43:13 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ char	*rem_quotes_export(char *s)
 	i = 0;
 	j = 0;
 	new = malloc(sizeof(char) * ft_strlen(s) + 1);
+	if (!new)
+		general_free(data()->pointer_cmd, 1, 0, 1);
 	while (s[i])
 	{
 		if (s[i] != '\"')

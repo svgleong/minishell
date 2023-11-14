@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:41:17 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/14 12:14:42 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/14 12:30:51 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ int	heredoc(t_cmd *cmd)
 	data()->in_heredoc = 0;
 	if (WIFEXITED(status) && WEXITSTATUS(status) != 0)
 	{
+		data()->exit = WEXITSTATUS(status);
 		close(data()->here[0]);
 		return (-1);
 	}

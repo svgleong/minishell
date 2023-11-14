@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:49:01 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/08 16:49:11 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/14 12:44:58 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char	*ft_itoa(int n)
 	}
 	str = (char *)malloc(size + 1);
 	if (!str)
-		return (0);
+		general_free(data()->pointer_cmd, 1, 0, 1);
 	str[size--] = '\0';
 	while (nbr > 0)
 	{

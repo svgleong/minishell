@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 14:51:17 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/13 20:52:13 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/14 13:08:50 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,6 @@ char	*expanding(char *str, char *value, int key, int i);
 int		redir_in(t_cmd **cmds);
 int		redir_out(t_cmd **cmds);
 int		redir_out_append(t_cmd **cmds);
+t_redir	*get_head_redir(t_redir *lst);
 
 #endif

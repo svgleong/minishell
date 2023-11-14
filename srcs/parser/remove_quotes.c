@@ -6,11 +6,21 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 15:41:19 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/13 19:51:03 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/14 13:04:03 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+char	*allocate_new_str(char *arg)
+{
+	char	*new_str;
+
+	new_str = malloc(ft_strlen(arg) - 1);
+	if (!new_str)
+		general_free(data()->pointer_cmd, 1, 0, 1);
+	return (new_str);
+}
 
 char	*rem_quotes_pair(char *arg, char quote, int *j)
 {
@@ -19,7 +29,7 @@ char	*rem_quotes_pair(char *arg, char quote, int *j)
 	int		tmp;
 
 	i = -1;
-	new_str = malloc(ft_strlen(arg) - 1);
+	new_str = allocate_new_str(arg);
 	while (++i < *j)
 		new_str[i] = arg[i];
 	(*j)++;

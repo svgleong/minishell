@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 15:21:53 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/08 16:56:09 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/14 12:45:58 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ char	*modify_str(char *rl)
 	if (!rl || !rl[0])
 		return (NULL);
 	str = malloc(ft_strlen(rl) * 5);
+	if (!str)
+		general_free(data()->pointer_cmd, 1, 0, 1);
 	j = 0;
 	while (*rl)
 	{

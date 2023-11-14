@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:41:17 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/14 12:13:36 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/14 13:04:37 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ void	sig_handler(int signal)
 	pid_t	pid;
 	int		status;
 
-	if (signal == SIGINT && !data()->pointer_cmd)// || data()->in_heredoc == 1))
-	{
-		printf("entrei sig_handler sigint\n");
+	if (signal == SIGINT)
 		data()->exit = 130;
+	if (signal == SIGINT && !data()->pointer_cmd)
+	{
 		write(2, "^C\n", 3);
 		rl_on_new_line();
 		rl_replace_line("", 0);

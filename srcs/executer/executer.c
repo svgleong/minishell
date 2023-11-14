@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:41:17 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/14 10:52:28 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/14 15:06:15 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,17 @@ void	exec_error(char *s, int exit_code)
 void	exec(t_cmd *cmd)
 {
 	char	**matrix;
+	char	*path;
 
 	matrix = env_to_matrix();
-	if (execve(find_command_path(cmd->args[0]), cmd->args, matrix) == -1)
+	path = find_command_path(cmd->args[0]);
+	if (execve(path, cmd->args, matrix) == -1)
 	{
 		if (errno == 13)
 		{
 			perror("Error");
 			data()->exit = 126;
+			free(path);
 		}
 		else
 			exec_error("command not found\n", 127);
@@ -86,17 +89,20 @@ void	pipe_handler(t_cmd *cmd)
 	close(cmd->pipe[1]);
 }
 
-void	execution(t_cmd *cmd)
+void	execution_loop(t_cmd *cmd)
 {
-	int		status;
-
-	status = 0;
 	while (cmd)
 	{
 		if (!cmd->args[0])
 		{
 			if (cmd->next)
 			{
+				if (pipe(cmd->pipe) == -1)
+					printf("pipe error\n");
+				if (cmd->next->fd_in == -1)
+					cmd->next->fd_in = dup(cmd->pipe[0]);
+				close(cmd->pipe[0]);
+				close(cmd->pipe[1]);
 				cmd = cmd->next;
 				continue ;
 			}
@@ -111,7 +117,16 @@ void	execution(t_cmd *cmd)
 		if (cmd->args)
 			pipe_handler(cmd);
 		cmd = cmd->next;
-	}
+	}	
+}
+
+void	execution(t_cmd *cmd)
+{
+	int		status;
+
+	status = 0;
+	
+	execution_loop(cmd);
 	cmd = data()->pointer_cmd;
 	while (cmd)
 	{

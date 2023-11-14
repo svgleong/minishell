@@ -6,13 +6,23 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 09:42:07 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/13 20:45:18 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/14 13:09:14 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
 int	matrix_size(char **args);
+
+char	**allocate_matrix(char **args)
+{
+	char	**new_matrix;
+
+	new_matrix = ft_calloc(matrix_size(args) + 1, sizeof(char *));
+	if (!new_matrix)
+		general_free(data()->pointer_cmd, 1, 0, 1);
+	return (new_matrix);
+}
 
 void	clean_redirections(t_cmd **cmds)
 {
@@ -26,10 +36,10 @@ void	clean_redirections(t_cmd **cmds)
 	{
 		i = -1;
 		j = 0;
-		new_matrix = ft_calloc(matrix_size((*cmds)->args) + 1, sizeof(char *));
+		new_matrix = allocate_matrix((*cmds)->args);
 		while ((*cmds)->args[++i])
 		{
-			if ((*cmds)->args[i][0] == '>' || (*cmds)->args[i][0] == '<')
+			if (((*cmds)->args[i][0] == '>' ) || (*cmds)->args[i][0] == '<')
 			{
 				i++;
 				continue ;
@@ -74,22 +84,4 @@ t_redir	*get_head_redir(t_redir *lst)
 	while (lst && lst->prev)
 		lst = lst->prev;
 	return (lst);
-}
-
-void	redirlstclear(t_redir **lst)
-{
-	t_redir	*head;
-	t_redir	*tmp;
-
-	head = get_head_redir(*lst);
-	while (head)
-	{
-		tmp = head;
-		head = head->next;
-		free(tmp->file);
-		if (tmp->fd != -1)
-			close(tmp->fd);
-		free(tmp);
-	}
-	head = NULL;
 }
