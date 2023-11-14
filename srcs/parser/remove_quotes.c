@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 15:41:19 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/14 19:34:55 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/14 22:06:27 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,21 @@ void	remove_quotes(char **args)
 	}
 }
 
+char	*remove_quotes_redir(char *args)
+{
+	int		j;
+
+	j = -1;
+	while (args[++j])
+	{
+		if (args[j] == '\'')
+			args = rem_quotes_pair(args, '\'', &j);
+		else if (args[j] == '"')
+			args = rem_quotes_pair(args, '"', &j);
+	}
+	return (args);
+}
+
 void	quote_checker_file(t_cmd **cmd)
 {
 	t_cmd	*head;
@@ -90,8 +105,7 @@ void	quote_checker_file(t_cmd **cmd)
 		while ((*cmd)->redir)
 		{
 			tmp = (*cmd)->redir->file;
-			(*cmd)->redir->file = ft_substr((*cmd)->redir->file, 1, \
-				ft_strlen((*cmd)->redir->file) - 2);
+			(*cmd)->redir->file = remove_quotes_redir((*cmd)->redir->file);
 			free(tmp);
 			(*cmd)->redir = (*cmd)->redir->next;
 		}

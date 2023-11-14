@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 10:46:46 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/14 12:50:34 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/14 21:47:15 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,16 @@ void	cmdlstclear(t_cmd **lst)
 	{
 		tmp = *lst;
 		*lst = (*lst)->next;
-		free_matrix(tmp->args);
+		if (tmp->args)
+			free_matrix(tmp->args);
 		if (tmp->fd_in != -1)
 			close(tmp->fd_in);
 		if (tmp->fd_out != -1)
 			close(tmp->fd_out);
 		if (tmp->redir)
 			redirlstclear(&tmp->redir);
-		free(tmp);
+		if (tmp)
+			free(tmp);
 	}
 	*lst = NULL;
 }

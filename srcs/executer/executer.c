@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:41:17 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/14 15:20:46 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/14 22:03:26 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ void	exec(t_cmd *cmd)
 			free(path);
 		}
 		else
-			exec_error("command not found\n", 127);
+			exec_error(cmd->args[0], ": command not found\n", 127);
 		free_matrix(matrix);
-		general_free(cmd, 1, 1, 1);
+		general_free(NULL, 1, 1, 1);
 	}
 }
 

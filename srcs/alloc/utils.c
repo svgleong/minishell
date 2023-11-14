@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 10:08:22 by svalente          #+#    #+#             */
-/*   Updated: 2023/09/25 16:18:49 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/14 21:46:00 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,12 @@ char	**free_matrix(char **matrix)
 	if (!matrix)
 		return (NULL);
 	while (matrix[i])
-		free(matrix[i++]);
+	{
+		if (matrix[i])
+			free(matrix[i]);
+		i++;
+	}
 	free(matrix);
+	matrix = NULL;
 	return (NULL);
 }

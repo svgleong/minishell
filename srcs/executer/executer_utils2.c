@@ -6,16 +6,18 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 15:15:09 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/14 15:15:55 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/14 22:02:07 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	exec_error(char *s, int exit_code)
+void	exec_error(char *cmd, char *s, int exit_code)
 {
-	ft_putstr_fd(s, STDERR_FILENO);
 	data()->exit = exit_code;
+	if (cmd)
+		ft_putstr_fd(cmd, STDERR_FILENO);
+	ft_putstr_fd(s, STDERR_FILENO);
 }
 
 void	heredoc_exception(t_cmd *cmd)

@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:41:17 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/14 15:33:38 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/14 19:44:11 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,13 @@ int	ft_strdigit(char *s)
 	int	i;
 
 	i = -1;
+	if (s[0] == '-' || s[0] == '+')
+			i++;
 	while (s[++i])
+	{
 		if (!ft_isdigit(s[i]))
 			return (0);
+	}
 	return (1);
 }
 

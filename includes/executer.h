@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 21:05:47 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/14 15:16:21 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/14 22:01:34 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	only_export(void);
 int		can_execute_command(char *command);
 void	execution(t_cmd *cmd);
 char	*find_command_path(char *command);
-void	exec_error(char *s, int exit_code);
+void	exec_error(char *cmd, char *s, int exit_code);
 void	heredoc_exception(t_cmd *cmd);
 
 #endif
