@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 19:43:20 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/13 19:45:37 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/14 15:19:36 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 # include <sys/wait.h>
 # include <errno.h>
 # include <limits.h>
+# include <executer.h>
 
 char	*get_next_line(int fd);
 char	*find_command_path(char *command);

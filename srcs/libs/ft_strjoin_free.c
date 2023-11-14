@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 18:29:05 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/14 14:49:40 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/14 15:09:41 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*ft_strjoin_free(char *s1, char *s2, int free_str)
 	size_t	s1_len;
 	size_t	s2_len;
 
-	if (!s1 || !s2)//|| !s1[0] || !s2[0])
+	if (!s1 || !s2)
 		return (NULL);
 	s1_len = ft_strlen(s1);
 	s2_len = ft_strlen(s2);

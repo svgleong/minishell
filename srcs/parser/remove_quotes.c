@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 15:41:19 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/14 13:04:03 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/14 19:34:55 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,30 @@ void	remove_quotes(char **args)
 				break ;
 		}
 	}
+}
+
+void	quote_checker_file(t_cmd **cmd)
+{
+	t_cmd	*head;
+	t_redir	*head_redir;
+	char	*tmp;
+
+	head = *cmd;
+	while (*cmd)
+	{
+		head_redir = (*cmd)->redir;
+		while ((*cmd)->redir)
+		{
+			tmp = (*cmd)->redir->file;
+			(*cmd)->redir->file = ft_substr((*cmd)->redir->file, 1, \
+				ft_strlen((*cmd)->redir->file) - 2);
+			free(tmp);
+			(*cmd)->redir = (*cmd)->redir->next;
+		}
+		(*cmd)->redir = head_redir;
+		(*cmd) = (*cmd)->next;
+	}
+	(*cmd) = head;
 }
 
 void	quote_checker(t_cmd **cmd)

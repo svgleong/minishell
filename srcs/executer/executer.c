@@ -6,17 +6,11 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:41:17 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/14 15:06:15 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/14 15:20:46 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-void	exec_error(char *s, int exit_code)
-{
-	ft_putstr_fd(s, STDERR_FILENO);
-	data()->exit = exit_code;
-}
 
 void	exec(t_cmd *cmd)
 {
@@ -97,12 +91,7 @@ void	execution_loop(t_cmd *cmd)
 		{
 			if (cmd->next)
 			{
-				if (pipe(cmd->pipe) == -1)
-					printf("pipe error\n");
-				if (cmd->next->fd_in == -1)
-					cmd->next->fd_in = dup(cmd->pipe[0]);
-				close(cmd->pipe[0]);
-				close(cmd->pipe[1]);
+				heredoc_exception(cmd);
 				cmd = cmd->next;
 				continue ;
 			}
@@ -117,7 +106,7 @@ void	execution_loop(t_cmd *cmd)
 		if (cmd->args)
 			pipe_handler(cmd);
 		cmd = cmd->next;
-	}	
+	}
 }
 
 void	execution(t_cmd *cmd)
@@ -125,7 +114,6 @@ void	execution(t_cmd *cmd)
 	int		status;
 
 	status = 0;
-	
 	execution_loop(cmd);
 	cmd = data()->pointer_cmd;
 	while (cmd)

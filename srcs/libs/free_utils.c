@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:41:45 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/14 13:42:41 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/14 16:02:15 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ char	*node_value(t_env *node)
 		return (NULL);
 	key_value = ft_split(node->content, '=');
 	if (!key_value[1])
+	{
+		free_matrix(key_value);
 		return (NULL);
+	}
 	value = ft_strdup(key_value[1]);
 	free_matrix(key_value);
 	return (value);

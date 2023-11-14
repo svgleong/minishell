@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:41:17 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/14 15:08:13 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/14 15:59:40 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char	*find_command_path(char *command)
 	char	*executable_path;
 	char	*temp;
 	int		i;
-	
+
 	path = node_value(search_env("PATH"));
 	i = -1;
 	if (path != NULL)
