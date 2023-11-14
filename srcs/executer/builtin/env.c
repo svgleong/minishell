@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:41:17 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/13 19:42:57 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/14 12:49:22 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_env	*env_new_node(char *str)
 
 	new = ft_calloc(sizeof(t_env), 1);
 	if (!new)
-		return (NULL);
+		general_free(data()->pointer_cmd, 1, 0, 1);
 	new->content = ft_strdup(str);
 	new->prev = NULL;
 	new->next = NULL;

@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 10:46:46 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/13 19:53:18 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/14 21:47:15 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_cmd	*cmd_new_node(char **args)
 
 	new = ft_calloc(1, sizeof(t_cmd));
 	if (!new)
-		return (NULL);
+		general_free(data()->pointer_cmd, 1, 0, 1);
 	if (args)
 		new->args = copy_matrix(args);
 	new->prev = NULL;
@@ -61,14 +61,16 @@ void	cmdlstclear(t_cmd **lst)
 	{
 		tmp = *lst;
 		*lst = (*lst)->next;
-		free_matrix(tmp->args);
+		if (tmp->args)
+			free_matrix(tmp->args);
 		if (tmp->fd_in != -1)
 			close(tmp->fd_in);
 		if (tmp->fd_out != -1)
 			close(tmp->fd_out);
 		if (tmp->redir)
 			redirlstclear(&tmp->redir);
-		free(tmp);
+		if (tmp)
+			free(tmp);
 	}
 	*lst = NULL;
 }

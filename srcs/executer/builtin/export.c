@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:41:17 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/13 21:06:38 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/14 16:12:03 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,12 @@ void	update_env_export(char *cmd, char **new_var)
 	char	*value;
 
 	var = new_var[0];
+	node = search_env(var);
 	value = new_var[1];
+	if (node && !ft_strchr(cmd, '='))
+		return ;
 	if (!value)
 		value = "";
-	node = search_env(var);
 	if (node == NULL)
 		env_add_node_end(data()->envp, env_new_node(cmd));
 	if (node && value)

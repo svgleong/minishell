@@ -6,11 +6,21 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 15:41:19 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/13 19:51:03 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/14 22:06:27 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+char	*allocate_new_str(char *arg)
+{
+	char	*new_str;
+
+	new_str = malloc(ft_strlen(arg) - 1);
+	if (!new_str)
+		general_free(data()->pointer_cmd, 1, 0, 1);
+	return (new_str);
+}
 
 char	*rem_quotes_pair(char *arg, char quote, int *j)
 {
@@ -19,7 +29,7 @@ char	*rem_quotes_pair(char *arg, char quote, int *j)
 	int		tmp;
 
 	i = -1;
-	new_str = malloc(ft_strlen(arg) - 1);
+	new_str = allocate_new_str(arg);
 	while (++i < *j)
 		new_str[i] = arg[i];
 	(*j)++;
@@ -65,6 +75,44 @@ void	remove_quotes(char **args)
 				break ;
 		}
 	}
+}
+
+char	*remove_quotes_redir(char *args)
+{
+	int		j;
+
+	j = -1;
+	while (args[++j])
+	{
+		if (args[j] == '\'')
+			args = rem_quotes_pair(args, '\'', &j);
+		else if (args[j] == '"')
+			args = rem_quotes_pair(args, '"', &j);
+	}
+	return (args);
+}
+
+void	quote_checker_file(t_cmd **cmd)
+{
+	t_cmd	*head;
+	t_redir	*head_redir;
+	char	*tmp;
+
+	head = *cmd;
+	while (*cmd)
+	{
+		head_redir = (*cmd)->redir;
+		while ((*cmd)->redir)
+		{
+			tmp = (*cmd)->redir->file;
+			(*cmd)->redir->file = remove_quotes_redir((*cmd)->redir->file);
+			free(tmp);
+			(*cmd)->redir = (*cmd)->redir->next;
+		}
+		(*cmd)->redir = head_redir;
+		(*cmd) = (*cmd)->next;
+	}
+	(*cmd) = head;
 }
 
 void	quote_checker(t_cmd **cmd)

@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:43:07 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/13 19:49:57 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/14 12:49:55 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ char	*remove_dollar(char *str, int *cursor)
 
 	i = (*cursor);
 	new_str = ft_calloc(sizeof(char), ft_strlen(str));
+	if (!new_str)
+		general_free(data()->pointer_cmd, 1, 0, 1);
 	j = -1;
 	k = 0;
 	while (str[++j])

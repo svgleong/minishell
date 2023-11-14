@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:02:23 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/13 19:50:15 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/14 12:44:05 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ char	*expanding(char *str, char *value, int key, int i)
 
 	sz = calculate_result(str, value, key, i);
 	result = malloc(sz);
+	if (!result)
+		general_free(data()->pointer_cmd, 1, 0, 1);
 	f = -1;
 	sz = -1;
 	while (++f < i)
@@ -122,6 +124,3 @@ void	expander(t_cmd **cmds)
 	}
 	(*cmds) = head;
 }
-
-//echo "'$USER'"'"$USER"'
-//echo '"$USER"'"'$USER'"

@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:20:58 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/13 20:51:06 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/14 18:28:52 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_redir
 
 typedef struct s_cmd
 {
+	int				reds;
 	struct s_cmd	*prev;
 	struct s_cmd	*next;
 	char			*path;

@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 18:29:05 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/17 18:29:06 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/14 15:09:41 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*ft_strjoin_free(char *s1, char *s2, int free_str)
 	s2_len = ft_strlen(s2);
 	new_str = (char *)malloc(sizeof(char) * (s1_len + s2_len + 1));
 	if (!new_str)
-		return (NULL);
+		general_free(data()->pointer_cmd, 1, 0, 1);
 	ft_memcpy(new_str, s1, s1_len);
 	ft_memcpy(new_str + s1_len, s2, s2_len);
 	new_str[s1_len + s2_len] = '\0';

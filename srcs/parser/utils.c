@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 09:52:09 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/13 20:38:46 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/14 12:51:07 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ char	**copy_matrix(char **matrix)
 	while (matrix[i] && matrix[i][0] != '|')
 		i++;
 	dup = ft_calloc(i + 1, sizeof(char *));
+	if (!dup)
+		general_free(data()->pointer_cmd, 1, 0, 1);
 	i = 0;
 	while (matrix[i] && matrix[i][0] != '|')
 	{
@@ -46,6 +48,8 @@ char	**copy_args_until(char **matrix, char c, char d)
 	while (matrix[i] && matrix[i][0] != c && matrix[i][0] != d)
 		i++;
 	dup = ft_calloc(i + 1, sizeof(char *));
+	if (!dup)
+		general_free(data()->pointer_cmd, 1, 0, 1);
 	i = 0;
 	while (matrix[i] && matrix[i][0] != c && matrix[i][0] != d)
 	{

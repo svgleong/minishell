@@ -6,34 +6,31 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:41:17 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/13 21:06:47 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/14 22:03:26 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	exec_error(char *s, int exit_code)
-{
-	ft_putstr_fd(s, STDERR_FILENO);
-	data()->exit = exit_code;
-}
-
 void	exec(t_cmd *cmd)
 {
 	char	**matrix;
+	char	*path;
 
 	matrix = env_to_matrix();
-	if (execve(find_command_path(cmd->args[0]), cmd->args, matrix) == -1)
+	path = find_command_path(cmd->args[0]);
+	if (execve(path, cmd->args, matrix) == -1)
 	{
 		if (errno == 13)
 		{
 			perror("Error");
 			data()->exit = 126;
+			free(path);
 		}
 		else
-			exec_error("command not found\n", 127);
+			exec_error(cmd->args[0], ": command not found\n", 127);
 		free_matrix(matrix);
-		general_free(cmd, 1, 1, 1);
+		general_free(NULL, 1, 1, 1);
 	}
 }
 
@@ -86,15 +83,20 @@ void	pipe_handler(t_cmd *cmd)
 	close(cmd->pipe[1]);
 }
 
-void	execution(t_cmd *cmd)
+void	execution_loop(t_cmd *cmd)
 {
-	int		status;
-
-	status = 0;
 	while (cmd)
 	{
 		if (!cmd->args[0])
+		{
+			if (cmd->next)
+			{
+				heredoc_exception(cmd);
+				cmd = cmd->next;
+				continue ;
+			}
 			break ;
+		}
 		if (cmd_is_builtin(cmd->args[0]) && !cmd->next && data()->redir == 0)
 		{
 			which_builtin(cmd);
@@ -105,6 +107,14 @@ void	execution(t_cmd *cmd)
 			pipe_handler(cmd);
 		cmd = cmd->next;
 	}
+}
+
+void	execution(t_cmd *cmd)
+{
+	int		status;
+
+	status = 0;
+	execution_loop(cmd);
 	cmd = data()->pointer_cmd;
 	while (cmd)
 	{

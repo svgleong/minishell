@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 18:22:02 by svalente          #+#    #+#             */
-/*   Updated: 2023/10/17 18:22:35 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/14 12:50:15 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*ft_strdup(const char *s)
 	leng_s = ft_strlen((const char *)s);
 	dest = ft_calloc(leng_s + 1, sizeof(char));
 	if (!dest)
-		return (NULL);
+		general_free(data()->pointer_cmd, 1, 0, 1);
 	i = 0;
 	while (s[i])
 	{
@@ -43,7 +43,7 @@ char	*ft_strdup_special(const char *s, int c)
 	leng_s = ft_strlen_special((const char *)s, c);
 	dest = ft_calloc(leng_s + 1, sizeof(char));
 	if (!dest)
-		return (NULL);
+		general_free(data()->pointer_cmd, 1, 0, 1);
 	i = 0;
 	while (s[i] && s[i] != c)
 	{

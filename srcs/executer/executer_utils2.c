@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   executer_utils2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/25 10:08:22 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/14 21:46:00 by svalente         ###   ########.fr       */
+/*   Created: 2023/11/14 15:15:09 by svalente          #+#    #+#             */
+/*   Updated: 2023/11/14 22:02:07 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-char	**free_matrix(char **matrix)
+void	exec_error(char *cmd, char *s, int exit_code)
 {
-	int	i;
+	data()->exit = exit_code;
+	if (cmd)
+		ft_putstr_fd(cmd, STDERR_FILENO);
+	ft_putstr_fd(s, STDERR_FILENO);
+}
 
-	i = 0;
-	if (!matrix)
-		return (NULL);
-	while (matrix[i])
-	{
-		if (matrix[i])
-			free(matrix[i]);
-		i++;
-	}
-	free(matrix);
-	matrix = NULL;
-	return (NULL);
+void	heredoc_exception(t_cmd *cmd)
+{
+	if (pipe(cmd->pipe) == -1)
+		printf("pipe error\n");
+	if (cmd->next->fd_in == -1)
+		cmd->next->fd_in = dup(cmd->pipe[0]);
+	close(cmd->pipe[0]);
+	close(cmd->pipe[1]);
 }

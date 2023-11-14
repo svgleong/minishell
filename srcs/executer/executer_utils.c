@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:41:17 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/13 21:06:44 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/14 15:59:40 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,16 @@ int	cmd_is_builtin(char *command)
 		return (0);
 }
 
+int	check_access(char *executable_path, char **matrix)
+{
+	if (access(executable_path, X_OK) == 0)
+	{
+		free_matrix(matrix);
+		return (0);
+	}
+	return (1);
+}
+
 char	*find_command_path(char *command)
 {
 	char	*path;
@@ -55,19 +65,18 @@ char	*find_command_path(char *command)
 	int		i;
 
 	path = node_value(search_env("PATH"));
-	i = 0;
+	i = -1;
 	if (path != NULL)
 	{
 		matrix = ft_split(path, ':');
 		free(path);
-		while (matrix != NULL && matrix[i] != NULL)
+		while (matrix != NULL && matrix[++i] != NULL)
 		{
 			temp = ft_strjoin_free(matrix[i], "/", 0);
 			executable_path = ft_strjoin_free(temp, command, 1);
-			if (access(executable_path, X_OK) == 0)
+			if (!check_access(executable_path, matrix))
 				return (executable_path);
 			free(executable_path);
-			i++;
 		}
 		free_matrix(matrix);
 	}

@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:41:17 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/13 21:06:50 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/14 12:30:22 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,11 @@ void	handle_c(int signal)
 	if (signal == SIGINT)
 	{
 		write(2, "\n ", 1);
-		general_free(data()->pointer_cmd, 1, 1, 0);
 		close(data()->here[0]);
 		close(data()->here[1]);
-		exit(1);
+		general_free(data()->pointer_cmd, 1, 1, 0);
+		data()->exit = 130;
+		exit(data()->exit);
 	}
 }
 

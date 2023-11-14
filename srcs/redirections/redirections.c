@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 21:28:12 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/13 21:08:51 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/14 19:31:20 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	treat_redirections(t_cmd **cmds)
 	}
 	else if ((*cmds)->redir->redir == 1)
 	{
-		if (redir_out_append(cmds))
+		if (!redir_out_append(cmds))
 			return (0);
 	}
 	return (1);
@@ -43,6 +43,7 @@ int	redirections(t_cmd **cmds)
 	tmp_cmds = data()->pointer_cmd;
 	if (!tmp_cmds)
 		return (-1);
+	quote_checker_file(cmds);
 	while (data()->pointer_cmd)
 	{
 		tmp_redir = data()->pointer_cmd->redir;
@@ -87,4 +88,22 @@ int	heredoc_init(t_cmd **cmds, t_cmd *tmp_cmds)
 	}
 	(*cmds) = tmp_cmds;
 	return (1);
+}
+
+void	redirlstclear(t_redir **lst)
+{
+	t_redir	*head;
+	t_redir	*tmp;
+
+	head = get_head_redir(*lst);
+	while (head)
+	{
+		tmp = head;
+		head = head->next;
+		free(tmp->file);
+		if (tmp->fd != -1)
+			close(tmp->fd);
+		free(tmp);
+	}
+	head = NULL;
 }
