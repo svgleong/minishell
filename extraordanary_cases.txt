@@ -39,6 +39,17 @@ echo - "" "" "hello"
 
 << ola | ls | wc
 
-control_d mario 
-
 protecao mallocs
+
+echo ">" >"test""lol"
+
+echo $>?
+
+< "" cat
+
+$var | $var
+
+"" | ""
+
+export _a --> should work and it is not working
+cat | exit --> cant exit

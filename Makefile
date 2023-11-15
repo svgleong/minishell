@@ -6,7 +6,7 @@
 #    By: svalente <svalente@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/20 20:09:21 by svalente          #+#    #+#              #
-#    Updated: 2023/11/14 22:07:02 by svalente         ###   ########.fr        #
+#    Updated: 2023/11/15 09:40:33 by svalente         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,7 +73,7 @@ OBJS		= $(addprefix $(OBJ_PATH)/, $(addsuffix .o, $(basename $(SRCS))))
 INCLUDES	= includes/
 
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -I$(INCLUDES) -g #-fsanitize=address,undefined
+CFLAGS		= -Wall -Wextra -Werror -I$(INCLUDES) -g #-fsanitize=address
 
 
 all: $(NAME)

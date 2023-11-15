@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 15:41:19 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/14 22:06:27 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/15 10:04:28 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	*allocate_new_str(char *arg)
 {
 	char	*new_str;
 
-	new_str = malloc(ft_strlen(arg) - 1);
+	new_str = ft_calloc(sizeof(char), ft_strlen(arg) - 1);
 	if (!new_str)
 		general_free(data()->pointer_cmd, 1, 0, 1);
 	return (new_str);
@@ -48,6 +48,7 @@ char	*rem_quotes_pair(char *arg, char quote, int *j)
 	(*j) = (*j) - 2;
 	new_str[i] = '\0';
 	free(arg);
+	printf("%p\n", new_str);
 	return (new_str);
 }
 
@@ -106,7 +107,6 @@ void	quote_checker_file(t_cmd **cmd)
 		{
 			tmp = (*cmd)->redir->file;
 			(*cmd)->redir->file = remove_quotes_redir((*cmd)->redir->file);
-			free(tmp);
 			(*cmd)->redir = (*cmd)->redir->next;
 		}
 		(*cmd)->redir = head_redir;
