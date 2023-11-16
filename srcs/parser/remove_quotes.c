@@ -97,7 +97,6 @@ void	quote_checker_file(t_cmd **cmd)
 {
 	t_cmd	*head;
 	t_redir	*head_redir;
-	char	*tmp;
 
 	head = *cmd;
 	while (*cmd)
@@ -105,7 +104,6 @@ void	quote_checker_file(t_cmd **cmd)
 		head_redir = (*cmd)->redir;
 		while ((*cmd)->redir)
 		{
-			tmp = (*cmd)->redir->file;
 			(*cmd)->redir->file = remove_quotes_redir((*cmd)->redir->file);
 			(*cmd)->redir = (*cmd)->redir->next;
 		}

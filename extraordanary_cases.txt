@@ -53,3 +53,6 @@ $var | $var
 
 export _a --> should work and it is not working
 cat | exit --> cant exit
+
+testar exit igual bash
+tester export

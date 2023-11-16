@@ -73,7 +73,7 @@ OBJS		= $(addprefix $(OBJ_PATH)/, $(addsuffix .o, $(basename $(SRCS))))
 INCLUDES	= includes/
 
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -I$(INCLUDES) -g #-fsanitize=address
+CFLAGS		= -Wall -Wextra -Werror -I$(INCLUDES) #-g -fsanitize=address
 
 
 all: $(NAME)

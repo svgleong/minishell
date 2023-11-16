@@ -27,7 +27,7 @@ void	control_d(char *str)
 	rl_clear_history();
 	write(1, "exit\n", 6);
 	status = data()->exit;
-	general_free((data()->pointer_cmd), 1, 1, 0);
+	general_free((data()->pointer_cmd), 1, 0, 0);
 	exit(status);
 }
 

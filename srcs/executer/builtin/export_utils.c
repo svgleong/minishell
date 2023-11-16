@@ -81,10 +81,16 @@ int	is_valid(char *var)
 	i = 0;
 	if (!var[0])
 		return (0);
-	if (ft_isdigit(var[i]) || var[0] == '_' || var[0] == '=')
+	
+	if (ft_isdigit(var[i]) || var[0] == '=')
 		return (0);
 	while (var[i] && var[i] != '=')
 	{
+		if (var[i] == '_')
+		{
+			i++;
+			continue ;
+		}
 		if (!ft_isalnum(var[i]) || var[i] == '_')
 			return (0);
 		i++;
