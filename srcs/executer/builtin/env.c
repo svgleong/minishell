@@ -68,7 +68,7 @@ void	update_shell_lvl(void)
 	free_matrix(var_value);
 }
 
-void	envp(void)
+int	envp(void)
 {
 	t_env	*env;
 
@@ -79,5 +79,6 @@ void	envp(void)
 			printf("%s\n", env->content);
 		env = env->next;
 	}
+	return (EXIT_SUCCESS);
 	//exitbuiltin(EXIT_SUCCESS);
 }

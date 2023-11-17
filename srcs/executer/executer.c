@@ -52,7 +52,8 @@ void	core_execution(t_cmd *cmd)
 	close(cmd->pipe[1]);
 	if (cmd_is_builtin(cmd->args[0]) == 1 && cmd->error == false)
 	{
-		which_builtin(cmd);
+		data()->exit = which_builtin(cmd);
+		data()->exit = 150;
 		general_free(cmd, 1, 1, 1);
 	}
 	else if (cmd->error == false)
@@ -99,7 +100,8 @@ void	execution_loop(t_cmd *cmd)
 		}
 		if (cmd_is_builtin(cmd->args[0]) && !cmd->next && data()->redir == 0)
 		{
-			which_builtin(cmd);
+			data()->exit = which_builtin(cmd);
+			exitbuiltin(data()->exit);
 			cmd = cmd->next;
 			continue ;
 		}

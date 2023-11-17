@@ -36,7 +36,7 @@ int	flags(char **cmd, bool *flag)
 	return (i);
 }
 
-void	echo(t_cmd *cmd)
+int	echo(t_cmd *cmd)
 {
 	bool	flag;
 	int		i;
@@ -45,8 +45,9 @@ void	echo(t_cmd *cmd)
 	if (!cmd->args[1])
 	{
 		printf("\n");
-		exitbuiltin(cmd, EXIT_SUCCESS);
-		return ;
+		return (EXIT_SUCCESS);
+		//exitbuiltin(cmd, EXIT_SUCCESS);
+		//return ;
 	}
 	i = flags(cmd->args, &flag) - 1;
 	while (cmd->args[++i])
@@ -57,5 +58,6 @@ void	echo(t_cmd *cmd)
 	}
 	if (!flag)
 		printf("\n");
-	exitbuiltin(cmd, EXIT_SUCCESS);
+	return (EXIT_SUCCESS);
+	//exitbuiltin(cmd, EXIT_SUCCESS);
 }
