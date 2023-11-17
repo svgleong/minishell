@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:41:17 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/13 21:06:17 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/17 12:39:19 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	echo(t_cmd *cmd)
 	if (!cmd->args[1])
 	{
 		printf("\n");
-		exitbuiltin(EXIT_SUCCESS);
+		exitbuiltin(cmd, EXIT_SUCCESS);
 		return ;
 	}
 	i = flags(cmd->args, &flag) - 1;
@@ -57,5 +57,5 @@ void	echo(t_cmd *cmd)
 	}
 	if (!flag)
 		printf("\n");
-	exitbuiltin(EXIT_SUCCESS);
+	exitbuiltin(cmd, EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 19:42:32 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/13 19:47:18 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/17 12:42:32 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define BUILTIN_H
 
 # include <minishell.h>
+# include <cmd.h>
 
 typedef struct s_env
 {
@@ -32,7 +33,6 @@ void	env_add_node_end(t_env *lst, t_env *new);
 void	free_env_list(t_env **lst);
 t_env	*search_env(char *var);
 char	*node_value(t_env *node);
-void	exitbuiltin(int i);
 void	simple_env(void);
 void	env_checker(char **env);
 void	handle_c(int signal);

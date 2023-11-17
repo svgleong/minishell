@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:41:17 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/15 10:06:22 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/17 12:32:09 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,12 @@ void	core_execution(t_cmd *cmd)
 	else if (cmd->next)
 		dup2(cmd->pipe[1], STDOUT_FILENO);
 	close(cmd->pipe[1]);
-	if (cmd_is_builtin(cmd->args[0]) == 1)
+	if (cmd_is_builtin(cmd->args[0]) == 1 && cmd->error == false)
 	{
 		which_builtin(cmd);
 		general_free(cmd, 1, 1, 1);
 	}
-	else
+	else if (cmd->error == false)
 		exec(cmd);
 }
 

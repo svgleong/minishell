@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 20:33:04 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/15 09:50:18 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/17 11:01:19 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,12 @@ int	parser(char *rl)
 	if (!checker(rl))
 		return (0);
 	tmp = separate_args(rl);
-	if (!create_list(&data()->pointer_cmd, tmp))
+	create_list(&data()->pointer_cmd, tmp);
+	/* if (!create_list(&data()->pointer_cmd, tmp))
 	{
 		cmdlstclear(&data()->pointer_cmd);
 		return (0);
-	}
+	} */
 	return (1);
 }
 
@@ -56,8 +57,8 @@ int	create_list(t_cmd **lst, char **args)
 	}
 	free_matrix(args);
 	check_redirections(lst);
-	if (!redirections(lst))
-		return (0);
+	redirections(lst);
+		
 	quote_checker(lst);
 	return (1);
 }

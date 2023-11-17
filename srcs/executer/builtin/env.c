@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:41:17 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/14 12:49:22 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/17 12:40:25 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,5 @@ void	envp(void)
 			printf("%s\n", env->content);
 		env = env->next;
 	}
-	exitbuiltin(EXIT_SUCCESS);
+	//exitbuiltin(EXIT_SUCCESS);
 }

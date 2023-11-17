@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:41:17 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/13 21:06:39 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/17 12:40:20 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,6 @@ void	pwd(void)
 	buf = getcwd(NULL, 0);
 	ft_putendl_fd(buf, 1);
 	free(buf);
-	exitbuiltin(EXIT_SUCCESS);
+	//exitbuiltin(EXIT_SUCCESS);
 	return ;
 }

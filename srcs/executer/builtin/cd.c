@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:41:17 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/13 21:01:43 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/17 12:40:41 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	ft_chdir(char	*path)
 	{
 		perror("Error");
 		free(path);
-		exitbuiltin(EXIT_FAILURE);
+		//exitbuiltin(EXIT_FAILURE);
 		return ;
 	}
 	free(path);

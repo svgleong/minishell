@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:41:17 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/13 21:06:42 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/17 12:40:11 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,5 @@ void	unset(char **cmd)
 			unset_node(&data()->envp, node);
 		i++;
 	}
-	exitbuiltin(EXIT_SUCCESS);
+	//exitbuiltin(EXIT_SUCCESS);
 }

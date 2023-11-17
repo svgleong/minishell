@@ -6,18 +6,18 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:41:17 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/14 19:44:11 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/17 12:43:25 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	exitbuiltin(int i)
+void	exitbuiltin(t_cmd *cmd, int i)
 {
-	int	pid;
+	//int	pid;
 
-	pid = fork();
-	if (!pid)
+	cmd->pid = fork();
+	if (!cmd->pid)
 	{
 		general_free(data()->pointer_cmd, 1, 1, 0);
 		exit(i);
