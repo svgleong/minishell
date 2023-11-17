@@ -48,6 +48,7 @@ void	main_loop(char **env)
 		//if (data()->error == 0)
 		execution(data()->pointer_cmd);
 		cmdlstclear(&data()->pointer_cmd);
+		printf("EXIT CODE: %d\n", data()->exit);
 	}
 	free(rl);
 	rl = NULL;

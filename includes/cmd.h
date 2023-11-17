@@ -61,13 +61,13 @@ typedef struct s_data
 
 t_data	*data(void);
 
-void	envp(void);
-void	pwd(void);
-void	echo(t_cmd *cmd);
+int		envp(void);
+int		pwd(void);
+int		echo(t_cmd *cmd);
 void	exit_builtin(t_cmd *cmd);
-void	cd(t_cmd *cmd);
-void	export(t_cmd *cmd);
-void	unset(char **cmd);
+int		cd(t_cmd *cmd);
+int		export(t_cmd *cmd);
+int		unset(char **cmd);
 void	execution(t_cmd *cmd);
 void	get_env_to_list(char **env);
 void	print_list(t_cmd *lst);
@@ -81,6 +81,6 @@ int		heredoc(t_cmd *cmd);
 void	cmd_add_back(t_cmd **lst, t_cmd *new);
 t_cmd	*cmd_last_node(t_cmd *lst);
 t_cmd	*cmd_new_node(char **args);
-void	exitbuiltin(t_cmd *cmd, int i);
+void	exitbuiltin(int i);
 
 #endif

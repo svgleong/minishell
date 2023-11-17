@@ -27,7 +27,7 @@ void	unset_node(t_env **envp, t_env *node)
 	free(node);
 }
 
-void	unset(char **cmd)
+int	unset(char **cmd)
 {
 	int		i;
 	t_env	*node;
@@ -40,5 +40,6 @@ void	unset(char **cmd)
 			unset_node(&data()->envp, node);
 		i++;
 	}
+	return (EXIT_SUCCESS);
 	//exitbuiltin(EXIT_SUCCESS);
 }

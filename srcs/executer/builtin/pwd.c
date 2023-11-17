@@ -12,7 +12,7 @@
 
 #include <minishell.h>
 
-void	pwd(void)
+int	pwd(void)
 {
 	char	*buf;
 
@@ -20,5 +20,5 @@ void	pwd(void)
 	ft_putendl_fd(buf, 1);
 	free(buf);
 	//exitbuiltin(EXIT_SUCCESS);
-	return ;
+	return (EXIT_SUCCESS);
 }

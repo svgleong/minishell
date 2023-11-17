@@ -78,7 +78,7 @@ void	normal_export(t_cmd *cmd, int i)
 	}
 }
 
-void	export(t_cmd *cmd)
+int	export(t_cmd *cmd)
 {
 	int		i;
 	char	**export_env;
@@ -91,9 +91,9 @@ void	export(t_cmd *cmd)
 		bubble_sort(export_env);
 		print_export(export_env);
 		free_matrix(export_env);
-		data()->exit = EXIT_SUCCESS;
-		return ;
+		return (EXIT_SUCCESS);
 	}
 	else
 		normal_export(cmd, i);
+	return (EXIT_SUCCESS);
 }

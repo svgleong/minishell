@@ -12,12 +12,12 @@
 
 #include <minishell.h>
 
-void	exitbuiltin(t_cmd *cmd, int i)
+void	exitbuiltin(int i)
 {
-	//int	pid;
+	int	pid;
 
-	cmd->pid = fork();
-	if (!cmd->pid)
+	pid = fork();
+	if (!pid)
 	{
 		general_free(data()->pointer_cmd, 1, 1, 0);
 		exit(i);
