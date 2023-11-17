@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:41:17 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/14 22:03:26 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/17 12:32:09 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	exec(t_cmd *cmd)
 		else
 			exec_error(cmd->args[0], ": command not found\n", 127);
 		free_matrix(matrix);
-		general_free(NULL, 1, 1, 1);
+		general_free(cmd, 1, 1, 1);
 	}
 }
 
@@ -50,12 +50,13 @@ void	core_execution(t_cmd *cmd)
 	else if (cmd->next)
 		dup2(cmd->pipe[1], STDOUT_FILENO);
 	close(cmd->pipe[1]);
-	if (cmd_is_builtin(cmd->args[0]) == 1)
+	if (cmd_is_builtin(cmd->args[0]) == 1 && cmd->error == false)
 	{
-		which_builtin(cmd);
+		data()->exit = which_builtin(cmd);
+		data()->exit = 150;
 		general_free(cmd, 1, 1, 1);
 	}
-	else
+	else if (cmd->error == false)
 		exec(cmd);
 }
 
@@ -99,7 +100,8 @@ void	execution_loop(t_cmd *cmd)
 		}
 		if (cmd_is_builtin(cmd->args[0]) && !cmd->next && data()->redir == 0)
 		{
-			which_builtin(cmd);
+			data()->exit = which_builtin(cmd);
+			exitbuiltin(data()->exit);
 			cmd = cmd->next;
 			continue ;
 		}

@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 10:46:46 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/14 21:47:15 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/17 11:08:09 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_cmd	*cmd_new_node(char **args)
 	new->redir = NULL;
 	new->fd_in = -1;
 	new->fd_out = -1;
+	new->error = false;
 	return (new);
 }
 

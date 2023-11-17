@@ -6,30 +6,31 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:41:17 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/14 15:59:40 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/17 12:49:12 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	which_builtin(t_cmd *cmd)
+int	which_builtin(t_cmd *cmd)
 {
 	if (!ft_strcmp(cmd->args[0], "env"))
-		envp();
+		return (envp());
 	else if (!ft_strcmp(cmd->args[0], "pwd"))
-		pwd();
+		return (pwd());
 	else if (!ft_strcmp(cmd->args[0], "echo"))
-		echo(cmd);
+		return (echo(cmd));
 	else if (!ft_strcmp(cmd->args[0], "cd"))
-		cd(cmd);
+		return (cd(cmd));
 	else if (!ft_strcmp(cmd->args[0], "export"))
-		export(cmd);
+		return (export(cmd));
 	else if (!ft_strcmp(cmd->args[0], "unset"))
-		unset(cmd->args);
+		return (unset(cmd->args));
 	else if (!ft_strcmp(cmd->args[0], "exit"))
 		exit_builtin(cmd);
 	else
 		ft_putstr_fd("command not found\n", STDERR_FILENO);
+	return (-1); //
 }
 
 int	cmd_is_builtin(char *command)

@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 20:49:02 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/13 20:50:17 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/17 11:21:29 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,15 @@ int	redir_in(t_cmd **cmds)
 	{
 		perror("Error");
 		data()->exit = 1;
+		(*cmds)->error = true;
 		return (0);
 	}
 	(*cmds)->fd_in = open((*cmds)->redir->file, O_RDONLY);
 	if ((*cmds)->fd_in == -1)
 	{
-		ft_putstr_fd("Error opening file\n", 2);
+		perror("Error");
 		data()->exit = 1;
+		(*cmds)->error = true;
 		return (0);
 	}
 	return (1);
@@ -42,7 +44,7 @@ int	redir_out(t_cmd **cmds)
 		| O_TRUNC, 0644);
 	if ((*cmds)->fd_out == -1)
 	{
-		ft_putstr_fd("Error opening file\n", 2);
+		perror("Error");
 		data()->exit = 1;
 		return (0);
 	}
@@ -58,7 +60,7 @@ int	redir_out_append(t_cmd **cmds)
 		| O_APPEND, 0644);
 	if ((*cmds)->fd_out == -1)
 	{
-		ft_putstr_fd("Error opening file\n", 2);
+		perror("Error");
 		data()->exit = 1;
 		data()->error = 1;
 		return (0);

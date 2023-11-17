@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:41:17 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/14 12:49:22 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/17 12:40:25 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,16 +68,17 @@ void	update_shell_lvl(void)
 	free_matrix(var_value);
 }
 
-void	envp(void)
+int	envp(void)
 {
 	t_env	*env;
 
 	env = data()->envp;
 	while (env && env->content)
 	{
-		if (ft_strchr(env->content, '=') && ft_strncmp(env->content, "_", 1))
+		if (ft_strchr(env->content, '=')) // && ft_strncmp(env->content, "_", 1)
 			printf("%s\n", env->content);
 		env = env->next;
 	}
-	exitbuiltin(EXIT_SUCCESS);
+	return (EXIT_SUCCESS);
+	//exitbuiltin(EXIT_SUCCESS);
 }

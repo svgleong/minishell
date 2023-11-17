@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:41:17 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/14 19:44:11 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/17 12:43:25 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,10 @@ void	exit_builtin(t_cmd *cmd)
 	status = 0;
 	if (!cmd->next)
 		ft_putstr_fd("exit\n", 2);
+	if (cmd->prev)
+		return ;
 	if (!cmd->args || !cmd->args[1])
-		general_free(cmd, 1, 1, 1);
+		general_free(cmd, 1, 0, 1);
 	if (!ft_strdigit(cmd->args[1]) || ft_atol(cmd->args[1]) == 3737373737)
 	{
 		ft_putstr_fd("exit: ", 2);

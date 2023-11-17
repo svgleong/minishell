@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:20:58 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/14 18:28:52 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/17 12:42:36 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_cmd
 	int				fd_in;
 	int				fd_out;
 	pid_t			pid;
+	bool			error;
 }	t_cmd;
 
 typedef struct s_data
@@ -60,13 +61,13 @@ typedef struct s_data
 
 t_data	*data(void);
 
-void	envp(void);
-void	pwd(void);
-void	echo(t_cmd *cmd);
+int		envp(void);
+int		pwd(void);
+int		echo(t_cmd *cmd);
 void	exit_builtin(t_cmd *cmd);
-void	cd(t_cmd *cmd);
-void	export(t_cmd *cmd);
-void	unset(char **cmd);
+int		cd(t_cmd *cmd);
+int		export(t_cmd *cmd);
+int		unset(char **cmd);
 void	execution(t_cmd *cmd);
 void	get_env_to_list(char **env);
 void	print_list(t_cmd *lst);
@@ -80,5 +81,6 @@ int		heredoc(t_cmd *cmd);
 void	cmd_add_back(t_cmd **lst, t_cmd *new);
 t_cmd	*cmd_last_node(t_cmd *lst);
 t_cmd	*cmd_new_node(char **args);
+void	exitbuiltin(int i);
 
 #endif
