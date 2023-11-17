@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 20:49:02 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/17 11:21:29 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/17 12:57:02 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int	redir_out(t_cmd **cmds)
 	{
 		perror("Error");
 		data()->exit = 1;
+		(*cmds)->error = true;
 		return (0);
 	}
 	return (1);
