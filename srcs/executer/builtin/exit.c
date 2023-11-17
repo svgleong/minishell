@@ -57,8 +57,10 @@ void	exit_builtin(t_cmd *cmd)
 	status = 0;
 	if (!cmd->next)
 		ft_putstr_fd("exit\n", 2);
+	if (cmd->prev)
+		return ;
 	if (!cmd->args || !cmd->args[1])
-		general_free(cmd, 1, 1, 1);
+		general_free(cmd, 1, 0, 1);
 	if (!ft_strdigit(cmd->args[1]) || ft_atol(cmd->args[1]) == 3737373737)
 	{
 		ft_putstr_fd("exit: ", 2);
