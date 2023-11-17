@@ -6,7 +6,7 @@
 #    By: svalente <svalente@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/20 20:09:21 by svalente          #+#    #+#              #
-#    Updated: 2023/11/17 12:22:11 by svalente         ###   ########.fr        #
+#    Updated: 2023/11/17 18:10:29 by svalente         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -100,7 +100,7 @@ fclean: clean
 	@echo "\033[1;32m---> ./$(NAME) was deleted\033[0m"
 
 valgrind:	re
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes --trace-children=yes --log-file=valgrind-out.txt --suppressions=readline.supp ./minishell
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes --log-file=valgrind-out.txt --suppressions=readline.supp ./minishell
 
 re: fclean all
 

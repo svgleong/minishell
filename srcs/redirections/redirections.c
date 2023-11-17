@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 21:28:12 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/17 12:56:26 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/17 19:13:53 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ int	treat_redirections(t_cmd **cmds)
 	}
 	else if ((*cmds)->redir->redir == 1)
 	{
-		redir_out_append(cmds);
-		/* if (!redir_out_append(cmds))
-			return (0); */
+		//redir_out_append(cmds);
+		if (!redir_out_append(cmds))
+			return (0);
 	}
 	return (1);
 }

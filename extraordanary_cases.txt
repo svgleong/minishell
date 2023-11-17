@@ -65,6 +65,37 @@ cat <missing | echo oi --> should do the echo and doesnt
 
 mv minishell minishell_tester && cd minishell_tester && valgrind --suppressions=../readline.supp ./minishell
 
+Test 103: ❌ cat >./test_files/invalid_permission <"./test_files/infile"
+Test 115: ❌ ls >>./test_files/invalid_permission
+Test 116: ❌ ls >>./test_files/invalid_permission >>./outfiles/outfile01 --> se outfiles nao xistir o ls nao deve correr
+Test 117: ❌ ls >>./outfiles/outfile01 >>./test_files/invalid_permission
+
+
+data()->error = 1;
+
+
+Painshell: ls >>./outfiles/outfile01 >>./test_files/invalid_permission
+Error: No such file or directory
+cmdlstclear pid 236853 [ls]
+==236843== Invalid read of size 8
+==236843==    at 0x4036A7: cmdlstclear (in /nfs/homes/svalente/Documents/minishell/minishell_tester/minishell)
+==236843==    by 0x408729: main_loop (in /nfs/homes/svalente/Documents/minishell/minishell_tester/minishell)
+==236843==    by 0x408772: main (in /nfs/homes/svalente/Documents/minishell/minishell_tester/minishell)
+==236843==  Address 0x4b27490 is 16 bytes inside a block of size 72 free'd
+==236843==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==236843==    by 0x40369F: cmdlstclear (in /nfs/homes/svalente/Documents/minishell/minishell_tester/minishell)
+==236843==    by 0x408729: main_loop (in /nfs/homes/svalente/Documents/minishell/minishell_tester/minishell)
+==236843==    by 0x408772: main (in /nfs/homes/svalente/Documents/minishell/minishell_tester/minishell)
+==236843==  Block was alloc'd at
+==236843==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==236843==    by 0x40130D: ft_calloc (in /nfs/homes/svalente/Documents/minishell/minishell_tester/minishell)
+==236843==    by 0x40346A: cmd_new_node (in /nfs/homes/svalente/Documents/minishell/minishell_tester/minishell)
+==236843==    by 0x40416E: create_list (in /nfs/homes/svalente/Documents/minishell/minishell_tester/minishell)
+==236843==    by 0x4040EB: parser (in /nfs/homes/svalente/Documents/minishell/minishell_tester/minishell)
+==236843==    by 0x4086FC: main_loop (in /nfs/homes/svalente/Documents/minishell/minishell_tester/minishell)
+==236843==    by 0x408772: main (in /nfs/homes/svalente/Documents/minishell/minishell_tester/minishell)
+==236843== 
+EXIT CODE: 0
 
 testar exit igual bash
 tester export

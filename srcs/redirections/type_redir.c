@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 20:49:02 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/17 12:57:02 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/17 19:23:00 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	redir_in(t_cmd **cmds)
 	{
 		perror("Error");
 		data()->exit = 1;
+		data()->error = 1;
 		(*cmds)->error = true;
 		return (0);
 	}
@@ -29,6 +30,7 @@ int	redir_in(t_cmd **cmds)
 	{
 		perror("Error");
 		data()->exit = 1;
+		data()->error = 1;
 		(*cmds)->error = true;
 		return (0);
 	}
@@ -46,6 +48,7 @@ int	redir_out(t_cmd **cmds)
 	{
 		perror("Error");
 		data()->exit = 1;
+		data()->error = 1;
 		(*cmds)->error = true;
 		return (0);
 	}
@@ -64,6 +67,7 @@ int	redir_out_append(t_cmd **cmds)
 		perror("Error");
 		data()->exit = 1;
 		data()->error = 1;
+		(*cmds)->error = true;
 		return (0);
 	}
 	return (1);

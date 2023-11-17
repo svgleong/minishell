@@ -6,11 +6,30 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:41:17 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/17 12:32:09 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/17 19:54:55 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+#include <sys/stat.h>
+
+void	error_before_execute(char *path, char **matrix)
+{
+	struct stat	st;
+
+	//printf("entrei error before\n");
+	
+	if (stat(path, &st) == -1)
+		return ;
+	if (S_ISDIR(st.st_mode) && path && (!ft_strncmp("./", path, 2) || path[0] == '/'))
+	{
+		exec_error("", " Is a directory", 126);
+		free(path);
+		free_matrix(matrix);
+		general_free(data()->pointer_cmd, 1, 1, 1);
+	}
+}
 
 void	exec(t_cmd *cmd)
 {
@@ -19,16 +38,30 @@ void	exec(t_cmd *cmd)
 
 	matrix = env_to_matrix();
 	path = find_command_path(cmd->args[0]);
+	
+	//fprintf(stderr, "[%s]", path);
+	//error_before_execute(path, matrix);
 	if (execve(path, cmd->args, matrix) == -1)
 	{
+		fprintf(stderr, "arg[0] %s\n", cmd->args[0]);
 		if (errno == 13)
 		{
+			fprintf(stderr, "entrei 13\n");
+			// perror("Error");
+			// data()->exit = 126;
+			// free(path);
+			// general_free(NULL, 1, 1, 1);
 			perror("Error");
 			data()->exit = 126;
 			free(path);
+			free_matrix(matrix);
+			general_free(cmd, 1, 1, 1);
 		}
 		else
+		{
 			exec_error(cmd->args[0], ": command not found\n", 127);
+			general_free(NULL, 1, 1, 1);
+		}
 		free_matrix(matrix);
 		general_free(cmd, 1, 1, 1);
 	}
@@ -36,6 +69,7 @@ void	exec(t_cmd *cmd)
 
 void	core_execution(t_cmd *cmd)
 {
+	print_list(data()->pointer_cmd);
 	if (cmd->fd_in != -1)
 	{
 		dup2(cmd->fd_in, STDIN_FILENO);
@@ -53,7 +87,6 @@ void	core_execution(t_cmd *cmd)
 	if (cmd_is_builtin(cmd->args[0]) == 1 && cmd->error == false)
 	{
 		data()->exit = which_builtin(cmd);
-		data()->exit = 150;
 		general_free(cmd, 1, 1, 1);
 	}
 	else if (cmd->error == false)
@@ -98,14 +131,14 @@ void	execution_loop(t_cmd *cmd)
 			}
 			break ;
 		}
-		if (cmd_is_builtin(cmd->args[0]) && !cmd->next && data()->redir == 0)
+		if (cmd_is_builtin(cmd->args[0]) && !cmd->next && data()->redir == 0 && cmd->error == false)
 		{
 			data()->exit = which_builtin(cmd);
 			exitbuiltin(data()->exit);
 			cmd = cmd->next;
 			continue ;
 		}
-		if (cmd->args)
+		if (cmd->args && cmd->error == false)
 			pipe_handler(cmd);
 		cmd = cmd->next;
 	}
