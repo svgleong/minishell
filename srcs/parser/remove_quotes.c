@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 15:41:19 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/15 10:04:28 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/18 13:15:40 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ char	*rem_quotes_pair(char *arg, char quote, int *j)
 	(*j) = (*j) - 2;
 	new_str[i] = '\0';
 	free(arg);
-	printf("%p\n", new_str);
 	return (new_str);
 }
 

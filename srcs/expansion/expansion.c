@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:02:23 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/14 12:44:05 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/18 13:46:35 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	*check_expansion(char *str, int *cursor)
 	int	i;
 
 	i = *cursor;
-	if (!str[i + 1])
+	if (!str[i + 1] || (str[i + 1] && str[i + 1] == '"'))
 		return (ft_strdup(str));
 	if (str[i + 1] == '\'' || str[i + 1] == '"')
 		return (remove_dollar(str, cursor));

@@ -56,3 +56,23 @@ cat | exit --> cant exit
 
 testar exit igual bash
 tester export
+
+FRIDAY
+echo <"./test_files/infile_big" | cat <"./test_files/infile"
+echo <"./test_files/infile_big" | echo <"./test_files/infile"
+echo hi | cat <"./test_files/infile"
+cat <missing | cat --> exit code should be 0 and it is 1
+cat <missing | echo oi --> should do the echo and doesnt
+
+mv minishell minishell_tester && cd minishell_tester && valgrind --suppressions=../readline.supp ./minishell
+
+Test 103: ❌ cat >./test_files/invalid_permission <"./test_files/infile"
+Test 115: ❌ ls >>./test_files/invalid_permission
+Test 116: ❌ ls >>./test_files/invalid_permission >>./outfiles/outfile01 --> se outfiles nao xistir o ls nao deve correr
+Test 117: ❌ ls >>./outfiles/outfile01 >>./test_files/invalid_permission
+
+
+data()->error = 1;
+
+
+echo "$"

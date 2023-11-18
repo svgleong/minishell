@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:41:17 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/13 12:31:08 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/18 15:01:35 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ long	ft_atol(const char *str)
 	{
 		res = res * 10 + str[i] - 48;
 		i++;
-		if ((res * sign) > INT_MAX || (res * sign) < INT_MIN)
+		if ((res * sign) > 2147483648 || (res * sign) < -2147483647)
 			return (3737373737);
 	}
 	return (sign * res);
