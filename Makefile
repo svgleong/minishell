@@ -6,7 +6,7 @@
 #    By: svalente <svalente@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/20 20:09:21 by svalente          #+#    #+#              #
-#    Updated: 2023/11/15 09:40:33 by svalente         ###   ########.fr        #
+#    Updated: 2023/11/18 16:02:41 by svalente         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ SRCS		= srcs/libs/ft_calloc.c						\
 			  srcs/parser/list_utils.c					\
 			  srcs/parser/modify_string.c 				\
 			  srcs/parser/remove_quotes.c 				\
+			  srcs/parser/remove_quotes2.c 				\
 			  srcs/parser/parser.c 						\
 			  srcs/redirections/redir_lst_utils.c 		\
 			  srcs/redirections/redirections.c 			\
@@ -100,7 +101,7 @@ fclean: clean
 	@echo "\033[1;32m---> ./$(NAME) was deleted\033[0m"
 
 valgrind:	re
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes --log-file=valgrind-out.txt --suppressions=readline.supp ./minishell
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes --log-file=valgrind-out.txt --suppressions=readline.supp --trace-children=yes ./minishell
 
 re: fclean all
 

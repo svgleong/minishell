@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 21:28:12 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/14 19:31:20 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/18 15:58:16 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	redirections(t_cmd **cmds)
 		while (data()->pointer_cmd->redir)
 		{
 			if (!treat_redirections(&data()->pointer_cmd))
-				return (0);
+				break ;
 			data()->pointer_cmd->redir = data()->pointer_cmd->redir->next;
 		}
 		data()->pointer_cmd->redir = tmp_redir;

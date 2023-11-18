@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:41:17 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/14 12:43:13 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/18 15:42:14 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ int	is_valid(char *var)
 	i = 0;
 	if (!var[0])
 		return (0);
-	
 	if (ft_isdigit(var[i]) || var[0] == '=')
 		return (0);
 	while (var[i] && var[i] != '=')

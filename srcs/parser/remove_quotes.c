@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 15:41:19 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/18 13:15:40 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/18 16:02:24 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,39 +90,6 @@ char	*remove_quotes_redir(char *args)
 			args = rem_quotes_pair(args, '"', &j);
 	}
 	return (args);
-}
-
-void	quote_checker_file(t_cmd **cmd)
-{
-	t_cmd	*head;
-	t_redir	*head_redir;
-
-	head = *cmd;
-	while (*cmd)
-	{
-		head_redir = (*cmd)->redir;
-		while ((*cmd)->redir)
-		{
-			(*cmd)->redir->file = remove_quotes_redir((*cmd)->redir->file);
-			(*cmd)->redir = (*cmd)->redir->next;
-		}
-		(*cmd)->redir = head_redir;
-		(*cmd) = (*cmd)->next;
-	}
-	(*cmd) = head;
-}
-
-void	quote_checker(t_cmd **cmd)
-{
-	t_cmd	*head;
-
-	head = *cmd;
-	while (*cmd)
-	{
-		remove_quotes((*cmd)->args);
-		(*cmd) = (*cmd)->next;
-	}
-	(*cmd) = head;
 }
 
 int	skip_quotes(char *str, char quote, int *i)

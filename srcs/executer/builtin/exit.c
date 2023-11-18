@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:41:17 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/14 19:44:11 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/18 15:41:48 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	ft_strdigit(char *s)
 
 	i = -1;
 	if (s[0] == '-' || s[0] == '+')
-			i++;
+		i++;
 	while (s[++i])
 	{
 		if (!ft_isdigit(s[i]))
@@ -50,6 +50,14 @@ int	status_calc(char *arg)
 	return (status);
 }
 
+int	not_numeric(t_cmd *cmd)
+{
+	ft_putstr_fd("exit: ", 2);
+	ft_putstr_fd(cmd->args[1], 2);
+	ft_putstr_fd(": numeric argument required\n", 2);
+	return (2);
+}
+
 int	exit_builtin(t_cmd *cmd)
 {
 	int	status;
@@ -60,12 +68,7 @@ int	exit_builtin(t_cmd *cmd)
 	if (!cmd->args || !cmd->args[1])
 		general_free(cmd, 1, 0, 1);
 	if (!ft_strdigit(cmd->args[1]) || ft_atol(cmd->args[1]) == 3737373737)
-	{
-		ft_putstr_fd("exit: ", 2);
-		ft_putstr_fd(cmd->args[1], 2);
-		ft_putstr_fd(": numeric argument required\n", 2);
-		status = 2;
-	}
+		status = not_numeric(cmd);
 	else if (cmd->args[2])
 	{
 		ft_putstr_fd("exit: too many arguments\n", 2);

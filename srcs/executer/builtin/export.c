@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:41:17 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/14 16:12:03 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/18 15:42:04 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,6 @@ int	export(t_cmd *cmd)
 		bubble_sort(export_env);
 		print_export(export_env);
 		free_matrix(export_env);
-		//data()->exit = EXIT_SUCCESS;
 		return (EXIT_SUCCESS);
 	}
 	return (normal_export(cmd, i));
