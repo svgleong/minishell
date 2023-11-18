@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 20:33:04 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/17 17:46:29 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/18 11:01:31 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	parser(char *rl)
 		return (0);
 	tmp = separate_args(rl);
 	create_list(&data()->pointer_cmd, tmp);
-	/* if (!create_list(&data()->pointer_cmd, tmp))
+/* 	if (!create_list(&data()->pointer_cmd, tmp))
 	{
 		cmdlstclear(&data()->pointer_cmd);
 		return (0);

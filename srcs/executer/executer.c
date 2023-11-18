@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:41:17 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/18 10:51:57 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/18 11:34:16 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #include <sys/stat.h>
 
-void	error_before_execute(char *path, char **matrix)
+/* void	error_before_execute(char *path, char **matrix)
 {
 	struct stat	st;
 
@@ -29,9 +29,9 @@ void	error_before_execute(char *path, char **matrix)
 		free_matrix(matrix);
 		general_free(data()->pointer_cmd, 1, 1, 1);
 	}
-}
+} */
 
-void	exec(t_cmd *cmd)
+/* void	exec(t_cmd *cmd)
 {
 	char	**matrix;
 	char	*path;
@@ -55,7 +55,8 @@ void	exec(t_cmd *cmd)
 			data()->exit = 126;
 			free(path);
 			free_matrix(matrix);
-			general_free(cmd, 1, 1, 1);
+			exit(1);
+			//general_free(cmd, 1, 1, 1);
 		}
 		else
 		{
@@ -65,8 +66,26 @@ void	exec(t_cmd *cmd)
 		free_matrix(matrix);
 		general_free(cmd, 1, 1, 1);
 	}
-}
+} */
 
+void	exec(t_cmd *cmd)
+{
+	char	**matrix;
+
+	matrix = env_to_matrix();
+	if (execve(find_command_path(cmd->args[0]), cmd->args, matrix) == -1)
+	{
+		if (errno == 13)
+		{
+			perror("Error");
+			data()->exit = 126;
+		}
+		else
+			exec_error(cmd->args[0], "command not found\n", 127);
+		free_matrix(matrix);
+		general_free(cmd, 1, 1, 1);
+	}
+}
 void	core_execution(t_cmd *cmd)
 {
 	if (cmd->fd_in != -1)
