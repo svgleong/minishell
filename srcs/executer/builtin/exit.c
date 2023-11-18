@@ -50,15 +50,13 @@ int	status_calc(char *arg)
 	return (status);
 }
 
-void	exit_builtin(t_cmd *cmd)
+int	exit_builtin(t_cmd *cmd)
 {
 	int	status;
 
 	status = 0;
 	if (!cmd->next)
 		ft_putstr_fd("exit\n", 2);
-	if (cmd->prev)
-		return ;
 	if (!cmd->args || !cmd->args[1])
 		general_free(cmd, 1, 0, 1);
 	if (!ft_strdigit(cmd->args[1]) || ft_atol(cmd->args[1]) == 3737373737)
@@ -71,11 +69,15 @@ void	exit_builtin(t_cmd *cmd)
 	else if (cmd->args[2])
 	{
 		ft_putstr_fd("exit: too many arguments\n", 2);
-		data()->exit = 1;
-		return ;
+		if (data()->exit == 0)
+			return (1);
+		return (data()->exit);
 	}
 	else
 		status = status_calc(cmd->args[1]);
+	if (cmd->prev)
+		return (status);
 	data()->exit = status;
 	general_free(cmd, 1, 1, 1);
+	return (status);
 }

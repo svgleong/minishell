@@ -55,7 +55,7 @@ void	core_execution(t_cmd *cmd)
 	close(cmd->pipe[1]);
 	if (cmd_is_builtin(cmd->args[0]) == 1)
 	{
-		which_builtin(cmd);
+		data()->exit = which_builtin(cmd);
 		general_free(cmd, 1, 1, 1);
 	}
 	else
@@ -100,9 +100,10 @@ void	execution_loop(t_cmd *cmd)
 			}
 			break ;
 		}
-		if (cmd_is_builtin(cmd->args[0]) && !cmd->next && data()->redir == 0 && cmd->error == false)
+		if (cmd_is_builtin(cmd->args[0]) && !cmd->next && !cmd->prev && data()->redir == 0 && cmd->error == false)
 		{
-			which_builtin(cmd);
+			data()->exit = which_builtin(cmd);
+			exitbuiltin(data()->exit);
 			cmd = cmd->next;
 			continue ;
 		}

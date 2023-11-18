@@ -58,16 +58,18 @@ int	verify_export_arg(char *arg)
 {
 	if (is_valid(arg) == 0)
 	{
+		data()->exit = 1;
 		ft_putstr_fd("not a valid identifier\n", STDERR_FILENO);
 		return (0);
 	}
 	return (1);
 }
 
-void	normal_export(t_cmd *cmd, int i)
+int	normal_export(t_cmd *cmd, int i)
 {
 	char	**var_value;
 
+	data()->exit = 0;
 	while (cmd->args[++i])
 	{
 		if (!verify_export_arg(cmd->args[i]))
@@ -76,9 +78,10 @@ void	normal_export(t_cmd *cmd, int i)
 		update_env_export(cmd->args[i], var_value);
 		free_matrix(var_value);
 	}
+	return (data()->exit);
 }
 
-void	export(t_cmd *cmd)
+int	export(t_cmd *cmd)
 {
 	int		i;
 	char	**export_env;
@@ -91,9 +94,8 @@ void	export(t_cmd *cmd)
 		bubble_sort(export_env);
 		print_export(export_env);
 		free_matrix(export_env);
-		data()->exit = EXIT_SUCCESS;
-		return ;
+		//data()->exit = EXIT_SUCCESS;
+		return (EXIT_SUCCESS);
 	}
-	else
-		normal_export(cmd, i);
+	return (normal_export(cmd, i));
 }

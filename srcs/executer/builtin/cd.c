@@ -40,20 +40,20 @@ void	update_pwd(void)
 	}
 }
 
-void	ft_chdir(char	*path)
+int	ft_chdir(char	*path)
 {
 	if (chdir(path) == -1)
 	{
 		perror("Error");
 		free(path);
-		exitbuiltin(EXIT_FAILURE);
-		return ;
+		return (EXIT_FAILURE);
 	}
 	free(path);
 	update_pwd();
+	return (EXIT_SUCCESS);
 }
 
-void	cd(t_cmd *cmd)
+int	cd(t_cmd *cmd)
 {
 	char	*path;
 
@@ -64,7 +64,7 @@ void	cd(t_cmd *cmd)
 		{
 			ft_putstr_fd("cd: HOME not set\n", 2);
 			free(path);
-			return ;
+			return (EXIT_FAILURE);
 		}
 	}
 	else
@@ -72,9 +72,11 @@ void	cd(t_cmd *cmd)
 		if (cmd->args[2] != NULL)
 		{
 			ft_putstr_fd("cd: too many arguments\n", 2);
-			return ;
+			return (EXIT_FAILURE);
 		}
 		path = ft_strdup(cmd->args[1]);
 	}
-	ft_chdir(path);
+	if (ft_chdir(path) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }
