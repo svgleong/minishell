@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:41:17 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/14 22:03:26 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/15 10:06:22 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,21 @@ void	exec(t_cmd *cmd)
 
 	matrix = env_to_matrix();
 	path = find_command_path(cmd->args[0]);
+	// printf("args in exec [1] %s\n", cmd->args[1]);
 	if (execve(path, cmd->args, matrix) == -1)
 	{
 		if (errno == 13)
 		{
 			perror("Error");
 			data()->exit = 126;
-			free(path);
+			//general_free(NULL, 1, 1, 1);
 		}
 		else
 			exec_error(cmd->args[0], ": command not found\n", 127);
 		free_matrix(matrix);
-		general_free(NULL, 1, 1, 1);
+		free(path);
+		//printf("args in exec [0] %s\n", cmd->args[0]);
+		general_free(cmd, 1, 1, 1);
 	}
 }
 
@@ -97,13 +100,13 @@ void	execution_loop(t_cmd *cmd)
 			}
 			break ;
 		}
-		if (cmd_is_builtin(cmd->args[0]) && !cmd->next && data()->redir == 0)
+		if (cmd_is_builtin(cmd->args[0]) && !cmd->next && data()->redir == 0 && cmd->error == false)
 		{
 			which_builtin(cmd);
 			cmd = cmd->next;
 			continue ;
 		}
-		if (cmd->args)
+		if (cmd->args && cmd->error == false)
 			pipe_handler(cmd);
 		cmd = cmd->next;
 	}

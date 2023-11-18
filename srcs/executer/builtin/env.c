@@ -75,7 +75,7 @@ void	envp(void)
 	env = data()->envp;
 	while (env && env->content)
 	{
-		if (ft_strchr(env->content, '=') && ft_strncmp(env->content, "_", 1))
+		if (ft_strchr(env->content, '=')) // && ft_strncmp(env->content, "_", 1)
 			printf("%s\n", env->content);
 		env = env->next;
 	}

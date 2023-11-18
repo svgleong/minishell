@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:39:21 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/14 10:41:54 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/15 10:45:43 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,7 @@ void	main_loop(char **env)
 		add_history(rl);
 		if (!parser(rl))
 			continue ;
-		if (data()->error == 0)
-			execution(data()->pointer_cmd);
+		execution(data()->pointer_cmd);
 		cmdlstclear(&data()->pointer_cmd);
 	}
 	free(rl);

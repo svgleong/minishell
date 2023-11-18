@@ -15,13 +15,18 @@
 t_env	*search_env(char *var)
 {
 	t_env	*envp;
+	char	**var_value;
 
 	envp = data()->envp;
 	while (envp && envp->content != NULL)
 	{
-		if (!ft_strncmp(envp->content, var, \
-			ft_strlen_special(envp->content, '=')))
+		var_value = ft_split(envp->content, '=');
+		if (!ft_strcmp(var, var_value[0]))
+		{
+			free_matrix(var_value);
 			return (envp);
+		}
+		free_matrix(var_value);
 		envp = envp->next;
 	}
 	return (NULL);

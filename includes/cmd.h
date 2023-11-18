@@ -43,6 +43,7 @@ typedef struct s_cmd
 	int				fd_in;
 	int				fd_out;
 	pid_t			pid;
+	bool			error;
 }	t_cmd;
 
 typedef struct s_data
