@@ -19,6 +19,7 @@ int	parser(char *rl)
 	if (!checker(rl))
 		return (0);
 	tmp = separate_args(rl);
+	//create_list(&data()->pointer_cmd, tmp);
 	if (!create_list(&data()->pointer_cmd, tmp))
 	{
 		cmdlstclear(&data()->pointer_cmd);

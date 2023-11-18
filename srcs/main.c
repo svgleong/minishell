@@ -45,8 +45,7 @@ void	main_loop(char **env)
 		add_history(rl);
 		if (!parser(rl))
 			continue ;
-		if (data()->error == 0)
-			execution(data()->pointer_cmd);
+		execution(data()->pointer_cmd);
 		cmdlstclear(&data()->pointer_cmd);
 	}
 	free(rl);

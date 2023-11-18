@@ -21,6 +21,7 @@ int	redir_in(t_cmd **cmds)
 	{
 		perror("Error");
 		data()->exit = 1;
+		(*cmds)->error = true;
 		return (0);
 	}
 	(*cmds)->fd_in = open((*cmds)->redir->file, O_RDONLY);
@@ -28,6 +29,7 @@ int	redir_in(t_cmd **cmds)
 	{
 		ft_putstr_fd("Error opening file\n", 2);
 		data()->exit = 1;
+		(*cmds)->error = true;
 		return (0);
 	}
 	return (1);
@@ -44,6 +46,7 @@ int	redir_out(t_cmd **cmds)
 	{
 		ft_putstr_fd("Error opening file\n", 2);
 		data()->exit = 1;
+		(*cmds)->error = true;
 		return (0);
 	}
 	return (1);
@@ -60,7 +63,7 @@ int	redir_out_append(t_cmd **cmds)
 	{
 		ft_putstr_fd("Error opening file\n", 2);
 		data()->exit = 1;
-		data()->error = 1;
+		(*cmds)->error = true;
 		return (0);
 	}
 	return (1);

@@ -80,5 +80,6 @@ char	*find_command_path(char *command)
 		}
 		free_matrix(matrix);
 	}
-	return (command);
+	executable_path = ft_strdup(command);
+	return (executable_path);
 }

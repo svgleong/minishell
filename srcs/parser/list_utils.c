@@ -26,6 +26,7 @@ t_cmd	*cmd_new_node(char **args)
 	new->redir = NULL;
 	new->fd_in = -1;
 	new->fd_out = -1;
+	new->error = false;
 	return (new);
 }
 
