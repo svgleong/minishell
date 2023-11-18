@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:20:58 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/14 18:28:52 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/18 16:04:05 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,9 @@ int		heredoc(t_cmd *cmd);
 void	cmd_add_back(t_cmd **lst, t_cmd *new);
 t_cmd	*cmd_last_node(t_cmd *lst);
 t_cmd	*cmd_new_node(char **args);
+void	quote_checker_file(t_cmd **cmd);
+void	quote_checker(t_cmd **cmd);
+char	*remove_quotes_redir(char *args);
+void	remove_quotes(char **args);
 
 #endif

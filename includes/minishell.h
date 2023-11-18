@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 19:43:20 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/14 15:19:36 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/18 16:01:03 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@
 
 char	*get_next_line(int fd);
 char	*find_command_path(char *command);
-int 	which_builtin(t_cmd *cmd);
+int		which_builtin(t_cmd *cmd);
 int		cmd_is_builtin(char *command);
 int		is_valid(char *var);
 char	*rem_quotes_export(char *s);

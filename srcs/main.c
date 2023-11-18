@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:39:21 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/15 10:45:43 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/18 15:55:27 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ void	main_loop(char **env)
 		add_history(rl);
 		if (!parser(rl))
 			continue ;
+		print_list(data()->pointer_cmd);
 		execution(data()->pointer_cmd);
 		cmdlstclear(&data()->pointer_cmd);
-		printf("EXIT CODE: %d\n", data()->exit);
 	}
 	free(rl);
 	rl = NULL;
