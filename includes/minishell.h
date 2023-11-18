@@ -39,7 +39,7 @@
 
 char	*get_next_line(int fd);
 char	*find_command_path(char *command);
-void	which_builtin(t_cmd *cmd);
+int 	which_builtin(t_cmd *cmd);
 int		cmd_is_builtin(char *command);
 int		is_valid(char *var);
 char	*rem_quotes_export(char *s);

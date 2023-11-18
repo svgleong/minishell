@@ -68,16 +68,16 @@ void	update_shell_lvl(void)
 	free_matrix(var_value);
 }
 
-void	envp(void)
+int	envp(void)
 {
 	t_env	*env;
 
 	env = data()->envp;
 	while (env && env->content)
 	{
-		if (ft_strchr(env->content, '=')) // && ft_strncmp(env->content, "_", 1)
+		if (ft_strchr(env->content, '='))
 			printf("%s\n", env->content);
 		env = env->next;
 	}
-	exitbuiltin(EXIT_SUCCESS);
+	return (EXIT_SUCCESS);
 }

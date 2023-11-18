@@ -61,13 +61,13 @@ typedef struct s_data
 
 t_data	*data(void);
 
-void	envp(void);
-void	pwd(void);
-void	echo(t_cmd *cmd);
-void	exit_builtin(t_cmd *cmd);
-void	cd(t_cmd *cmd);
-void	export(t_cmd *cmd);
-void	unset(char **cmd);
+int		envp(void);
+int		pwd(void);
+int		echo(t_cmd *cmd);
+int		exit_builtin(t_cmd *cmd);
+int		cd(t_cmd *cmd);
+int		export(t_cmd *cmd);
+int		unset(char **cmd);
 void	execution(t_cmd *cmd);
 void	get_env_to_list(char **env);
 void	print_list(t_cmd *lst);

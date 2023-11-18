@@ -48,7 +48,6 @@ char	*rem_quotes_pair(char *arg, char quote, int *j)
 	(*j) = (*j) - 2;
 	new_str[i] = '\0';
 	free(arg);
-	printf("%p\n", new_str);
 	return (new_str);
 }
 
