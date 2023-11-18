@@ -6,7 +6,7 @@
 /*   By: svalente <svalente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:41:17 by svalente          #+#    #+#             */
-/*   Updated: 2023/11/17 19:54:55 by svalente         ###   ########.fr       */
+/*   Updated: 2023/11/18 10:51:57 by svalente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	exec(t_cmd *cmd)
 		else
 		{
 			exec_error(cmd->args[0], ": command not found\n", 127);
-			general_free(NULL, 1, 1, 1);
+			//general_free(NULL, 1, 1, 1);
 		}
 		free_matrix(matrix);
 		general_free(cmd, 1, 1, 1);
@@ -69,7 +69,6 @@ void	exec(t_cmd *cmd)
 
 void	core_execution(t_cmd *cmd)
 {
-	print_list(data()->pointer_cmd);
 	if (cmd->fd_in != -1)
 	{
 		dup2(cmd->fd_in, STDIN_FILENO);
